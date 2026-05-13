@@ -1,0 +1,371 @@
+{
+  "id": "d179402b-01ab-49cd-9ff5-eca6fec2763e",
+  "name": "Maintenance Mode",
+  "description": "",
+  "definition": {
+    "start": "Interactive Form",
+    "steps": {
+      "Compare Strings": {
+        "actionId": "sp:compare-strings",
+        "choiceList": [
+          {
+            "comparator": "StringEquals",
+            "nextStep": "HTTP Request 7",
+            "variableA.$": "$.interactiveForm.formData.enableOrDisableMaintenanceMode",
+            "variableB": "Disable"
+          }
+        ],
+        "defaultStep": "HTTP Request 1",
+        "displayName": "Check if Enabled or Disabled",
+        "type": "choice"
+      },
+      "End Step - Failure": {
+        "actionId": "sp:operator-failure",
+        "displayName": "",
+        "failureName": "api call failed",
+        "type": "failure"
+      },
+      "End Step - Success": {
+        "actionId": "sp:operator-success",
+        "displayName": "",
+        "type": "success"
+      },
+      "Get Identity": {
+        "actionId": "sp:get-identity",
+        "attributes": {
+          "id.$": "$.trigger.launchedBy.id"
+        },
+        "displayName": "",
+        "nextStep": "HTTP Request 3",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "HTTP Request 1": {
+        "actionId": "sp:http",
+        "attributes": {
+          "authenticationType": "OAuth",
+          "method": "get",
+          "oAuthClientId": "ENTERCLIENTID",
+          "oAuthClientSecret": null,
+          "oAuthCredentialLocation": "oAuthInHeader",
+          "oAuthScope": null,
+          "oAuthTokenUrl": "https://TENANT.api.identitynow.com/oauth/token",
+          "requestContentType": null,
+          "url": "https://TENANT.api.identitynow.com/v2024/sources/{{$.interactiveForm.formData.sources}}/schedules/GROUP_AGGREGATION",
+          "urlParams": null
+        },
+        "catch": [
+          {
+            "next": "HTTP Request 2"
+          }
+        ],
+        "displayName": "Get Current Group Aggregation",
+        "nextStep": "HTTP Request 2",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "HTTP Request 2": {
+        "actionId": "sp:http",
+        "attributes": {
+          "authenticationType": "OAuth",
+          "method": "get",
+          "oAuthClientId": "ENTERCLIENTID",
+          "oAuthClientSecret": null,
+          "oAuthCredentialLocation": "oAuthInHeader",
+          "oAuthTokenUrl": "https://TENANT.api.identitynow.com/oauth/token",
+          "requestContentType": null,
+          "url": "https://TENANT.api.identitynow.com/v2024/sources/{{$.interactiveForm.formData.sources}}/schedules/ACCOUNT_AGGREGATION"
+        },
+        "catch": [
+          {
+            "next": "HTTP Request 4"
+          }
+        ],
+        "displayName": "Get Current Account Aggregation",
+        "nextStep": "HTTP Request 4",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "HTTP Request 3": {
+        "actionId": "sp:http",
+        "attributes": {
+          "authenticationType": "OAuth",
+          "method": "get",
+          "oAuthClientId": "ENTERCLIENTID",
+          "oAuthClientSecret": null,
+          "oAuthCredentialLocation": "oAuthInHeader",
+          "oAuthScope": null,
+          "oAuthTokenUrl": "https://TENANT.api.identitynow.com/oauth/token",
+          "requestContentType": null,
+          "url": "https://TENANT.api.identitynow.com/v2024/sources/{{$.interactiveForm.formData.sources}}",
+          "urlParams": null
+        },
+        "catch": [
+          {
+            "next": "End Step - Failure"
+          }
+        ],
+        "displayName": "Get Source Name from ID",
+        "nextStep": "Compare Strings",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "HTTP Request 4": {
+        "actionId": "sp:http",
+        "attributes": {
+          "authenticationType": "OAuth",
+          "method": "delete",
+          "oAuthClientId": "ENTERCLIENTID",
+          "oAuthClientSecret": null,
+          "oAuthCredentialLocation": "oAuthInHeader",
+          "oAuthScope": null,
+          "oAuthTokenUrl": "https://TENANT.api.identitynow.com/oauth/token",
+          "requestContentType": null,
+          "url": "https://TENANT.api.identitynow.com/v2024/sources/{{$.interactiveForm.formData.sources}}/schedules/GROUP_AGGREGATION",
+          "urlParams": null
+        },
+        "catch": [
+          {
+            "next": "HTTP Request 5"
+          }
+        ],
+        "displayName": "Remove Current Group Aggregation",
+        "nextStep": "HTTP Request 5",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "HTTP Request 5": {
+        "actionId": "sp:http",
+        "attributes": {
+          "authenticationType": "OAuth",
+          "method": "delete",
+          "oAuthClientId": "ENTERCLIENTID",
+          "oAuthClientSecret": null,
+          "oAuthCredentialLocation": "oAuthInHeader",
+          "oAuthTokenUrl": "https://TENANT.api.identitynow.com/oauth/token",
+          "requestContentType": null,
+          "url": "https://TENANT.api.identitynow.com/v2024/sources/{{$.interactiveForm.formData.sources}}/schedules/ACCOUNT_AGGREGATION"
+        },
+        "catch": [
+          {
+            "next": "HTTP Request 6"
+          }
+        ],
+        "displayName": "Remove Current Account Aggregation",
+        "nextStep": "HTTP Request 6",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "HTTP Request 6": {
+        "actionId": "sp:http",
+        "attributes": {
+          "authenticationType": "OAuth",
+          "jsonPatchRequestBody": [
+            {
+              "op": "add",
+              "path": "/connectorAttributes/enableProvisioningFeature",
+              "value": false
+            },
+            {
+              "op": "add",
+              "path": "/connectorAttributes/disable_health_check",
+              "value": true
+            },
+            {
+              "op": "replace",
+              "path": "/features",
+              "value": []
+            },
+            {
+              "op": "add",
+              "path": "/connectorAttributes/groupaggregationschedule",
+              "value": "{{$.hTTPRequest1.body.cronExpression}}"
+            },
+            {
+              "op": "add",
+              "path": "/connectorAttributes/accountaggregationschedule",
+              "value": "{{$.hTTPRequest2.body.cronExpression}}"
+            },
+            {
+              "op": "add",
+              "path": "/connectorAttributes/maintenancemode",
+              "value": true
+            }
+          ],
+          "method": "patch",
+          "oAuthClientId": "ENTERCLIENTID",
+          "oAuthClientSecret": null,
+          "oAuthCredentialLocation": "oAuthInHeader",
+          "oAuthTokenUrl": "https://TENANT.api.identitynow.com/oauth/token",
+          "requestContentType": "json-patch+json",
+          "url": "https://TENANT.api.identitynow.com/v2024/sources/{{$.interactiveForm.formData.sources}}"
+        },
+        "catch": [
+          {
+            "next": "End Step - Failure"
+          }
+        ],
+        "displayName": "Patch Changes to Source",
+        "nextStep": "Interactive Message",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "HTTP Request 7": {
+        "actionId": "sp:http",
+        "attributes": {
+          "authenticationType": "OAuth",
+          "jsonPatchRequestBody": [
+            {
+              "op": "add",
+              "path": "/connectorAttributes/enableProvisioningFeature",
+              "value": true
+            },
+            {
+              "op": "add",
+              "path": "/connectorAttributes/disable_health_check",
+              "value": false
+            },
+            {
+              "op": "add",
+              "path": "/connectorAttributes/maintenancemode",
+              "value": false
+            }
+          ],
+          "method": "patch",
+          "oAuthClientId": "ENTERCLIENTID",
+          "oAuthClientSecret": null,
+          "oAuthCredentialLocation": "oAuthInHeader",
+          "oAuthTokenUrl": "https://TENANT.api.identitynow.com/oauth/token",
+          "requestContentType": "json-patch+json",
+          "url": "https://TENANT.api.identitynow.com/v2024/sources/{{$.interactiveForm.formData.sources}}"
+        },
+        "catch": [
+          {
+            "next": "End Step - Failure"
+          }
+        ],
+        "displayName": "Patch Changes to Source",
+        "nextStep": "HTTP Request 8",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "HTTP Request 8": {
+        "actionId": "sp:http",
+        "attributes": {
+          "authenticationType": "OAuth",
+          "jsonRequestBody": {
+            "cronExpression": "{{$.hTTPRequest3.body.connectorAttributes.groupaggregationschedule}}",
+            "type": "GROUP_AGGREGATION"
+          },
+          "method": "post",
+          "oAuthClientId": "ENTERCLIENTID",
+          "oAuthClientSecret": null,
+          "oAuthCredentialLocation": "oAuthInHeader",
+          "oAuthScope": null,
+          "oAuthTokenUrl": "https://TENANT.api.identitynow.com/oauth/token",
+          "requestContentType": "json",
+          "url": "https://TENANT.api.identitynow.com/v2024/sources/{{$.interactiveForm.formData.sources}}/schedules",
+          "urlParams": null
+        },
+        "catch": [
+          {
+            "next": "HTTP Request 9"
+          }
+        ],
+        "displayName": "Update Group Aggregation Schedule",
+        "nextStep": "HTTP Request 9",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "HTTP Request 9": {
+        "actionId": "sp:http",
+        "attributes": {
+          "authenticationType": "OAuth",
+          "jsonRequestBody": {
+            "cronExpression": "{{$.hTTPRequest3.body.connectorAttributes.accountaggregationschedule}}",
+            "type": "ACCOUNT_AGGREGATION"
+          },
+          "method": "post",
+          "oAuthClientId": "ENTERCLIENTID",
+          "oAuthClientSecret": null,
+          "oAuthCredentialLocation": "oAuthInHeader",
+          "oAuthTokenUrl": "https://TENANT.api.identitynow.com/oauth/token",
+          "requestContentType": "json",
+          "url": "https://TENANT.api.identitynow.com/v2024/sources/{{$.interactiveForm.formData.sources}}/schedules"
+        },
+        "catch": [
+          {
+            "next": "Interactive Message"
+          }
+        ],
+        "displayName": "Update Account Aggregation Schedule",
+        "nextStep": "Interactive Message",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "Interactive Form": {
+        "actionId": "sp:interactive-form",
+        "attributes": {
+          "formDefinitionId": "44c6cd12-8e7f-412e-8442-9b7c4dd059b6",
+          "interactiveProcessId.$": "$.trigger.interactiveProcessId",
+          "message": "",
+          "ownerId.$": "$.trigger.launchedBy.id",
+          "title": "Source Selector - Maintenance Mode"
+        },
+        "displayName": "",
+        "nextStep": "Get Identity",
+        "type": "action",
+        "versionNumber": 1
+      },
+      "Interactive Message": {
+        "actionId": "sp:interactive-message",
+        "attributes": {
+          "category": "INFO",
+          "interactiveProcessId.$": "$.trigger.interactiveProcessId",
+          "message": "<p>API Calls Sent to Sources!</p>",
+          "ownerId.$": "$.trigger.launchedBy.id",
+          "title": "API Calls Sent to Sources!"
+        },
+        "displayName": "",
+        "nextStep": "Send Email",
+        "type": "action",
+        "versionNumber": 1
+      },
+      "Send Email": {
+        "actionId": "sp:send-email",
+        "attributes": {
+          "body": "<p>The maintenance mode workflow for <strong>{{$.hTTPRequest3.body.name}}</strong> has been completed successfully.</p>\n<p><strong>Execution Details:</strong></p>\n<p><strong>Action:</strong> Maintenance Mode has been {{$.interactiveForm.formData.enableOrDisableMaintenanceMode}} for this source.</p>\n<p><strong>Reason:</strong> {{$.interactiveForm.formData.enterReason}}</p>\n<p><strong>Account Aggregation Schedule:</strong> {{$.hTTPRequest3.body.connectorAttributes.accountaggregationschedule}}</p>\n<p><strong>Group Aggregation Schedule:</strong> {{$.hTTPRequest3.body.connectorAttributes.groupaggregationschedule}}</p>\n<p>All configuration changes have been applied to the source, and the connection state is now updated as requested.</p>",
+          "context": {},
+          "recipientEmailList": [
+            "NOTIFICATIONEMAIL!"
+          ],
+          "subject": "Maintenance Mode Update: {{$.hTTPRequest3.body.name}} ({{$.interactiveForm.formData.enableOrDisableMaintenanceMode}})"
+        },
+        "displayName": "",
+        "nextStep": "End Step - Success",
+        "type": "action",
+        "versionNumber": 2
+      }
+    }
+  },
+  "enabled": false,
+  "executionCount": 0,
+  "failureCount": 0,
+      "creator": {
+        "type": "IDENTITY",
+        "id": "ENTERIDHERE",
+        "name": "ENTERNAMEHERE"
+    },
+    "owner": {
+        "type": "IDENTITY",
+        "id": "ENTERIDHERE",
+        "name": "ENTERNAMEHERE"
+    },
+  "trigger": {
+    "type": "EVENT",
+    "attributes": {
+      "filter.$": "$[?(@.workflowId == 'd179402b-01ab-49cd-9ff5-eca6fec2763e')]",
+      "id": "idn:interactive-process-launched"
+    }
+  }
+}

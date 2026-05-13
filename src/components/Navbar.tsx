@@ -9,9 +9,13 @@ const Navbar = () => {
           <p className="text-slate-400 font-bold tracking-[0.2em] uppercase" style={{ fontSize: '0.75rem' }}>SailPoint Consulting</p>
         </a>
         
-        <a href="/contact" style={{ 
-          backgroundColor: '#2563eb', 
-          color: '#ffffff', 
+        <div className="flex items-center gap-6">
+          <a href="/blog" className="text-white font-bold hover:text-blue-400 transition-colors uppercase tracking-widest text-sm">
+            Blog
+          </a>
+          <a href="/contact" style={{ 
+            backgroundColor: '#2563eb', 
+            color: '#ffffff', 
           padding: '0.75rem 2rem', 
           borderRadius: '9999px', 
           fontWeight: '900', 
@@ -25,6 +29,7 @@ const Navbar = () => {
         }}>
           Talk to an Expert
         </a>
+        </div>
       </div>
     </nav>
   );

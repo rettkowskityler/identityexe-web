@@ -18,7 +18,7 @@ export default function Contact() {
             <p className="text-slate-400 text-lg md:text-xl font-light">Discuss your SailPoint Identity Security architecture needs directly with IdentityEXE.</p>
           </div>
 
-          <form action="https://formsubmit.co/hello@identityexe.com" method="POST" className="flex flex-col gap-8 w-full">
+          <form action="https://formsubmit.co/tyler@identityexe.com" method="POST" className="flex flex-col gap-8 w-full">
             {/* FormSubmit Configs */}
             <input type="hidden" name="_subject" value="New IdentityEXE Consultation Inquiry" />
             <input type="hidden" name="_captcha" value="true" />

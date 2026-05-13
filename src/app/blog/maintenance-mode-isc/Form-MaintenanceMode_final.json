@@ -1,0 +1,124 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "44c6cd12-8e7f-412e-8442-9b7c4dd059b6",
+      "name": "Maintenance Mode"
+    },
+    "object": {
+      "id": "44c6cd12-8e7f-412e-8442-9b7c4dd059b6",
+      "name": "Maintenance Mode",
+      "description": "Maintenance Mode",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "ENTERIDHERE",
+        "name": "ENTERNAMEHERE"
+      },
+      "usedBy": [],
+      "formInput": [],
+      "formElements": [
+        {
+          "id": "838612516273",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "options": [
+                        {
+                          "label": "Enable",
+                          "sublabel": "",
+                          "value": "Enable"
+                        },
+                        {
+                          "label": "Disable",
+                          "sublabel": "",
+                          "value": "Disable"
+                        }
+                      ]
+                    },
+                    "dataSourceType": "STATIC"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Enable or Disable Maintenance Mode",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1562071013330",
+                "key": "enableOrDisableMaintenanceMode",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "SOURCES"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Source:",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "743052397527",
+                "key": "sources",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "default": "",
+                  "description": "",
+                  "helpText": "",
+                  "label": "Enter Reason:",
+                  "placeholder": "Turning Maintenance Mode on for Server XYZ Per RITM#",
+                  "required": true
+                },
+                "elementType": "TEXT",
+                "id": "1044404738941",
+                "key": "enterReason",
+                "validations": [
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              }
+            ],
+            "label": "Toggle Maintenance Mode For Source",
+            "labelStyle": "h1",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [],
+      "created": "2026-01-28T01:19:31.878462159Z",
+      "modified": "2026-03-23T23:31:39.459436805Z"
+    }
+  }
+]

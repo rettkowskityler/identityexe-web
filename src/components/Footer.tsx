@@ -23,8 +23,9 @@ const Footer = () => {
           <h3 className="text-white font-bold mb-4">Connect</h3>
           <ul className="space-y-2 text-slate-400 text-sm">
             <li><a href="#" className="hover:text-blue-400 transition-colors">LinkedIn</a></li>
-            <li><a href="#" className="hover:text-blue-400 transition-colors">Contact Us</a></li>
-            <li>hello@identityexe.com</li>
+            <li><a href="/blog" className="hover:text-blue-400 transition-colors">Blog</a></li>
+            <li><a href="/contact" className="hover:text-blue-400 transition-colors">Contact Us</a></li>
+            <li>tyler@identityexe.com</li>
           </ul>
         </div>
       </div>
