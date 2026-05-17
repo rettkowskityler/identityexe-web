@@ -39,6 +39,28 @@ export default function Blog() {
                 Read Article <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </a>
+
+            {/* Blog Post Card 2 */}
+            <a href="/blog/recursive-governance" className="glass-card rounded-2xl p-6 flex flex-col gap-4 group hover:-translate-y-2 transition-transform duration-300 animate-fade-in-up" style={{ textDecoration: 'none', animationDelay: '0.3s' }}>
+              <div className="rounded-xl bg-purple-500/10 w-full h-48 flex items-center justify-center border border-purple-500/20 mb-2 overflow-hidden relative">
+                 <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-blue-600/20" />
+                 <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-purple-400 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                 </svg>
+              </div>
+              <div className="flex items-center justify-between text-xs font-bold tracking-widest uppercase text-purple-400">
+                <span>Architecture</span>
+                <span>May 2026</span>
+              </div>
+              <h2 className="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors">Implementing Recursive Governance</h2>
+              <p className="text-slate-400 text-sm flex-grow">
+                Learn how to govern SailPoint ISC Personal Access Tokens (PATs) using a custom Web Services Connector to regain visibility and control.
+              </p>
+              <div className="mt-4 flex items-center text-purple-500 font-bold text-sm">
+                Read Article <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
           </div>
         </div>
       </main>
