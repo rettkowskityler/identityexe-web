@@ -21,8 +21,8 @@ export default function RecursiveGovernancePost() {
               <span className="text-blue-500 text-2xl md:text-3xl">(How to govern SailPoint ISC PATs using a Web Services Connector)</span>
             </h1>
             <div className="flex items-center gap-4 text-sm text-slate-400 font-medium">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                T
+              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">
+                <img src="/images/profile.jpg" alt="Tyler" className="w-full h-full object-cover rounded-full" />
               </div>
               <div>
                 <p className="text-white">Tyler</p>
