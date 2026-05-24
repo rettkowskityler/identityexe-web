@@ -1,0 +1,204 @@
+{
+  "id": "dcf53b0c-c51d-45fa-a63d-951f3a841e6c",
+  "name": "Add Governance Group Owners Automatically to Role",
+  "description": "Add Governance Group Owners Automatically to Role",
+  "definition": {
+    "start": "HTTP Request",
+    "steps": {
+      "Compare Multi Type": {
+        "actionId": "sp:compare-multi-type",
+        "choiceList": [
+          {
+            "comparator": "NumericEquals",
+            "nextStep": "End Step - Failure",
+            "variableA.$": "$.hTTPRequest.body.length()",
+            "variableB": 0
+          }
+        ],
+        "defaultStep": "HTTP Request 1",
+        "displayName": "",
+        "type": "choice"
+      },
+      "Compare Multi Type 1": {
+        "actionId": "sp:compare-multi-type",
+        "choiceList": [
+          {
+            "comparator": "IsNull",
+            "nextStep": "HTTP Request 2",
+            "variableA.$": "$.hTTPRequest1.body.membership"
+          }
+        ],
+        "defaultStep": "HTTP Request 2",
+        "displayName": "",
+        "type": "choice"
+      },
+      "End Step - Failure": {
+        "actionId": "sp:operator-failure",
+        "displayName": "",
+        "failureDetails": "You have no governance groups!",
+        "failureName": "You have no governance groups!",
+        "type": "failure"
+      },
+      "End Step - Success 1": {
+        "actionId": "sp:operator-success",
+        "displayName": "",
+        "type": "success"
+      },
+      "HTTP Request": {
+        "actionId": "sp:http",
+        "attributes": {
+          "method": "get",
+          "param_authenticationRef": "oauth",
+          "param_oauth": {
+            "mapping": {
+              "auth_client_id": "clientId",
+              "auth_client_secret": "clientSecret",
+              "auth_credential_location": "credentialLocation",
+              "auth_token_url": "tokenURL"
+            },
+            "paramID": "2ef465cd-d3f6-4d49-9512-bdde60bed967",
+            "paramType": "1.4",
+            "refID": "19ea6018-0b25-49f8-a2e2-1fbbf72a899e"
+          },
+          "url": "https://<TENANT>.api.identitynow.com/v2025/workgroups"
+        },
+        "displayName": "Get Workgroup Owners",
+        "nextStep": "Compare Multi Type",
+        "type": "action",
+        "versionNumber": 3
+      },
+      "HTTP Request 1": {
+        "actionId": "sp:http",
+        "attributes": {
+          "method": "get",
+          "param_authenticationRef": "oauth",
+          "param_oauth": {
+            "mapping": {
+              "auth_client_id": "clientId",
+              "auth_client_secret": "clientSecret",
+              "auth_credential_location": "credentialLocation",
+              "auth_token_url": "tokenURL"
+            },
+            "paramID": "2ef465cd-d3f6-4d49-9512-bdde60bed967",
+            "paramType": "1.4",
+            "refID": "19ea6018-0b25-49f8-a2e2-1fbbf72a899e"
+          },
+          "url": "https://<TENANT>.api.identitynow.com/v2025/roles/<ROLEID>"
+        },
+        "displayName": "Get Role",
+        "nextStep": "Compare Multi Type 1",
+        "type": "action",
+        "versionNumber": 3
+      },
+      "HTTP Request 2": {
+        "actionId": "sp:http",
+        "attributes": {
+          "jsonPatchRequestBody": [
+            {
+              "op": "replace",
+              "path": "/membership",
+              "value": {
+                "identities": [
+                  {
+                    "id": "{{$.hTTPRequest.body[0].owner.id}}",
+                    "type": "IDENTITY"
+                  }
+                ],
+                "type": "IDENTITY_LIST"
+              }
+            }
+          ],
+          "method": "patch",
+          "param_authenticationRef": "oauth",
+          "param_oauth": {
+            "mapping": {
+              "auth_client_id": "clientId",
+              "auth_client_secret": "clientSecret",
+              "auth_credential_location": "credentialLocation",
+              "auth_token_url": "tokenURL"
+            },
+            "paramID": "2ef465cd-d3f6-4d49-9512-bdde60bed967",
+            "paramType": "1.4",
+            "refID": "19ea6018-0b25-49f8-a2e2-1fbbf72a899e"
+          },
+          "requestContentType": "json-patch+json",
+          "url": "https://<TENANT>.api.identitynow.com/v2025/roles/<ROLEID>"
+        },
+        "displayName": "Reset Role Membership",
+        "nextStep": "Serial Loop",
+        "type": "action",
+        "versionNumber": 3
+      },
+      "Serial Loop": {
+        "actionId": "sp:serial:iterator",
+        "attributes": {
+          "input.$": "$.hTTPRequest.body",
+          "loopType": "forLoop",
+          "start": "HTTP Request 3",
+          "steps": {
+            "End Step - Success": {
+              "actionId": "sp:operator-success",
+              "displayName": "",
+              "type": "success"
+            },
+            "HTTP Request 3": {
+              "actionId": "sp:http",
+              "attributes": {
+                "jsonPatchRequestBody": [
+                  {
+                    "op": "add",
+                    "path": "/membership/identities/-",
+                    "value": {
+                      "id": "{{$.loop.loopInput.owner.id}}",
+                      "name": "{{$.loop.loopInput.owner.name}}",
+                      "type": "IDENTITY"
+                    }
+                  }
+                ],
+                "method": "patch",
+                "param_authenticationRef": "oauth",
+                "param_oauth": {
+                  "mapping": {
+                    "auth_client_id": "clientId",
+                    "auth_client_secret": "clientSecret",
+                    "auth_credential_location": "credentialLocation",
+                    "auth_token_url": "tokenURL"
+                  },
+                  "paramID": "2ef465cd-d3f6-4d49-9512-bdde60bed967",
+                  "paramType": "1.4",
+                  "refID": "19ea6018-0b25-49f8-a2e2-1fbbf72a899e"
+                },
+                "requestContentType": "json-patch+json",
+                "url": "https://<TENANT>.api.identitynow.com/v2025/roles/<ROLEID>"
+              },
+              "displayName": "Add Owners To Role",
+              "nextStep": "End Step - Success",
+              "type": "action",
+              "versionNumber": 3
+            }
+          }
+        },
+        "displayName": "Loop Through Workgroup Owners",
+        "nextStep": "End Step - Success 1",
+        "type": "action",
+        "versionNumber": 1
+      }
+    }
+  },
+  "enabled": false,
+  "executionCount": 8,
+  "failureCount": 0,
+  "trigger": {
+    "type": "SCHEDULED",
+    "attributes": {
+      "cronString": "0 0 * * *",
+      "dailyTimes": [
+        "1969-12-31T06:00:00.000Z"
+      ],
+      "frequency": "daily",
+      "id": "idn:cron-schedule",
+      "integrationId": null,
+      "timeZone": "America/Chicago"
+    }
+  }
+}

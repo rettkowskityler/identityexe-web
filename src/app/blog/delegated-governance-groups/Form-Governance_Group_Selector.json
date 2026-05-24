@@ -1,0 +1,73 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "2f5b2c32-8284-4bf5-b92a-ce02f7d856f4",
+      "name": "Governance Group Selector"
+    },
+    "object": {
+      "id": "2f5b2c32-8284-4bf5-b92a-ce02f7d856f4",
+      "name": "Governance Group Selector",
+      "description": "Governance Group Selector",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "",
+        "name": ""
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "governanceGroups",
+          "type": "ARRAY",
+          "label": "GovernanceGroups",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "788054475918",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "formInputId": "governanceGroups",
+                      "sortBy": "ASC"
+                    },
+                    "dataSourceType": "FORM_INPUT"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Governance Group:",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": false
+                },
+                "elementType": "SELECT",
+                "id": "144469713754",
+                "key": "governanceGroup",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  }
+                ]
+              }
+            ],
+            "label": "Select Your Governance Group",
+            "labelStyle": "h2",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [],
+      "created": "2026-05-18T22:25:04.626669262Z",
+      "modified": "2026-05-18T22:26:44.256207709Z"
+    }
+  }
+]

@@ -1,0 +1,176 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "688cdb7e-4b19-49b7-8042-77aab1a90eed",
+      "name": "Select Action and User"
+    },
+    "object": {
+      "id": "688cdb7e-4b19-49b7-8042-77aab1a90eed",
+      "name": "Select Action and User",
+      "description": "Select Action and User",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "",
+        "name": ""
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "removeusers",
+          "type": "ARRAY",
+          "label": "removeusers",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "1585115707352",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "options": [
+                        {
+                          "label": "ADD",
+                          "sublabel": "",
+                          "value": "ADD"
+                        },
+                        {
+                          "label": "REMOVE",
+                          "sublabel": "",
+                          "value": "REMOVE"
+                        }
+                      ]
+                    },
+                    "dataSourceType": "STATIC"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Action:",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "285863875434",
+                "key": "action",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "IDENTITY"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Add User(s):",
+                  "maximum": 30,
+                  "placeholder": "",
+                  "required": false
+                },
+                "elementType": "SELECT",
+                "id": "54402740518",
+                "key": "addusers",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "formInputId": "removeusers",
+                      "sortBy": "ASC"
+                    },
+                    "dataSourceType": "FORM_INPUT"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Remove User(s):",
+                  "maximum": 30,
+                  "placeholder": "",
+                  "required": false
+                },
+                "elementType": "SELECT",
+                "id": "1198221885989",
+                "key": "removeUsers",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  }
+                ]
+              }
+            ],
+            "label": "Select Action & User",
+            "labelStyle": "h2",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "action",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "ADD"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "54402740518"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "action",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "REMOVE"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "1198221885989"
+              }
+            }
+          ]
+        }
+      ],
+      "created": "2026-05-18T22:46:43.30275337Z",
+      "modified": "2026-05-18T22:57:02.789948616Z"
+    }
+  }
+]

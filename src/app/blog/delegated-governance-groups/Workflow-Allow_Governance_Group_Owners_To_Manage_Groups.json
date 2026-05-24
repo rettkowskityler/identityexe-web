@@ -1,0 +1,280 @@
+{
+  "id": "0625c182-740e-4a1c-af25-572f935eb431",
+  "name": "Allow Governance Group Owners To Manage Groups",
+  "description": "Allow Governance Group Owners To Manage Groups",
+  "definition": {
+    "start": "HTTP Request",
+    "steps": {
+      "Compare Strings": {
+        "actionId": "sp:compare-strings",
+        "choiceList": [
+          {
+            "comparator": "StringEquals",
+            "nextStep": "Loop",
+            "variableA.$": "$.interactiveForm1.formData.action",
+            "variableB": "ADD"
+          }
+        ],
+        "defaultStep": "Loop 1",
+        "displayName": "Check If ADD or REMOVE",
+        "type": "choice"
+      },
+      "End Step - Success": {
+        "actionId": "sp:operator-success",
+        "displayName": "",
+        "type": "success"
+      },
+      "End Step - Success 1": {
+        "actionId": "sp:operator-success",
+        "displayName": "",
+        "type": "success"
+      },
+      "HTTP Request": {
+        "actionId": "sp:http",
+        "attributes": {
+          "method": "get",
+          "param_authenticationRef": "oauth",
+          "param_oauth": {
+            "mapping": {
+              "auth_client_id": "clientId",
+              "auth_client_secret": "clientSecret",
+              "auth_credential_location": "credentialLocation",
+              "auth_token_url": "tokenURL"
+            },
+            "paramID": "6e825815-d032-4764-80c9-06110f732185",
+            "paramType": "1.4",
+            "refID": "b0dae349-8aa8-422a-b4c0-20fa82681cdc"
+          },
+          "param_oauth_scopes": {
+            "mapping": {
+              "auth_scopes": "scopes"
+            },
+            "paramID": "",
+            "paramType": "3.1"
+          },
+          "requestContentType": "json",
+          "url": "https://<TENANT>.api.identitynow.com/v2026/workgroups"
+        },
+        "displayName": "Get Governance Group Owners By Requester ID",
+        "nextStep": "Interactive Form",
+        "type": "action",
+        "versionNumber": 3
+      },
+      "HTTP Request 1": {
+        "actionId": "sp:http",
+        "attributes": {
+          "method": "get",
+          "param_authenticationRef": "oauth",
+          "param_oauth": {
+            "mapping": {
+              "auth_client_id": "clientId",
+              "auth_client_secret": "clientSecret",
+              "auth_credential_location": "credentialLocation",
+              "auth_token_url": "tokenURL"
+            },
+            "paramID": "6e825815-d032-4764-80c9-06110f732185",
+            "paramType": "1.4",
+            "refID": "b0dae349-8aa8-422a-b4c0-20fa82681cdc"
+          },
+          "param_oauth_scopes": {
+            "mapping": {
+              "auth_scopes": "scopes"
+            },
+            "paramID": "",
+            "paramType": "3.1"
+          },
+          "requestContentType": "json",
+          "url": "https://<TENANT>.api.identitynow.com/v2026/workgroups/{{$.interactiveForm.formData.governanceGroup}}/members"
+        },
+        "displayName": "Get Governance Group Members",
+        "nextStep": "Interactive Form 1",
+        "type": "action",
+        "versionNumber": 3
+      },
+      "Interactive Form": {
+        "actionId": "sp:interactive-form",
+        "attributes": {
+          "formDefinitionId": "2f5b2c32-8284-4bf5-b92a-ce02f7d856f4",
+          "inputForForm_array_governanceGroups.$": "$.hTTPRequest.body[?(@.owner.id == '{{$.trigger.launchedBy.id}}')]",
+          "inputForForm_array_governanceGroups_label": "$.name",
+          "inputForForm_array_governanceGroups_subLabel": "$.description",
+          "inputForForm_array_governanceGroups_value": "$.id",
+          "interactiveProcessId.$": "$.trigger.interactiveProcessId",
+          "ownerId.$": "$.trigger.launchedBy.id",
+          "title": "Governance Group Selector"
+        },
+        "description": null,
+        "displayName": "Governance Group Selector Form",
+        "nextStep": "HTTP Request 1",
+        "type": "action",
+        "versionNumber": 1
+      },
+      "Interactive Form 1": {
+        "actionId": "sp:interactive-form",
+        "attributes": {
+          "formDefinitionId": "688cdb7e-4b19-49b7-8042-77aab1a90eed",
+          "inputForForm_array_removeusers.$": "$.hTTPRequest1.body[*]",
+          "inputForForm_array_removeusers_label": "$.name",
+          "inputForForm_array_removeusers_subLabel": "$.email",
+          "inputForForm_array_removeusers_value": "$.id",
+          "interactiveProcessId.$": "$.trigger.interactiveProcessId",
+          "message": "",
+          "ownerId.$": "$.trigger.launchedBy.id",
+          "title": "Select Action & Users"
+        },
+        "displayName": "Select Action and User Form",
+        "nextStep": "Compare Strings",
+        "type": "action",
+        "versionNumber": 1
+      },
+      "Loop": {
+        "actionId": "sp:loop:iterator",
+        "attributes": {
+          "context.$": "$.interactiveForm.formData.governanceGroup",
+          "input.$": "$.interactiveForm1.formData.addusers",
+          "start": "HTTP Request 2",
+          "steps": {
+            "End Step - Failure": {
+              "actionId": "sp:operator-failure",
+              "displayName": "",
+              "failureDetails": "FAILURE - HTTP REQUEST FOR ADDING USERS FAILED",
+              "failureName": "FAILURE - HTTP REQUEST FOR ADDING USERS FAILED",
+              "type": "failure"
+            },
+            "End Step - Success 3": {
+              "actionId": "sp:operator-success",
+              "displayName": "",
+              "type": "success"
+            },
+            "HTTP Request 2": {
+              "actionId": "sp:http",
+              "attributes": {
+                "jsonRequestBody": [
+                  {
+                    "id": "{{$.loop.loopInput}}",
+                    "type": "IDENTITY"
+                  }
+                ],
+                "method": "post",
+                "param_authenticationRef": "oauth",
+                "param_oauth": {
+                  "mapping": {
+                    "auth_client_id": "clientId",
+                    "auth_client_secret": "clientSecret",
+                    "auth_credential_location": "credentialLocation",
+                    "auth_token_url": "tokenURL"
+                  },
+                  "paramID": "6e825815-d032-4764-80c9-06110f732185",
+                  "paramType": "1.4",
+                  "refID": "b0dae349-8aa8-422a-b4c0-20fa82681cdc"
+                },
+                "param_oauth_scopes": {
+                  "mapping": {
+                    "auth_scopes": "scopes"
+                  },
+                  "paramID": "",
+                  "paramType": "3.1"
+                },
+                "requestContentType": "json",
+                "url": "https://<TENANT>.api.identitynow-demo.com/v2026/workgroups/{{$.loop.context}}/members/bulk-add"
+              },
+              "catch": [
+                {
+                  "next": "End Step - Failure"
+                }
+              ],
+              "displayName": "Add Users To Governance Group API Call",
+              "nextStep": "End Step - Success 3",
+              "type": "action",
+              "versionNumber": 3
+            }
+          }
+        },
+        "displayName": "Loop Through Users to Add",
+        "nextStep": "End Step - Success 1",
+        "type": "action",
+        "versionNumber": 1
+      },
+      "Loop 1": {
+        "actionId": "sp:loop:iterator",
+        "attributes": {
+          "context.$": "$.interactiveForm.formData.governanceGroup",
+          "input.$": "$.interactiveForm1.formData.removeUsers",
+          "start": "HTTP Request 3",
+          "steps": {
+            "End Step - Failure 1": {
+              "actionId": "sp:operator-failure",
+              "displayName": "",
+              "failureDetails": "FAILURE - HTTP REQUEST FOR REMOVING USERS FAILED",
+              "failureName": "FAILURE - HTTP REQUEST FOR REMOVING USERS FAILED",
+              "type": "failure"
+            },
+            "End Step - Success 2": {
+              "actionId": "sp:operator-success",
+              "displayName": "",
+              "type": "success"
+            },
+            "HTTP Request 3": {
+              "actionId": "sp:http",
+              "attributes": {
+                "jsonRequestBody": [
+                  {
+                    "id": "{{$.loop.loopInput}}",
+                    "type": "IDENTITY"
+                  }
+                ],
+                "method": "post",
+                "param_authenticationRef": "oauth",
+                "param_oauth": {
+                  "mapping": {
+                    "auth_client_id": "clientId",
+                    "auth_client_secret": "clientSecret",
+                    "auth_credential_location": "credentialLocation",
+                    "auth_token_url": "tokenURL"
+                  },
+                  "paramID": "6e825815-d032-4764-80c9-06110f732185",
+                  "paramType": "1.4",
+                  "refID": "b0dae349-8aa8-422a-b4c0-20fa82681cdc"
+                },
+                "param_oauth_scopes": {
+                  "mapping": {
+                    "auth_scopes": "scopes"
+                  },
+                  "paramID": "",
+                  "paramType": "3.1"
+                },
+                "requestContentType": "json",
+                "url": "https://<TENANT>.api.identitynow.com/v2026/workgroups/{{$.loop.context}}/members/bulk-delete"
+              },
+              "catch": [
+                {
+                  "next": "End Step - Failure 1"
+                }
+              ],
+              "displayName": "Remove Users From Governance Group API Call",
+              "nextStep": "End Step - Success 2",
+              "type": "action",
+              "versionNumber": 3
+            }
+          }
+        },
+        "displayName": "Loop Through Users To Remove",
+        "nextStep": "End Step - Success",
+        "type": "action",
+        "versionNumber": 1
+      }
+    }
+  },
+  "enabled": false,
+  "executionCount": 8,
+  "failureCount": 0,
+  "trigger": {
+    "displayName": "Interactive Form Launcher",
+    "type": "EVENT",
+    "attributes": {
+      "filter.$": "$[?(@.workflowId == '0625c182-740e-4a1c-af25-572f935eb431')]",
+      "id": "idn:interactive-process-launched",
+      "integrationId": null
+    }
+  }
+}

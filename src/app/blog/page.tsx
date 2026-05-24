@@ -61,6 +61,30 @@ export default function Blog() {
                 Read Article <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </a>
+
+            {/* Blog Post Card 3 */}
+            <a href="/blog/delegated-governance-groups" className="glass-card rounded-2xl p-6 flex flex-col gap-4 group hover:-translate-y-2 transition-transform duration-300 animate-fade-in-up" style={{ textDecoration: 'none', animationDelay: '0.4s' }}>
+              <div className="rounded-xl bg-emerald-500/10 w-full h-48 flex items-center justify-center border border-emerald-500/20 mb-2 overflow-hidden relative">
+                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/20 to-teal-600/20" />
+                 <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-emerald-400 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                 </svg>
+              </div>
+              <div className="flex items-center justify-between text-xs font-bold tracking-widest uppercase text-emerald-400">
+                <span>Architecture</span>
+                <span>May 2026</span>
+              </div>
+              <h2 className="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">Self-Service Governance Group Management</h2>
+              <p className="text-slate-400 text-sm flex-grow">
+                Securely delegate governance group administration to group owners using a multi-form pipeline workaround in SailPoint ISC.
+              </p>
+              <div className="mt-4 flex items-center text-emerald-500 font-bold text-sm">
+                Read Article <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
           </div>
         </div>
       </main>
