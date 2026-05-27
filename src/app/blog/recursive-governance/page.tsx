@@ -24,8 +24,17 @@ export default function RecursiveGovernancePost() {
           </aside>
           
           <article className="lg:col-span-3 glass-card rounded-3xl p-8 md:p-12 animate-fade-in-up">
-          
-          <header className="mb-12 border-b border-white/10 pb-8">
+            
+            {/* Breadcrumbs */}
+            <nav className="flex items-center gap-2 text-[10px] text-slate-500 mb-6 font-bold uppercase tracking-widest">
+              <a href="/" className="hover:text-blue-400 transition-colors no-underline">Home</a>
+              <span>/</span>
+              <a href="/blog" className="hover:text-blue-400 transition-colors no-underline">Blog</a>
+              <span>/</span>
+              <span className="text-slate-400">PAT Governance</span>
+            </nav>
+
+            <header className="mb-12 border-b border-white/10 pb-8">
             <div className="flex items-center gap-3 mb-6 text-xs font-bold tracking-widest uppercase text-blue-400">
               <span>Architecture</span>
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
@@ -506,14 +515,29 @@ return processedResponseObject;`}</code></pre>
 }`}</code></pre>
             </div>
 
-            <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mt-12">
-              <h3 id="conclusion" className="text-2xl text-white mb-3 mt-0">Conclusion</h3>
-              <p className="text-slate-300 mb-4">
-                <strong>Summary:</strong> By implementing recursive governance, you regain control and visibility over Personal Access Tokens, treating them with the same security rigor as regular entitlements. This ensures that unused or risky PATs can be effectively audited and revoked automatically.
+            <div className="mt-16 pt-12 border-t border-white/10">
+              <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+              <p className="text-slate-300 mb-8 leading-relaxed font-light">
+                By implementing recursive governance, you regain control and visibility over Personal Access Tokens, treating them with the same security rigor as regular entitlements. This ensures that unused or risky PATs can be effectively audited and revoked automatically.
               </p>
-              <p className="text-slate-300 m-0">
-                <strong>Call to Action:</strong> Connect with us to learn more about advanced governance solutions or if you need assistance configuring this for your SailPoint ISC tenant!
-              </p>
+
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-blue-950/40 to-purple-950/40 p-8 rounded-3xl border border-white/5 shadow-2xl">
+                <div className="flex-1">
+                  <h4 className="text-xl font-bold text-white mb-2">Need help configuring PAT governance?</h4>
+                  <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xl">
+                    Setting up custom Web Services connectors, consolidation rules, and certification campaigns in SailPoint requires careful execution. Connect with me directly to get this configured for your tenant.
+                  </p>
+                </div>
+                <a 
+                  href="/contact" 
+                  className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(37,99,235,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
+                >
+                  Talk to an Expert
+                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
             </div>
 
           </div>

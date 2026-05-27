@@ -28,8 +28,17 @@ export default function MaintenanceModePost() {
           </aside>
           
           <article className="lg:col-span-3 glass-card rounded-3xl p-8 md:p-12 animate-fade-in-up">
-          
-          <header className="mb-12 border-b border-white/10 pb-8">
+            
+            {/* Breadcrumbs */}
+            <nav className="flex items-center gap-2 text-[10px] text-slate-500 mb-6 font-bold uppercase tracking-widest">
+              <a href="/" className="hover:text-blue-400 transition-colors no-underline">Home</a>
+              <span>/</span>
+              <a href="/blog" className="hover:text-blue-400 transition-colors no-underline">Blog</a>
+              <span>/</span>
+              <span className="text-slate-400">Maintenance Mode</span>
+            </nav>
+
+            <header className="mb-12 border-b border-white/10 pb-8">
             <div className="flex items-center gap-3 mb-6 text-xs font-bold tracking-widest uppercase text-blue-400">
               <span>Architecture</span>
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
@@ -242,14 +251,29 @@ if ($results) {
               <li><strong className="text-white">PAT Needed to Run:</strong> When setting the PAT client ID and secret for all of the HTTP Requests, ensure your service account that holds this PAT has ORG_ADMIN. You should only need the scopes necessary to update source configurations on your PAT: <code>idn:sources:manage</code> & <code>idn:sources:read</code></li>
             </ul>
 
-            <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mt-12">
-              <h3 id="conclusion" className="text-2xl text-white mb-3 mt-0">Conclusion</h3>
-              <p className="text-slate-300 mb-4">
-                <strong>Summary:</strong> This is a good workaround if your org requires Maintenance Mode functionality in ISC and previously relied on it in IIQ or another system.
+            <div className="mt-16 pt-12 border-t border-white/10">
+              <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+              <p className="text-slate-300 mb-8 leading-relaxed font-light">
+                This is a solid architectural workaround if your organization requires Maintenance Mode functionality in ISC and previously relied on it in IIQ or another legacy system.
               </p>
-              <p className="text-slate-300 m-0">
-                <strong>Call to Action:</strong> If you have any questions or concerns on the approach, feel free to reach out. I'm happy to help extend the functionality of this workaround!
-              </p>
+
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-blue-950/40 to-purple-950/40 p-8 rounded-3xl border border-white/5 shadow-2xl">
+                <div className="flex-1">
+                  <h4 className="text-xl font-bold text-white mb-2">Struggling with complex SailPoint workflows?</h4>
+                  <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xl">
+                    Implementing interactive forms, lifecycle triggers, and automated API patches in SailPoint ISC requires custom tuning. Connect with me directly to design your workflows.
+                  </p>
+                </div>
+                <a 
+                  href="/contact" 
+                  className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(37,99,235,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
+                >
+                  Talk to an Expert
+                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
             </div>
 
           </div>

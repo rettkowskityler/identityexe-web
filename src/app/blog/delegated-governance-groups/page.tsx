@@ -28,8 +28,17 @@ export default function DelegatedGovernanceGroupsPost() {
           </aside>
           
           <article className="lg:col-span-3 glass-card rounded-3xl p-8 md:p-12 animate-fade-in-up">
-          
-          <header className="mb-12 border-b border-white/10 pb-8">
+            
+            {/* Breadcrumbs */}
+            <nav className="flex items-center gap-2 text-[10px] text-slate-500 mb-6 font-bold uppercase tracking-widest">
+              <a href="/" className="hover:text-blue-400 transition-colors no-underline">Home</a>
+              <span>/</span>
+              <a href="/blog" className="hover:text-blue-400 transition-colors no-underline">Blog</a>
+              <span>/</span>
+              <span className="text-slate-400">Self-Service Groups</span>
+            </nav>
+
+            <header className="mb-12 border-b border-white/10 pb-8">
             <div className="flex items-center gap-3 mb-6 text-xs font-bold tracking-widest uppercase text-blue-400">
               <span>Architecture</span>
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
@@ -388,14 +397,32 @@ if ($ownersToAdd.Count -gt 0) {
 }`}</code></pre>
             </div>
 
-            <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mt-12">
-              <h3 id="conclusion" className="text-2xl text-white mb-3 mt-0">Conclusion</h3>
-              <p className="text-slate-300 mb-4">
-                This multi-form pipeline effectively solves an immediate operational gap using standard, native tools, no external middleware required. It empowers governance owners, tightens up access modification timelines, and frees up your engineering team from routine ticket management.
+            <div className="mt-16 pt-12 border-t border-white/10">
+              <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+              <p className="text-slate-300 mb-8 leading-relaxed font-light">
+                This multi-form pipeline effectively solves an immediate operational gap using standard, native tools—no external middleware required. It empowers governance owners, tightens up access modification timelines, and frees up your identity engineering team from routine ticket management.
               </p>
-              <p className="text-slate-300 m-0">
-                If this is a pain point for your organization, I highly encourage you to cast your vote on <a href="https://ideas.sailpoint.com/ideas/GOV-I-1808" target="_blank" rel="noopener noreferrer">GOV-I-1808</a> to help push a native solution to the roadmap. In the meantime, deploy this workflow and take back your time!
+              <p className="text-slate-300 mb-8 leading-relaxed font-light">
+                If this is a pain point for your organization, I highly encourage you to cast your vote on <a href="https://ideas.sailpoint.com/ideas/GOV-I-1808" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline font-medium">GOV-I-1808</a> to help push a native solution to the roadmap. In the meantime, deploy this workflow and take back your time!
               </p>
+
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-blue-950/40 to-purple-950/40 p-8 rounded-3xl border border-white/5 shadow-2xl">
+                <div className="flex-1">
+                  <h4 className="text-xl font-bold text-white mb-2">Need a custom delegated administration solution?</h4>
+                  <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xl">
+                    Whether you are building complex multi-form logic, dynamic workgroup aggregations, or customized access request engines, direct advisory can help you deploy quickly and securely.
+                  </p>
+                </div>
+                <a 
+                  href="/contact" 
+                  className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(37,99,235,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
+                >
+                  Talk to an Expert
+                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
             </div>
 
           </div>
