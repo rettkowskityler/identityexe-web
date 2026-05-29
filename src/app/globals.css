@@ -81,6 +81,31 @@ h1, h2, h3, h4, h5, h6 {
   background-clip: text;
 }
 
+/* Brand Logo Premium Design */
+.logo-identity {
+  color: #ffffff;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group:hover .logo-identity {
+  color: #3b82f6; /* brand-accent blue */
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.4));
+}
+
+.logo-exe {
+  background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group:hover .logo-exe {
+  filter: brightness(1.15) drop-shadow(0 0 10px rgba(34, 211, 238, 0.5));
+}
+
+
 /* Premium Shimmer Button Animation */
 .btn-shimmer {
   position: relative;

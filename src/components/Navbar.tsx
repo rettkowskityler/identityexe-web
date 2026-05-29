@@ -30,8 +30,9 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Brand Logo */}
         <a href="/" className="flex flex-col items-start justify-center gap-0.5 no-underline group">
-          <h2 className="font-display font-black tracking-tighter text-white text-2xl md:text-3xl leading-none transition-colors group-hover:text-blue-400">
-            Identity<span className="text-blue-500">EXE</span>
+          <h2 className="font-display font-black tracking-tighter text-2xl md:text-3xl leading-none">
+            <span className="logo-identity">Identity</span>
+            <span className="logo-exe">EXE</span>
           </h2>
           <p className="text-slate-400 font-bold tracking-[0.25em] uppercase text-[0.65rem] leading-none">
             SailPoint Consulting

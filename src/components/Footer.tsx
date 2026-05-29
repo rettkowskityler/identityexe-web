@@ -6,9 +6,12 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
         {/* Brand Block */}
         <div className="col-span-1 md:col-span-2 flex flex-col gap-4">
-          <h2 className="text-3xl font-display font-black tracking-tighter text-white">
-            Identity<span className="text-blue-500">EXE</span>
-          </h2>
+          <a href="/" className="no-underline group inline-block self-start">
+            <h2 className="text-3xl font-display font-black tracking-tighter leading-none">
+              <span className="logo-identity">Identity</span>
+              <span className="logo-exe">EXE</span>
+            </h2>
+          </a>
           <p className="text-slate-400 max-w-sm font-light text-base leading-relaxed">
             Top-echelon SailPoint consulting for forward-thinking enterprises. Identity Security, Mastered.
           </p>
