@@ -1,0 +1,121 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "FORMIDHERE",
+      "name": "Select Identity"
+    },
+    "object": {
+      "id": "FORMIDHERE",
+      "name": "Select Identity",
+      "description": "Select Identity",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "OWNERIDHERE",
+        "name": "OWNERNAMEHERE"
+      },
+      "usedBy": [],
+      "formInput": [],
+      "formElements": [
+        {
+          "id": "682958831856",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "IDENTITY"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Identity Selector",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "69054743499",
+                "key": "identitySelector",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "options": [
+                        {
+                          "label": "Identity Lifecycle",
+                          "sublabel": "",
+                          "value": "Identity Lifecycle"
+                        },
+                        {
+                          "label": "Audit Event",
+                          "sublabel": "",
+                          "value": "Audit Event"
+                        },
+                        {
+                          "label": "Account Activity",
+                          "sublabel": "",
+                          "value": "Account Activity"
+                        },
+                        {
+                          "label": "Access Request",
+                          "sublabel": "",
+                          "value": "Access Request"
+                        },
+                        {
+                          "label": "Manual Work Item",
+                          "sublabel": "",
+                          "value": "Manual Work Item"
+                        }
+                      ]
+                    },
+                    "dataSourceType": "STATIC"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Report Type",
+                  "maximum": 5,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "965457288184",
+                "key": "reportType",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              }
+            ],
+            "label": "Select Identity",
+            "labelStyle": "h1",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [],
+      "created": "2026-05-30T18:33:39.469Z",
+      "modified": "2026-05-30T18:37:26.638Z"
+    }
+  }
+]

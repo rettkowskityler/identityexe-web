@@ -1,0 +1,148 @@
+{
+  "id": "WORKFLOWIDHERE",
+  "name": "Identity Report",
+  "description": "Identity Report",
+  "definition": {
+    "start": "Interactive Form",
+    "steps": {
+      "Define Variable": {
+        "actionId": "sp:define-variable",
+        "attributes": {
+          "id": "sp:define-variable",
+          "variables": [
+            {
+              "description": "",
+              "name": "identitySelector",
+              "transforms": [],
+              "variableA.$": "$.interactiveForm.formData.identitySelector"
+            },
+            {
+              "description": "",
+              "name": "tenant",
+              "transforms": [],
+              "variableA": "TENANTNAMEHERE"
+            }
+          ]
+        },
+        "displayName": "",
+        "nextStep": "Windows Server",
+        "type": "Mutation"
+      },
+      "End Step - Failure": {
+        "actionId": "sp:operator-failure",
+        "displayName": "",
+        "failureDetails": "PTA Server Call Failed!",
+        "failureName": "PTA Server Call Failed!",
+        "type": "failure"
+      },
+      "End Step - Success": {
+        "actionId": "sp:operator-success",
+        "description": "PTA Server Script Ran Successfully.",
+        "displayName": "",
+        "type": "success"
+      },
+      "Get Identity": {
+        "actionId": "sp:get-identity",
+        "attributes": {
+          "id.$": "$.trigger.launchedBy.id"
+        },
+        "displayName": "",
+        "nextStep": "Define Variable",
+        "type": "action",
+        "versionNumber": 2
+      },
+      "Interactive Form": {
+        "actionId": "sp:interactive-form",
+        "attributes": {
+          "formDefinitionId": "FORMIDHERE",
+          "interactiveProcessId.$": "$.trigger.interactiveProcessId",
+          "message": "",
+          "ownerId.$": "$.trigger.launchedBy.id",
+          "title": "Identity Report"
+        },
+        "displayName": "",
+        "nextStep": "Get Identity",
+        "type": "action",
+        "versionNumber": 1
+      },
+      "Interactive Message": {
+        "actionId": "sp:interactive-message",
+        "attributes": {
+          "category": "INFO",
+          "interactiveProcessId.$": "$.trigger.interactiveProcessId",
+          "message": "<p>Please check your email for the report:&nbsp;</p>\n<p>{{$.getIdentity.emailAddress}}</p>",
+          "ownerId.$": "$.trigger.launchedBy.id",
+          "title": "Report Generated Successfully!"
+        },
+        "displayName": "",
+        "nextStep": "End Step - Success",
+        "type": "action",
+        "versionNumber": 1
+      },
+      "Windows Server": {
+        "actionId": "sp:pag-windows-server",
+        "attributes": {
+          "inputForPag_address": "WINDOWSSERVERIPHERE",
+          "inputForPag_auth_type": "ntlm",
+          "inputForPag_checksum": "",
+          "inputForPag_command_timeout_seconds": 3600,
+          "inputForPag_configuration_name": "Microsoft.PowerShell",
+          "inputForPag_kdc_port": 88,
+          "inputForPag_kdc_protocol": "udp",
+          "inputForPag_output_format": "text",
+          "inputForPag_script_arguments": {
+            "Categories": "{{$.interactiveForm.formData.reportType.JSON()}}",
+            "IdentityId": "{{$.defineVariable.identitySelector}}",
+            "RecipientEmail": "{{$.getIdentity.emailAddress}}",
+            "Tenant": "{{$.defineVariable.tenant}}"
+          },
+          "inputForPag_script_path": "C:\\Scripts\\CustomIdentityReport.ps1",
+          "inputForPag_use_ssl": true,
+          "inputForPag_verify_cert": false,
+          "pagCommandType": "pag:windows_server:execute_powershell_script",
+          "pagInstanceId": "PAGINSTANCEIDHERE",
+          "pagSpecId": "PAGSPECIDHERE",
+          "param_conn": {
+            "mapping": {
+              "address": "address"
+            },
+            "paramID": "",
+            "paramType": "2.3"
+          },
+          "param_connType": "paramInline",
+          "param_credential": {
+            "mapping": {
+              "auth_password": "password",
+              "auth_username": "username"
+            },
+            "paramID": "CREDENTIALIDHERE",
+            "paramType": "1.1",
+            "refID": "CREDENTIALREFIDHERE"
+          },
+          "param_credentialType": "paramSPS",
+          "param_kerberosType": "paramInline"
+        },
+        "catch": [
+          {
+            "next": "End Step - Failure"
+          }
+        ],
+        "displayName": "",
+        "nextStep": "Interactive Message",
+        "type": "action",
+        "versionNumber": 1
+      }
+    }
+  },
+  "enabled": true,
+  "executionCount": 0,
+  "failureCount": 0,
+  "trigger": {
+    "type": "EVENT",
+    "attributes": {
+      "filter.$": "$[?(@.workflowId == 'WORKFLOWIDHERE')]",
+      "id": "idn:interactive-process-launched",
+      "integrationId": null
+    }
+  }
+}

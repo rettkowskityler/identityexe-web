@@ -85,6 +85,28 @@ export default function Blog() {
                 Read Article <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </a>
+
+            {/* Blog Post Card 4 */}
+            <a href="/blog/identity-timeline-report" className="glass-card rounded-2xl p-6 flex flex-col gap-4 group hover:-translate-y-2 transition-transform duration-300 animate-fade-in-up" style={{ textDecoration: 'none', animationDelay: '0.5s' }}>
+              <div className="rounded-xl bg-amber-500/10 w-full h-48 flex items-center justify-center border border-amber-500/20 mb-2 overflow-hidden relative">
+                 <div className="absolute inset-0 bg-gradient-to-br from-amber-600/20 to-orange-600/20" />
+                 <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-amber-400 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                 </svg>
+              </div>
+              <div className="flex items-center justify-between text-xs font-bold tracking-widest uppercase text-amber-400">
+                <span>Architecture</span>
+                <span>May 2026</span>
+              </div>
+              <h2 className="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors">Building a Custom Identity Timeline Report</h2>
+              <p className="text-slate-400 text-sm flex-grow">
+                Consolidate identity lifecycle events, audit trails, provisioning activities, access requests, and manual work items into a single chronological timeline.
+              </p>
+              <div className="mt-4 flex items-center text-amber-500 font-bold text-sm">
+                Read Article <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
           </div>
         </div>
       </main>
