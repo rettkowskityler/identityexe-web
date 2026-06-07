@@ -1,0 +1,194 @@
+{
+  "id": "9b4f6dfe-24b8-49ed-9931-14b677159328",
+  "name": "Certification Escalator",
+  "description": "Certification Escalator",
+  "definition": {
+    "start": "HTTP Request 1",
+    "steps": {
+      "Compare Multi Type 2": {
+        "actionId": "sp:compare-multi-type",
+        "choiceList": [
+          {
+            "comparator": "NumericEquals",
+            "nextStep": "End Step - Success",
+            "variableA.$": "$.hTTPRequest1.body.length()",
+            "variableB": 250
+          }
+        ],
+        "defaultStep": "Define Variable",
+        "description": "Check If Campaigns to Escalate Are Over 250",
+        "displayName": "Check If Campaigns to Escalate Are Over 250",
+        "type": "choice"
+      },
+      "Define Variable": {
+        "actionId": "sp:define-variable",
+        "attributes": {
+          "id": "sp:define-variable",
+          "variables": [
+            {
+              "description": "d",
+              "name": "managerid",
+              "transforms": [],
+              "variableA": "temp"
+            }
+          ]
+        },
+        "displayName": "",
+        "nextStep": "Serial Loop",
+        "type": "Mutation"
+      },
+      "End Step - Success": {
+        "actionId": "sp:operator-success",
+        "description": "BREAK",
+        "displayName": "",
+        "type": "success"
+      },
+      "HTTP Request 1": {
+        "actionId": "sp:http",
+        "attributes": {
+          "param_authenticationRef": "oauth",
+          "param_oauth": {
+            "mapping": {
+              "auth_client_id": "clientId",
+              "auth_client_secret": "clientSecret",
+              "auth_credential_location": "credentialLocation",
+              "auth_token_url": "tokenURL"
+            },
+            "paramID": "6e825815-d032-4764-80c9-06110f732185",
+            "paramType": "1.4",
+            "refID": "458acf75-4c97-4aaa-a455-cfe826668038"
+          },
+          "param_oauth_scopes": {
+            "mapping": {
+              "auth_scopes": "scopes"
+            },
+            "paramID": "",
+            "paramType": "3.1"
+          },
+          "url": "https://<TENANT>.api.identitynow.com/v2026/certifications",
+          "urlParams": {
+            "filters": "campaign.id eq \"{{$.trigger.campaignid}}\" and phase eq \"ACTIVE\" and completed eq false"
+          }
+        },
+        "displayName": "Get Certifications",
+        "nextStep": "Compare Multi Type 2",
+        "type": "action",
+        "versionNumber": 3
+      },
+      "Serial Loop": {
+        "actionId": "sp:serial:iterator",
+        "attributes": {
+          "input.$": "$.hTTPRequest1.body",
+          "loopType": "forLoop",
+          "start": "Get Identity",
+          "steps": {
+            "Compare Multi Type 1": {
+              "actionId": "sp:compare-multi-type",
+              "choiceList": [
+                {
+                  "comparator": "IsPresent",
+                  "nextStep": "HTTP Request 3",
+                  "variableA.$": "$.defineVariable.managerid"
+                }
+              ],
+              "defaultStep": "End Step - Success 2",
+              "description": "CHECK IF VALID MANAGER",
+              "displayName": "Check If Manager Exists",
+              "type": "choice"
+            },
+            "End Step - Success 2": {
+              "actionId": "sp:operator-success",
+              "displayName": "",
+              "type": "success"
+            },
+            "Get Identity": {
+              "actionId": "sp:get-identity",
+              "attributes": {
+                "id.$": "$.loop.loopInput.reviewer.id"
+              },
+              "displayName": "Get Reviewer",
+              "nextStep": "Update Variable",
+              "type": "action",
+              "versionNumber": 2
+            },
+            "HTTP Request 3": {
+              "actionId": "sp:http",
+              "attributes": {
+                "jsonRequestBody": {
+                  "certificationIds": [
+                    "{{$.loop.loopInput.id}}"
+                  ],
+                  "reason": "Escalating Certification To Users Manager",
+                  "reassignTo": {
+                    "id": "{{$.defineVariable.managerid}}",
+                    "type": "IDENTITY"
+                  }
+                },
+                "method": "post",
+                "param_authenticationRef": "oauth",
+                "param_oauth": {
+                  "mapping": {
+                    "auth_client_id": "clientId",
+                    "auth_client_secret": "clientSecret",
+                    "auth_credential_location": "credentialLocation",
+                    "auth_token_url": "tokenURL"
+                  },
+                  "paramID": "6e825815-d032-4764-80c9-06110f732185",
+                  "paramType": "1.4",
+                  "refID": "458acf75-4c97-4aaa-a455-cfe826668038"
+                },
+                "param_oauth_scopes": {
+                  "mapping": {
+                    "auth_scopes": "scopes"
+                  },
+                  "paramID": "",
+                  "paramType": "3.1"
+                },
+                "requestContentType": "json",
+                "url": "https://<TENANT>.api.identitynow.com/v2026/campaigns/{{$.loop.loopInput.campaign.id}}/reassign",
+                "urlParams": null
+              },
+              "displayName": "Reassign HTTP Call",
+              "nextStep": "End Step - Success 2",
+              "type": "action",
+              "versionNumber": 3
+            },
+            "Update Variable": {
+              "actionId": "sp:update-variable",
+              "attributes": {
+                "id": "sp:update-variable",
+                "variables": [
+                  {
+                    "description": "",
+                    "name": "$.defineVariable.managerid",
+                    "transforms": [],
+                    "variableA.$": "$.getIdentity.managerRef.id"
+                  }
+                ]
+              },
+              "displayName": "Update Variable - Manager ID",
+              "nextStep": "Compare Multi Type 1",
+              "type": "Mutation"
+            }
+          }
+        },
+        "displayName": "Loop Through Certifications",
+        "nextStep": "End Step - Success",
+        "type": "action",
+        "versionNumber": 1
+      }
+    }
+  },
+  "enabled": false,
+  "executionCount": 14,
+  "failureCount": 0,
+  "trigger": {
+    "type": "EXTERNAL",
+    "attributes": {
+      "clientId": "client-id-placeholder",
+      "id": "idn:external-http",
+      "integrationId": null,
+      "url": "https://<TENANT>.api.identitynow.com/v2024/workflows/execute/external/9b4f6dfe-24b8-49ed-9931-14b677159328"
+    }
+  }
+}

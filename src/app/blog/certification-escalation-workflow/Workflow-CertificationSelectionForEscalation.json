@@ -1,0 +1,633 @@
+{
+  "id": "5ecdf4de-e770-4b21-afb6-0185cd0c0d49",
+  "name": "Certification Selection For Escalation",
+  "description": "Certification Selection For Escalation",
+  "definition": {
+    "start": "HTTP Request",
+    "steps": {
+      "Compare Multi Type 3": {
+        "actionId": "sp:compare-multi-type",
+        "choiceList": [
+          {
+            "comparator": "BooleanEquals",
+            "nextStep": "Serial Loop 1",
+            "variableA.$": "$.interactiveForm1.formData.approveOrDeny",
+            "variableB": true
+          }
+        ],
+        "defaultStep": "End Step - Success",
+        "displayName": "Check If Approved",
+        "type": "choice"
+      },
+      "Define Variable": {
+        "actionId": "sp:define-variable",
+        "attributes": {
+          "id": "sp:define-variable",
+          "variables": [
+            {
+              "description": "",
+              "name": "Campaign Builder V2",
+              "transforms": [],
+              "variableA.$": ""
+            }
+          ]
+        },
+        "displayName": "",
+        "nextStep": "Serial Loop",
+        "type": "Mutation"
+      },
+      "End Step - Success": {
+        "actionId": "sp:operator-success",
+        "displayName": "",
+        "type": "success"
+      },
+      "HTTP Request": {
+        "actionId": "sp:http",
+        "attributes": {
+          "method": "get",
+          "param_authenticationRef": "oauth",
+          "param_oauth": {
+            "mapping": {
+              "auth_client_id": "clientId",
+              "auth_client_secret": "clientSecret",
+              "auth_credential_location": "credentialLocation",
+              "auth_token_url": "tokenURL"
+            },
+            "paramID": "6e825815-d032-4764-80c9-06110f732185",
+            "paramType": "1.4",
+            "refID": "5fb51fdb-0032-458d-9678-f3fa27c01290"
+          },
+          "requestContentType": "json",
+          "url": "https://<TENANT>.api.identitynow.com/v2026/campaigns",
+          "urlParams": {
+            "filters": "status eq \"ACTIVE\""
+          }
+        },
+        "displayName": "Get All Active Campaigns",
+        "nextStep": "Interactive Form",
+        "type": "action",
+        "versionNumber": 3
+      },
+      "Interactive Form": {
+        "actionId": "sp:interactive-form",
+        "attributes": {
+          "formDefinitionId": "b778b0b2-aeaa-402a-84fd-c85a7309c0cb",
+          "inputForForm_array_activecampaigns.$": "$.hTTPRequest.body",
+          "inputForForm_array_activecampaigns_label": "$.name",
+          "inputForForm_array_activecampaigns_subLabel": "$.id",
+          "inputForForm_array_activecampaigns_value": "$.id",
+          "interactiveProcessId.$": "$.trigger.interactiveProcessId",
+          "message": "",
+          "ownerId.$": "$.trigger.launchedBy.id",
+          "title": "Certification Escalation Campaign"
+        },
+        "displayName": "Form - Campaign Selection",
+        "nextStep": "Define Variable",
+        "type": "action",
+        "versionNumber": 1
+      },
+      "Interactive Form 1": {
+        "actionId": "sp:interactive-form",
+        "attributes": {
+          "formDefinitionId": "b626518a-0270-473b-acc4-fd081ff9cc6e",
+          "inputForForm_campaignSelections.$": "$.defineVariable.campaignBuilderV2",
+          "interactiveProcessId.$": "$.trigger.interactiveProcessId",
+          "message": "",
+          "ownerId.$": "$.trigger.launchedBy.id",
+          "title": "Confirm Campaign Selection"
+        },
+        "displayName": "Form - Confirm Campaign Selection",
+        "nextStep": "Compare Multi Type 3",
+        "type": "action",
+        "versionNumber": 1
+      },
+      "Serial Loop": {
+        "actionId": "sp:serial:iterator",
+        "attributes": {
+          "input.$": "$.hTTPRequest.body",
+          "loopType": "forLoop",
+          "start": "Compare Multi Type 4",
+          "steps": {
+            "Compare Multi Type 1": {
+              "actionId": "sp:compare-multi-type",
+              "choiceList": [
+                {
+                  "OR": [
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[0]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[1]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[2]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[3]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[4]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[5]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[6]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[7]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[8]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[9]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[10]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[11]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[12]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[13]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[14]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[15]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[16]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[17]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[18]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[19]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[20]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[21]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[22]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[23]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[24]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[25]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[26]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[27]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[28]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[29]"
+                    }
+                  ],
+                  "nextStep": "Update Variable"
+                }
+              ],
+              "defaultStep": "End Step - Success 2",
+              "displayName": "Only Include Campaigns That Were Selected",
+              "type": "choice"
+            },
+            "Compare Multi Type 4": {
+              "actionId": "sp:compare-multi-type",
+              "choiceList": [
+                {
+                  "comparator": "BooleanEquals",
+                  "nextStep": "Compare Multi Type 1",
+                  "variableA.$": "$.interactiveForm.formData.escalateAllActiveCampaigns",
+                  "variableB": false
+                }
+              ],
+              "defaultStep": "Update Variable 2",
+              "displayName": "Check If All Campaigns Were Selected",
+              "type": "choice"
+            },
+            "End Step - Success 2": {
+              "actionId": "sp:operator-success",
+              "displayName": "",
+              "type": "success"
+            },
+            "Update Variable": {
+              "actionId": "sp:update-variable",
+              "attributes": {
+                "id": "sp:update-variable",
+                "variables": [
+                  {
+                    "description": "Appends an ultra-polished container card with a left accent border for each item",
+                    "name": "$.defineVariable.campaignBuilderV2",
+                    "transforms": [
+                      {
+                        "id": "sp:transform:concatenate:string",
+                        "input": {
+                          "variableB": "<div style='background-color: #1e1e1e; padding: 14px; border-radius: 6px; border: 1px solid #333; border-left: 4px solid #3498db; margin-bottom: 15px;'><span style='font-size: 14px; font-weight: bold; color: #3498db;'>📋 {{$.loop.loopInput.name}}</span><hr style='border: 0; border-top: 1px solid #2d2d2d; margin: 8px 0;'><span style='font-size: 12px; opacity: 0.85;'><strong>🔑 Campaign ID:</strong> <code>{{$.loop.loopInput.id}}</code></span><br><span style='font-size: 12px; opacity: 0.85;'><strong>📅 Target Deadline:</strong> <span style='color: #e67e22; font-family: monospace;'>{{$.loop.loopInput.deadline}}</span></span></div>"
+                        }
+                      }
+                    ],
+                    "variableA.$": "$.defineVariable.campaignBuilderV2"
+                  }
+                ]
+              },
+              "displayName": "Update Summary Variable",
+              "nextStep": "End Step - Success 2",
+              "type": "Mutation"
+            },
+            "Update Variable 2": {
+              "actionId": "sp:update-variable",
+              "attributes": {
+                "id": "sp:update-variable",
+                "variables": [
+                  {
+                    "description": "Pixel-perfect high-density layout with baseline-aligned IDs",
+                    "name": "$.defineVariable.campaignBuilderV2",
+                    "transforms": [
+                      {
+                        "id": "sp:transform:concatenate:string",
+                        "input": {
+                          "variableB": "<div style='font-size: 13px; line-height: 1.6; margin-bottom: 5px; border-bottom: 1px dashed #2d2d2d; padding-bottom: 5px;'>🔹 <strong style='color: #3498db;'>{{$.loop.loopInput.name}}</strong> &nbsp;<span style='color:#444;'>|</span>&nbsp; <span style='font-size: 11px; opacity: 0.6;'>ID:</span> <code style='font-size: 11px; padding: 0; vertical-align: middle; font-family: monospace;'>{{$.loop.loopInput.id}}</code> &nbsp;<span style='color:#444;'>|</span>&nbsp; <span style='font-size: 11px; color: #e67e22;'>📅 <span style='font-family: monospace;'>{{$.loop.loopInput.deadline}}</span></span></div>"
+                        }
+                      }
+                    ],
+                    "variableA.$": "$.defineVariable.campaignBuilderV2"
+                  }
+                ]
+              },
+              "displayName": "Update Summary Variable",
+              "nextStep": "End Step - Success 2",
+              "type": "Mutation"
+            }
+          }
+        },
+        "displayName": "Loop Certifications To Build Summary",
+        "nextStep": "Interactive Form 1",
+        "type": "action",
+        "versionNumber": 1
+      },
+      "Serial Loop 1": {
+        "actionId": "sp:serial:iterator",
+        "attributes": {
+          "input.$": "$.hTTPRequest.body",
+          "loopType": "forLoop",
+          "start": "Compare Multi Type 2",
+          "steps": {
+            "Compare Multi Type 2": {
+              "actionId": "sp:compare-multi-type",
+              "choiceList": [
+                {
+                  "comparator": "BooleanEquals",
+                  "nextStep": "Compare Multi Type 5",
+                  "variableA.$": "$.interactiveForm.formData.escalateAllActiveCampaigns",
+                  "variableB": false
+                }
+              ],
+              "defaultStep": "HTTP Request 1",
+              "displayName": "Check If All Campaigns",
+              "type": "choice"
+            },
+            "Compare Multi Type 5": {
+              "actionId": "sp:compare-multi-type",
+              "choiceList": [
+                {
+                  "OR": [
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[0]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[1]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[2]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[3]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[4]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[5]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[6]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[7]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[8]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[9]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[10]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[11]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[12]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[13]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[14]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[15]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[16]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[17]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[18]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[19]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[20]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[21]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[22]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[23]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[24]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[25]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[26]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[27]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[28]"
+                    },
+                    {
+                      "comparator": "StringEquals",
+                      "variableA.$": "$.loop.loopInput.id",
+                      "variableB.$": "$.interactiveForm.formData.campaign[29]"
+                    }
+                  ],
+                  "nextStep": "HTTP Request 3"
+                }
+              ],
+              "defaultStep": "End Step - Success 1",
+              "displayName": "Only Include Selected Campaigns",
+              "type": "choice"
+            },
+            "End Step - Success 1": {
+              "actionId": "sp:operator-success",
+              "displayName": "",
+              "type": "success"
+            },
+            "End Step - Success 3": {
+              "actionId": "sp:operator-success",
+              "displayName": "",
+              "type": "success"
+            },
+            "HTTP Request 1": {
+              "actionId": "sp:http",
+              "attributes": {
+                "jsonRequestBody": {
+                  "campaignid": "{{$.loop.loopInput.id}}"
+                },
+                "method": "post",
+                "param_authenticationRef": "oauth",
+                "param_oauth": {
+                  "mapping": {
+                    "auth_client_id": "clientId",
+                    "auth_client_secret": "clientSecret",
+                    "auth_credential_location": "credentialLocation",
+                    "auth_token_url": "tokenURL"
+                  },
+                  "paramID": "20c42e3e-a3d5-4c02-b56f-3a10412e0fae",
+                  "paramType": "1.4",
+                  "refID": "f19e8318-5318-4ed1-b5d9-545e6a345118"
+                },
+                "param_oauth_scopes": {
+                  "mapping": {
+                    "auth_scopes": "scopes"
+                  },
+                  "paramID": "",
+                  "paramType": "3.1"
+                },
+                "requestContentType": "json",
+                "url": "https://<TENANT>.api.identitynow.com/v2024/workflows/execute/external/9b4f6dfe-24b8-49ed-9931-14b677159328",
+                "urlParams": null
+              },
+              "displayName": "Certification Escalator HTTP Call",
+              "nextStep": "End Step - Success 3",
+              "type": "action",
+              "versionNumber": 3
+            },
+            "HTTP Request 3": {
+              "actionId": "sp:http",
+              "attributes": {
+                "jsonRequestBody": {
+                  "campaignid": "{{$.loop.loopInput.id}}"
+                },
+                "method": "post",
+                "param_authenticationRef": "oauth",
+                "param_oauth": {
+                  "mapping": {
+                    "auth_client_id": "clientId",
+                    "auth_client_secret": "clientSecret",
+                    "auth_credential_location": "credentialLocation",
+                    "auth_token_url": "tokenURL"
+                  },
+                  "paramID": "20c42e3e-a3d5-4c02-b56f-3a10412e0fae",
+                  "paramType": "1.4",
+                  "refID": "f19e8318-5318-4ed1-b5d9-545e6a345118"
+                },
+                "param_oauth_scopes": {
+                  "mapping": {
+                    "auth_scopes": "scopes"
+                  },
+                  "paramID": "",
+                  "paramType": "3.1"
+                },
+                "requestContentType": "json",
+                "url": "https://<TENANT>.api.identitynow.com/v2024/workflows/execute/external/9b4f6dfe-24b8-49ed-9931-14b677159328",
+                "urlParams": null
+              },
+              "displayName": "Certification Escalator HTTP Call",
+              "nextStep": "End Step - Success 1",
+              "type": "action",
+              "versionNumber": 3
+            }
+          }
+        },
+        "description": "This loops through the campaigns that were selected before and sends a request to the \"Certification Escalator\" Workflow.",
+        "displayName": "Loop Through Campaigns",
+        "nextStep": "End Step - Success",
+        "type": "action",
+        "versionNumber": 1
+      }
+    }
+  },
+  "enabled": false,
+  "executionCount": 80,
+  "failureCount": 65,
+  "trigger": {
+    "type": "EVENT",
+    "attributes": {
+      "filter.$": "$[?(@.workflowId == '5ecdf4de-e770-4b21-afb6-0185cd0c0d49')]",
+      "id": "idn:interactive-process-launched",
+      "integrationId": null
+    }
+  }
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "b626518a-0270-473b-acc4-fd081ff9cc6e",
+      "name": "Confirm Campaign Selection"
+    },
+    "object": {
+      "id": "b626518a-0270-473b-acc4-fd081ff9cc6e",
+      "name": "Confirm Campaign Selection",
+      "description": "Confirm Campaign Selection",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "",
+        "name": ""
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "campaignSelections",
+          "type": "STRING",
+          "label": "Campaign Selections",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "443706288281",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "Please review the campaigns below. Once confirmed, click the toggle to Approve the selection and submit the form.",
+            "formElements": [
+              {
+                "config": {
+                  "description": "<p>{{$.form.input.campaignSelections}}</p>\n<p>&nbsp;</p>",
+                  "label": "Confirm the Following Certifications Should be Modified",
+                  "showLabel": false
+                },
+                "elementType": "DESCRIPTION",
+                "id": "318037946186",
+                "key": "",
+                "validations": []
+              },
+              {
+                "config": {
+                  "default": false,
+                  "falseLabel": "Denied",
+                  "helpText": "",
+                  "label": "Approve or Deny",
+                  "trueLabel": "Approved"
+                },
+                "elementType": "TOGGLE",
+                "id": "1216024784147",
+                "key": "approveOrDeny",
+                "validations": []
+              }
+            ],
+            "label": "Confirm Campaigns To Escalate!",
+            "labelStyle": "h1",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [],
+      "created": "2026-06-01T14:06:05.831243582Z",
+      "modified": "2026-06-03T00:10:24.355848414Z"
+    }
+  }
+]

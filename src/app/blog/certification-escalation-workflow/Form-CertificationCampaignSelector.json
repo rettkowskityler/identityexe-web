@@ -1,0 +1,107 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "b778b0b2-aeaa-402a-84fd-c85a7309c0cb",
+      "name": "Certification Campaign Selector"
+    },
+    "object": {
+      "id": "b778b0b2-aeaa-402a-84fd-c85a7309c0cb",
+      "name": "Certification Campaign Selector",
+      "description": "Certification Campaign Selector",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "",
+        "name": ""
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "activecampaigns",
+          "type": "ARRAY",
+          "label": "activecampaigns",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "1300922688089",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "default": true,
+                  "falseLabel": "Escalate Campaigns Below",
+                  "helpText": "Enable this field to escalate all currently active campaigns.",
+                  "label": "Escalate All Active Campaigns?",
+                  "trueLabel": "Escalate All Campaigns"
+                },
+                "elementType": "TOGGLE",
+                "id": "848306824842",
+                "key": "escalateAllActiveCampaigns",
+                "validations": []
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "formInputId": "activecampaigns",
+                      "sortBy": "ASC"
+                    },
+                    "dataSourceType": "FORM_INPUT"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Campaign:",
+                  "maximum": 30,
+                  "placeholder": "",
+                  "required": false
+                },
+                "elementType": "SELECT",
+                "id": "167674705917",
+                "key": "campaign",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  }
+                ]
+              }
+            ],
+            "label": "Select Certification Campaign",
+            "labelStyle": "h1",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "escalateAllActiveCampaigns",
+              "operator": "EQ",
+              "valueType": "BOOLEAN",
+              "value": "false"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "167674705917"
+              }
+            }
+          ]
+        }
+      ],
+      "created": "2026-06-01T12:56:57.725121269Z",
+      "modified": "2026-06-01T13:22:58.074290694Z"
+    }
+  }
+]
