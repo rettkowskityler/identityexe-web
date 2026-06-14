@@ -1,0 +1,282 @@
+{
+    "description": "Personal Access Token Management",
+    "owner": {
+        "type": "IDENTITY",
+        "id": "",
+        "name": ""
+    },
+    "cluster": {
+        "type": "CLUSTER",
+        "id": "",
+        "name": ""
+    },
+    "accountCorrelationConfig": {
+        "type": "ACCOUNT_CORRELATION_CONFIG",
+        "id": "",
+        "name": ""
+    },
+    "accountCorrelationRule": null,
+    "managerCorrelationMapping": null,
+    "managerCorrelationRule": null,
+    "beforeProvisioningRule": null,
+    "schemas": [
+        {
+            "configuration": {},
+            "type": "CONNECTOR_SCHEMA",
+            "id": "",
+            "name": "account"
+        },
+        {
+            "configuration": {},
+            "type": "CONNECTOR_SCHEMA",
+            "id": "",
+            "name": "group"
+        }
+    ],
+    "passwordPolicies": null,
+    "features": [
+        "PROVISIONING"
+    ],
+    "type": "Web Services",
+    "connector": "web-services-angularsc",
+    "connectorClass": "sailpoint.connector.webservices.WebServicesConnector",
+    "connectorAttributes": {
+        "healthCheckTimeout": 30,
+        "clientCertificate": null,
+        "deltaAggregationEnabled": false,
+        "accesstoken": null,
+        "throwProvBeforeRuleException": true,
+        "connectionType": "direct",
+        "client_id": "",
+        "numPartitionThreads": null,
+        "enableProvisioningFeature": true,
+        "password": null,
+        "client_secret": "",
+        "clientKeySpec": null,
+        "saml_headers_to_exclude": null,
+        "sourceConnected": true,
+        "saml_headers": null,
+        "private_key": null,
+        "version": "v2",
+        "labels": [
+            "standard"
+        ],
+        "slpt-source-diagnostics": "{\"connector\":\"web-services-angularsc\",\"status\":\"SOURCE_STATE_HEALTHY\",\"healthy\":true,\"healthcheckDisabled\":false,\"healthcheckCount\":37,\"lastHealthcheck\":1778971885692,\"statusChanged\":1778885233950}",
+        "formPath": null,
+        "refresh_token": null,
+        "cloudCacheUpdate": 1778971885059,
+        "saml_request_body": null,
+        "authenticationMethod": "OAuth2Login",
+        "httpCookieSpecsStandard": "true",
+        "connectorName": "Web Services",
+        "enableStatus": null,
+        "since": "2026-05-15T22:47:13.950Z",
+        "status": "SOURCE_STATE_HEALTHY",
+        "supportsDeltaAgg": "true",
+        "lastAggregationDate_group": "2026-05-16T22:45:53Z",
+        "resourceOwnerUsername": null,
+        "oAuthJwtHeader": null,
+        "enableHasMore": false,
+        "isGetObjectRequiredForPTA": true,
+        "timeoutInSeconds": "60",
+        "genericWebServiceBaseUrl": "",
+        "resourceOwnerPassword": null,
+        "connectionParameters": [
+            {
+                "httpMethodType": "GET",
+                "pagingInitialOffset": 0,
+                "sequenceNumberForEndpoint": "1",
+                "uniqueNameForEndPoint": "Test Connection",
+                "rootPath": null,
+                "body": {
+                    "jsonBody": null,
+                    "bodyFormat": "raw"
+                },
+                "paginationSteps": null,
+                "responseCode": null,
+                "resMappingObj": null,
+                "contextUrl": "/v2025/personal-access-tokens",
+                "pagingSize": 50,
+                "curlEnabled": false,
+                "header": {
+                    "Authorization": "Bearer $application.accesstoken$"
+                },
+                "operationType": "Test Connection",
+                "xpathNamespaces": null,
+                "parentEndpointName": null
+            },
+            {
+                "httpMethodType": "GET",
+                "pagingInitialOffset": 0,
+                "sequenceNumberForEndpoint": "2",
+                "uniqueNameForEndPoint": "Account Aggregation",
+                "afterRule": "Personal Access Token Management - After Aggregation Rule",
+                "rootPath": "[*]",
+                "body": {
+                    "jsonBody": null,
+                    "bodyFormat": "raw"
+                },
+                "paginationSteps": null,
+                "responseCode": [
+                    "2**"
+                ],
+                "resMappingObj": {
+                    "identityname": "owner.name",
+                    "identityid": "owner.id",
+                    "PATid": "id"
+                },
+                "contextUrl": "/v2025/personal-access-tokens",
+                "pagingSize": 50,
+                "curlEnabled": false,
+                "header": {
+                    "Authorization": "$application.accesstoken$"
+                },
+                "operationType": "Account Aggregation",
+                "xpathNamespaces": null,
+                "parentEndpointName": null
+            },
+            {
+                "httpMethodType": "GET",
+                "pagingInitialOffset": 0,
+                "sequenceNumberForEndpoint": "3",
+                "uniqueNameForEndPoint": "Get Object",
+                "afterRule": "Personal Access Token Management - After Aggregation Rule",
+                "rootPath": "[*]",
+                "body": {
+                    "jsonBody": null,
+                    "bodyFormat": "raw"
+                },
+                "paginationSteps": null,
+                "responseCode": [
+                    "2**"
+                ],
+                "resMappingObj": {
+                    "identityname": "owner.name",
+                    "identityid": "owner.id",
+                    "PATid": "id"
+                },
+                "contextUrl": "/v2025/personal-access-tokens?owner-id=$getobject.nativeIdentity$",
+                "pagingSize": 50,
+                "curlEnabled": false,
+                "header": {
+                    "Authorization": "$application.accesstoken$"
+                },
+                "operationType": "Get Object",
+                "xpathNamespaces": null,
+                "parentEndpointName": null
+            },
+            {
+                "httpMethodType": "GET",
+                "pagingInitialOffset": 0,
+                "sequenceNumberForEndpoint": "4",
+                "uniqueNameForEndPoint": "Group Aggregation",
+                "afterRule": "Personal Access Token Management - After Group Aggregation Rule",
+                "rootPath": "[*]",
+                "body": {
+                    "jsonBody": null,
+                    "bodyFormat": "raw"
+                },
+                "paginationSteps": null,
+                "responseCode": [
+                    "2**"
+                ],
+                "resMappingObj": {
+                    "lastUsed": "lastUsed",
+                    "created": "created",
+                    "managed": "managed",
+                    "ownername": "owner.name",
+                    "ownertype": "owner.type",
+                    "accessTokenValiditySeconds": "accessTokenValiditySeconds",
+                    "scope": "scope",
+                    "name": "name",
+                    "id": "id",
+                    "ownerid": "owner.id",
+                    "userAwareTokenNeverExpires": "userAwareTokenNeverExpires",
+                    "expirationDate": "expirationDate"
+                },
+                "contextUrl": "/v2025/personal-access-tokens",
+                "pagingSize": 50,
+                "curlEnabled": false,
+                "header": {
+                    "Authorization": "Bearer $application.accesstoken$"
+                },
+                "operationType": "Group Aggregation",
+                "xpathNamespaces": null,
+                "parentEndpointName": null
+            },
+            {
+                "httpMethodType": "DELETE",
+                "pagingInitialOffset": 0,
+                "sequenceNumberForEndpoint": "5",
+                "uniqueNameForEndPoint": "Remove Entitlement",
+                "rootPath": null,
+                "body": {
+                    "jsonBody": null,
+                    "bodyFormat": "raw"
+                },
+                "paginationSteps": null,
+                "responseCode": [
+                    "2**"
+                ],
+                "resMappingObj": null,
+                "contextUrl": "/v2025/personal-access-tokens/$plan.PATid$",
+                "pagingSize": 50,
+                "curlEnabled": false,
+                "header": {
+                    "Authorization": "$application.accesstoken$"
+                },
+                "operationType": "Remove Entitlement",
+                "xpathNamespaces": null,
+                "parentEndpointName": null
+            }
+        ],
+        "lockStatus": null,
+        "oauth_request_parameters": null,
+        "grant_type": "CLIENT_CREDENTIALS",
+        "partitionAggregationEnabled": false,
+        "deleteStatus": null,
+        "hasFullAggregationCompleted": true,
+        "deltaAggregation": null,
+        "token_url": " ",
+        "possibleHttpErrors": {
+            "errorMessages": null,
+            "errorCodes": null
+        },
+        "oauth_body_attrs_to_exclude": null,
+        "throwProvAfterRuleException": true,
+        "lastAggregationDate_account": "2026-05-16T22:51:24Z",
+        "deleteThresholdPercentage": 10,
+        "fixedPlanMultivaluedAttribute": "true",
+        "oauth_headers": null,
+        "templateApplication": "Web Services Template",
+        "oauth_token_info": "",
+        "encrypted": "accesstoken,refresh_token,oauth_token_info,client_secret,private_key,private_key_password,clientCertificate,clientKeySpec,resourceOwnerPassword,custom_auth_token_info",
+        "healthy": true,
+        "private_key_password": null,
+        "cloudDisplayName": "Personal Access Token Management",
+        "oAuthJwtPayload": null,
+        "oauth_headers_to_exclude": null,
+        "saml_assertion_url": null,
+        "beforeProvisioningRule": null,
+        "username": null
+    },
+    "deleteThreshold": 10,
+    "authoritative": false,
+    "healthy": true,
+    "status": "SOURCE_STATE_HEALTHY",
+    "since": "2026-05-15T22:47:13.950Z",
+    "connectorId": "web-services-angularsc",
+    "connectorName": "Web Services",
+    "connectionType": "direct",
+    "connectorImplementationId": "web-services-angularsc",
+    "managementWorkgroup": null,
+    "credentialProviderEnabled": false,
+    "category": null,
+    "accountsFile": null,
+    "entitlementFiles": null,
+    "meta": null,
+    "id": "",
+    "name": "Personal Access Token Management",
+    "created": "2026-05-15T17:44:57.412Z",
+    "modified": "2026-05-16T22:51:25.702Z"
+}

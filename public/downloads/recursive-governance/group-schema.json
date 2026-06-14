@@ -1,0 +1,142 @@
+{
+    "nativeObjectType": "group",
+    "identityAttribute": "id",
+    "displayAttribute": "name",
+    "hierarchyAttribute": null,
+    "includePermissions": false,
+    "features": [],
+    "configuration": {},
+    "attributes": [
+        {
+            "name": "id",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "id",
+            "isMulti": true,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "scope",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "scope",
+            "isMulti": true,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "created",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "created",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "lastUsed",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "lastUsed",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "managed",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "managed",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "accessTokenValiditySeconds",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "accessTokenValiditySeconds",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "expirationDate",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "expirationDate",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "userAwareTokenNeverExpires",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "userAwareTokenNeverExpires",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "name",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "name",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "ownertype",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "ownertype",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "ownerid",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "ownerid",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "ownername",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "ownername",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "description",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "description",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        }
+    ],
+    "name": "group"
+}

@@ -1,0 +1,46 @@
+{
+    "nativeObjectType": "user",
+    "identityAttribute": "identityid",
+    "displayAttribute": "identityname",
+    "hierarchyAttribute": null,
+    "includePermissions": false,
+    "features": [],
+    "configuration": {},
+    "attributes": [
+        {
+            "name": "identityid",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "identityid",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "identityname",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": null,
+            "description": "identityname",
+            "isMulti": false,
+            "isEntitlement": false,
+            "isGroup": false
+        },
+        {
+            "name": "PATid",
+            "nativeName": null,
+            "type": "STRING",
+            "schema": {
+                "type": "CONNECTOR_SCHEMA",
+                "id": "GROUPSCHEMAIDHERE",
+                "name": "group"
+            },
+            "description": "PATid",
+            "isMulti": true,
+            "isEntitlement": true,
+            "isGroup": true
+        }
+    ],
+    "name": "account"
+}
