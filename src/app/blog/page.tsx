@@ -120,6 +120,27 @@ export default function Blog() {
           <polyline points="8 6 12 10 16 6"></polyline>
         </svg>
       )
+    },
+    {
+      slug: 'form-ui-customization',
+      title: 'Designing Beyond Default: SailPoint Form UI Customization',
+      category: 'Architecture',
+      date: 'June 2026',
+      description: 'An ultimate guide to SailPoint ISC Form UI customization using custom HTML elements, advanced inline CSS layout structures, and dynamic serial loops.',
+      iconBgClass: 'bg-cyan-500/10',
+      iconBorderClass: 'border-cyan-500/20',
+      iconColorClass: 'text-cyan-400',
+      hoverTitleClass: 'group-hover:text-cyan-400',
+      readMoreColorClass: 'text-cyan-500',
+      gradientClass: 'from-cyan-600/20 to-teal-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="9" y1="9" x2="15" y2="9"></line>
+          <line x1="9" y1="13" x2="15" y2="13"></line>
+          <line x1="9" y1="17" x2="15" y2="17"></line>
+        </svg>
+      )
     }
   ];
 

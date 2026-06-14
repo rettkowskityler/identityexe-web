@@ -1,0 +1,138 @@
+{
+	"name": "Form Customization Tester",
+	"description": "Form Customization Tester",
+	"modified": "2026-06-09T23:46:42.249909949Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "",
+		"name": ""
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "inputloopbuilder",
+							"transforms": []
+						}
+					]
+				},
+				"displayName": "",
+				"nextStep": "HTTP Request",
+				"type": "Mutation"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "858e4f27-feab-4447-b433-581552335cc5"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"url": "https://<TENANT>.api.identitynow.com/v2026/identities"
+				},
+				"displayName": "",
+				"nextStep": "Serial Loop",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Interactive Form": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "c27dbd2a-dd5c-45c7-bfbe-0c3d518c3f6e",
+					"inputForForm_input.$": "$.defineVariable.inputloopbuilder",
+					"inputForForm_input1.$": "$.defineVariable.inputloopbuilder",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Form Customization Tester"
+				},
+				"displayName": "",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Serial Loop": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"input.$": "$.hTTPRequest.body",
+					"loopType": "forLoop",
+					"start": "Update Variable",
+					"steps": {
+						"End Step - Success 1": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"Update Variable": {
+							"actionId": "sp:update-variable",
+							"attributes": {
+								"id": "sp:update-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "$.defineVariable.inputloopbuilder",
+										"transforms": [
+											{
+												"id": "sp:transform:concatenate:string",
+												"input": {
+													"variableB": "<table style='width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #cfd8dc; border-left: 5px solid #3498db; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); font-family: sans-serif; margin-bottom: 12px;'><tr><td style='padding: 12px; width: 35%;'><span style='font-weight: bold; font-size: 14px; color: #1e293b;'>👤 {{$.loop.loopInput.attributes.displayName}}</span><br><span style='font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase;'>{{$.loop.loopInput.attributes.title}}</span><br><span style='font-size: 11px; color: #94a3b8;'>UID: <code style='font-family: monospace; color: #d63384;'>{{$.loop.loopInput.attributes.uid}}</code></span></td><td style='padding: 12px; width: 40%; font-size: 12px; color: #334155; vertical-align: top;'>📧 <span style='font-family: monospace; color: #e11d48;'>{{$.loop.loopInput.emailAddress}}</span><br>📍 Location: <strong style='color: #475569;'>{{$.loop.loopInput.attributes.location}}</strong><br>👔 Manager: <span style='font-size: 11px; opacity: 0.85; font-weight: bold;'>{{$.loop.loopInput.managerRef.name}}</span></td><td style='padding: 12px; width: 25%; text-align: right; vertical-align: top;'><span style='background: #e8f5e9; border: 1px solid #c8e6c9; color: #2e7d32; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase;'>{{$.loop.loopInput.attributes.identityState}}</span></td></tr><tr><td colspan='3' style='padding: 0 12px 12px 12px;'><details style='cursor: pointer; background: #f8fafc; padding: 8px; border-radius: 4px; border: 1px solid #e2e8f0;'><summary style='font-weight: bold; font-size: 11px; color: #475569;'>🔍 View Lifecycle & Sync Parameters</summary><div style='margin-top: 8px; font-family: monospace; font-size: 11px; color: #334155; border-top: 1px dashed #cbd5e1; padding-top: 6px; white-space: pre-wrap; word-break: break-all;'>Internal ID: {{$.loop.loopInput.id}}\nCreated: {{$.loop.loopInput.created}}\nModified: {{$.loop.loopInput.modified}}\nLast Sync Signature: {{$.loop.loopInput.attributes.lastSyncDate}}</div></details></td></tr></table>"
+												}
+											}
+										],
+										"variableA.$": "$.defineVariable.inputloopbuilder"
+									}
+								]
+							},
+							"displayName": "",
+							"nextStep": "End Step - Success 1",
+							"type": "Mutation"
+						}
+					}
+				},
+				"displayName": "",
+				"nextStep": "Interactive Form",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "",
+		"name": ""
+	},
+	"trigger": {
+		"type": "EVENT",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == 'e3c9ed7d-eab6-4956-a459-475533708642')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	}
+}
