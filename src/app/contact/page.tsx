@@ -151,21 +151,21 @@ export default function Contact() {
               </button>
             </div>
 
-            {/* Tab Content 1: Calendly Embed */}
+            {/* Tab Content 1: Google Calendar Embed */}
             {activeTab === 'calendar' && (
               <div className="animate-fade-in-up flex flex-col gap-4">
-                <div className="bg-slate-900/40 rounded-2xl overflow-hidden border border-white/5 min-h-[620px] relative">
+                <div className="bg-white rounded-2xl overflow-hidden border border-white/5 min-h-[620px] relative">
                   <iframe 
-                    src="https://calendly.com/tyler-identityexe/30min?hide_landing_page_details=1&hide_gdpr_banner=1" 
+                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1blvARvOjYrxqlOLwH9R6E3xS9BRbelK6xVHR66JXXUrT_EnVwI1c7cmslxpvrz13LgaGfLlX5?gv=true" 
                     width="100%" 
                     height="620" 
                     frameBorder="0"
                     title="Schedule Call with Tyler"
-                    className="w-full h-[620px]"
+                    className="w-full h-[620px] bg-white"
                   ></iframe>
                 </div>
                 <p className="text-slate-500 text-xs text-center font-light mt-2">
-                  Calendly widget loading securely. Pick any available slot to lock in your call.
+                  Calendar scheduling loading securely. Pick any available slot to lock in your call.
                 </p>
               </div>
             )}
