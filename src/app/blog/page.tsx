@@ -24,6 +24,27 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'dynamic-retry-workflows',
+      title: 'Dynamic Retry Workflows in Identity Security Cloud',
+      category: 'Architecture',
+      date: 'June 2026',
+      description: 'An architectural implementation framework to gracefully retry HTTP POSTs and PowerShell scripts to handle downstream dependency delays.',
+      iconBgClass: 'bg-indigo-500/10',
+      iconBorderClass: 'border-indigo-500/20',
+      iconColorClass: 'text-indigo-400',
+      hoverTitleClass: 'group-hover:text-indigo-400',
+      readMoreColorClass: 'text-indigo-500',
+      gradientClass: 'from-indigo-600/20 to-blue-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 2v6h-6"></path>
+          <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+          <path d="M3 22v-6h6"></path>
+          <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
+        </svg>
+      )
+    },
+    {
       slug: 'maintenance-mode-isc',
       title: 'Bringing IIQ Maintenance Mode to ISC',
       category: 'Architecture',
@@ -144,15 +165,17 @@ export default function Blog() {
     }
   ];
 
-  const filteredPosts = blogPosts.filter((post) => {
-    const query = searchQuery.toLowerCase().trim();
-    if (!query) return true;
-    return (
-      post.title.toLowerCase().includes(query) ||
-      post.description.toLowerCase().includes(query) ||
-      post.category.toLowerCase().includes(query)
-    );
-  });
+  const filteredPosts = blogPosts
+    .filter((post) => {
+      const query = searchQuery.toLowerCase().trim();
+      if (!query) return true;
+      return (
+        post.title.toLowerCase().includes(query) ||
+        post.description.toLowerCase().includes(query) ||
+        post.category.toLowerCase().includes(query)
+      );
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <>

@@ -1,0 +1,290 @@
+{
+	"name": "Test Launch Certification Campaign",
+	"description": "Test Launch Certification Campaign",
+	"modified": "2026-06-20T19:05:57.545811822Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin_user"
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Comparison 1": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "NumericLessThan",
+						"nextStep": "End Step - Success 1",
+						"variableA.$": "$.serialLoop.succeeded",
+						"variableB.$": "$.defineVariable.retrycount"
+					}
+				],
+				"defaultStep": "End Step - Failure",
+				"displayName": "Check If Retry Workflow Succeeded",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "retrycount",
+							"transforms": [],
+							"variableA": 10
+						},
+						{
+							"description": "",
+							"name": "counter",
+							"transforms": [],
+							"variableA": 0
+						},
+						{
+							"description": "",
+							"name": "waittime",
+							"transforms": [],
+							"variableA": "20s"
+						},
+						{
+							"description": "",
+							"name": "requestStatus",
+							"transforms": [],
+							"variableA": "false"
+						}
+					]
+				},
+				"displayName": "",
+				"nextStep": "HTTP Request",
+				"type": "Mutation"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureName": "Did not activate",
+				"type": "failure"
+			},
+			"End Step - Success 1": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": {
+						"autoRevokeAllowed": false,
+						"deadline": "2026-07-31T23:59:59Z",
+						"description": "A campaign designed to review and certify all access items across the entire organization.",
+						"emailNotificationEnabled": true,
+						"mandatoryCommentRequirement": "REVOKE_ONLY_DECISIONS",
+						"name": "Annual Comprehensive All Access Certification Campaign",
+						"recommendationsEnabled": true,
+						"searchCampaignInfo": {
+							"query": "*",
+							"reviewer": {
+								"id": "00000000000000000000000000000000",
+								"type": "IDENTITY"
+							},
+							"type": "ACCESS"
+						},
+						"type": "SEARCH"
+					},
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "00000000-0000-0000-0000-000000000000",
+						"paramType": "1.4",
+						"refID": "00000000-0000-0000-0000-000000000000"
+					},
+					"requestContentType": "json",
+					"url": "https://your-tenant.api.identitynow.com/v2026/campaigns"
+				},
+				"description": "Create Campaign",
+				"displayName": "Launch Campaign",
+				"nextStep": "HTTP Request 2",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 2": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": {
+						"httprequest": {
+							"body": "",
+							"url": "https://your-tenant.api.identitynow.com/v2026/campaigns/{{$.hTTPRequest.body.id}}/activate"
+						},
+						"originalworkflow": "Launch Certification Campaign",
+						"retrycount": 5,
+						"waittime": "{{$.defineVariable.waittime}}"
+					},
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "00000000-0000-0000-0000-000000000000",
+						"paramType": "1.4",
+						"refID": "00000000-0000-0000-0000-000000000000"
+					},
+					"requestContentType": "json",
+					"url": "https://your-tenant.api.identitynow.com/v2024/workflows/execute/external/00000000-0000-0000-0000-000000000000"
+				},
+				"description": "Create Campaign",
+				"displayName": "Retry Workflow - Active Campaign",
+				"nextStep": "Serial Loop",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Serial Loop": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"condition": {
+						"comparator": "NumericLessThan",
+						"variableA.$": "$.defineVariable.counter",
+						"variableB.$": "$.defineVariable.retrycount"
+					},
+					"loopType": "while",
+					"start": "Wait",
+					"steps": {
+						"Break Loop": {
+							"actionId": "sp:operator-break",
+							"attributes": {
+								"id": "sp:operator-break"
+							},
+							"displayName": "",
+							"type": "break",
+							"versionNumber": 0
+						},
+						"Define Comparison": {
+							"actionId": "sp:compare-multi-type",
+							"choiceList": [
+								{
+									"comparator": "StringEquals",
+									"nextStep": "Break Loop",
+									"variableA.$": "$.defineVariable.requestStatus",
+									"variableB": "Completed"
+								}
+							],
+							"defaultStep": "Update Variable",
+							"displayName": "Check Status",
+							"type": "choice"
+						},
+						"End Step - Success": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"HTTP Request 1": {
+							"actionId": "sp:http",
+							"attributes": {
+								"method": "get",
+								"param_authenticationRef": "oauth",
+								"param_oauth": {
+									"mapping": {
+										"auth_client_id": "clientId",
+										"auth_client_secret": "clientSecret",
+										"auth_credential_location": "credentialLocation",
+										"auth_token_url": "tokenURL"
+									},
+									"paramID": "00000000-0000-0000-0000-000000000000",
+									"paramType": "1.4",
+									"refID": "00000000-0000-0000-0000-000000000000"
+								},
+								"requestContentType": "json",
+								"url": "https://your-tenant.api.identitynow.com/v2026/workflow-executions/{{$.hTTPRequest2.body.workflowExecutionId}}"
+							},
+							"description": "Create Campaign",
+							"displayName": "Poll Retry Workflow For Status",
+							"nextStep": "Update Variable 1",
+							"type": "action",
+							"versionNumber": 3
+						},
+						"Update Variable": {
+							"actionId": "sp:update-variable",
+							"attributes": {
+								"id": "sp:update-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "$.defineVariable.counter",
+										"transforms": [
+											{
+												"id": "sp:transform:add:number",
+												"input": {
+													"precision": 4,
+													"roundingMode": "roundHalfUp",
+													"variableB": 1
+												}
+											}
+										],
+										"variableA.$": "$.defineVariable.counter"
+									}
+								]
+							},
+							"displayName": "Increment Counter",
+							"nextStep": "End Step - Success",
+							"type": "Mutation"
+						},
+						"Update Variable 1": {
+							"actionId": "sp:update-variable",
+							"attributes": {
+								"id": "sp:update-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "$.defineVariable.requestStatus",
+										"transforms": [],
+										"variableA.$": "$.hTTPRequest1.body.status"
+									}
+								]
+							},
+							"displayName": "Get Status From Poll",
+							"nextStep": "Define Comparison",
+							"type": "Mutation"
+						},
+						"Wait": {
+							"actionId": "sp:sleep",
+							"attributes": {
+								"duration.$": "$.defineVariable.waittime",
+								"type": "waitFor"
+							},
+							"displayName": "",
+							"nextStep": "HTTP Request 1",
+							"type": "action",
+							"versionNumber": 1
+						}
+					}
+				},
+				"displayName": "",
+				"nextStep": "Define Comparison 1",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin_user"
+	},
+	"trigger": {
+		"type": "EVENT",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == '00000000-0000-0000-0000-000000000000')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	}
+}

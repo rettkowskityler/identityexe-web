@@ -1,0 +1,213 @@
+{
+	"name": "Dynamic Retry Workflow - HTTP POST Request",
+	"description": "",
+	"modified": "2026-06-20T19:35:23.341098891Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin_user"
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"AND": [
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.httprequest"
+							},
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.httprequest.url"
+							},
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.httprequest.body"
+							},
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.retrycount"
+							}
+						],
+						"nextStep": "Serial Loop 1"
+					}
+				],
+				"defaultStep": "End Step - Failure",
+				"description": null,
+				"displayName": "Check Input Is Complete",
+				"type": "choice"
+			},
+			"Define Comparison 5": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "NumericLessThan",
+						"nextStep": "End Step - Success 2",
+						"variableA.$": "$.serialLoop1.succeeded",
+						"variableB.$": "$.trigger.retrycount"
+					}
+				],
+				"defaultStep": "End Step - Failure 1",
+				"description": null,
+				"displayName": "Check If Succeeded",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "counter",
+							"transforms": [],
+							"variableA": 0
+						}
+					]
+				},
+				"displayName": "",
+				"nextStep": "Define Comparison",
+				"type": "Mutation"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureDetails": "Please check the following:\nretrycount\nhttprequest.httprequesturl\nhttprequest.body",
+				"failureName": "Key Parameter Missing!",
+				"type": "failure"
+			},
+			"End Step - Failure 1": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureName": "Error",
+				"type": "failure"
+			},
+			"End Step - Success 2": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"Serial Loop 1": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"condition": {
+						"comparator": "NumericLessThan",
+						"variableA.$": "$.defineVariable.counter",
+						"variableB.$": "$.trigger.retrycount"
+					},
+					"loopType": "while",
+					"start": "Wait",
+					"steps": {
+						"Break Loop": {
+							"actionId": "sp:operator-break",
+							"attributes": {
+								"id": "sp:operator-break"
+							},
+							"displayName": "",
+							"type": "break",
+							"versionNumber": 0
+						},
+						"End Step - Success": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"HTTP Request": {
+							"actionId": "sp:http",
+							"attributes": {
+								"jsonRequestBody.$": "$.trigger.httprequest.body",
+								"method": "post",
+								"param_authenticationRef": "oauth",
+								"param_oauth": {
+									"mapping": {
+										"auth_client_id": "clientId",
+										"auth_client_secret": "clientSecret",
+										"auth_credential_location": "credentialLocation",
+										"auth_token_url": "tokenURL"
+									},
+									"paramID": "00000000-0000-0000-0000-000000000000",
+									"paramType": "1.4",
+									"refID": "00000000-0000-0000-0000-000000000000"
+								},
+								"requestContentType": "json",
+								"requestHeaders": null,
+								"url.$": "$.trigger.httprequest.url",
+								"urlParams": {}
+							},
+							"catch": [
+								{
+									"next": "Update Variable 3"
+								}
+							],
+							"description": "POST",
+							"displayName": "HTTP POST",
+							"nextStep": "Break Loop",
+							"type": "action",
+							"versionNumber": 3
+						},
+						"Update Variable 3": {
+							"actionId": "sp:update-variable",
+							"attributes": {
+								"id": "sp:update-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "$.defineVariable.counter",
+										"transforms": [
+											{
+												"id": "sp:transform:add:number",
+												"input": {
+													"precision": 4,
+													"roundingMode": "roundHalfUp",
+													"variableB": 1
+												}
+											}
+										],
+										"variableA.$": "$.defineVariable.counter"
+									}
+								]
+							},
+							"displayName": "Increment Counter",
+							"nextStep": "End Step - Success",
+							"type": "Mutation"
+						},
+						"Wait": {
+							"actionId": "sp:sleep",
+							"attributes": {
+								"duration.$": "$.trigger.waittime",
+								"type": "waitFor"
+							},
+							"displayName": "",
+							"nextStep": "HTTP Request",
+							"type": "action",
+							"versionNumber": 1
+						}
+					}
+				},
+				"description": null,
+				"displayName": "",
+				"nextStep": "Define Comparison 5",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin_user"
+	},
+	"trigger": {
+		"type": "EXTERNAL",
+		"attributes": {
+			"clientId": "00000000-0000-0000-0000-000000000000",
+			"description": "retrycount\nwaittime\noriginalworkflow\nHTTPRequest\n     HTTPRequestUrl\n     Body",
+			"id": "idn:external-http",
+			"integrationId": null,
+			"url": "https://your-tenant.api.identitynow.com/v2024/workflows/execute/external/00000000-0000-0000-0000-000000000000"
+		}
+	}
+}

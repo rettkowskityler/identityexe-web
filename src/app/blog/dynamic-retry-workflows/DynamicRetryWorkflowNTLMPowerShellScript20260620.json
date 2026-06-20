@@ -1,0 +1,256 @@
+{
+	"name": "Dynamic Retry Workflow - NTLM PowerShell Script",
+	"description": "",
+	"modified": "2026-06-20T19:33:25.457577613Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin_user"
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"AND": [
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.windowsserver"
+							},
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.waittime"
+							},
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.windowsserver"
+							},
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.windowsserver.connectionaddress"
+							},
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.windowsserver.outputformat"
+							},
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.windowsserver.scriptpath"
+							},
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.windowsserver.scriptexecutiontimeout"
+							},
+							{
+								"comparator": "IsPresent",
+								"variableA.$": "$.trigger.retrycount"
+							}
+						],
+						"nextStep": "Serial Loop"
+					}
+				],
+				"defaultStep": "End Step - Failure",
+				"description": null,
+				"displayName": "Check If Input is Complete",
+				"type": "choice"
+			},
+			"Define Comparison 6": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "NumericLessThan",
+						"nextStep": "End Step - Success 3",
+						"variableA.$": "$.serialLoop.succeeded",
+						"variableB.$": "$.trigger.retrycount"
+					}
+				],
+				"defaultStep": "End Step - Failure 2",
+				"displayName": "Check If Succeeded",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "success",
+							"transforms": [],
+							"variableA": "false"
+						},
+						{
+							"description": "",
+							"name": "counter",
+							"transforms": [],
+							"variableA": 0
+						}
+					]
+				},
+				"displayName": "",
+				"nextStep": "Define Comparison",
+				"type": "Mutation"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureName": "Missing Key Property!",
+				"type": "failure"
+			},
+			"End Step - Failure 2": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureDetails": "Failed After All Attempted Retries",
+				"failureName": "Failed After All Attempted Retries",
+				"type": "failure"
+			},
+			"End Step - Success 3": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"Serial Loop": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"condition": {
+						"comparator": "NumericLessThan",
+						"variableA.$": "$.defineVariable.counter",
+						"variableB.$": "$.trigger.retrycount"
+					},
+					"loopType": "while",
+					"start": "Wait",
+					"steps": {
+						"Break Loop 1": {
+							"actionId": "sp:operator-break",
+							"attributes": {
+								"id": "sp:operator-break"
+							},
+							"displayName": "",
+							"type": "break",
+							"versionNumber": 0
+						},
+						"Check Script Result": {
+							"actionId": "sp:compare-multi-type",
+							"choiceList": [
+								{
+									"comparator": "IsNull",
+									"nextStep": "Break Loop 1",
+									"variableA.$": "$.windowsServer.error"
+								}
+							],
+							"defaultStep": "Update Variable 2",
+							"displayName": "Check Script Result",
+							"type": "choice"
+						},
+						"End Step - Success 1": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"Update Variable 2": {
+							"actionId": "sp:update-variable",
+							"attributes": {
+								"id": "sp:update-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "$.defineVariable.counter",
+										"transforms": [
+											{
+												"id": "sp:transform:add:number",
+												"input": {
+													"precision": 4,
+													"roundingMode": "roundHalfUp",
+													"variableB": 1
+												}
+											}
+										],
+										"variableA.$": "$.defineVariable.counter"
+									}
+								]
+							},
+							"displayName": "Increment Counter",
+							"nextStep": "End Step - Success 1",
+							"type": "Mutation"
+						},
+						"Wait": {
+							"actionId": "sp:sleep",
+							"attributes": {
+								"date": "",
+								"duration.$": "$.trigger.waittime",
+								"type": "waitFor"
+							},
+							"displayName": "",
+							"nextStep": "Windows Server",
+							"type": "action",
+							"versionNumber": 1
+						},
+						"Windows Server": {
+							"actionId": "sp:pag-windows-server",
+							"attributes": {
+								"inputForPag_address.$": "$.trigger.windowsserver.connectionaddress",
+								"inputForPag_auth_type": "ntlm",
+								"inputForPag_auth_username": null,
+								"inputForPag_checksum.$": "$.trigger.windowsserver.scriptsha512checksum",
+								"inputForPag_command_timeout_seconds.$": "$.trigger.windowsserver.scriptexecutiontimeout",
+								"inputForPag_configuration_name.$": "$.trigger.windowsserver.powershellconfigurationname",
+								"inputForPag_kdc_port": 88,
+								"inputForPag_kdc_protocol": "udp",
+								"inputForPag_output_format.$": "$.trigger.windowsserver.outputformat",
+								"inputForPag_script_arguments.$": "$.trigger.windowsserver.scriptarguments",
+								"inputForPag_script_path.$": "$.trigger.windowsserver.scriptpath",
+								"inputForPag_use_ssl": true,
+								"inputForPag_verify_cert": false,
+								"pagCommandType": "pag:windows_server:execute_powershell_script",
+								"pagInstanceId": "00000000-0000-0000-0000-000000000000",
+								"pagSpecId": "00000000-0000-0000-0000-000000000000",
+								"param_connType": "paramInline",
+								"param_credential": {
+									"mapping": {
+										"auth_password": "password",
+										"auth_username": "username"
+									},
+									"paramID": "00000000-0000-0000-0000-000000000000",
+									"paramType": "1.1",
+									"refID": "00000000-0000-0000-0000-000000000000"
+								},
+								"param_credentialType": "paramSPS",
+								"param_kerberosType": "paramInline"
+							},
+							"catch": [
+								{
+									"next": "Check Script Result"
+								}
+							],
+							"displayName": "Execute PowerShell Script",
+							"nextStep": "Check Script Result",
+							"type": "action",
+							"versionNumber": 1
+						}
+					}
+				},
+				"displayName": "",
+				"nextStep": "Define Comparison 6",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin_user"
+	},
+	"trigger": {
+		"type": "EXTERNAL",
+		"attributes": {
+			"clientId": "00000000-0000-0000-0000-000000000000",
+			"description": "retrycount\noriginalworkflow\nwaittime\nWindows Server\n\tConnectionAddress\n\tScriptPath\n\tScriptArguments\n\tOutputFormat\n\tScriptSHA512Checksum\n\tPowerShellConfigurationName\n\tScriptExecutionTimeout",
+			"id": "idn:external-http",
+			"integrationId": null,
+			"url": "https://your-tenant.api.identitynow.com/v2024/workflows/execute/external/00000000-0000-0000-0000-000000000000"
+		}
+	}
+}
