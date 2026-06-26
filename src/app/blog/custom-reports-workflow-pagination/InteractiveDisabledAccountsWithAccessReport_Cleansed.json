@@ -1,0 +1,188 @@
+{
+	"name": "Interactive Disabled Accounts With Access Report",
+	"description": "Interactive Disabled Accounts With Access Report",
+	"modified": "2026-06-25T23:21:06.57256005Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "{admin-id}",
+		"name": "{admin-name}"
+	},
+	"definition": {
+		"start": "Get Identity",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request",
+						"variableA.$": "$.interactiveForm.formData.selectAllSources",
+						"variableB": "Yes"
+					}
+				],
+				"defaultStep": "Define Variable",
+				"displayName": "Check If Individual Sources or All",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "formattedSources",
+							"transforms": [
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "[",
+										"replacement": "("
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "]",
+										"replacement": ")"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "\"",
+										"replacement": "\\\""
+									}
+								}
+							],
+							"variableA": "{{$.interactiveForm.formData.sources.JSON()}}"
+						}
+					]
+				},
+				"displayName": "",
+				"nextStep": "HTTP Request 1",
+				"type": "Mutation"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureDetails": "Error!",
+				"failureName": "Error!",
+				"type": "failure"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"End Step - Success 1": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"Get Identity": {
+				"actionId": "sp:get-identity",
+				"attributes": {
+					"id.$": "$.trigger.launchedBy.id"
+				},
+				"displayName": "Get Users Email",
+				"nextStep": "Interactive Form",
+				"type": "action",
+				"versionNumber": 2
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": {
+						"currentoffset": 0,
+						"currentsummaryvariable": "",
+						"filter": "hasEntitlements eq true",
+						"limit": 250,
+						"recipientemail": "{{$.getIdentity.emailAddress}}"
+					},
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "a6e2648a-5d34-4ed6-9714-08cdb6e9e193",
+						"paramType": "1.4",
+						"refID": "1c12a02b-b630-4ea0-a072-68fa7cda9465"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/{workflow-id}"
+				},
+				"displayName": "Call Pagination Worker (All Sources)",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 1": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": {
+						"currentoffset": 0,
+						"currentsummaryvariable": "",
+						"filter": "hasEntitlements eq true and sourceId in {{$.defineVariable.formattedSources}}",
+						"limit": 250,
+						"recipientemail": "{{$.getIdentity.emailAddress}}"
+					},
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "a6e2648a-5d34-4ed6-9714-08cdb6e9e193",
+						"paramType": "1.4",
+						"refID": "1c12a02b-b630-4ea0-a072-68fa7cda9465"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/{workflow-id}"
+				},
+				"displayName": "Call Pagination Worker (Single Sources)",
+				"nextStep": "End Step - Success 1",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Interactive Form": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "ff6b8297-8039-4899-8b75-128153aae7b8",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Select Sources For Reporting!"
+				},
+				"catch": [
+					{
+						"next": "End Step - Failure"
+					}
+				],
+				"displayName": "",
+				"nextStep": "Define Comparison",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "{admin-id}",
+		"name": "{admin-name}"
+	},
+	"trigger": {
+		"type": "EVENT",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == '73e878de-944c-4bed-b751-033e27372de8')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	}
+}

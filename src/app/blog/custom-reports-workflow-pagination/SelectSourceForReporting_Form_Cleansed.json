@@ -1,0 +1,127 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "ff6b8297-8039-4899-8b75-128153aae7b8",
+      "name": "Select Source For Reporting"
+    },
+    "object": {
+      "id": "ff6b8297-8039-4899-8b75-128153aae7b8",
+      "name": "Select Source For Reporting",
+      "description": "",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "{admin-id}",
+        "name": "{admin-name}"
+      },
+      "usedBy": [],
+      "formInput": [],
+      "formElements": [
+        {
+          "id": "440344554061",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "options": [
+                        {
+                          "label": "Yes",
+                          "sublabel": "",
+                          "value": "Yes"
+                        },
+                        {
+                          "label": "No",
+                          "sublabel": "",
+                          "value": "No"
+                        }
+                      ]
+                    },
+                    "dataSourceType": "STATIC"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select All Sources?",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "963802726989",
+                "key": "selectAllSources",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "SOURCES"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Sources",
+                  "maximum": 30,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "509806337438",
+                "key": "sources",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              }
+            ],
+            "label": "Disabled Accounts With Access Report",
+            "labelStyle": "h1",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectAllSources",
+              "operator": "NE",
+              "valueType": "STRING",
+              "value": "No"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "HIDE",
+              "config": {
+                "element": "509806337438"
+              }
+            }
+          ]
+        }
+      ],
+      "created": "2026-06-22T23:40:56.236818985Z",
+      "modified": "2026-06-22T23:50:19.816130952Z"
+    }
+  }
+]

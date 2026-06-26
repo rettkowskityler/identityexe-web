@@ -24,6 +24,28 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'custom-reports-workflow-pagination',
+      title: 'Custom Reports with Workflow Pagination',
+      category: 'Architecture',
+      date: 'June 2026',
+      description: 'A modular architectural framework for building native paginated custom reports within Identity Security Cloud workflows.',
+      iconBgClass: 'bg-indigo-500/10',
+      iconBorderClass: 'border-indigo-500/20',
+      iconColorClass: 'text-indigo-400',
+      hoverTitleClass: 'group-hover:text-indigo-400',
+      readMoreColorClass: 'text-indigo-500',
+      gradientClass: 'from-indigo-600/20 to-blue-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      )
+    },
+    {
       slug: 'dynamic-retry-workflows',
       title: 'Dynamic Retry Workflows in Identity Security Cloud',
       category: 'Architecture',

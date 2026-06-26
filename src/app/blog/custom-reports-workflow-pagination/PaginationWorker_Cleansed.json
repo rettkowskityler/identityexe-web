@@ -1,0 +1,480 @@
+{
+	"name": "Pagination Worker",
+	"description": "",
+	"modified": "2026-06-25T23:24:36.668253413Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "{admin-id}",
+		"name": "{admin-name}"
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "NumericEquals",
+						"nextStep": "Serial Loop",
+						"variableA.$": "$.hTTPRequest.body.length()",
+						"variableB": 250
+					}
+				],
+				"defaultStep": "Serial Loop 1",
+				"description": "Check If 1000Records",
+				"displayName": "Check If Full Page Of Records",
+				"type": "choice"
+			},
+			"Define Comparison 3": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "Send Email 1",
+						"variableA.$": "$.defineVariable.currentsummaryvariable",
+						"variableB": ""
+					}
+				],
+				"defaultStep": "Send Email",
+				"displayName": "Check If Summary Is Empty",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "currentoffset",
+							"transforms": [],
+							"variableA.$": "$.trigger.offset"
+						},
+						{
+							"description": "",
+							"name": "limit",
+							"transforms": [],
+							"variableA.$": "$.trigger.currentsummaryvariable"
+						},
+						{
+							"description": "",
+							"name": "currentsummaryvariable",
+							"transforms": [],
+							"variableA.$": "$.trigger.currentsummaryvariable"
+						},
+						{
+							"description": "",
+							"name": "newoffset",
+							"transforms": [
+								{
+									"id": "sp:transform:add:number",
+									"input": {
+										"precision": 4,
+										"roundingMode": "roundHalfUp",
+										"variableB": 250
+									}
+								}
+							],
+							"variableA.$": "$.trigger.currentoffset"
+						},
+						{
+							"description": "",
+							"name": "filter",
+							"transforms": [
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "(sourceId\\s+in\\s+)([a-zA-Z0-9]+)",
+										"replacement": "$1(\"$2\")"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "\"",
+										"replacement": "\\\""
+									}
+								}
+							],
+							"variableA.$": "$.trigger.filter"
+						}
+					]
+				},
+				"displayName": "Set Variables from Trigger",
+				"nextStep": "HTTP Request",
+				"type": "Mutation"
+			},
+			"Define Variable 3": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "d",
+							"name": "syncedSummary",
+							"transforms": [],
+							"variableA.$": "$.defineVariable.currentsummaryvariable"
+						}
+					]
+				},
+				"displayName": "Assign Summary To Recapture State",
+				"nextStep": "HTTP Request 1",
+				"type": "Mutation"
+			},
+			"End Step - Success 1": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"End Step - Success 2": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"End Step - Success 7": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": null,
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "5eace4b3-03bf-4787-8ff5-4d134f81509b"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v3/accounts",
+					"urlParams": {
+						"filters": "{{$.defineVariable.filter}}",
+						"limit": "{{$.trigger.limit}}",
+						"offset": "{{$.trigger.currentoffset}}",
+						"sorters": "id"
+					}
+				},
+				"displayName": "Perform Accounts HTTP Call",
+				"nextStep": "Define Comparison",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 1": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": {
+						"currentoffset": "{{$.defineVariable.newoffset}}",
+						"currentsummaryvariable": "{{$.defineVariable3.syncedSummary}}",
+						"filter": "{{$.defineVariable.filter}}",
+						"limit": "{{$.trigger.limit}}",
+						"recipientemail": "{{$.trigger.recipientemail}}"
+					},
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "a6e2648a-5d34-4ed6-9714-08cdb6e9e193",
+						"paramType": "1.4",
+						"refID": "b066b2e0-b07b-4f06-a8d5-62b0a94d2a7b"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/{workflow-id}"
+				},
+				"displayName": "Recall Itself to Continue Pagination",
+				"nextStep": "End Step - Success 2",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Send Email": {
+				"actionId": "sp:send-email",
+				"attributes": {
+					"body": "<div style=\"max-width: 800px; margin: 40px auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);\">\n<div style=\"background-color: #1e293b; padding: 32px 40px; border-bottom: 4px solid #3b82f6;\">\n<h1 style=\"margin: 0 0 8px 0; color: #f8fafc; font-size: 24px;\">Disabled Accounts with Access</h1>\n<p style=\"margin: 0; color: #94a3b8; font-size: 14px;\">Automated Security Report</p>\n</div>\n<div style=\"padding: 40px;\">\n<p style=\"margin-top: 0; margin-bottom: 24px;\">The following accounts have been identified as disabled in their respective sources but still retain active access entitlements.</p>\n<!-- 1. HEADER TABLE WITH ADJUSTED WIDTHS -->\n<table style=\"width: 100%; border-collapse: collapse; border-bottom: 2px solid #e2e8f0; background-color: #f8fafc;\">\n<tbody>\n<tr>\n<th style=\"padding: 16px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; width: 35%;\">Identity</th>\n<th style=\"padding: 16px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; width: 25%;\">Account Details</th>\n<th style=\"padding: 16px 20px; text-align: center; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; width: 20%;\">Source</th>\n<th style=\"padding: 16px 20px; text-align: center; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; width: 20%;\">Access Items</th>\n</tr>\n</tbody>\n</table>\n<!-- 2. DATA ROWS SITTING SAFELY OUTSIDE THE TABLE -->\n<div>{{$.defineVariable.currentsummaryvariable}}</div>\n</div>\n</div>",
+					"context": {},
+					"from": null,
+					"recipientEmailList.$": "$.trigger.recipientemail",
+					"subject": "Disabled Accounts With Access Report!"
+				},
+				"displayName": "",
+				"nextStep": "End Step - Success 1",
+				"type": "action",
+				"versionNumber": 2
+			},
+			"Send Email 1": {
+				"actionId": "sp:send-email",
+				"attributes": {
+					"body": "<div style=\"max-width: 900px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05); border: 1px solid #e2e8f0; overflow: hidden; font-family: Arial, Helvetica, sans-serif;\"><!-- Premium Header -->\n<div style=\"background-color: #0f172a; background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 32px 40px;\">\n<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td>\n<h1 style=\"margin: 0; font-size: 24px; font-weight: bold; color: #ffffff; letter-spacing: -0.5px;\">Disabled Accounts with Access</h1>\n<p style=\"margin: 8px 0 0 0; font-size: 14px; color: #94a3b8; font-weight: 400;\">Automated Security Report &bull; Identity Security Cloud</p>\n</td>\n<td style=\"vertical-align: top;\" align=\"right\">\n<div style=\"background-color: rgba(16, 185, 129, 0.15); padding: 8px 12px; border-radius: 6px; color: #34d399; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(16, 185, 129, 0.2);\">All Clear</div>\n</td>\n</tr>\n</tbody>\n</table>\n</div>\n<!-- Hero Success Section -->\n<div style=\"padding: 60px 40px; text-align: center; background-color: #f8fafc;\"><!-- Glowing Checkmark Circle -->\n<table style=\"margin: 0 auto 24px auto;\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">\n<tbody>\n<tr>\n<td style=\"background-color: #ecfdf5; border: 2px solid #a7f3d0; border-radius: 50%; box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);\" align=\"center\" valign=\"middle\" width=\"80\" height=\"80\"><span style=\"font-size: 40px; color: #10b981; font-weight: bold;\">✔</span></td>\n</tr>\n</tbody>\n</table>\n<h2 style=\"margin: 0 0 16px 0; font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px;\">100% Compliant</h2>\n<p style=\"margin: 0 auto; max-width: 500px; font-size: 16px; color: #475569; line-height: 1.6;\">The automated audit completed successfully. We scanned your selected sources and found <strong>zero</strong> disabled accounts that still retain active access entitlements.</p>\n<!-- Stat Pill -->\n<table style=\"margin-top: 32px;\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">\n<tbody>\n<tr>\n<td style=\"background-color: #ffffff; border: 1px solid #e2e8f0; padding: 12px 24px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); text-align: center;\">\n<div style=\"font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight: 600; margin-bottom: 4px;\">Audit Result</div>\n<div style=\"font-size: 16px; font-weight: bold; color: #10b981;\">Passed</div>\n</td>\n</tr>\n</tbody>\n</table>\n</div>\n<!-- Footer -->\n<div style=\"background-color: #ffffff; padding: 24px 40px; border-top: 1px solid #e2e8f0; text-align: center;\">\n<p style=\"margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #475569;\">Powered by SailPoint Workflows</p>\n<p style=\"margin: 0; font-size: 12px; color: #94a3b8; line-height: 1.5;\">This email was automatically generated via the workflow pagination module.<br>Please do not reply directly to this address.</p>\n</div>\n</div>",
+					"context": {},
+					"from": null,
+					"recipientEmailList.$": "$.trigger.recipientemail",
+					"subject": "Disabled Accounts With Access Report!"
+				},
+				"displayName": "",
+				"nextStep": "End Step - Success 7",
+				"type": "action",
+				"versionNumber": 2
+			},
+			"Serial Loop": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"input.$": "$.hTTPRequest.body",
+					"loopType": "forLoop",
+					"start": "Define Comparison 2",
+					"steps": {
+						"Define Comparison 2": {
+							"actionId": "sp:compare-multi-type",
+							"choiceList": [
+								{
+									"comparator": "BooleanEquals",
+									"nextStep": "HTTP Request 3",
+									"variableA.$": "$.loop.loopInput.disabled",
+									"variableB": true
+								}
+							],
+							"defaultStep": "End Step - Success 6",
+							"displayName": "Is Disabled?",
+							"type": "choice"
+						},
+						"Define Variable 2": {
+							"actionId": "sp:define-variable",
+							"attributes": {
+								"id": "sp:define-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "cleanEntitlements",
+										"transforms": [],
+										"variableA.$": "$.hTTPRequest3.body[*].name"
+									}
+								]
+							},
+							"displayName": "Format Entitlements",
+							"nextStep": "Update Variable 1",
+							"type": "Mutation"
+						},
+						"End Step - Success 4": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"End Step - Success 6": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"HTTP Request 3": {
+							"actionId": "sp:http",
+							"attributes": {
+								"jsonRequestBody": null,
+								"method": "get",
+								"param_authenticationRef": "oauth",
+								"param_oauth": {
+									"mapping": {
+										"auth_client_id": "clientId",
+										"auth_client_secret": "clientSecret",
+										"auth_credential_location": "credentialLocation",
+										"auth_token_url": "tokenURL"
+									},
+									"paramID": "6e825815-d032-4764-80c9-06110f732185",
+									"paramType": "1.4",
+									"refID": "5eace4b3-03bf-4787-8ff5-4d134f81509b"
+								},
+								"param_oauth_scopes": {
+									"mapping": {
+										"auth_scopes": "scopes"
+									},
+									"paramID": "",
+									"paramType": "3.1"
+								},
+								"requestContentType": "json",
+								"url": "https://{tenant}.api.identitynow.com/v3/accounts/{{$.loop.loopInput.id}}/entitlements",
+								"urlParams": {
+									"limit": "10"
+								}
+							},
+							"displayName": "Get Entitlements For Account",
+							"nextStep": "Define Variable 2",
+							"type": "action",
+							"versionNumber": 3
+						},
+						"Update Variable 1": {
+							"actionId": "sp:update-variable",
+							"attributes": {
+								"id": "sp:update-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "$.defineVariable.currentsummaryvariable",
+										"transforms": [
+											{
+												"id": "sp:transform:concatenate:string",
+												"input": {
+													"variableB": "<tr style='border-bottom: 1px solid #e2e8f0; transition: background-color 0.2s ease;'><td style='padding: 16px 20px; vertical-align: top; width: 25%;'><div style='font-size: 14px; font-weight: 600; color: #0f172a; margin-bottom: 4px; font-family: Inter, Arial, sans-serif;'>{{$.loop.loopInput.name}}</div><div style='font-size: 12px; color: #64748b; font-family: Inter, Arial, sans-serif;'>{{$.loop.loopInput.identityId}}</div></td><td style='padding: 16px 20px; vertical-align: top; width: 25%;'><div style='font-size: 14px; font-weight: 500; color: #334155; margin-bottom: 6px; font-family: Inter, Arial, sans-serif;'>{{$.loop.loopInput.name}}</div><div style='font-size: 11px; color: #475569; font-family: Consolas, monospace; background-color: #f1f5f9; padding: 3px 6px; border-radius: 4px; border: 1px solid #e2e8f0; display: inline-block;'>ID: {{$.loop.loopInput.nativeIdentity}}</div></td><td style='padding: 16px 20px; vertical-align: top; width: 15%;'><span style='display: inline-block; padding: 4px 10px; background-color: #eff6ff; color: #1d4ed8; font-size: 12px; font-weight: 600; border-radius: 12px; border: 1px solid #bfdbfe; font-family: Inter, Arial, sans-serif;'>{{$.loop.loopInput.sourceName}}</span></td><td style='padding: 16px 20px; vertical-align: top; width: 35%;'><div style='font-size: 12px; color: #475569; line-height: 1.8; word-spacing: 8px; font-family: Consolas, monospace; background-color: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #f1f5f9;'>{{$.defineVariable2.cleanEntitlements}}</div></td></tr>"
+												}
+											}
+										],
+										"variableA.$": "$.defineVariable.currentsummaryvariable"
+									}
+								]
+							},
+							"displayName": "Add Account Row To Summary",
+							"nextStep": "End Step - Success 4",
+							"type": "Mutation"
+						}
+					}
+				},
+				"displayName": "",
+				"nextStep": "Define Variable 3",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Serial Loop 1": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"input.$": "$.hTTPRequest.body",
+					"loopType": "forLoop",
+					"start": "Define Comparison 1",
+					"steps": {
+						"Define Comparison 1": {
+							"actionId": "sp:compare-multi-type",
+							"choiceList": [
+								{
+									"comparator": "BooleanEquals",
+									"nextStep": "HTTP Request 2",
+									"variableA.$": "$.loop.loopInput.disabled",
+									"variableB": true
+								}
+							],
+							"defaultStep": "End Step - Success 5",
+							"displayName": "Is Disabled?",
+							"type": "choice"
+						},
+						"Define Variable 1": {
+							"actionId": "sp:define-variable",
+							"attributes": {
+								"id": "sp:define-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "cleanEntitlements",
+										"transforms": [],
+										"variableA.$": "$.hTTPRequest2.body[*].name"
+									}
+								]
+							},
+							"displayName": "Format Entitlements",
+							"nextStep": "Update Variable",
+							"type": "Mutation"
+						},
+						"End Step - Success 3": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"End Step - Success 5": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"HTTP Request 2": {
+							"actionId": "sp:http",
+							"attributes": {
+								"jsonRequestBody": null,
+								"method": "get",
+								"param_authenticationRef": "oauth",
+								"param_oauth": {
+									"mapping": {
+										"auth_client_id": "clientId",
+										"auth_client_secret": "clientSecret",
+										"auth_credential_location": "credentialLocation",
+										"auth_token_url": "tokenURL"
+									},
+									"paramID": "6e825815-d032-4764-80c9-06110f732185",
+									"paramType": "1.4",
+									"refID": "5eace4b3-03bf-4787-8ff5-4d134f81509b"
+								},
+								"param_oauth_scopes": {
+									"mapping": {
+										"auth_scopes": "scopes"
+									},
+									"paramID": "",
+									"paramType": "3.1"
+								},
+								"requestContentType": "json",
+								"url": "https://{tenant}.api.identitynow.com/v3/accounts/{{$.loop.loopInput.id}}/entitlements",
+								"urlParams": {
+									"limit": "10"
+								}
+							},
+							"displayName": "Get Entitlements For Account",
+							"nextStep": "Define Variable 1",
+							"type": "action",
+							"versionNumber": 3
+						},
+						"Update Variable": {
+							"actionId": "sp:update-variable",
+							"attributes": {
+								"id": "sp:update-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "$.defineVariable.currentsummaryvariable",
+										"transforms": [
+											{
+												"id": "sp:transform:concatenate:string",
+												"input": {
+													"variableB": "<tr style='border-bottom: 1px solid #e2e8f0; transition: background-color 0.2s ease;'><td style='padding: 16px 20px; vertical-align: top; width: 25%;'><div style='font-size: 14px; font-weight: 600; color: #0f172a; margin-bottom: 4px; font-family: Inter, Arial, sans-serif;'>{{$.loop.loopInput.name}}</div><div style='font-size: 12px; color: #64748b; font-family: Inter, Arial, sans-serif;'>{{$.loop.loopInput.identityId}}</div></td><td style='padding: 16px 20px; vertical-align: top; width: 25%;'><div style='font-size: 14px; font-weight: 500; color: #334155; margin-bottom: 6px; font-family: Inter, Arial, sans-serif;'>{{$.loop.loopInput.name}}</div><div style='font-size: 11px; color: #475569; font-family: Consolas, monospace; background-color: #f1f5f9; padding: 3px 6px; border-radius: 4px; border: 1px solid #e2e8f0; display: inline-block;'>ID: {{$.loop.loopInput.nativeIdentity}}</div></td><td style='padding: 16px 20px; vertical-align: top; width: 15%;'><span style='display: inline-block; padding: 4px 10px; background-color: #eff6ff; color: #1d4ed8; font-size: 12px; font-weight: 600; border-radius: 12px; border: 1px solid #bfdbfe; font-family: Inter, Arial, sans-serif;'>{{$.loop.loopInput.sourceName}}</span></td><td style='padding: 16px 20px; vertical-align: top; width: 35%;'><div style='font-size: 12px; color: #475569; line-height: 1.8; word-spacing: 8px; font-family: Consolas, monospace; background-color: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #f1f5f9;'>{{$.defineVariable1.cleanEntitlements}}</div></td></tr>"
+												}
+											}
+										],
+										"variableA.$": "$.defineVariable.currentsummaryvariable"
+									}
+								]
+							},
+							"displayName": "Add Account Row To Summary",
+							"nextStep": "End Step - Success 3",
+							"type": "Mutation"
+						}
+					}
+				},
+				"displayName": "",
+				"nextStep": "Define Comparison 3",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "{admin-id}",
+		"name": "{admin-name}"
+	},
+	"trigger": {
+		"type": "EXTERNAL",
+		"attributes": {
+			"clientId": "d5c43f08-df61-4530-abbf-b86020ccd254",
+			"id": "idn:external-http",
+			"integrationId": null,
+			"url": "/v2024/workflows/execute/external/{workflow-id}"
+		}
+	}
+}
