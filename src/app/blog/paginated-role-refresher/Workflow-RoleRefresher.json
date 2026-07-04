@@ -1,0 +1,164 @@
+{
+	"name": "Role Refresher!",
+	"description": "Role Refresher!",
+	"modified": "2026-06-30T11:45:35.589278667Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "YOUR_IDENTITY_ID",
+		"name": "YOUR_IDENTITY_NAME"
+	},
+	"definition": {
+		"start": "Interactive Form",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "NumericEquals",
+						"nextStep": "End Step - Success",
+						"variableA.$": "$.serialLoop.succeeded",
+						"variableB.$": "$.interactiveForm.formData.roles.length()"
+					}
+				],
+				"defaultStep": "End Step - Failure 1",
+				"displayName": "Check If All Iterations Completed",
+				"type": "choice"
+			},
+			"Define Comparison 1": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "Define Variable",
+						"variableA.$": "$.interactiveForm.state",
+						"variableB": "COMPLETED"
+					}
+				],
+				"defaultStep": "End Step - Failure",
+				"displayName": "Check For Form Completion",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "needrefresh",
+							"transforms": [],
+							"variableA.$": "$.interactiveForm.formData.identityListRefreshNeeded"
+						}
+					]
+				},
+				"displayName": "Set Refresh Variable",
+				"nextStep": "Serial Loop",
+				"type": "Mutation"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureName": "Form Error!",
+				"type": "failure"
+			},
+			"End Step - Failure 1": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureName": "Loop Error!",
+				"type": "failure"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"Interactive Form": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "YOUR_FORM_ID",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Role Refresh Tool!"
+				},
+				"description": null,
+				"displayName": "",
+				"nextStep": "Define Comparison 1",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Serial Loop": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"input.$": "$.interactiveForm.formData.roles",
+					"loopType": "forLoop",
+					"start": "HTTP Request",
+					"steps": {
+						"End Step - Failure 2": {
+							"actionId": "sp:operator-failure",
+							"displayName": "",
+							"failureName": "HTTPRequest Error!",
+							"type": "failure"
+						},
+						"End Step - Success 1": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"HTTP Request": {
+							"actionId": "sp:http",
+							"attributes": {
+								"jsonRequestBody": {
+									"currentoffset": 0,
+									"limit": 250,
+									"needsidentitylistrefresh": "{{$.defineVariable.needrefresh}}",
+									"roleid": "{{$.loop.loopInput}}"
+								},
+								"method": "post",
+								"param_authenticationRef": "oauth",
+								"param_oauth": {
+									"mapping": {
+										"auth_client_id": "clientId",
+										"auth_client_secret": "clientSecret",
+										"auth_credential_location": "credentialLocation",
+										"auth_token_url": "tokenURL"
+									},
+									"paramID": "081a0892-8125-465f-99c3-97984a8f2bc6",
+									"paramType": "1.4",
+									"refID": "4004a05d-66ed-455f-bc1e-df5c8d13d719"
+								},
+								"requestContentType": "json",
+								"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/{workflow_id}"
+							},
+							"catch": [
+								{
+									"next": "End Step - Failure 2"
+								}
+							],
+							"displayName": "Call Pagination Worker",
+							"nextStep": "End Step - Success 1",
+							"type": "action",
+							"versionNumber": 3
+						}
+					}
+				},
+				"displayName": "Loop Through Roles",
+				"nextStep": "Define Comparison",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "YOUR_IDENTITY_ID",
+		"name": "YOUR_IDENTITY_NAME"
+	},
+	"trigger": {
+		"type": "EVENT",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == 'YOUR_WORKFLOW_ID')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	}
+}

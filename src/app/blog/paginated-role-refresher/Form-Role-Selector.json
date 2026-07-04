@@ -1,0 +1,106 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "89dc3c92-fd1d-4dfb-925c-fddfdf3e62a9",
+      "name": "Role Selector For Single Refresh"
+    },
+    "object": {
+      "id": "89dc3c92-fd1d-4dfb-925c-fddfdf3e62a9",
+      "name": "Role Selector For Single Refresh",
+      "description": "Role Selector For Single Refresh",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "YOUR_IDENTITY_ID",
+        "name": "YOUR_IDENTITY_NAME"
+      },
+      "usedBy": [],
+      "formInput": [],
+      "formElements": [
+        {
+          "id": "1661537547141",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "ROLE"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Roles",
+                  "maximum": 30,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "879546237694",
+                "key": "roles",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "options": [
+                        {
+                          "label": "Yes",
+                          "sublabel": "",
+                          "value": "Yes"
+                        },
+                        {
+                          "label": "No",
+                          "sublabel": "",
+                          "value": "No"
+                        }
+                      ]
+                    },
+                    "dataSourceType": "STATIC"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Identity List Refresh Needed?",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1578009171746",
+                "key": "identityListRefreshNeeded",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              }
+            ],
+            "label": "Select the Role(s) that should be refreshed!",
+            "labelStyle": "h1",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [],
+      "created": "2026-06-29T16:15:46.270040636Z",
+      "modified": "2026-06-29T19:13:24.479134354Z"
+    }
+  }
+]

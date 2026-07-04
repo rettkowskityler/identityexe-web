@@ -1,0 +1,388 @@
+{
+	"name": "Paginated Identity Refresher",
+	"description": "Paginated Identity Refresher",
+	"modified": "2026-06-30T11:49:24.404930648Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "YOUR_IDENTITY_ID",
+		"name": "YOUR_IDENTITY_NAME"
+	},
+	"definition": {
+		"start": "HTTP Request",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "NumericEquals",
+						"nextStep": "HTTP Request 3",
+						"variableA.$": "$.hTTPRequest.body.length()",
+						"variableB": 250
+					}
+				],
+				"defaultStep": "HTTP Request 2",
+				"displayName": "Check If Full Page",
+				"type": "choice"
+			},
+			"Define Comparison 1": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request 4",
+						"variableA.$": "$.trigger.needsidentitylistrefresh",
+						"variableB": "Yes"
+					}
+				],
+				"defaultStep": "Define Comparison",
+				"displayName": "Check If Identity List Refresh",
+				"type": "choice"
+			},
+			"Define Comparison 2": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"NOT": {
+							"comparator": "IsNull",
+							"variableA.$": "$.hTTPRequest4.body.membership"
+						},
+						"nextStep": "Define Variable 1"
+					}
+				],
+				"defaultStep": "Define Comparison",
+				"displayName": "Check If Identity List Membership Is Null",
+				"type": "choice"
+			},
+			"Define Comparison 3": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "NumericGreaterThan",
+						"nextStep": "HTTP Request 6",
+						"variableA.$": "$.defineVariable1.identitylistlast250.length()",
+						"variableB": 0
+					}
+				],
+				"defaultStep": "Define Comparison",
+				"displayName": "Check if Last 250 Refresh Is Needed",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "newoffset",
+							"transforms": [
+								{
+									"id": "sp:transform:add:number",
+									"input": {
+										"precision": 4,
+										"roundingMode": "roundHalfUp",
+										"variableB": 250
+									}
+								}
+							],
+							"variableA.$": "$.trigger.currentoffset"
+						},
+						{
+							"description": "",
+							"name": "identities",
+							"transforms": [],
+							"variableA.$": "$.hTTPRequest.body[*].id"
+						}
+					]
+				},
+				"displayName": "Set Variables",
+				"nextStep": "Define Comparison 1",
+				"type": "Mutation"
+			},
+			"Define Variable 1": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "identitylistfirst250",
+							"transforms": [],
+							"variableA.$": "$.hTTPRequest4.body.membership.identities[0:250].id"
+						},
+						{
+							"description": "a",
+							"name": "identitylistlast250",
+							"transforms": [],
+							"variableA.$": "$.hTTPRequest4.body.membership.identities[-250:].id"
+						}
+					]
+				},
+				"displayName": "Set First & Last 250 Identities",
+				"nextStep": "HTTP Request 5",
+				"type": "Mutation"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"End Step - Success 1": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "45f7104e-a9b0-4bba-993e-f68973c3e58b"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.trigger.roleid}}/assigned-identities",
+					"urlParams": {
+						"limit": "{{$.trigger.limit}}",
+						"offset": "{{$.trigger.currentoffset}}",
+						"sorters": "id"
+					}
+				},
+				"displayName": "Get Current Identities Assigned To Role",
+				"nextStep": "Define Variable",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 1": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": "{\"roleid\":\"{{$.trigger.roleid}}\",\"limit\":{{$.trigger.limit}},\"currentoffset\":{{$.defineVariable.newoffset}},\"needsidentitylistrefresh\": \"No\"}",
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "081a0892-8125-465f-99c3-97984a8f2bc6",
+						"paramType": "1.4",
+						"refID": "55c38bc4-7bfd-4e40-b01a-cd5921a97d64"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/{workflow_id}"
+				},
+				"displayName": "Paginate To Next Page and Restart Workflow",
+				"nextStep": "End Step - Success 1",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 2": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": "{\n  \"identityIds\": {{$.defineVariable.identities.JSON()}}\n}",
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "45f7104e-a9b0-4bba-993e-f68973c3e58b"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"requestHeaders": {
+						"X-SailPoint-Experimental": "true"
+					},
+					"url": "https://{tenant}.api.identitynow.com/identities/v1/process",
+					"urlParams": null
+				},
+				"displayName": "Less Than 250 - Refresh Identities",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 3": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": "{\n  \"identityIds\": {{$.defineVariable.identities.JSON()}}\n}",
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "45f7104e-a9b0-4bba-993e-f68973c3e58b"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"requestHeaders": {
+						"X-SailPoint-Experimental": "true"
+					},
+					"url": "https://{tenant}.api.identitynow.com/identities/v1/process",
+					"urlParams": null
+				},
+				"displayName": "More than 250 - Refresh Identities",
+				"nextStep": "HTTP Request 1",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 4": {
+				"actionId": "sp:http",
+				"attributes": {
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "45f7104e-a9b0-4bba-993e-f68973c3e58b"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.trigger.roleid}}",
+					"urlParams": null
+				},
+				"displayName": "Get Role",
+				"nextStep": "Define Comparison 2",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 5": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": "{\"identityIds\":{{$.defineVariable1.identitylistfirst250.JSON()}}}",
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "45f7104e-a9b0-4bba-993e-f68973c3e58b"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"requestHeaders": {
+						"X-SailPoint-Experimental": "true"
+					},
+					"url": "https://{tenant}.api.identitynow.com/identities/v1/process",
+					"urlParams": null
+				},
+				"displayName": "Refresh First 250",
+				"nextStep": "Define Comparison 3",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 6": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": "{\"identityIds\":{{$.defineVariable1.identitylistlast250.JSON()}}}",
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "45f7104e-a9b0-4bba-993e-f68973c3e58b"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"requestHeaders": {
+						"X-SailPoint-Experimental": "true"
+					},
+					"url": "https://{tenant}.api.identitynow.com/identities/v1/process",
+					"urlParams": null
+				},
+				"displayName": "Refresh Last 250",
+				"nextStep": "Define Comparison",
+				"type": "action",
+				"versionNumber": 3
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "YOUR_IDENTITY_ID",
+		"name": "YOUR_IDENTITY_NAME"
+	},
+	"trigger": {
+		"type": "EXTERNAL",
+		"attributes": {
+			"clientId": "{client_id}",
+			"id": "idn:external-http",
+			"integrationId": null,
+			"url": "/v2024/workflows/execute/external/{workflow_id}"
+		}
+	}
+}

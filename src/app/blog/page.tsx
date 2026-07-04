@@ -24,6 +24,27 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'paginated-role-refresher',
+      title: 'Paginated Role Refresher in Identity Security Cloud',
+      category: 'Architecture',
+      date: 'July 2026',
+      description: 'A modular implementation framework to intelligently refresh single roles without triggering global tenant updates.',
+      iconBgClass: 'bg-emerald-500/10',
+      iconBorderClass: 'border-emerald-500/20',
+      iconColorClass: 'text-emerald-400',
+      hoverTitleClass: 'group-hover:text-emerald-400',
+      readMoreColorClass: 'text-emerald-500',
+      gradientClass: 'from-emerald-600/20 to-blue-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M17 3v18"></path>
+          <path d="M7 3v18"></path>
+          <path d="M22 8l-5-5-5 5"></path>
+          <path d="M12 16l-5 5-5-5"></path>
+        </svg>
+      )
+    },
+    {
       slug: 'custom-reports-workflow-pagination',
       title: 'Custom Reports with Workflow Pagination',
       category: 'Architecture',
