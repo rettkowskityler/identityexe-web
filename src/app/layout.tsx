@@ -2,8 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'IdentityEXE | SailPoint Performance Consulting',
-  description: 'Premier direct-to-client SailPoint Identity Security Cloud and SailPoint IdentityIQ consultancy creating uncompromised identity ecosystems.',
+  title: 'IdentityEXE',
+  description: 'Elite SailPoint Identity Security Cloud and IdentityIQ architecture.',
   keywords: ['SailPoint', 'Identity Security Cloud', 'IdentityIQ', 'IAM Consulting', 'SailPoint Expert Ambassador', 'Cybersecurity', 'Identity Governance'],
   openGraph: {
     title: 'IdentityEXE | SailPoint Performance Consulting',
@@ -29,7 +29,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet" />
       </head>
       <body className="antialiased min-h-screen flex flex-col text-slate-200 selection:bg-blue-500/30" suppressHydrationWarning>
         {children}

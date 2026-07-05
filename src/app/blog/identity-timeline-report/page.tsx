@@ -449,9 +449,9 @@ export default function IdentityTimelineReportPost() {
             
             {/* Breadcrumbs */}
             <nav className="flex items-center gap-2 text-[10px] text-slate-500 mb-6 font-bold uppercase tracking-widest">
-              <a href="/" className="hover:text-blue-400 transition-colors no-underline">Home</a>
+              <a href="/" className="hover:text-brand-accent transition-colors no-underline">Home</a>
               <span>/</span>
-              <a href="/blog" className="hover:text-blue-400 transition-colors no-underline">Blog</a>
+              <a href="/blog" className="hover:text-brand-accent transition-colors no-underline">Blog</a>
               <span>/</span>
               <span className="text-slate-400">Identity Timeline</span>
             </nav>
@@ -467,7 +467,7 @@ export default function IdentityTimelineReportPost() {
                 <span className="text-amber-500 text-2xl md:text-3xl">(Unified lifecycle, audit events, access requests, and work items in a single view)</span>
               </h1>
               <div className="flex items-center gap-4 text-sm text-slate-400 font-medium">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-brand-accent flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">
                   <img src="/images/profile.jpg" alt="Tyler" className="w-full h-full object-cover rounded-full" />
                 </div>
                 <div>
@@ -477,7 +477,7 @@ export default function IdentityTimelineReportPost() {
               </div>
             </header>
 
-            <div className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-code:text-blue-300 prose-code:bg-blue-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
+            <div className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               <h3 id="introduction" className="text-2xl text-white mt-8 mb-4">Introduction</h3>
               <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
@@ -563,13 +563,13 @@ export default function IdentityTimelineReportPost() {
                 </div>
               </div>
 
-              <h4 className="text-xl text-blue-400 mt-8 mb-4">Form Definition Code</h4>
+              <h4 className="text-xl text-brand-accent mt-8 mb-4">Form Definition Code</h4>
               <p className="text-slate-300 mb-4">
                 Here is the form JSON payload configuration representing the form layout above:
               </p>
               
               <div className="bg-[#0d1117] rounded-lg p-4 overflow-auto max-h-[400px] mb-8 border border-white/10">
-                <pre className="text-sm text-blue-300 m-0"><code>{JSON.stringify(formData, null, 2)}</code></pre>
+                <pre className="text-sm text-brand-light m-0"><code>{JSON.stringify(formData, null, 2)}</code></pre>
               </div>
 
               <h3 id="back-end-workflow" className="text-2xl text-white mt-12 mb-4">Back End (Workflow)</h3>
@@ -591,13 +591,13 @@ export default function IdentityTimelineReportPost() {
                 <li><strong className="text-white">Interactive Message:</strong> Re-engages the user in the browser to notify them of successful execution.</li>
               </ul>
 
-              <h4 className="text-xl text-blue-400 mt-8 mb-4">Workflow Definition Code</h4>
+              <h4 className="text-xl text-brand-accent mt-8 mb-4">Workflow Definition Code</h4>
               <p className="text-slate-300 mb-4">
                 The JSON schema workflow below handles state parameters and forwards inputs to the PAG Windows Server action:
               </p>
 
               <div className="bg-[#0d1117] rounded-lg p-4 overflow-auto max-h-[400px] mb-8 border border-white/10">
-                <pre className="text-sm text-blue-300 m-0"><code>{JSON.stringify(workflowData, null, 2)}</code></pre>
+                <pre className="text-sm text-brand-light m-0"><code>{JSON.stringify(workflowData, null, 2)}</code></pre>
               </div>
 
               <h3 id="powershell-script" className="text-2xl text-white mt-12 mb-4">PowerShell Script</h3>
@@ -606,7 +606,7 @@ export default function IdentityTimelineReportPost() {
               </p>
 
               <div className="bg-[#0d1117] rounded-lg p-4 overflow-auto max-h-[400px] mb-10 border border-white/10">
-                <pre className="text-sm text-blue-300 m-0"><code>{psScriptCode}</code></pre>
+                <pre className="text-sm text-brand-light m-0"><code>{psScriptCode}</code></pre>
               </div>
 
               <h3 id="execution-demo" className="text-2xl text-white mt-12 mb-4">Execution & Output Demo</h3>
@@ -672,7 +672,7 @@ export default function IdentityTimelineReportPost() {
                   <a 
                     href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(formData, null, 2))}`}
                     download="Form-SelectIdentity_final.json"
-                    className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 mt-auto"
+                    className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 mt-auto"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     Form-SelectIdentity.json
@@ -713,7 +713,7 @@ export default function IdentityTimelineReportPost() {
               </div>
 
               {/* Consultation / Talk to an Expert Block */}
-              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-blue-950/40 to-purple-950/40 p-8 rounded-3xl border border-white/5 shadow-2xl mt-12">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-deep-slate to-brand-blue/20 p-8 rounded-3xl border border-white/5 shadow-2xl mt-12">
                 <div className="flex-1">
                   <h4 className="text-xl font-bold text-white mb-2">Need a custom reporting or governance dashboard?</h4>
                   <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xl">
@@ -722,7 +722,7 @@ export default function IdentityTimelineReportPost() {
                 </div>
                 <a 
                   href="/contact" 
-                  className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(37,99,235,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
+                  className="group inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-accent text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(81,132,196,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
                 >
                   Talk to an Expert
                   <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">

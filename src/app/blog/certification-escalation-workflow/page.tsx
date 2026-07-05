@@ -32,25 +32,25 @@ export default function CertificationEscalationWorkflowPost() {
             
             {/* Breadcrumbs */}
             <nav className="flex items-center gap-2 text-[10px] text-slate-500 mb-6 font-bold uppercase tracking-widest">
-              <a href="/" className="hover:text-blue-400 transition-colors no-underline">Home</a>
+              <a href="/" className="hover:text-brand-accent transition-colors no-underline">Home</a>
               <span>/</span>
-              <a href="/blog" className="hover:text-blue-400 transition-colors no-underline">Blog</a>
+              <a href="/blog" className="hover:text-brand-accent transition-colors no-underline">Blog</a>
               <span>/</span>
               <span className="text-slate-400">Certification Escalation</span>
             </nav>
 
             <header className="mb-12 border-b border-white/10 pb-8">
-              <div className="flex items-center gap-3 mb-6 text-xs font-bold tracking-widest uppercase text-blue-400">
+              <div className="flex items-center gap-3 mb-6 text-xs font-bold tracking-widest uppercase text-brand-accent">
                 <span>Architecture</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
                 <span>June 2026</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
                 Self-Service Certification Escalation <br />
-                <span className="text-blue-500 text-2xl md:text-3xl">(A Custom Workflows & Interactive Forms Solution)</span>
+                <span className="text-brand-blue text-2xl md:text-3xl">(A Custom Workflows & Interactive Forms Solution)</span>
               </h1>
               <div className="flex items-center gap-4 text-sm text-slate-400 font-medium">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-brand-accent flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">
                   <img src="/images/profile.jpg" alt="Tyler" className="w-full h-full object-cover rounded-full" />
                 </div>
                 <div>
@@ -60,7 +60,7 @@ export default function CertificationEscalationWorkflowPost() {
               </div>
             </header>
 
-            <div className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-code:text-blue-300 prose-code:bg-blue-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
+            <div className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Introduction/Problem */}
               <h3 id="problem-certification-crunch" className="text-2xl text-white mt-8 mb-4 font-black tracking-tight">The Problem: The End-of-Quarter Certification Crunch</h3>
@@ -86,7 +86,7 @@ export default function CertificationEscalationWorkflowPost() {
                   {/* Left Column: Selection Workflow */}
                   <div className="flex flex-col gap-4 bg-white/5 p-5 rounded-xl border border-white/5 relative">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">1</span>
+                      <span className="w-6 h-6 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">1</span>
                       <h4 className="text-white font-bold text-sm uppercase tracking-wide">Selection & Confirmation (UI)</h4>
                     </div>
                     <div className="text-xs text-slate-400 space-y-3">
@@ -108,7 +108,7 @@ export default function CertificationEscalationWorkflowPost() {
                       </div>
                     </div>
                     {/* Connecting arrow indicator for desktop */}
-                    <div className="hidden md:flex absolute top-1/2 -right-6 transform -translate-y-1/2 z-10 w-4 h-4 text-blue-400 items-center justify-center font-bold">
+                    <div className="hidden md:flex absolute top-1/2 -right-6 transform -translate-y-1/2 z-10 w-4 h-4 text-brand-accent items-center justify-center font-bold">
                       →
                     </div>
                   </div>
@@ -116,24 +116,24 @@ export default function CertificationEscalationWorkflowPost() {
                   {/* Right Column: Background Execution */}
                   <div className="flex flex-col gap-4 bg-white/5 p-5 rounded-xl border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs">2</span>
+                      <span className="w-6 h-6 rounded-full bg-purple-500/20 text-brand-accent flex items-center justify-center font-bold text-xs">2</span>
                       <h4 className="text-white font-bold text-sm uppercase tracking-wide">Background Escalation (Worker)</h4>
                     </div>
                     <div className="text-xs text-slate-400 space-y-3">
                       <div className="bg-slate-950/60 p-3 rounded-lg border border-white/5">
-                        <span className="text-purple-400 font-bold">HTTP Webhook Trigger</span>
+                        <span className="text-brand-accent font-bold">HTTP Webhook Trigger</span>
                         <p className="mt-1">Workflow 1 triggers background executions asynchronously.</p>
                       </div>
                       <div className="bg-slate-950/60 p-3 rounded-lg border border-white/5">
-                        <span className="text-purple-400 font-bold">Query Certifications</span>
+                        <span className="text-brand-accent font-bold">Query Certifications</span>
                         <p className="mt-1">Fetch incomplete active certification items for target campaign.</p>
                       </div>
                       <div className="bg-slate-950/60 p-3 rounded-lg border border-white/5">
-                        <span className="text-purple-400 font-bold">Resolution Loop</span>
+                        <span className="text-brand-accent font-bold">Resolution Loop</span>
                         <p className="mt-1">Retrieve reviewer details, fetch manager ID dynamically.</p>
                       </div>
                       <div className="bg-slate-950/60 p-3 rounded-lg border border-white/5">
-                        <span className="text-purple-400 font-bold">Reassignment API Call</span>
+                        <span className="text-brand-accent font-bold">Reassignment API Call</span>
                         <p className="mt-1">Reassign target certifications to the resolved managers.</p>
                       </div>
                     </div>
@@ -160,7 +160,7 @@ export default function CertificationEscalationWorkflowPost() {
                 </li>
               </ul>
 
-              <div className="bg-blue-950/30 border-l-4 border-blue-500 p-4 rounded-r-xl mb-8">
+              <div className="bg-blue-950/30 border-l-4 border-brand-blue p-4 rounded-r-xl mb-8">
                 <h4 className="text-white font-bold text-base m-0">Design Decision: Why Split Into Two Workflows?</h4>
                 <ul className="list-disc pl-5 mt-2 text-sm text-slate-300 space-y-1.5">
                   <li><strong>Licensing Compliance:</strong> Splitting the logic ensures both workflows stay under <strong>20 steps</strong>, which is the maximum step count allowed under the entry-level SailPoint ISC business subscription. Users with higher-tier plans can combine these into a single workflow if preferred.</li>
@@ -176,7 +176,7 @@ export default function CertificationEscalationWorkflowPost() {
                 By leveraging ISC Interactive Forms, we can build a clean, guided wizard experience. 
               </p>
 
-              <h4 className="text-xl text-blue-400 mt-8 mb-3">1. Campaign Selector Form</h4>
+              <h4 className="text-xl text-brand-accent mt-8 mb-3">1. Campaign Selector Form</h4>
               <p className="text-slate-300 mb-4">
                 The first form asks the user if they want to target all active campaigns or specify a list. A form condition shows the campaign selection dropdown only when the toggle is turned off.
               </p>
@@ -201,7 +201,7 @@ export default function CertificationEscalationWorkflowPost() {
                 </div>
               </div>
 
-              <h4 className="text-xl text-blue-400 mt-8 mb-3">2. Confirmation Form</h4>
+              <h4 className="text-xl text-brand-accent mt-8 mb-3">2. Confirmation Form</h4>
               <p className="text-slate-300 mb-4">
                 The second form uses a description block to render a dynamic HTML preview generated during the workflow's execution. This ensures the admin knows exactly which campaigns they are about to escalate before executing.
               </p>
@@ -229,14 +229,14 @@ export default function CertificationEscalationWorkflowPost() {
               {/* Back End Workflow Details */}
               <h3 id="back-end-workflows" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Back End: Workflow Details</h3>
               
-              <h4 className="text-xl text-blue-400 mt-8 mb-3">Workflow 1: Certification Selection For Escalation</h4>
+              <h4 className="text-xl text-brand-accent mt-8 mb-3">Workflow 1: Certification Selection For Escalation</h4>
               <p className="text-slate-300 mb-4">
                 This workflow is responsible for querying campaigns, orchestrating the interactive forms, and dynamically compiling the campaign selection summaries depending on whether the administrator selected the "Escalate All Campaigns" toggle in Form 1.
               </p>
               <ul className="list-disc pl-5 text-slate-300 space-y-2 mb-6">
                 <li><strong className="text-white">Individual Campaign Selections (Card Style):</strong> When specific campaigns are manually selected, a detailed card format featuring a left accent border, structured titles, and deadlines is compiled:
                   <div className="bg-[#0d1117] rounded-lg p-4 mt-2 mb-4 border border-white/10 overflow-x-auto">
-                    <pre className="text-xs text-blue-300 m-0"><code>{`<div style='background-color: #1e1e1e; padding: 14px; border-radius: 6px; border: 1px solid #333; border-left: 4px solid #3498db; margin-bottom: 15px;'>
+                    <pre className="text-xs text-brand-light m-0"><code>{`<div style='background-color: #1e1e1e; padding: 14px; border-radius: 6px; border: 1px solid #333; border-left: 4px solid #3498db; margin-bottom: 15px;'>
   <span style='font-size: 14px; font-weight: bold; color: #3498db;'>📋 {{$.loop.loopInput.name}}</span>
   <hr style='border: 0; border-top: 1px solid #2d2d2d; margin: 8px 0;'>
   <span style='font-size: 12px; opacity: 0.85;'><strong>🔑 Campaign ID:</strong> <code>{{$.loop.loopInput.id}}</code></span><br>
@@ -246,14 +246,14 @@ export default function CertificationEscalationWorkflowPost() {
                 </li>
                 <li><strong className="text-white">All Campaigns Selected (Consolidated View):</strong> When "Escalate All Campaigns" is toggled, looping through every active campaign could result in massive page heights. The workflow builds a high-density list using inline vertical piping and dashed separators:
                   <div className="bg-[#0d1117] rounded-lg p-4 mt-2 mb-4 border border-white/10 overflow-x-auto">
-                    <pre className="text-xs text-blue-300 m-0"><code>{`<div style='font-size: 13px; line-height: 1.6; margin-bottom: 5px; border-bottom: 1px dashed #2d2d2d; padding-bottom: 5px;'>
+                    <pre className="text-xs text-brand-light m-0"><code>{`<div style='font-size: 13px; line-height: 1.6; margin-bottom: 5px; border-bottom: 1px dashed #2d2d2d; padding-bottom: 5px;'>
   🔹 <strong style='color: #3498db;'>{{$.loop.loopInput.name}}</strong> &nbsp;<span style='color:#444;'>|</span>&nbsp; <span style='font-size: 11px; opacity: 0.6;'>ID:</span> <code style='font-size: 11px; padding: 0; vertical-align: middle; font-family: monospace;'>{{$.loop.loopInput.id}}</code> &nbsp;<span style='color:#444;'>|</span>&nbsp; <span style='font-size: 11px; color: #e67e22;'>📅 <span style='font-family: monospace;'>{{$.loop.loopInput.deadline}}</span></span>
 </div>`}</code></pre>
                   </div>
                 </li>
               </ul>
 
-              <h4 className="text-xl text-blue-400 mt-8 mb-3">Workflow 2: Certification Escalator</h4>
+              <h4 className="text-xl text-brand-accent mt-8 mb-3">Workflow 2: Certification Escalator</h4>
               <p className="text-slate-300 mb-6">
                 This workflow performs the actual heavy lifting. It executes asynchronously in the background for each escalated campaign, gathering incomplete active certifications, looping through them, looking up each reviewer's manager, and executing the reassignment.
               </p>
@@ -278,10 +278,10 @@ export default function CertificationEscalationWorkflowPost() {
                 </div>
 
                 <div className="bg-slate-900/40 p-5 rounded-xl border border-white/15">
-                  <span className="font-mono text-xs uppercase bg-blue-500/10 text-blue-400 px-2 py-1 rounded border border-blue-500/20 font-bold">3. Reassign Certification</span>
+                  <span className="font-mono text-xs uppercase bg-brand-accent/10 text-brand-accent px-2 py-1 rounded border border-brand-blue/20 font-bold">3. Reassign Certification</span>
                   <p className="font-mono text-sm text-slate-200 mt-3 mb-1">{"POST /v2026/campaigns/{{$.loop.loopInput.campaign.id}}/reassign"}</p>
                   <div className="bg-[#0d1117] rounded-lg p-4 mt-2 border border-white/10 overflow-x-auto">
-                    <pre className="text-xs text-blue-300 m-0"><code>{`{
+                    <pre className="text-xs text-brand-light m-0"><code>{`{
   "certificationIds": [
     "{{$.loop.loopInput.id}}"
   ],
@@ -336,7 +336,7 @@ export default function CertificationEscalationWorkflowPost() {
                   <a 
                     href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(formCampaignSelector, null, 2))}`}
                     download="Form-CertificationCampaignSelector.json"
-                    className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 mt-auto"
+                    className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 mt-auto"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     Form-CertificationCampaignSelector.json
@@ -352,7 +352,7 @@ export default function CertificationEscalationWorkflowPost() {
                   <a 
                     href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(formConfirmSelection, null, 2))}`}
                     download="Form-ConfirmCampaignSelection.json"
-                    className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 mt-auto"
+                    className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 mt-auto"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     Form-ConfirmCampaignSelection.json
@@ -394,7 +394,7 @@ export default function CertificationEscalationWorkflowPost() {
               </div>
 
               {/* Consultation / Talk to an Expert Block */}
-              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-blue-950/40 to-purple-950/40 p-8 rounded-3xl border border-white/5 shadow-2xl mt-12">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-deep-slate to-brand-blue/20 p-8 rounded-3xl border border-white/5 shadow-2xl mt-12">
                 <div className="flex-1">
                   <h4 className="text-xl font-bold text-white mb-2">Need a custom reporting or governance dashboard?</h4>
                   <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xl">
@@ -403,7 +403,7 @@ export default function CertificationEscalationWorkflowPost() {
                 </div>
                 <a 
                   href="/contact" 
-                  className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(37,99,235,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
+                  className="group inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-accent text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(81,132,196,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
                 >
                   Talk to an Expert
                   <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">

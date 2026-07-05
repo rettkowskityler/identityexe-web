@@ -6,7 +6,7 @@ const ProblemSolution = () => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-20 text-center animate-fade-in-up">
           <p className="font-bold tracking-widest uppercase text-sm mb-4 text-blue-500">The IdentityEXE Difference</p>
-          <h2 className="font-black text-white tracking-tighter text-4xl md:text-5xl max-w-3xl mx-auto">Stop Settling for Bloated Deployments</h2>
+          <h2 className="font-black text-white tracking-tighter text-4xl md:text-5xl max-w-3xl mx-auto">Stop Settling for Bloat</h2>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
@@ -19,19 +19,19 @@ const ProblemSolution = () => {
             <ul className="space-y-6 text-slate-300 text-lg">
               <li className="flex items-start gap-4">
                 <span className="text-red-500 mt-1 font-bold">✗</span>
-                <p><strong className="text-white">Slow Timelines:</strong> Projects drag on for years due to massive overhead and bureaucracy.</p>
+                <p><strong className="text-white">Slow Timelines:</strong> Projects drag on for years due to overhead and bureaucracy.</p>
               </li>
               <li className="flex items-start gap-4">
                 <span className="text-red-500 mt-1 font-bold">✗</span>
-                <p><strong className="text-white">Bait and Switch:</strong> You are sold by senior architects, but the work is done by junior staff.</p>
+                <p><strong className="text-white">Bait and Switch:</strong> Sold by senior architects, executed by junior staff.</p>
               </li>
               <li className="flex items-start gap-4">
                 <span className="text-red-500 mt-1 font-bold">✗</span>
-                <p><strong className="text-white">Bloated Budgets:</strong> Paying for unneeded project managers and massive agency margins.</p>
+                <p><strong className="text-white">Bloated Budgets:</strong> Paying for unneeded managers and agency margins.</p>
               </li>
               <li className="flex items-start gap-4">
                 <span className="text-red-500 mt-1 font-bold">✗</span>
-                <p><strong className="text-white">Fragile Code:</strong> Poorly designed custom rules that break during the next upgrade.</p>
+                <p><strong className="text-white">Fragile Code:</strong> Poorly designed rules that break during upgrades.</p>
               </li>
             </ul>
           </div>
@@ -46,19 +46,19 @@ const ProblemSolution = () => {
             <ul className="space-y-6 text-slate-200 text-lg">
               <li className="flex items-start gap-4">
                 <span className="text-blue-400 mt-1 font-bold">✓</span>
-                <p><strong className="text-white">Rapid Time-to-Value:</strong> Lean, expert-driven sprints that deliver results in weeks, not years.</p>
+                <p><strong className="text-white">Rapid Time-to-Value:</strong> Expert-driven sprints delivering results in weeks.</p>
               </li>
               <li className="flex items-start gap-4">
                 <span className="text-blue-400 mt-1 font-bold">✓</span>
-                <p><strong className="text-white">Direct Expert Access:</strong> You work directly with a recognized SailPoint Expert Ambassador.</p>
+                <p><strong className="text-white">Direct Expert Access:</strong> Work directly with a SailPoint Expert Ambassador.</p>
               </li>
               <li className="flex items-start gap-4">
                 <span className="text-blue-400 mt-1 font-bold">✓</span>
-                <p><strong className="text-white">Transparent Pricing:</strong> Clear, scoped deliverables without the agency bloat.</p>
+                <p><strong className="text-white">Transparent Pricing:</strong> Clear deliverables without agency bloat.</p>
               </li>
               <li className="flex items-start gap-4">
                 <span className="text-blue-400 mt-1 font-bold">✓</span>
-                <p><strong className="text-white">Elegant Architecture:</strong> Parameter-by-parameter performance tuning for enterprise scale.</p>
+                <p><strong className="text-white">Elegant Architecture:</strong> Performance tuning for enterprise scale.</p>
               </li>
             </ul>
           </div>

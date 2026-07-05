@@ -28,25 +28,25 @@ export default function RecursiveGovernancePost() {
             
             {/* Breadcrumbs */}
             <nav className="flex items-center gap-2 text-[10px] text-slate-500 mb-6 font-bold uppercase tracking-widest">
-              <a href="/" className="hover:text-blue-400 transition-colors no-underline">Home</a>
+              <a href="/" className="hover:text-brand-accent transition-colors no-underline">Home</a>
               <span>/</span>
-              <a href="/blog" className="hover:text-blue-400 transition-colors no-underline">Blog</a>
+              <a href="/blog" className="hover:text-brand-accent transition-colors no-underline">Blog</a>
               <span>/</span>
               <span className="text-slate-400">PAT Governance</span>
             </nav>
 
             <header className="mb-12 border-b border-white/10 pb-8">
-            <div className="flex items-center gap-3 mb-6 text-xs font-bold tracking-widest uppercase text-blue-400">
+            <div className="flex items-center gap-3 mb-6 text-xs font-bold tracking-widest uppercase text-brand-accent">
               <span>Architecture</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
               <span>May 2026</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
               Implementing Recursive Governance <br />
-              <span className="text-blue-500 text-2xl md:text-3xl">(How to govern SailPoint ISC PATs using a Web Services Connector)</span>
+              <span className="text-brand-blue text-2xl md:text-3xl">(How to govern SailPoint ISC PATs using a Web Services Connector)</span>
             </h1>
             <div className="flex items-center gap-4 text-sm text-slate-400 font-medium">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-brand-accent flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">
                 <img src="/images/profile.jpg" alt="Tyler" className="w-full h-full object-cover rounded-full" />
               </div>
               <div>
@@ -56,7 +56,7 @@ export default function RecursiveGovernancePost() {
             </div>
           </header>
 
-          <div className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-code:text-blue-300 prose-code:bg-blue-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
+          <div className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
             <h3 id="problem-invisible-access" className="text-2xl text-white mt-8 mb-4">The Problem: "Invisible" Access</h3>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
@@ -74,7 +74,7 @@ export default function RecursiveGovernancePost() {
                   <li>Base URL: <code>https://{'{'}tenant{'}'}.api.identitynow.com</code></li>
                   <li>Authentication: OAuth2 (Client Credentials).
                     <ul className="list-square pl-5 mt-1">
-                      <li className="font-mono text-sm"><span className="text-purple-400 mr-2">POST</span> <code>https://{'{'}tenant{'}'}.api.identitynow.com/oauth/token</code></li>
+                      <li className="font-mono text-sm"><span className="text-brand-accent mr-2">POST</span> <code>https://{'{'}tenant{'}'}.api.identitynow.com/oauth/token</code></li>
                     </ul>
                   </li>
                   <li>API Endpoints:
@@ -91,14 +91,14 @@ export default function RecursiveGovernancePost() {
             <div className="bg-slate-900/50 border border-white/5 rounded-xl p-6 mb-8">
               <h4 className="text-xl text-white mb-3">Schema Design: What attributes are we mapping and from where?</h4>
               
-              <h5 className="text-lg text-blue-400 mt-4 mb-2">Account - <code>/v2025/personal-access-tokens</code></h5>
+              <h5 className="text-lg text-brand-accent mt-4 mb-2">Account - <code>/v2025/personal-access-tokens</code></h5>
               <ul className="list-disc pl-5 text-slate-300 space-y-1 mb-4">
                 <li><code>identityname</code> ↔ <code>Owner.Name</code></li>
                 <li><code>identityid</code> ↔ <code>Owner.id</code></li>
                 <li><code>PATids</code> ↔ <code>id</code></li>
               </ul>
 
-              <h5 className="text-lg text-blue-400 mt-4 mb-2">Group - <code>/v2025/personal-access-tokens</code></h5>
+              <h5 className="text-lg text-brand-accent mt-4 mb-2">Group - <code>/v2025/personal-access-tokens</code></h5>
               <ul className="list-disc pl-5 text-slate-300 space-y-1">
                 <li><code>id</code> ↔ <code>id</code></li>
                 <li><code>scope</code> ↔ <code>scope</code></li>
@@ -161,7 +161,7 @@ export default function RecursiveGovernancePost() {
             <h3 id="code-design-choices" className="text-2xl text-white mt-12 mb-4">Code & Design Choices</h3>
 
             {/* AFTER ACCOUNT AGGREGATION RULE CARD */}
-            <h4 className="text-xl text-blue-400 mt-8 mb-3">After Account Aggregation Rule</h4>
+            <h4 className="text-xl text-brand-accent mt-8 mb-3">After Account Aggregation Rule</h4>
             <p className="text-slate-300 mb-4">
               The After Account Aggregation rule is what allows us to save back an account object for a user even though we receive multiple entries of PATs in the GET <code>/v2025/personal-access-tokens</code> call. The rule scans for the first occurrence of a user, aggregates all PAT IDs assigned to them, and saves that single consolidated row back to <code>processedResponseObject</code>.
             </p>
@@ -169,7 +169,7 @@ export default function RecursiveGovernancePost() {
             <div className="glass-card border border-white/10 rounded-2xl p-6 mb-8 flex flex-col gap-4">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                  <div className="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-blue/20 flex items-center justify-center text-brand-accent">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
@@ -182,7 +182,7 @@ export default function RecursiveGovernancePost() {
                 <a 
                   href="/downloads/recursive-governance/after-account-aggregation-rule.java" 
                   download="after-account-aggregation-rule.java"
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-full font-black text-xs uppercase tracking-widest transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-accent text-white px-5 py-2.5 rounded-full font-black text-xs uppercase tracking-widest transition-colors cursor-pointer"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -192,12 +192,12 @@ export default function RecursiveGovernancePost() {
               </div>
               
               <details className="group border-t border-white/5 pt-4">
-                <summary className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-blue-400 transition-colors cursor-pointer list-none flex items-center gap-2 select-none">
+                <summary className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-brand-accent transition-colors cursor-pointer list-none flex items-center gap-2 select-none">
                   <span className="group-open:rotate-90 transition-transform">▶</span>
                   Show Code Preview
                 </summary>
                 <div className="bg-[#0d1117] rounded-lg p-4 overflow-x-auto mt-4 border border-white/10 max-h-[350px] overflow-y-auto">
-<pre className="text-sm text-blue-300 m-0"><code>{`import connector.common.Util;
+<pre className="text-sm text-brand-light m-0"><code>{`import connector.common.Util;
 import java.util.*;
 import java.net.*;
 import java.io.*;
@@ -289,7 +289,7 @@ return processedResponseObject;`}</code></pre>
             </div>
 
             {/* AFTER GROUP AGGREGATION RULE CARD */}
-            <h4 className="text-xl text-blue-400 mt-8 mb-3">After Group Aggregation Rule</h4>
+            <h4 className="text-xl text-brand-accent mt-8 mb-3">After Group Aggregation Rule</h4>
             <p className="text-slate-300 mb-4">
               The After Group Aggregation rule is purely for populating the description attribute of each entitlement. Since we want the reviewer to be able to view all the details up front in the certification campaign, I used this rule to group all the relevant attributes about each PAT and separate them by pipe characters (<code>|</code>) so the reviewer has full context as to what they are reviewing. Here is an example description field for a PAT:
             </p>
@@ -300,7 +300,7 @@ return processedResponseObject;`}</code></pre>
             <div className="glass-card border border-white/10 rounded-2xl p-6 mb-8 flex flex-col gap-4">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                  <div className="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-blue/20 flex items-center justify-center text-brand-accent">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
@@ -313,7 +313,7 @@ return processedResponseObject;`}</code></pre>
                 <a 
                   href="/downloads/recursive-governance/after-group-aggregation-rule.java" 
                   download="after-group-aggregation-rule.java"
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-full font-black text-xs uppercase tracking-widest transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-accent text-white px-5 py-2.5 rounded-full font-black text-xs uppercase tracking-widest transition-colors cursor-pointer"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -323,12 +323,12 @@ return processedResponseObject;`}</code></pre>
               </div>
               
               <details className="group border-t border-white/5 pt-4">
-                <summary className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-blue-400 transition-colors cursor-pointer list-none flex items-center gap-2 select-none">
+                <summary className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-brand-accent transition-colors cursor-pointer list-none flex items-center gap-2 select-none">
                   <span className="group-open:rotate-90 transition-transform">▶</span>
                   Show Code Preview
                 </summary>
                 <div className="bg-[#0d1117] rounded-lg p-4 overflow-x-auto mt-4 border border-white/10 max-h-[350px] overflow-y-auto">
-<pre className="text-sm text-blue-300 m-0"><code>{`import connector.common.Util;
+<pre className="text-sm text-brand-light m-0"><code>{`import connector.common.Util;
 import java.util.*;
 
 String logPrefix = "Personal Access Token Management - After Group Aggregation Rule";
@@ -380,7 +380,7 @@ return processedResponseObject;`}</code></pre>
             </div>
 
             {/* ACCOUNT SCHEMA CARD */}
-            <h4 className="text-xl text-blue-400 mt-8 mb-3">Account Schema</h4>
+            <h4 className="text-xl text-brand-accent mt-8 mb-3">Account Schema</h4>
             <p className="text-slate-300 mb-4">
               The Account Schema defines the correlation attributes for linking Consolidating Personal Access Token references back to the User Profile.
             </p>
@@ -388,7 +388,7 @@ return processedResponseObject;`}</code></pre>
             <div className="glass-card border border-white/10 rounded-2xl p-6 mb-8 flex flex-col gap-4">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-brand-accent">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
@@ -411,7 +411,7 @@ return processedResponseObject;`}</code></pre>
               </div>
               
               <details className="group border-t border-white/5 pt-4">
-                <summary className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-blue-400 transition-colors cursor-pointer list-none flex items-center gap-2 select-none">
+                <summary className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-brand-accent transition-colors cursor-pointer list-none flex items-center gap-2 select-none">
                   <span className="group-open:rotate-90 transition-transform">▶</span>
                   Show Code Preview
                 </summary>
@@ -467,7 +467,7 @@ return processedResponseObject;`}</code></pre>
             </div>
 
             {/* GROUP SCHEMA CARD */}
-            <h4 className="text-xl text-blue-400 mt-8 mb-3">Group Schema</h4>
+            <h4 className="text-xl text-brand-accent mt-8 mb-3">Group Schema</h4>
             <p className="text-slate-300 mb-4">
               The Group Schema captures the details of the Personal Access Tokens, modeling them as entitlements in SailPoint ISC.
             </p>
@@ -475,7 +475,7 @@ return processedResponseObject;`}</code></pre>
             <div className="glass-card border border-white/10 rounded-2xl p-6 mb-8 flex flex-col gap-4">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-brand-accent">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
@@ -498,7 +498,7 @@ return processedResponseObject;`}</code></pre>
               </div>
               
               <details className="group border-t border-white/5 pt-4">
-                <summary className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-blue-400 transition-colors cursor-pointer list-none flex items-center gap-2 select-none">
+                <summary className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-brand-accent transition-colors cursor-pointer list-none flex items-center gap-2 select-none">
                   <span className="group-open:rotate-90 transition-transform">▶</span>
                   Show Code Preview
                 </summary>
@@ -650,7 +650,7 @@ return processedResponseObject;`}</code></pre>
             </div>
 
             {/* SOURCE CONFIGURATION CARD */}
-            <h4 className="text-xl text-blue-400 mt-8 mb-3">Source Configuration</h4>
+            <h4 className="text-xl text-brand-accent mt-8 mb-3">Source Configuration</h4>
             <p className="text-slate-300 mb-4">
               The complete JSON structure for importing the Web Services source into your SailPoint ISC tenant. 
             </p>
@@ -658,7 +658,7 @@ return processedResponseObject;`}</code></pre>
             <div className="glass-card border border-white/10 rounded-2xl p-6 mb-8 flex flex-col gap-4">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-brand-accent">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
@@ -681,7 +681,7 @@ return processedResponseObject;`}</code></pre>
               </div>
               
               <details className="group border-t border-white/5 pt-4">
-                <summary className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-blue-400 transition-colors cursor-pointer list-none flex items-center gap-2 select-none">
+                <summary className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-brand-accent transition-colors cursor-pointer list-none flex items-center gap-2 select-none">
                   <span className="group-open:rotate-90 transition-transform">▶</span>
                   Show Code Preview
                 </summary>
@@ -978,7 +978,7 @@ return processedResponseObject;`}</code></pre>
             </p>
 
             <div className="bg-slate-900/50 border border-white/5 rounded-xl p-6 mb-8">
-              <h4 className="text-xl text-blue-400 mb-4 font-bold">End-to-End Flow:</h4>
+              <h4 className="text-xl text-brand-accent mb-4 font-bold">End-to-End Flow:</h4>
               <ol className="list-decimal pl-5 text-slate-300 space-y-4 mb-6">
                 <li>
                   <strong className="text-white">Aggregation:</strong> The Web Services source runs a group aggregation and calls the <code>/v2025/personal-access-tokens</code> endpoint. The After Group Aggregation rule processes each token as an entitlement (Group) and sets its detailed metadata (owner, scopes, expiration, created, last used) as the entitlement description. Next, during account aggregation, the same endpoint is called. The After Account Aggregation rule consolidates multiple tokens per user into a single account record with a multi-valued <code>PATid</code> attribute listing all of the user's active token IDs.
@@ -991,7 +991,7 @@ return processedResponseObject;`}</code></pre>
                 </li>
               </ol>
 
-              <h4 className="text-xl text-blue-400 mb-4 font-bold">Key Benefits:</h4>
+              <h4 className="text-xl text-brand-accent mb-4 font-bold">Key Benefits:</h4>
               <ul className="list-disc pl-5 text-slate-300 space-y-3">
                 <li>
                   <strong className="text-white">Unified Visibility:</strong> Brings previously "invisible" API credentials under the standard governance umbrella, making them visible to security teams and managers in the standard Identity Cube.
@@ -1012,16 +1012,16 @@ return processedResponseObject;`}</code></pre>
               <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
               <ul className="space-y-4 text-slate-300 mb-8 list-none pl-0 leading-relaxed font-light">
                 <li className="flex gap-2">
-                  <span className="text-blue-400 font-bold shrink-0">Summary:</span>
+                  <span className="text-brand-accent font-bold shrink-0">Summary:</span>
                   <span>Recursive governance provides an elegant, out-of-the-box workaround to a common security gap in SailPoint ISC. By treating Personal Access Tokens as certifiable entitlements on a loopback source, organizations can secure their API footprint and enforce manager-led lifecycle controls.</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-blue-400 font-bold shrink-0">Call to Action:</span>
+                  <span className="text-brand-accent font-bold shrink-0">Call to Action:</span>
                   <span>If you have any questions, suggestions, or extensions to this Web Services approach, feel free to comment below. Let's collaborate on making SailPoint governance even more robust!</span>
                 </li>
               </ul>
 
-              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-blue-950/40 to-purple-950/40 p-8 rounded-3xl border border-white/5 shadow-2xl">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-deep-slate to-brand-blue/20 p-8 rounded-3xl border border-white/5 shadow-2xl">
                 <div className="flex-1">
                   <h4 className="text-xl font-bold text-white mb-2">Need help configuring PAT governance?</h4>
                   <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xl">
@@ -1030,7 +1030,7 @@ return processedResponseObject;`}</code></pre>
                 </div>
                 <a 
                   href="/contact" 
-                  className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(37,99,235,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
+                  className="group inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-accent text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(81,132,196,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
                 >
                   Talk to an Expert
                   <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">

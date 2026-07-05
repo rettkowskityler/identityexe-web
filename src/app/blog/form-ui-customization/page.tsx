@@ -637,12 +637,12 @@ export default function FormUiCustomizationPost() {
                   {/* Phase 2: Processing Loop */}
                   <div className="flex flex-col gap-4 bg-white/5 p-5 rounded-xl border border-white/5 relative">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">2</span>
+                      <span className="w-6 h-6 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">2</span>
                       <h4 className="text-white font-bold text-sm uppercase tracking-wide">Serial Loop Execution</h4>
                     </div>
                     <div className="text-xs text-slate-400 space-y-3">
                       <div className="bg-slate-950/60 p-3 rounded-lg border border-white/5">
-                        <span className="text-blue-400 font-bold">HTTP Request</span>
+                        <span className="text-brand-accent font-bold">HTTP Request</span>
                         <p className="mt-1">Query identities list from SailPoint REST endpoint.</p>
                       </div>
                       <div className="bg-slate-950/60 p-3 rounded-lg border border-white/5 ring-1 ring-cyan-500/30">
@@ -655,12 +655,12 @@ export default function FormUiCustomizationPost() {
                   {/* Phase 3: Display */}
                   <div className="flex flex-col gap-4 bg-white/5 p-5 rounded-xl border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs">3</span>
+                      <span className="w-6 h-6 rounded-full bg-purple-500/20 text-brand-accent flex items-center justify-center font-bold text-xs">3</span>
                       <h4 className="text-white font-bold text-sm uppercase tracking-wide">Rendering Dashboard</h4>
                     </div>
                     <div className="text-xs text-slate-400 space-y-3">
                       <div className="bg-slate-950/60 p-3 rounded-lg border border-white/5">
-                        <span className="text-purple-400 font-bold">Interactive Form Step</span>
+                        <span className="text-brand-accent font-bold">Interactive Form Step</span>
                         <p className="mt-1">Pass compiled HTML string as a variable input.</p>
                       </div>
                       <div className="bg-slate-950/60 p-3 rounded-lg border border-white/5">

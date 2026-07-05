@@ -4,21 +4,21 @@ const Services = () => {
   const services = [
     {
       title: "IIQ to ISC Migrations",
-      description: "De-risking complex moves to the cloud. We map out your existing IdentityIQ implementation and seamlessly transition it to Identity Security Cloud.",
+      description: "Map your existing IdentityIQ implementation and transition it to Identity Security Cloud.",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="m14 15-2-2-2 2"/><path d="M12 13v8"/></svg>
       )
     },
     {
       title: "Custom Integrations",
-      description: "Building bespoke Web Service connectors and custom workflows to automatically govern any application, anywhere in your ecosystem.",
+      description: "Build Web Service connectors and custom workflows to govern any application.",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-purple-400"><path d="m21 16-5.16-5.16a2 2 0 0 0-2.83 0l-5.17 5.17"/><path d="M12 8a4 4 0 1 0-8 0 4 4 0 0 0 8 0Z"/><path d="M15.5 15.5 19 19"/></svg>
       )
     },
     {
       title: "Architecture & Health",
-      description: "Rescuing failing deployments, optimizing performance, and ensuring your identity ecosystem follows true Zero Trust principles.",
+      description: "Optimize performance and ensure your identity ecosystem follows Zero Trust principles.",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-green-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
       )

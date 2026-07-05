@@ -16,7 +16,7 @@ const CTA = () => {
 
         {/* Subtext */}
         <p className="text-xl md:text-2xl text-slate-400 mb-14 max-w-2xl mx-auto font-light leading-relaxed">
-          Stop fighting your deployment. Let's build a secure, compliant, and automated ecosystem that scales with your enterprise.
+          Build a secure, compliant, and automated ecosystem that scales with your enterprise.
         </p>
 
         {/* Secondary Shimmer CTA Button */}

@@ -38,16 +38,16 @@ const Founder = () => {
             {/* Custom Quote Highlights block */}
             <div className="border-l-4 border-blue-500 pl-6 my-8 py-1 bg-white/3 rounded-r-2xl border-white/5 pr-4">
               <p className="text-white font-medium text-lg md:text-xl italic leading-relaxed">
-                "When you hire IdentityEXE, you aren't handed off to junior developers—you get an architect who understands the platform parameter-by-parameter."
+                "When you hire IdentityEXE, you aren't handed off to junior developers. You get an architect who understands the platform parameter-by-parameter."
               </p>
             </div>
 
             <div className="space-y-6 text-slate-300 leading-relaxed text-base md:text-lg font-light">
               <p>
-                As a recognized SailPoint Expert Ambassador, my mission is to deliver uncompromised identity ecosystems that actually work. 
+                My mission is to deliver identity ecosystems that work. 
               </p>
               <p>
-                After spending years fixing broken deployments created by massive consulting firms, I founded <strong className="text-white font-medium">IdentityEXE</strong> to provide direct-to-client expertise. 
+                I founded <strong className="text-white font-medium">IdentityEXE</strong> to provide direct-to-client expertise. 
               </p>
             </div>
             

@@ -7,10 +7,7 @@ const Footer = () => {
         {/* Brand Block */}
         <div className="col-span-1 md:col-span-2 flex flex-col gap-4">
           <a href="/" className="no-underline group inline-block self-start">
-            <h2 className="text-3xl font-display font-black tracking-tighter leading-none">
-              <span className="logo-identity">Identity</span>
-              <span className="logo-exe">EXE</span>
-            </h2>
+            <img src="/logo.svg" alt="IdentityEXE Logo" className="h-12 w-auto mb-2 transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.6)] group-hover:brightness-110" />
           </a>
           <p className="text-slate-400 max-w-sm font-light text-base leading-relaxed">
             Top-echelon SailPoint consulting for forward-thinking enterprises. Identity Security, Mastered.
@@ -33,22 +30,22 @@ const Footer = () => {
           <h3 className="text-white font-bold mb-4 tracking-wide text-sm uppercase">Connect</h3>
           <ul className="space-y-3 text-slate-400 text-sm font-light">
             <li>
-              <a href="#" className="hover:text-blue-400 hover:underline transition-all">
+              <a href="https://www.linkedin.com/company/identityexe/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent hover:underline transition-all">
                 LinkedIn
               </a>
             </li>
             <li>
-              <a href="/blog" className="hover:text-blue-400 hover:underline transition-all">
+              <a href="/blog" className="hover:text-brand-accent hover:underline transition-all">
                 Blog
               </a>
             </li>
             <li>
-              <a href="/contact" className="hover:text-blue-400 hover:underline transition-all">
+              <a href="/contact" className="hover:text-brand-accent hover:underline transition-all">
                 Contact Us
               </a>
             </li>
             <li>
-              <a href="mailto:tyler@identityexe.com" className="text-blue-400 hover:text-blue-300 font-medium transition-colors">
+              <a href="mailto:tyler@identityexe.com" className="text-brand-accent hover:text-brand-light font-medium transition-colors">
                 tyler@identityexe.com
               </a>
             </li>

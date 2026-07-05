@@ -29,25 +29,25 @@ export default function CustomReportsWorkflowPaginationPost() {
             
             {/* Breadcrumbs */}
             <nav className="flex items-center gap-2 text-[10px] text-slate-500 mb-6 font-bold uppercase tracking-widest">
-              <a href="/" className="hover:text-blue-400 transition-colors no-underline">Home</a>
+              <a href="/" className="hover:text-brand-accent transition-colors no-underline">Home</a>
               <span>/</span>
-              <a href="/blog" className="hover:text-blue-400 transition-colors no-underline">Blog</a>
+              <a href="/blog" className="hover:text-brand-accent transition-colors no-underline">Blog</a>
               <span>/</span>
               <span className="text-slate-400">Custom Reports Workflow Pagination</span>
             </nav>
 
             <header className="mb-12 border-b border-white/10 pb-8">
-            <div className="flex items-center gap-3 mb-6 text-xs font-bold tracking-widest uppercase text-blue-400">
+            <div className="flex items-center gap-3 mb-6 text-xs font-bold tracking-widest uppercase text-brand-accent">
               <span>Architecture</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
               <span>June 2026</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
               Custom Reports with Workflow Pagination <br />
-              <span className="text-blue-500 text-2xl md:text-3xl">(Architectural Implementation Framework)</span>
+              <span className="text-brand-blue text-2xl md:text-3xl">(Architectural Implementation Framework)</span>
             </h1>
             <div className="flex items-center gap-4 text-sm text-slate-400 font-medium">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-brand-accent flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">
                 <img src="/images/profile.jpg" alt="Tyler" className="w-full h-full object-cover rounded-full" />
               </div>
               <div>
@@ -57,7 +57,7 @@ export default function CustomReportsWorkflowPaginationPost() {
             </div>
           </header>
 
-          <div className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-code:text-blue-300 prose-code:bg-blue-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
+          <div className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
             <h3 id="executive-summary" className="text-2xl text-white mt-8 mb-4">Executive Summary</h3>
             <p className="text-slate-300 mb-4">
@@ -151,7 +151,7 @@ export default function CustomReportsWorkflowPaginationPost() {
               <a 
                 href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(formData, null, 2))}`}
                 download="SelectSourceForReporting_Form.json"
-                className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
+                className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Launcher Form
@@ -168,7 +168,7 @@ export default function CustomReportsWorkflowPaginationPost() {
                 <a 
                   href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(launcherData, null, 2))}`}
                   download="InteractiveDisabledAccountsWithAccessReport.json"
-                  className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
+                  className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                   Launcher Workflow
@@ -186,7 +186,7 @@ export default function CustomReportsWorkflowPaginationPost() {
                 <a 
                   href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(workerData, null, 2))}`}
                   download="PaginationWorker.json"
-                  className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
+                  className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                   Worker Workflow
@@ -200,7 +200,7 @@ export default function CustomReportsWorkflowPaginationPost() {
                 By leveraging self-calling workflows, state passing via updated variables, and recursive execution paths, Identity Security Cloud can natively bypass standard execution limits. This framework delivers comprehensive, paginated reporting securely within your existing governance ecosystem without the continuous overhead of maintaining external infrastructure or arbitrary external scripts.
               </p>
 
-              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-blue-950/40 to-purple-950/40 p-8 rounded-3xl border border-white/5 shadow-2xl mt-8">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-deep-slate to-brand-blue/20 p-8 rounded-3xl border border-white/5 shadow-2xl mt-8">
                 <div className="flex-1">
                   <h4 className="text-xl font-bold text-white mb-2">A stalled identity governance rollout burns capital and stalls organizational momentum.</h4>
                   <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xl">
@@ -209,7 +209,7 @@ export default function CustomReportsWorkflowPaginationPost() {
                 </div>
                 <a 
                   href="/contact" 
-                  className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(37,99,235,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
+                  className="group inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-accent text-white px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(81,132,196,0.3)] border border-white/10 hover:scale-105 active:scale-95 transition-all duration-300 shrink-0"
                 >
                   Book Your SailPoint Architecture Review
                   <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">

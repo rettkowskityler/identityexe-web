@@ -5,7 +5,7 @@ const Credentials = () => {
     {
       title: "SailPoint Expert Ambassador",
       value: "Elite",
-      description: "Recognized among the top global tier of technical SailPoint experts.",
+      description: "Recognized among top technical SailPoint experts.",
       color: "#3b82f6",
       icon: (
         <svg className="w-12 h-12 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -17,7 +17,7 @@ const Credentials = () => {
     {
       title: "Identity Security Cloud",
       value: "Certified",
-      description: "ISC Certified Developer & Engineer with deep multi-tenant deployment architecture experience.",
+      description: "ISC Certified Developer & Engineer with multi-tenant deployment experience.",
       color: "#a855f7",
       icon: (
         <svg className="w-12 h-12 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -29,7 +29,7 @@ const Credentials = () => {
     {
       title: "IdentityIQ",
       value: "Certified",
-      description: "IIQ Certified Developer & Engineer specializing in complex, custom enterprise integrations.",
+      description: "IIQ Certified Developer & Engineer specializing in custom enterprise integrations.",
       color: "#10b981",
       icon: (
         <svg className="w-12 h-12 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -41,7 +41,7 @@ const Credentials = () => {
     {
       title: "Enterprise Deployments",
       value: "Proven",
-      description: "Direct-to-client track record of securing millions of identities across Fortune 500 environments.",
+      description: "Securing millions of identities across Fortune 500 environments.",
       color: "#94a3b8",
       icon: (
         <svg className="w-12 h-12 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -65,7 +65,7 @@ const Credentials = () => {
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
         <div className="mb-20 flex flex-col items-center justify-center w-full text-center animate-fade-in-up">
-          <p className="font-bold tracking-widest uppercase text-sm mb-4 text-blue-500">Unmatched Technical Pedigree</p>
+          <p className="font-bold tracking-widest uppercase text-sm mb-4 text-blue-500">Technical Pedigree</p>
           <h2 className="font-display font-black text-white tracking-tighter text-4xl md:text-6xl">Our Credentials</h2>
         </div>
 

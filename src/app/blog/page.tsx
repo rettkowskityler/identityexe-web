@@ -93,11 +93,11 @@ export default function Blog() {
       category: 'Architecture',
       date: 'May 2026',
       description: 'A custom workflow forms solution to gracefully handle SailPoint source downtime using the Maintenance Guard pattern.',
-      iconBgClass: 'bg-blue-500/10',
-      iconBorderClass: 'border-blue-500/20',
-      iconColorClass: 'text-blue-400',
-      hoverTitleClass: 'group-hover:text-blue-400',
-      readMoreColorClass: 'text-blue-500',
+      iconBgClass: 'bg-brand-accent/10',
+      iconBorderClass: 'border-brand-blue/20',
+      iconColorClass: 'text-brand-accent',
+      hoverTitleClass: 'group-hover:text-brand-accent',
+      readMoreColorClass: 'text-brand-blue',
       gradientClass: 'from-blue-600/20 to-purple-600/20',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -113,9 +113,9 @@ export default function Blog() {
       description: 'Learn how to govern SailPoint ISC Personal Access Tokens (PATs) using a custom Web Services Connector to regain visibility and control.',
       iconBgClass: 'bg-purple-500/10',
       iconBorderClass: 'border-purple-500/20',
-      iconColorClass: 'text-purple-400',
-      hoverTitleClass: 'group-hover:text-purple-400',
-      readMoreColorClass: 'text-purple-500',
+      iconColorClass: 'text-brand-accent',
+      hoverTitleClass: 'group-hover:text-brand-accent',
+      readMoreColorClass: 'text-brand-blue',
       gradientClass: 'from-purple-600/20 to-blue-600/20',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -237,7 +237,7 @@ export default function Blog() {
 
           {/* Search Bar */}
           <div className="mb-12 max-w-md animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
-            <div className="relative glass-card rounded-full border border-white/10 px-5 py-3.5 flex items-center gap-3 focus-within:border-blue-500/50 focus-within:ring-2 focus-within:ring-blue-500/20 transition-all duration-300">
+            <div className="relative glass-card rounded-full border border-white/10 px-5 py-3.5 flex items-center gap-3 focus-within:border-brand-blue/50 focus-within:ring-2 focus-within:ring-blue-500/20 transition-all duration-300">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-slate-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
