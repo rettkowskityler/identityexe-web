@@ -1,0 +1,393 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "63d4ddca-8c17-41c9-9e22-42c61ef45488",
+      "name": "Role Management"
+    },
+    "object": {
+      "id": "63d4ddca-8c17-41c9-9e22-42c61ef45488",
+      "name": "Role Management",
+      "description": "",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "00000000000000000000000000000000",
+        "name": "admin"
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "summary",
+          "type": "STRING",
+          "label": "summary",
+          "description": ""
+        },
+        {
+          "id": "rolename",
+          "type": "STRING",
+          "label": "rolename",
+          "description": ""
+        },
+        {
+          "id": "currententitlements",
+          "type": "ARRAY",
+          "label": "currententitlements",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "865377397561",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "description": "<p>{{$.form.input.summary}}</p>",
+                  "label": "Description Field",
+                  "showLabel": false
+                },
+                "elementType": "DESCRIPTION",
+                "id": "1452043503098",
+                "key": "",
+                "validations": []
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "options": [
+                        {
+                          "label": "Modify Name",
+                          "sublabel": "",
+                          "value": "Modify Name"
+                        },
+                        {
+                          "label": "Modify Description",
+                          "sublabel": "",
+                          "value": "Modify Description"
+                        },
+                        {
+                          "label": "Modify Requestable",
+                          "sublabel": "",
+                          "value": "Modify Requestable"
+                        },
+                        {
+                          "label": "Change Primary Owner",
+                          "sublabel": "",
+                          "value": "Change Primary Owner"
+                        },
+                        {
+                          "label": "Add Entitlement",
+                          "sublabel": "",
+                          "value": "Add Entitlement"
+                        },
+                        {
+                          "label": "Remove Entitlement",
+                          "sublabel": "",
+                          "value": "Remove Entitlement"
+                        }
+                      ]
+                    },
+                    "dataSourceType": "STATIC"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Field To Modify",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1316405820758",
+                "key": "selectfieldtomodify",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "default": "",
+                  "description": "",
+                  "helpText": "",
+                  "label": "Enter New Name",
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "TEXT",
+                "id": "128318669831",
+                "key": "enterNewName",
+                "validations": [
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "default": "",
+                  "description": "",
+                  "helpText": "",
+                  "label": " Enter New Description",
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "TEXT",
+                "id": "558387856678",
+                "key": "EnterNewDescription",
+                "validations": [
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "default": true,
+                  "falseLabel": "Requestable Disabled",
+                  "helpText": "",
+                  "label": "Requestable",
+                  "trueLabel": "Requestable Enabled"
+                },
+                "elementType": "TOGGLE",
+                "id": "260599269426",
+                "key": "requestable",
+                "validations": []
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "indices": [
+                        "identities"
+                      ],
+                      "label": "attributes.displayName",
+                      "query": "*",
+                      "sublabel": "attributes.email",
+                      "value": "id"
+                    },
+                    "dataSourceType": "SEARCH_V2"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select New Owner",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "930765439682",
+                "key": "newidentityid",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "indices": [
+                        "entitlements"
+                      ],
+                      "label": "displayName",
+                      "query": "*",
+                      "sublabel": "source.name",
+                      "value": "id"
+                    },
+                    "dataSourceType": "SEARCH_V2"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Entitlements To Add",
+                  "maximum": 30,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1721503254178",
+                "key": "SelectEntitlementsToAdd",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "formInputId": "currententitlements",
+                      "sortBy": "ASC"
+                    },
+                    "dataSourceType": "FORM_INPUT"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Entitlements To Remove",
+                  "maximum": 30,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "87533926320",
+                "key": "SelectEntitlementsToRemove",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              }
+            ],
+            "label": "Modify Role: {{$.form.input.rolename}}",
+            "labelStyle": "h2",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectfieldtomodify",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Modify Name"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "128318669831"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectfieldtomodify",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Modify Description"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "558387856678"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectfieldtomodify",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Modify Requestable"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "260599269426"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectfieldtomodify",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Change Primary Owner"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "930765439682"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectfieldtomodify",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Add Entitlement"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "1721503254178"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectfieldtomodify",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Remove Entitlement"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "87533926320"
+              }
+            }
+          ]
+        }
+      ],
+      "created": "2026-07-06T22:58:17.272622701Z",
+      "modified": "2026-07-11T18:08:46.202066984Z"
+    }
+  }
+]

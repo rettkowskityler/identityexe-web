@@ -1,0 +1,471 @@
+{
+	"name": "Remove Entitlement From Role",
+	"description": "",
+	"modified": "2026-07-12T01:10:48.660851662Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin"
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Comparison 2": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"NOT": {
+							"comparator": "IsString",
+							"variableA.$": "$.defineVariable.nextlist"
+						},
+						"nextStep": "HTTP Request 2"
+					}
+				],
+				"defaultStep": "HTTP Request 3",
+				"displayName": "Check If Final Removal",
+				"type": "choice"
+			},
+			"Define Comparison 3": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"NOT": {
+							"comparator": "IsString",
+							"variableA.$": "$.trigger.entitlementstoremove"
+						},
+						"nextStep": "Serial Loop"
+					}
+				],
+				"defaultStep": "Serial Loop 1",
+				"displayName": "Check If Single Or Multiple Removal",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "currentindex",
+							"transforms": [],
+							"variableA": 0
+						},
+						{
+							"description": "",
+							"name": "currententitlementid",
+							"transforms": [],
+							"variableA.$": "$.trigger.entitlementstoremove[0]"
+						},
+						{
+							"description": "",
+							"name": "nextlist",
+							"transforms": [],
+							"variableA.$": "$.trigger.entitlementstoremove[1:].JSON()"
+						},
+						{
+							"description": "",
+							"name": "roleid",
+							"transforms": [],
+							"variableA.$": "$.trigger.roleid"
+						},
+						{
+							"description": "",
+							"name": "singleentitlementid",
+							"transforms": [],
+							"variableA.$": "$.trigger.entitlementstoremove"
+						},
+						{
+							"description": "",
+							"name": "converted",
+							"transforms": [],
+							"variableA.$": "$.trigger.entitlementstoremove"
+						}
+					]
+				},
+				"displayName": "Set Variables",
+				"nextStep": "HTTP Request",
+				"type": "Mutation"
+			},
+			"End Step - Success 3": {
+				"actionId": "sp:operator-success",
+				"displayName": "End Current Execution",
+				"type": "success"
+			},
+			"End Step - Success 4": {
+				"actionId": "sp:operator-success",
+				"displayName": "No Further Entitlements To Remove",
+				"type": "success"
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "e58b3090-8735-4f06-b05d-a478f466af9f"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.trigger.roleid}}"
+				},
+				"displayName": "Get Role Details",
+				"nextStep": "Define Comparison 3",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 2": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": "{\n \"roleid\": \"{{$.defineVariable.roleid}}\",\n \"entitlementstoremove\": {{$.defineVariable.nextlist}}\n}",
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "5b84cd9e-ce10-4d43-8337-7472101120b7",
+						"paramType": "1.4",
+						"refID": "142cec58-2f73-4844-bffd-307039bfd08a"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/77d3bcb9-243e-4d67-94d0-dec77b30540b"
+				},
+				"displayName": "Re-Call Workflow - Array",
+				"nextStep": "End Step - Success 3",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 3": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": {
+						"entitlementstoremove": "{{$.defineVariable.nextlist}}",
+						"roleid": "{{$.defineVariable.roleid}}"
+					},
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "5b84cd9e-ce10-4d43-8337-7472101120b7",
+						"paramType": "1.4",
+						"refID": "142cec58-2f73-4844-bffd-307039bfd08a"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/77d3bcb9-243e-4d67-94d0-dec77b30540b"
+				},
+				"displayName": "Re-Call Workflow - String",
+				"nextStep": "End Step - Success 3",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Serial Loop": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"input.$": "$.hTTPRequest.body.entitlements",
+					"loopType": "forLoop",
+					"start": "Define Variable 1",
+					"steps": {
+						"Break Loop": {
+							"actionId": "sp:operator-break",
+							"attributes": {
+								"id": "sp:operator-break"
+							},
+							"displayName": "Found & Removed Entitlement - Bteak",
+							"type": "break",
+							"versionNumber": 0
+						},
+						"Define Comparison 1": {
+							"actionId": "sp:compare-multi-type",
+							"choiceList": [
+								{
+									"comparator": "StringEquals",
+									"nextStep": "HTTP Request 1",
+									"variableA.$": "$.defineVariable.currententitlementid",
+									"variableB.$": "$.loop.loopInput.id"
+								}
+							],
+							"defaultStep": "Update Variable",
+							"displayName": "Check If Removal Entitlement",
+							"type": "choice"
+						},
+						"Define Variable 1": {
+							"actionId": "sp:define-variable",
+							"attributes": {
+								"id": "sp:define-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "tempcounter",
+										"transforms": [],
+										"variableA.$": "$.defineVariable.currentindex"
+									}
+								]
+							},
+							"displayName": "Set Counter",
+							"nextStep": "Define Comparison 1",
+							"type": "Mutation"
+						},
+						"End Step - Success": {
+							"actionId": "sp:operator-success",
+							"displayName": "Not Found - Loop Again",
+							"type": "success"
+						},
+						"HTTP Request 1": {
+							"actionId": "sp:http",
+							"attributes": {
+								"jsonPatchRequestBody": [
+									{
+										"op": "remove",
+										"path": "/entitlements/{{$.defineVariable1.tempcounter}}"
+									}
+								],
+								"jsonRequestBody": [
+									{
+										"op": "remove",
+										"path": "/entitlements/{{$.defineVariable.currentindex}}"
+									}
+								],
+								"method": "patch",
+								"param_authenticationRef": "oauth",
+								"param_oauth": {
+									"mapping": {
+										"auth_client_id": "clientId",
+										"auth_client_secret": "clientSecret",
+										"auth_credential_location": "credentialLocation",
+										"auth_token_url": "tokenURL"
+									},
+									"paramID": "6e825815-d032-4764-80c9-06110f732185",
+									"paramType": "1.4",
+									"refID": "e58b3090-8735-4f06-b05d-a478f466af9f"
+								},
+								"param_oauth_scopes": {
+									"mapping": {
+										"auth_scopes": "scopes"
+									},
+									"paramID": "",
+									"paramType": "3.1"
+								},
+								"requestContentType": "json-patch+json",
+								"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.trigger.roleid}}"
+							},
+							"displayName": "Remove Entitlement HTTP Call",
+							"nextStep": "Break Loop",
+							"type": "action",
+							"versionNumber": 3
+						},
+						"Update Variable": {
+							"actionId": "sp:update-variable",
+							"attributes": {
+								"id": "sp:update-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "$.defineVariable.currentindex",
+										"transforms": [
+											{
+												"id": "sp:transform:add:number",
+												"input": {
+													"precision": 4,
+													"roundingMode": "roundHalfUp",
+													"variableB": 1
+												}
+											}
+										],
+										"variableA.$": "$.defineVariable.currentindex"
+									}
+								]
+							},
+							"displayName": "Update Counter",
+							"nextStep": "End Step - Success",
+							"type": "Mutation"
+						}
+					}
+				},
+				"displayName": "Multiple Removal Loop",
+				"nextStep": "Define Comparison 2",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Serial Loop 1": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"input.$": "$.hTTPRequest.body.entitlements",
+					"loopType": "forLoop",
+					"start": "Define Variable 2",
+					"steps": {
+						"Break Loop 1": {
+							"actionId": "sp:operator-break",
+							"attributes": {
+								"id": "sp:operator-break"
+							},
+							"displayName": "Found & Removed Entitlement - Break",
+							"type": "break",
+							"versionNumber": 0
+						},
+						"Define Comparison 4": {
+							"actionId": "sp:compare-multi-type",
+							"choiceList": [
+								{
+									"comparator": "StringEquals",
+									"nextStep": "HTTP Request 4",
+									"variableA.$": "$.defineVariable.singleentitlementid",
+									"variableB.$": "$.loop.loopInput.id"
+								}
+							],
+							"defaultStep": "Update Variable 1",
+							"displayName": "Check If Removal Entitlement",
+							"type": "choice"
+						},
+						"Define Variable 2": {
+							"actionId": "sp:define-variable",
+							"attributes": {
+								"id": "sp:define-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "tempcounter",
+										"transforms": [],
+										"variableA.$": "$.defineVariable.currentindex"
+									}
+								]
+							},
+							"displayName": "Set Counter",
+							"nextStep": "Define Comparison 4",
+							"type": "Mutation"
+						},
+						"End Step - Success 1": {
+							"actionId": "sp:operator-success",
+							"displayName": "Not Found - Loop Again",
+							"type": "success"
+						},
+						"HTTP Request 4": {
+							"actionId": "sp:http",
+							"attributes": {
+								"jsonPatchRequestBody": [
+									{
+										"op": "remove",
+										"path": "/entitlements/{{$.defineVariable2.tempcounter}}"
+									}
+								],
+								"jsonRequestBody": [
+									{
+										"op": "remove",
+										"path": "/entitlements/{{$.defineVariable.currentindex}}"
+									}
+								],
+								"method": "patch",
+								"param_authenticationRef": "oauth",
+								"param_oauth": {
+									"mapping": {
+										"auth_client_id": "clientId",
+										"auth_client_secret": "clientSecret",
+										"auth_credential_location": "credentialLocation",
+										"auth_token_url": "tokenURL"
+									},
+									"paramID": "6e825815-d032-4764-80c9-06110f732185",
+									"paramType": "1.4",
+									"refID": "e58b3090-8735-4f06-b05d-a478f466af9f"
+								},
+								"param_oauth_scopes": {
+									"mapping": {
+										"auth_scopes": "scopes"
+									},
+									"paramID": "",
+									"paramType": "3.1"
+								},
+								"requestContentType": "json-patch+json",
+								"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.trigger.roleid}}"
+							},
+							"displayName": "Remove Entitlement HTTP Call",
+							"nextStep": "Break Loop 1",
+							"type": "action",
+							"versionNumber": 3
+						},
+						"Update Variable 1": {
+							"actionId": "sp:update-variable",
+							"attributes": {
+								"id": "sp:update-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "$.defineVariable.currentindex",
+										"transforms": [
+											{
+												"id": "sp:transform:add:number",
+												"input": {
+													"precision": 4,
+													"roundingMode": "roundHalfUp",
+													"variableB": 1
+												}
+											}
+										],
+										"variableA.$": "$.defineVariable.currentindex"
+									}
+								]
+							},
+							"displayName": "Update Counter",
+							"nextStep": "End Step - Success 1",
+							"type": "Mutation"
+						}
+					}
+				},
+				"displayName": "Single Removal Loop",
+				"nextStep": "End Step - Success 4",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin"
+	},
+	"trigger": {
+		"type": "EXTERNAL",
+		"attributes": {
+			"clientId": "a3976fd3-9241-4519-909c-006b35229e1b",
+			"description": "roleid: \"\"\nentitlementstoremove: []",
+			"id": "idn:external-http",
+			"integrationId": null,
+			"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/77d3bcb9-243e-4d67-94d0-dec77b30540b"
+		}
+	}
+}

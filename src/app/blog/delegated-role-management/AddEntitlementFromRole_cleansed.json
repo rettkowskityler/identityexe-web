@@ -1,0 +1,182 @@
+{
+	"name": "Add Entitlement From Role",
+	"description": "",
+	"modified": "2026-07-12T14:18:12.957304675Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin"
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "NumericEquals",
+						"nextStep": "End Step - Success",
+						"variableA.$": "$.serialLoop.succeeded",
+						"variableB.$": "$.trigger.entitlementstoadd.length()"
+					}
+				],
+				"defaultStep": "End Step - Failure",
+				"displayName": "Check If Multiple Addition Success",
+				"type": "choice"
+			},
+			"Define Comparison 1": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"AND": [
+							{
+								"comparator": "IsString",
+								"variableA.$": "$.trigger.entitlementstoadd"
+							},
+							{
+								"comparator": "NumericEquals",
+								"variableA.$": "$.serialLoop.succeeded",
+								"variableB": 1
+							}
+						],
+						"nextStep": "End Step - Success"
+					}
+				],
+				"defaultStep": "Define Comparison",
+				"displayName": "Check If Only 1 Addition Success",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "waittime",
+							"name": "waittime",
+							"transforms": [],
+							"variableA": "5s"
+						}
+					]
+				},
+				"displayName": "Set Wait Time",
+				"nextStep": "Serial Loop",
+				"type": "Mutation"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureName": "Loop Didn't Execute All Requests!",
+				"type": "failure"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"Serial Loop": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"input.$": "$.trigger.entitlementstoadd",
+					"loopType": "forLoop",
+					"start": "Wait",
+					"steps": {
+						"End Step - Failure 1": {
+							"actionId": "sp:operator-failure",
+							"displayName": "HTTP Call Failure - End Loop",
+							"failureDetails": null,
+							"failureName": "Failed PATCH!",
+							"type": "failure"
+						},
+						"End Step - Success 3": {
+							"actionId": "sp:operator-success",
+							"displayName": "Success - Loop Again",
+							"type": "success"
+						},
+						"HTTP Request 1": {
+							"actionId": "sp:http",
+							"attributes": {
+								"jsonPatchRequestBody": [
+									{
+										"op": "add",
+										"path": "/entitlements/-",
+										"value": {
+											"id": "{{$.loop.loopInput}}",
+											"type": "ENTITLEMENT"
+										}
+									}
+								],
+								"jsonRequestBody": [
+									{
+										"op": "remove",
+										"path": "/entitlements/{{$.defineVariable.currentindex}}"
+									}
+								],
+								"method": "patch",
+								"param_authenticationRef": "oauth",
+								"param_oauth": {
+									"mapping": {
+										"auth_client_id": "clientId",
+										"auth_client_secret": "clientSecret",
+										"auth_credential_location": "credentialLocation",
+										"auth_token_url": "tokenURL"
+									},
+									"paramID": "6e825815-d032-4764-80c9-06110f732185",
+									"paramType": "1.4",
+									"refID": "48b8dbe5-a47b-4d69-af51-58af167ec01d"
+								},
+								"param_oauth_scopes": {
+									"mapping": {
+										"auth_scopes": "scopes"
+									},
+									"paramType": "3.1"
+								},
+								"requestContentType": "json-patch+json",
+								"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.trigger.roleid}}"
+							},
+							"catch": [
+								{
+									"next": "End Step - Failure 1"
+								}
+							],
+							"displayName": "Add New Entitlement HTTP Call",
+							"nextStep": "End Step - Success 3",
+							"type": "action",
+							"versionNumber": 3
+						},
+						"Wait": {
+							"actionId": "sp:sleep",
+							"attributes": {
+								"duration.$": "$.defineVariable.waittime",
+								"type": "waitFor"
+							},
+							"displayName": "",
+							"nextStep": "HTTP Request 1",
+							"type": "action",
+							"versionNumber": 1
+						}
+					}
+				},
+				"displayName": "Loop Through New Entitlement Additions",
+				"nextStep": "Define Comparison 1",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin"
+	},
+	"trigger": {
+		"type": "EXTERNAL",
+		"attributes": {
+			"clientId": "d2efe61d-b3e9-4b56-b906-916aeb39f15e",
+			"description": "roleid: \"\"\nentitlementstoadd: []",
+			"id": "idn:external-http",
+			"integrationId": null,
+			"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/b865cf2d-03fc-4f0b-8c7d-f645465d48fd"
+		}
+	}
+}

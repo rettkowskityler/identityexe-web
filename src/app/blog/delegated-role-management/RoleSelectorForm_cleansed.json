@@ -1,0 +1,87 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "51223256-243d-4c13-9dd5-ab8f105a1ce6",
+      "name": "Role Selector"
+    },
+    "object": {
+      "id": "51223256-243d-4c13-9dd5-ab8f105a1ce6",
+      "name": "Role Selector",
+      "description": "",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "00000000000000000000000000000000",
+        "name": "admin"
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "uid",
+          "type": "STRING",
+          "label": "uid",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "1215551206522",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "filters": {
+                        "owner.id": {
+                          "exclude": false,
+                          "value": "{{$.form.input.uid}}"
+                        }
+                      },
+                      "indices": [
+                        "roles"
+                      ],
+                      "label": "name",
+                      "query": "*",
+                      "sublabel": "description",
+                      "value": "id"
+                    },
+                    "dataSourceType": "SEARCH_V2"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Role",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1172674126886",
+                "key": "role",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              }
+            ],
+            "label": "Select The Role To Modify",
+            "labelStyle": "h1",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [],
+      "created": "2026-07-06T22:44:52.989999713Z",
+      "modified": "2026-07-11T18:19:49.819890581Z"
+    }
+  }
+]

@@ -1,0 +1,522 @@
+{
+	"name": "Role Management",
+	"description": "Role Management",
+	"modified": "2026-07-12T14:18:16.105728489Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin"
+	},
+	"definition": {
+		"start": "Interactive Form",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request 1",
+						"variableA.$": "$.interactiveForm1.formData.selectfieldtomodify",
+						"variableB": "Modify Name"
+					}
+				],
+				"defaultStep": "Define Comparison 1",
+				"displayName": "Check If Modify Name",
+				"type": "choice"
+			},
+			"Define Comparison 1": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request 2",
+						"variableA.$": "$.interactiveForm1.formData.selectfieldtomodify",
+						"variableB": "Modify Description"
+					}
+				],
+				"defaultStep": "Define Comparison 2",
+				"displayName": "Check If Modify Description",
+				"type": "choice"
+			},
+			"Define Comparison 2": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request 3",
+						"variableA.$": "$.interactiveForm1.formData.selectfieldtomodify",
+						"variableB": "Modify Requestable"
+					}
+				],
+				"defaultStep": "Define Comparison 3",
+				"displayName": "Check If Modify Requestable",
+				"type": "choice"
+			},
+			"Define Comparison 3": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request 4",
+						"variableA.$": "$.interactiveForm1.formData.selectfieldtomodify",
+						"variableB": "Change Primary Owner"
+					}
+				],
+				"defaultStep": "Define Comparison 4",
+				"displayName": "Check If Change Primary Owner",
+				"type": "choice"
+			},
+			"Define Comparison 4": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "Define Comparison 6",
+						"variableA.$": "$.interactiveForm1.formData.selectfieldtomodify",
+						"variableB": "Add Entitlement"
+					}
+				],
+				"defaultStep": "Define Comparison 5",
+				"displayName": "Check If Add Entitlement",
+				"type": "choice"
+			},
+			"Define Comparison 5": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"NOT": {
+							"comparator": "IsString",
+							"variableA.$": "$.interactiveForm1.formData.SelectEntitlementsToRemove"
+						},
+						"nextStep": "HTTP Request 6"
+					}
+				],
+				"defaultStep": "HTTP Request 5",
+				"displayName": "Check If Single Or Multiple",
+				"type": "choice"
+			},
+			"Define Comparison 6": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"NOT": {
+							"comparator": "IsString",
+							"variableA.$": "$.interactiveForm1.formData.SelectEntitlementsToAdd"
+						},
+						"nextStep": "HTTP Request 7"
+					}
+				],
+				"defaultStep": "HTTP Request 8",
+				"displayName": "Check If Single Or Multiple",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "rolesummary",
+							"transforms": [],
+							"variableA": "<div style='background: #ffffff; color: #0f172a; border: 2px solid #94a3b8; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); max-width: 750px; font-family: sans-serif; padding: 16px;'><div style='display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 14px;'><div><span style='font-size: 16px; font-weight: bold; color: #0f172a;'>Role Configuration Context</span></div></div><div style='margin-bottom: 14px; background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #f59e0b; padding: 10px; border-radius: 4px; color: #92400e; font-size: 12px; line-height: 1.4;'><strong>Modification Notice:</strong> The fields below represent the current configuration. You may use the form controls to modify Name, Description, Requestable state, Primary Owner, and Entitlement assignments.</div><div style='margin-bottom: 16px;'><div style='font-size: 13px; font-weight: bold; color: #0369a1; border-bottom: 2px solid #bae6fd; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase;'>Editable Configuration</div><div style='margin-bottom: 12px; background: #f8fafc; padding: 12px; border-radius: 4px; border: 1px solid #e2e8f0; border-left: 4px solid #8b5cf6;'><span style='font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: bold;'>Role Name</span><br><span style='font-size: 16px; font-weight: bold; color: #6d28d9;'>{{$.hTTPRequest.body.name}}</span><div style='margin-top: 8px; font-size: 12px; color: #334155; line-height: 1.4; border-top: 1px dashed #e2e8f0; padding-top: 8px;'><span style='font-size: 10px; color: #64748b; text-transform: uppercase; font-weight: bold;'>Description</span><br>{{$.hTTPRequest.body.description}}</div></div><div style='display: flex; gap: 10px; margin-bottom: 12px;'><div style='width: 33%; background: #f8fafc; padding: 10px; border-radius: 4px; text-align: center; border: 1px solid #e2e8f0;'><span style='font-size: 10px; color: #64748b; text-transform: uppercase;'>Primary Owner</span><br><span style='font-size: 13px; font-weight: bold; color: #0f172a;'>{{$.hTTPRequest.body.owner.name}}</span></div><div style='width: 33%; background: #f8fafc; padding: 10px; border-radius: 4px; text-align: center; border: 1px solid #e2e8f0;'><span style='font-size: 10px; color: #64748b; text-transform: uppercase;'>Enabled State</span><br><span style='font-size: 13px; font-weight: bold; color: #166534;'>{{$.hTTPRequest.body.enabled}}</span></div><div style='width: 34%; background: #f8fafc; padding: 10px; border-radius: 4px; text-align: center; border: 1px solid #e2e8f0;'><span style='font-size: 10px; color: #64748b; text-transform: uppercase;'>Requestable</span><br><span style='font-size: 13px; font-weight: bold; color: #0369a1;'>{{$.hTTPRequest.body.requestable}}</span></div></div></div><details style='cursor: pointer; background: #fff5f5; padding: 12px; border-radius: 4px; border: 1px solid #fecaca;'><summary style='font-weight: bold; font-size: 13px; color: #b91c1c; outline: none; text-transform: uppercase;'>View All Other Role Attributes (Read-Only)</summary><div style='display: flex; gap: 10px; margin-top: 12px; margin-bottom: 12px;'><div style='width: 50%; background: #fef2f2; padding: 10px; border-radius: 4px; text-align: center; border: 1px solid #fca5a5;'><span style='font-size: 10px; color: #991b1b; text-transform: uppercase;'>Target Object ID</span><br><span style='font-size: 12px; font-family: monospace; font-weight: bold; color: #7f1d1d;'>{{$.hTTPRequest.body.id}}</span></div><div style='width: 50%; background: #fef2f2; padding: 10px; border-radius: 4px; text-align: center; border: 1px solid #fca5a5;'><span style='font-size: 10px; color: #991b1b; text-transform: uppercase;'>Privileged Level</span><br><span style='font-size: 13px; font-weight: bold; color: #7f1d1d;'>{{$.hTTPRequest.body.privilegedLevel}}</span></div></div><div style='font-family: monospace; font-size: 11px; color: #991b1b; border-top: 1px dashed #fca5a5; padding-top: 10px; line-height: 1.5; word-break: break-all;'>Created: {{$.hTTPRequest.body.created}}<br>Modified: {{$.hTTPRequest.body.modified}}<br>Revocable: {{$.hTTPRequest.body.revocable}}<br>Membership Type: {{$.hTTPRequest.body.membership.type}}<br>Access Profiles: {{$.hTTPRequest.body.accessProfiles}}<br>Entitlements: {{$.hTTPRequest.body.entitlements}}<br>Additional Owners: {{$.hTTPRequest.body.additionalOwners}}<br>Access Request Config: {{$.hTTPRequest.body.accessRequestConfig}}<br>Approval Schema: {{$.hTTPRequest.body.approvalSchema}}<br>Revocation Config: {{$.hTTPRequest.body.revocationRequestConfig}}<br>Access Model Metadata: {{$.hTTPRequest.body.accessModelMetadata}}</div></details></div>"
+						},
+						{
+							"description": "",
+							"name": "roletitle",
+							"transforms": [],
+							"variableA.$": "$.hTTPRequest.body.name"
+						},
+						{
+							"description": "",
+							"name": "entitlementaddjson",
+							"transforms": [],
+							"variableA.$": ""
+						}
+					]
+				},
+				"displayName": "Set Role Variables",
+				"nextStep": "Interactive Form 1",
+				"type": "Mutation"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_header": {
+						"mapping": {
+							"auth_header_name": "headerName",
+							"auth_header_value": "headerValue"
+						},
+						"paramID": "",
+						"paramType": "1.3"
+					},
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "2f92d9a5-3f3f-4c9d-8b4a-671dd4a219bb"
+					},
+					"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.interactiveForm.formData.role}}"
+				},
+				"displayName": "Get Role Details From Role Selector Form",
+				"nextStep": "Define Variable",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 1": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonPatchRequestBody": [
+						{
+							"op": "replace",
+							"path": "/name",
+							"value": "{{$.interactiveForm1.formData.enterNewName}}"
+						}
+					],
+					"method": "patch",
+					"param_authenticationRef": "oauth",
+					"param_header": {
+						"mapping": {
+							"auth_header_name": "headerName",
+							"auth_header_value": "headerValue"
+						},
+						"paramID": "",
+						"paramType": "1.3"
+					},
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "2f92d9a5-3f3f-4c9d-8b4a-671dd4a219bb"
+					},
+					"requestContentType": "json-patch+json",
+					"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.interactiveForm.formData.role}}"
+				},
+				"description": null,
+				"displayName": "Set New Name HTTP Call",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 2": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonPatchRequestBody": [
+						{
+							"op": "replace",
+							"path": "/description",
+							"value": "{{$.interactiveForm1.formData.EnterNewDescription}}"
+						}
+					],
+					"method": "patch",
+					"param_authenticationRef": "oauth",
+					"param_header": {
+						"mapping": {
+							"auth_header_name": "headerName",
+							"auth_header_value": "headerValue"
+						},
+						"paramID": "",
+						"paramType": "1.3"
+					},
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "2f92d9a5-3f3f-4c9d-8b4a-671dd4a219bb"
+					},
+					"requestContentType": "json-patch+json",
+					"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.interactiveForm.formData.role}}"
+				},
+				"displayName": "Set New Description HTTP Call",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 3": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonPatchRequestBody": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/requestable\",\n    \"value\": {{$.interactiveForm1.formData.requestable}}\n  }\n]",
+					"method": "patch",
+					"param_authenticationRef": "oauth",
+					"param_header": {
+						"mapping": {
+							"auth_header_name": "headerName",
+							"auth_header_value": "headerValue"
+						},
+						"paramID": "",
+						"paramType": "1.3"
+					},
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "2f92d9a5-3f3f-4c9d-8b4a-671dd4a219bb"
+					},
+					"requestContentType": "json-patch+json",
+					"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.interactiveForm.formData.role}}"
+				},
+				"displayName": "Set Requestable HTTP Call",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 4": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonPatchRequestBody": [
+						{
+							"op": "replace",
+							"path": "/owner",
+							"value": {
+								"id": "{{$.interactiveForm1.formData.newidentityid}}",
+								"type": "IDENTITY"
+							}
+						}
+					],
+					"method": "patch",
+					"param_authenticationRef": "oauth",
+					"param_header": {
+						"mapping": {
+							"auth_header_name": "headerName",
+							"auth_header_value": "headerValue"
+						},
+						"paramID": "",
+						"paramType": "1.3"
+					},
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "2f92d9a5-3f3f-4c9d-8b4a-671dd4a219bb"
+					},
+					"requestContentType": "json-patch+json",
+					"url": "https://{tenant}.api.identitynow.com/roles/v1/{{$.interactiveForm.formData.role}}"
+				},
+				"displayName": "Set New Owner HTTP Call",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 5": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonPatchRequestBody": null,
+					"jsonRequestBody": {
+						"entitlementstoremove": "{{$.interactiveForm1.formData.SelectEntitlementsToRemove.JSON()}}",
+						"roleid": "{{$.interactiveForm.formData.role}}"
+					},
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_header": {
+						"mapping": {
+							"auth_header_name": "headerName",
+							"auth_header_value": "headerValue"
+						},
+						"paramID": "",
+						"paramType": "1.3"
+					},
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "5b84cd9e-ce10-4d43-8337-7472101120b7",
+						"paramType": "1.4",
+						"refID": "d00d8bba-08f8-43c5-8180-2425ec192593"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/77d3bcb9-243e-4d67-94d0-dec77b30540b"
+				},
+				"displayName": "Single HTTP Remove Entitlement Workflow",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 6": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonPatchRequestBody": null,
+					"jsonRequestBody": "{\"entitlementstoremove\":{{$.interactiveForm1.formData.SelectEntitlementsToRemove.JSON()}},\"roleid\":\"{{$.interactiveForm.formData.role}}\"}",
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_header": {
+						"mapping": {
+							"auth_header_name": "headerName",
+							"auth_header_value": "headerValue"
+						},
+						"paramID": "",
+						"paramType": "1.3"
+					},
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "5b84cd9e-ce10-4d43-8337-7472101120b7",
+						"paramType": "1.4",
+						"refID": "d00d8bba-08f8-43c5-8180-2425ec192593"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/77d3bcb9-243e-4d67-94d0-dec77b30540b"
+				},
+				"displayName": "Multiple HTTP Remove Entitlement Workflow",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 7": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonPatchRequestBody.$": "$.defineVariable.entitlementaddjson",
+					"jsonRequestBody": "{\"entitlementstoadd\":{{$.interactiveForm1.formData.SelectEntitlementsToAdd.JSON()}},\"roleid\":\"{{$.interactiveForm.formData.role}}\"}",
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_header": {
+						"mapping": {
+							"auth_header_name": "headerName",
+							"auth_header_value": "headerValue"
+						},
+						"paramID": "",
+						"paramType": "1.3"
+					},
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "b3368b5f-cad2-4217-bd81-c98bade3d66f",
+						"paramType": "1.4",
+						"refID": "e2ec6d54-e9ca-45f0-a498-2ecd633b7361"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/b865cf2d-03fc-4f0b-8c7d-f645465d48fd"
+				},
+				"displayName": "Multiple HTTP Add Entitlement Workflow",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 8": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonPatchRequestBody.$": "$.defineVariable.entitlementaddjson",
+					"jsonRequestBody": {
+						"entitlementstoadd": "{{$.interactiveForm1.formData.SelectEntitlementsToAdd.JSON()}}",
+						"roleid": "{{$.interactiveForm.formData.role}}"
+					},
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_header": {
+						"mapping": {
+							"auth_header_name": "headerName",
+							"auth_header_value": "headerValue"
+						},
+						"paramID": "",
+						"paramType": "1.3"
+					},
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "b3368b5f-cad2-4217-bd81-c98bade3d66f",
+						"paramType": "1.4",
+						"refID": "e2ec6d54-e9ca-45f0-a498-2ecd633b7361"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/b865cf2d-03fc-4f0b-8c7d-f645465d48fd"
+				},
+				"displayName": "Single HTTP Add Entitlement Workflow",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Interactive Form": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "51223256-243d-4c13-9dd5-ab8f105a1ce6",
+					"inputForForm_uid.$": "$.trigger.launchedBy.id",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Select Role"
+				},
+				"displayName": "Role Selector Form",
+				"nextStep": "HTTP Request",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Form 1": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "63d4ddca-8c17-41c9-9e22-42c61ef45488",
+					"inputForForm_array_currententitlements.$": "$.hTTPRequest.body.entitlements",
+					"inputForForm_array_currententitlements_label": "$.name",
+					"inputForForm_array_currententitlements_subLabel": null,
+					"inputForForm_array_currententitlements_value": "$.id",
+					"inputForForm_rolename.$": "$.defineVariable.roletitle",
+					"inputForForm_summary.$": "$.defineVariable.rolesummary",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Modify Role: {{$.defineVariable.roletitle}}"
+				},
+				"displayName": "Role Management Form",
+				"nextStep": "Define Comparison",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "00000000000000000000000000000000",
+		"name": "admin"
+	},
+	"trigger": {
+		"type": "EVENT",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == '95a56e97-b555-4401-847c-f74c48b7f3c1')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	}
+}
