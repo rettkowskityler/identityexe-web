@@ -1,0 +1,64 @@
+{
+  "id": "903eb362-3e8a-4bf0-90c7-19578010b607",
+  "name": "Employee - CloudLifeCycleState",
+  "type": "static",
+  "attributes": {
+    "requiresPeriodicRefresh": true,
+    "isTerminated": {
+      "type": "dateCompare",
+      "attributes": {
+        "firstDate": {
+          "type": "reference",
+          "attributes": {
+            "id": "UTC To EST",
+            "input": {
+              "type": "dateFormat",
+              "attributes": {
+                "inputFormat": "MM/dd/yyyy",
+                "outputFormat": "ISO8601",
+                "input": {
+                  "type": "firstValid",
+                  "attributes": {
+                    "values": [
+                      {
+                        "type": "accountAttribute",
+                        "attributes": {
+                          "attributeName": "terminationDate",
+                          "sourceName": "Employee Directory"
+                        }
+                      },
+                      "12/31/2099"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "secondDate": {
+          "type": "dateMath",
+          "attributes": {
+            "expression": "/d",
+            "input": {
+              "type": "reference",
+              "attributes": {
+                "id": "UTC To EST",
+                "input": {
+                  "type": "dateMath",
+                  "attributes": {
+                    "expression": "now"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operator": "lte",
+        "positiveCondition": "yes",
+        "negativeCondition": "no"
+      }
+    },
+    "value": "#if($isTerminated == 'yes')inactive#{else}active#end"
+  },
+  "internal": false
+}

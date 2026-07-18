@@ -29,7 +29,7 @@ const Credentials = () => {
     {
       title: "IdentityIQ",
       value: "Certified",
-      description: "IIQ Certified Developer & Engineer specializing in custom enterprise integrations.",
+      description: "IIQ Certified Developer & Engineer leveraging deep legacy knowledge to execute complex IIQ to ISC migrations.",
       color: "#10b981",
       icon: (
         <svg className="w-12 h-12 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

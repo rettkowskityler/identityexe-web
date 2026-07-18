@@ -1,0 +1,31 @@
+{
+  "id": "4adcfbd5-7769-4cb8-9ffd-d5aaee069e95",
+  "name": "Employee - Standardize Date Format to UTC",
+  "type": "reference",
+  "attributes": {
+    "id": "EST To UTC",
+    "input": {
+      "type": "dateFormat",
+      "attributes": {
+        "inputFormat": "MM/dd/yyyy",
+        "outputFormat": "ISO8601",
+        "input": {
+          "type": "firstValid",
+          "attributes": {
+            "values": [
+              {
+                "type": "accountAttribute",
+                "attributes": {
+                  "attributeName": "startDate",
+                  "sourceName": "Employee Directory"
+                }
+              },
+              "12/31/2099"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "internal": false
+}

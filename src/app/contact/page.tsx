@@ -242,7 +242,7 @@ export default function Contact() {
                           className="bg-slate-900 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-sm font-light disabled:opacity-50 cursor-pointer"
                         >
                           <option value="ISC">SailPoint Identity Security Cloud (ISC)</option>
-                          <option value="IIQ">SailPoint IdentityIQ (IIQ)</option>
+                          <option value="IIQ-Migration">SailPoint IdentityIQ to ISC Migration</option>
                           <option value="Hybrid">Hybrid Deployment</option>
                           <option value="Other">Not Sure / Other</option>
                         </select>

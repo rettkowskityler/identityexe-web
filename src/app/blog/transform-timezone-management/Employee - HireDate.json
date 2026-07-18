@@ -1,0 +1,43 @@
+{
+  "id": "1f4b79ec-75fa-4160-8cd5-c77f028f4777",
+  "name": "Employee - HireDate",
+  "type": "reference",
+  "attributes": {
+    "id": "EST To UTC",
+    "input": {
+      "type": "dateMath",
+      "attributes": {
+        "expression": "/d+1h",
+        "input": {
+          "type": "reference",
+          "attributes": {
+            "id": "UTC To EST",
+            "input": {
+              "type": "dateFormat",
+              "attributes": {
+                "inputFormat": "MM/dd/yyyy",
+                "outputFormat": "ISO8601",
+                "input": {
+                  "type": "firstValid",
+                  "attributes": {
+                    "values": [
+                      {
+                        "type": "accountAttribute",
+                        "attributes": {
+                          "attributeName": "startDate",
+                          "sourceName": "Employee Directory"
+                        }
+                      },
+                      "12/31/2099"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "internal": false
+}

@@ -1,0 +1,43 @@
+{
+  "id": "39e49f44-041f-438a-b6db-bd92923674db",
+  "name": "Employee - End of Business Day Disablement",
+  "type": "reference",
+  "attributes": {
+    "id": "EST To UTC",
+    "input": {
+      "type": "dateMath",
+      "attributes": {
+        "expression": "+17h/d",
+        "input": {
+          "type": "reference",
+          "attributes": {
+            "id": "UTC To EST",
+            "input": {
+              "type": "dateFormat",
+              "attributes": {
+                "inputFormat": "MM/dd/yyyy",
+                "outputFormat": "ISO8601",
+                "input": {
+                  "type": "firstValid",
+                  "attributes": {
+                    "values": [
+                      {
+                        "type": "accountAttribute",
+                        "attributes": {
+                          "attributeName": "endDate",
+                          "sourceName": "Employee Directory"
+                        }
+                      },
+                      "12/31/2099"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "internal": false
+}

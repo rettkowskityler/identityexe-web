@@ -1,0 +1,43 @@
+{
+  "id": "e065a639-cb0c-40e5-9dfc-969ba9287ef6",
+  "name": "Employee - Get Current Local Midnight",
+  "type": "reference",
+  "attributes": {
+    "id": "EST To UTC",
+    "input": {
+      "type": "dateMath",
+      "attributes": {
+        "expression": "/d",
+        "input": {
+          "type": "reference",
+          "attributes": {
+            "id": "UTC To EST",
+            "input": {
+              "type": "dateFormat",
+              "attributes": {
+                "inputFormat": "MM/dd/yyyy",
+                "outputFormat": "ISO8601",
+                "input": {
+                  "type": "firstValid",
+                  "attributes": {
+                    "values": [
+                      {
+                        "type": "accountAttribute",
+                        "attributes": {
+                          "attributeName": "terminationDate",
+                          "sourceName": "Employee Directory"
+                        }
+                      },
+                      "12/31/2099"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "internal": false
+}

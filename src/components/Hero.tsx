@@ -21,7 +21,7 @@ const Hero = () => {
 
         {/* Hero Subheadline */}
         <p className="text-xl md:text-2xl lg:text-3xl text-slate-400 mb-14 max-w-3xl leading-relaxed font-light mt-4">
-          Expert <strong className="text-white font-semibold">SailPoint Identity Security Cloud</strong> and <strong className="text-white font-semibold">IdentityIQ</strong> architecture for the modern enterprise.
+          Expert <strong className="text-white font-semibold">SailPoint Identity Security Cloud</strong> implementation and architecture for the modern enterprise. We specialize exclusively in ISC, including seamless <strong className="text-white font-semibold">IdentityIQ to ISC</strong> migrations.
         </p>
 
         {/* Primary Interactive CTA */}

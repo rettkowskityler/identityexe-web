@@ -19,7 +19,7 @@ const Footer = () => {
           <h3 className="text-white font-bold mb-4 tracking-wide text-sm uppercase">Expertise</h3>
           <ul className="space-y-3 text-slate-400 text-sm font-light">
             <li className="hover:text-white transition-colors">SailPoint Identity Security Cloud</li>
-            <li className="hover:text-white transition-colors">SailPoint IdentityIQ</li>
+            <li className="hover:text-white transition-colors">IIQ to ISC Migrations</li>
             <li className="hover:text-white transition-colors">Access Modeling</li>
             <li className="hover:text-white transition-colors">Zero Trust Frameworks</li>
           </ul>

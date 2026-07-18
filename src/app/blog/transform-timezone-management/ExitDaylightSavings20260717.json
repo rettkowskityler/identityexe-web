@@ -1,0 +1,169 @@
+{
+	"name": "Exit Daylight Savings",
+	"description": "This workflow fires when we exit daylight savings time to handle things like offset changes as needed",
+	"modified": "2026-07-17T20:41:55.024392608Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "exampleId12345",
+		"name": "exampleAdmin"
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "notificationemail",
+							"transforms": [],
+							"variableA": "admin@example.com"
+						}
+					]
+				},
+				"displayName": "",
+				"nextStep": "HTTP Request",
+				"type": "Mutation"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureName": "Failure - Transforms Not Updated",
+				"type": "failure"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": {
+						"attributes": {
+							"expression": "+5h"
+						},
+						"name": "EST To UTC",
+						"type": "dateMath"
+					},
+					"method": "put",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "exampleParamId",
+						"paramType": "1.4",
+						"refID": "exampleRefId456"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/transforms/v1/d9df51b1-5d08-43ac-9e8a-7069e17282b7"
+				},
+				"catch": [
+					{
+						"next": "Send Email 1"
+					}
+				],
+				"displayName": "Update Transform: EST To UTC",
+				"nextStep": "HTTP Request 1",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 1": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": {
+						"attributes": {
+							"expression": "-5h"
+						},
+						"name": "UTC To EST",
+						"type": "dateMath"
+					},
+					"method": "put",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "exampleParamId",
+						"paramType": "1.4",
+						"refID": "exampleRefId456"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/transforms/v1/71f3f59a-8172-4cc4-a08e-b0960c8e7604"
+				},
+				"catch": [
+					{
+						"next": "Send Email 1"
+					}
+				],
+				"displayName": "Update Transform: UTC To EST",
+				"nextStep": "Send Email",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Send Email": {
+				"actionId": "sp:send-email",
+				"attributes": {
+					"body": "<div style=\"font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;\">\n<div style=\"background-color: #1976d2; padding: 20px; text-align: center;\">\n<h2 style=\"color: #ffffff; margin: 0;\">Timezone Offset Updated</h2>\n</div>\n<div style=\"padding: 30px; background-color: #f4f8fc; color: #333333;\">\n<p style=\"font-size: 16px; line-height: 1.5;\">Hello IAM Team,</p>\n<p style=\"font-size: 16px; line-height: 1.5;\">The automated ISC (Identity Security Cloud) workflow to <strong>Exit Daylight Savings (Fall Back)</strong> has completed successfully.</p>\n<table style=\"width: 100%; margin-top: 20px; border-collapse: collapse;\">\n<tbody>\n<tr>\n<td style=\"padding: 10px; border-bottom: 1px solid #dddddd;\"><strong>Base Transforms Updated:</strong></td>\n<td style=\"padding: 10px; border-bottom: 1px solid #dddddd; text-align: right;\">EST To UTC &amp; UTC To EST</td>\n</tr>\n<tr>\n<td style=\"padding: 10px; border-bottom: 1px solid #dddddd;\"><strong>New Offset:</strong></td>\n<td style=\"padding: 10px; border-bottom: 1px solid #dddddd; text-align: right;\">UTC -5h (EST)</td>\n</tr>\n<tr>\n<td style=\"padding: 10px; border-bottom: 1px solid #dddddd;\"><strong>Status:</strong></td>\n<td style=\"padding: 10px; border-bottom: 1px solid #dddddd; text-align: right; color: #1976d2; font-weight: bold;\">Success</td>\n</tr>\n</tbody>\n</table>\n<p style=\"font-size: 14px; color: #666666; margin-top: 30px; border-top: 1px solid #e0e0e0; padding-top: 15px;\">All dynamic dateMath transforms will now calculate local midnight based on the Winter EST offset.</p>\n</div>\n</div>",
+					"context": {},
+					"recipientEmailList.$": "$.defineVariable.notificationemail",
+					"subject": "Success: Exited Daylight Savings Time (EST)"
+				},
+				"displayName": "Success Notification Email",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 2
+			},
+			"Send Email 1": {
+				"actionId": "sp:send-email",
+				"attributes": {
+					"body": "<div style=\"font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;\">\n<div style=\"background-color: #d32f2f; padding: 20px; text-align: center;\">\n<h2 style=\"color: #ffffff; margin: 0;\">Workflow Execution Error</h2>\n</div>\n<div style=\"padding: 30px; background-color: #fcf4f4; color: #333333;\">\n<p style=\"font-size: 16px; line-height: 1.5;\">Hello IAM Team,</p>\n<p style=\"font-size: 16px; line-height: 1.5;\">The automated ISC (Identity Security Cloud) workflow to <strong>Exit Daylight Savings (Fall Back)</strong> has <span style=\"color: #d32f2f; font-weight: bold;\">failed</span> to complete.</p>\n<div style=\"background-color: #ffffff; padding: 15px; border-left: 4px solid #d32f2f; margin: 20px 0;\">\n<p style=\"margin: 0; font-size: 14px; color: #555555;\"><strong>Impact:</strong> Base transforms have NOT been updated to the -5h offset. Lifecycle states and date calculations will trigger 1 hour early until this is manually resolved.</p>\n</div>\n<p style=\"font-size: 16px; line-height: 1.5;\">Please log in to your tenant immediately to review the workflow execution logs and manually update the <code>EST To UTC</code> and <code>UTC To EST</code> transforms via the API if necessary.</p>\n</div>\n</div>",
+					"context": {},
+					"recipientEmailList.$": "$.defineVariable.notificationemail",
+					"subject": "ACTION REQUIRED: Exit Daylight Savings Workflow Failed"
+				},
+				"displayName": "Failure Notification Email",
+				"nextStep": "End Step - Failure",
+				"type": "action",
+				"versionNumber": 2
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "exampleId12345",
+		"name": "exampleAdmin"
+	},
+	"trigger": {
+		"type": "SCHEDULED",
+		"attributes": {
+			"cronString": "0 3 * 11 0#1",
+			"frequency": "yearly",
+			"id": "idn:cron-schedule",
+			"integrationId": null,
+			"timeZone": "America/New_York",
+			"yearlyRelativeDates": [
+				{
+					"day": "Sunday",
+					"week": "First"
+				}
+			],
+			"yearlyRelativeMonths": [
+				"Nov"
+			],
+			"yearlyScheduleType": "yearlyRelativeDates",
+			"yearlyTimes": [
+				"1969-12-31T08:00:00.000Z"
+			]
+		}
+	}
+}

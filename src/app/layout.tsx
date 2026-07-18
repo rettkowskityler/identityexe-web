@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'IdentityEXE',
-  description: 'Elite SailPoint Identity Security Cloud and IdentityIQ architecture.',
+  description: 'Elite SailPoint Identity Security Cloud implementation and architecture.',
   keywords: ['SailPoint', 'Identity Security Cloud', 'IdentityIQ', 'IAM Consulting', 'SailPoint Expert Ambassador', 'Cybersecurity', 'Identity Governance'],
   openGraph: {
     title: 'IdentityEXE | SailPoint Performance Consulting',
-    description: 'Premier direct-to-client SailPoint Identity Security Cloud and SailPoint IdentityIQ consultancy.',
+    description: 'Premier direct-to-client SailPoint Identity Security Cloud consultancy specializing in IIQ migrations.',
     type: 'website',
     locale: 'en_US',
     siteName: 'IdentityEXE',

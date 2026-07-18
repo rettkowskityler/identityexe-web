@@ -1,0 +1,43 @@
+{
+  "id": "17d5e722-41ac-466e-949b-6632b1d3b3a4",
+  "name": "Employee - Contractor Expiration Warning",
+  "type": "reference",
+  "attributes": {
+    "id": "EST To UTC",
+    "input": {
+      "type": "dateMath",
+      "attributes": {
+        "expression": "-7d/d+8h",
+        "input": {
+          "type": "reference",
+          "attributes": {
+            "id": "UTC To EST",
+            "input": {
+              "type": "dateFormat",
+              "attributes": {
+                "inputFormat": "MM/dd/yyyy",
+                "outputFormat": "ISO8601",
+                "input": {
+                  "type": "firstValid",
+                  "attributes": {
+                    "values": [
+                      {
+                        "type": "accountAttribute",
+                        "attributes": {
+                          "attributeName": "endDate",
+                          "sourceName": "Employee Directory"
+                        }
+                      },
+                      "12/31/2099"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "internal": false
+}

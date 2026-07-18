@@ -24,6 +24,26 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'transform-timezone-management',
+      title: 'Managing Timezone Transforms & Daylight Savings',
+      category: 'Architecture',
+      date: 'July 2026',
+      description: 'A repeatable architectural methodology designed to dynamically handle daylight savings offsets in Identity Security Cloud using scheduled workflows.',
+      iconBgClass: 'bg-orange-500/10',
+      iconBorderClass: 'border-orange-500/20',
+      iconColorClass: 'text-orange-400',
+      hoverTitleClass: 'group-hover:text-orange-400',
+      readMoreColorClass: 'text-orange-500',
+      gradientClass: 'from-orange-600/20 to-red-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+      )
+    },
+    {
       slug: 'delegated-role-management',
       title: 'Delegated Role Management in Identity Security Cloud',
       category: 'Architecture',
