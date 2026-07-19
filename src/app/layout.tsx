@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title: 'IdentityEXE',
@@ -33,6 +34,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased min-h-screen flex flex-col text-slate-200 selection:bg-blue-500/30" suppressHydrationWarning>
         {children}
+        <Analytics />
       </body>
     </html>
   );
