@@ -265,7 +265,7 @@ export default function Blog() {
     <>
       <Navbar />
       
-      <main className="pt-32 pb-16 px-6 min-h-screen">
+      <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
             <h1 className="text-5xl md:text-6xl font-black tracking-tighter text-white mb-4 animate-fade-in-up">

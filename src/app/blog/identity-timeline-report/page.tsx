@@ -439,13 +439,13 @@ export default function IdentityTimelineReportPost() {
     <>
       <Navbar />
       
-      <main className="pt-32 pb-16 px-6 min-h-screen">
+      <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
           <aside className="lg:col-span-1 sticky top-32 hidden lg:block">
             <TableOfContents items={tocItems} />
           </aside>
           
-          <article className="lg:col-span-3 glass-card rounded-3xl p-8 md:p-12 animate-fade-in-up">
+          <article className="lg:col-span-3 min-w-0 w-full overflow-hidden glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 animate-fade-in-up">
             
             {/* Breadcrumbs */}
             <nav className="flex items-center gap-2 text-[10px] text-slate-500 mb-6 font-bold uppercase tracking-widest">
@@ -462,7 +462,7 @@ export default function IdentityTimelineReportPost() {
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
                 <span>May 2026</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
                 Building a Custom Identity Timeline Report in ISC <br />
                 <span className="text-amber-500 text-2xl md:text-3xl">(Unified lifecycle, audit events, access requests, and work items in a single view)</span>
               </h1>
@@ -477,7 +477,7 @@ export default function IdentityTimelineReportPost() {
               </div>
             </header>
 
-            <div className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
+            <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               <h3 id="introduction" className="text-2xl text-white mt-8 mb-4">Introduction</h3>
               <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">

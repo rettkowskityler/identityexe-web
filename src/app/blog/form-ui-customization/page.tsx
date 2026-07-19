@@ -21,13 +21,13 @@ export default function FormUiCustomizationPost() {
     <>
       <Navbar />
       
-      <main className="pt-32 pb-16 px-6 min-h-screen">
+      <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
           <aside className="lg:col-span-1 sticky top-32 hidden lg:block">
             <TableOfContents items={tocItems} />
           </aside>
           
-          <article className="lg:col-span-3 glass-card rounded-3xl p-8 md:p-12 animate-fade-in-up min-w-0">
+          <article className="lg:col-span-3 min-w-0 w-full overflow-hidden glass-card rounded-3xl p-8 md:p-12 animate-fade-in-up">
             
             {/* Breadcrumbs */}
             <nav className="flex items-center gap-2 text-[10px] text-slate-500 mb-6 font-bold uppercase tracking-widest">
@@ -44,7 +44,7 @@ export default function FormUiCustomizationPost() {
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
                 <span>June 2026</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
                 Designing Beyond Default: <br />
                 <span className="text-cyan-500 text-2xl md:text-3xl">(The Ultimate Guide to SailPoint Form UI Customization)</span>
               </h1>
@@ -59,7 +59,7 @@ export default function FormUiCustomizationPost() {
               </div>
             </header>
 
-            <div className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-code:text-cyan-300 prose-code:bg-cyan-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
+            <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-code:text-cyan-300 prose-code:bg-cyan-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Hook: Form Adoption vs Form Function */}
               <h3 id="hook-form-adoption" className="text-2xl text-white mt-8 mb-4 font-black tracking-tight">Form Adoption vs. Form Function</h3>

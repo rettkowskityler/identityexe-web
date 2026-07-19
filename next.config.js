@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    allowedDevOrigins: ['192.168.0.140', 'localhost:3000'],
-  },
+  allowedDevOrigins: ['192.168.0.140', '192.168.0.173', 'localhost:3000'],
   typescript: { ignoreBuildErrors: true },
   async rewrites() {
     return [

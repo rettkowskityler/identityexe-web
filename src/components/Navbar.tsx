@@ -50,11 +50,12 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-white hover:text-brand-accent focus:outline-none p-2"
+          type="button"
+          onClick={() => setMobileMenuOpen(prev => !prev)}
+          className="md:hidden text-white hover:text-brand-accent focus:outline-none p-2 z-50 cursor-pointer pointer-events-auto touch-manipulation"
           aria-label="Toggle menu"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {mobileMenuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             ) : (
@@ -66,8 +67,8 @@ const Navbar = () => {
 
       {/* Mobile Drawer Overlay */}
       <div 
-        className={`md:hidden fixed inset-x-0 top-[60px] bg-deep-slate/95 border-b border-white/10 backdrop-blur-xl transition-all duration-300 ease-in-out ${
-          mobileMenuOpen ? 'max-h-60 opacity-100 py-6' : 'max-h-0 opacity-0 overflow-hidden py-0'
+        className={`md:hidden absolute inset-x-0 top-full bg-[#02081b]/95 border-b border-white/10 backdrop-blur-xl transition-all duration-300 ease-in-out overflow-hidden ${
+          mobileMenuOpen ? 'max-h-[400px] opacity-100 py-6' : 'max-h-0 opacity-0 py-0 !border-transparent'
         }`}
       >
         <div className="flex flex-col items-center gap-6 px-6">

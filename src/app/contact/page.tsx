@@ -44,28 +44,25 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-[#020617] text-white selection:bg-blue-500/30 overflow-hidden relative flex flex-col">
+    <main className="min-h-screen bg-[#02081b] text-white selection:bg-brand-blue/30 overflow-hidden relative flex flex-col">
       <Navbar />
       
       <div className="flex-grow flex items-center justify-center pt-36 pb-20 px-6 relative z-10 w-full">
         {/* Background Ambient Glows */}
-        <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[130px] -z-10 pointer-events-none"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-[600px] h-[600px] bg-purple-600/5 rounded-full blur-[130px] -z-10 pointer-events-none"></div>
+        <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-brand-blue/10 rounded-full blur-[130px] -z-10 pointer-events-none"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-[600px] h-[600px] bg-brand-accent/10 rounded-full blur-[130px] -z-10 pointer-events-none"></div>
 
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column: Expectation & Trust Builder */}
           <div className="lg:col-span-5 flex flex-col gap-8 animate-fade-in-up">
             <div>
-              <span className="px-4 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/5 text-blue-400 text-xs font-bold uppercase tracking-[0.2em] mb-4 inline-block">
-                Direct Expert Partnership
-              </span>
               <h1 className="font-display font-black text-white tracking-tighter text-4xl md:text-5xl lg:text-6xl leading-tight">
                 Let's master your <br/>
                 <span className="gradient-text">identity security.</span>
               </h1>
               <p className="text-slate-400 font-light text-lg mt-6 leading-relaxed">
-                Connect directly with a recognized SailPoint Expert Ambassador. No sales layers, no delegation to junior staff—just deep, high-impact technical advisory tailored to your enterprise.
+                Connect directly with a recognized SailPoint Expert Ambassador. No sales layers, no delegation to junior staff, just deep, high-impact technical advisory tailored to your enterprise.
               </p>
             </div>
 
@@ -76,7 +73,7 @@ export default function Contact() {
               </h3>
               
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-sm shrink-0">
+                <div className="w-8 h-8 rounded-full bg-brand-blue/10 border border-brand-blue/30 flex items-center justify-center text-brand-blue font-bold text-sm shrink-0">
                   1
                 </div>
                 <div>
@@ -88,7 +85,7 @@ export default function Contact() {
               </div>
 
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-sm shrink-0">
+                <div className="w-8 h-8 rounded-full bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent font-bold text-sm shrink-0">
                   2
                 </div>
                 <div>
@@ -100,7 +97,7 @@ export default function Contact() {
               </div>
 
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm shrink-0">
+                <div className="w-8 h-8 rounded-full bg-brand-light/10 border border-brand-light/30 flex items-center justify-center text-brand-light font-bold text-sm shrink-0">
                   3
                 </div>
                 <div>
@@ -114,7 +111,7 @@ export default function Contact() {
 
             <div className="text-slate-500 text-xs font-light pl-2">
               Prefer direct email? Reach out at{' '}
-              <a href="mailto:tyler@identityexe.com" className="text-blue-400 hover:text-blue-300 font-semibold no-underline">
+              <a href="mailto:tyler@identityexe.com" className="text-brand-accent hover:text-brand-light font-semibold no-underline">
                 tyler@identityexe.com
               </a>
             </div>
@@ -132,7 +129,7 @@ export default function Contact() {
                 onClick={() => setActiveTab('calendar')}
                 className={`flex-1 text-center py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   activeTab === 'calendar'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
+                    ? 'bg-brand-blue text-white shadow-md shadow-brand-blue/20'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -143,7 +140,7 @@ export default function Contact() {
                 onClick={() => setActiveTab('form')}
                 className={`flex-1 text-center py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   activeTab === 'form'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
+                    ? 'bg-brand-blue text-white shadow-md shadow-brand-blue/20'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -154,14 +151,14 @@ export default function Contact() {
             {/* Tab Content 1: Google Calendar Embed */}
             {activeTab === 'calendar' && (
               <div className="animate-fade-in-up flex flex-col gap-4">
-                <div className="bg-white rounded-2xl overflow-hidden border border-white/5 min-h-[620px] relative">
+                <div className="bg-white rounded-2xl overflow-hidden border border-white/5 min-h-[800px] md:min-h-[620px] relative">
                   <iframe 
                     src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1blvARvOjYrxqlOLwH9R6E3xS9BRbelK6xVHR66JXXUrT_EnVwI1c7cmslxpvrz13LgaGfLlX5?gv=true" 
                     width="100%" 
-                    height="620" 
+                    height="100%" 
                     frameBorder="0"
                     title="Schedule Call with Tyler"
-                    className="w-full h-[620px] bg-white"
+                    className="w-full h-[800px] md:h-[620px] bg-white"
                   ></iframe>
                 </div>
                 <p className="text-slate-500 text-xs text-center font-light mt-2">
@@ -175,8 +172,8 @@ export default function Contact() {
               <div className="animate-fade-in-up">
                 {isSuccess ? (
                   <div className="flex flex-col items-center justify-center py-16 text-center animate-fade-in-up">
-                    <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mb-6 border border-green-500/20">
-                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-green-400">
+                    <div className="w-20 h-20 bg-brand-accent/10 rounded-full flex items-center justify-center mb-6 border border-brand-accent/20">
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-brand-accent">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
@@ -202,7 +199,7 @@ export default function Contact() {
                           name="name" 
                           required 
                           disabled={isSubmitting} 
-                          className="bg-white/3 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-sm font-light disabled:opacity-50" 
+                          className="bg-white/3 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all text-sm font-light disabled:opacity-50" 
                           placeholder="John Doe" 
                         />
                       </div>
@@ -214,7 +211,7 @@ export default function Contact() {
                           name="email" 
                           required 
                           disabled={isSubmitting} 
-                          className="bg-white/3 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-sm font-light disabled:opacity-50" 
+                          className="bg-white/3 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all text-sm font-light disabled:opacity-50" 
                           placeholder="john@company.com" 
                         />
                       </div>
@@ -228,7 +225,7 @@ export default function Contact() {
                           id="company" 
                           name="company" 
                           disabled={isSubmitting} 
-                          className="bg-white/3 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-sm font-light disabled:opacity-50" 
+                          className="bg-white/3 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all text-sm font-light disabled:opacity-50" 
                           placeholder="Acme Corp" 
                         />
                       </div>
@@ -239,7 +236,7 @@ export default function Contact() {
                           id="productFocus" 
                           name="productFocus" 
                           disabled={isSubmitting}
-                          className="bg-slate-900 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-sm font-light disabled:opacity-50 cursor-pointer"
+                          className="bg-slate-900 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all text-sm font-light disabled:opacity-50 cursor-pointer"
                         >
                           <option value="ISC">SailPoint Identity Security Cloud (ISC)</option>
                           <option value="IIQ-Migration">SailPoint IdentityIQ to ISC Migration</option>
@@ -257,7 +254,7 @@ export default function Contact() {
                         required 
                         disabled={isSubmitting} 
                         rows={4} 
-                        className="bg-white/3 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-sm font-light resize-y disabled:opacity-50" 
+                        className="bg-white/3 border border-white/10 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-all text-sm font-light resize-y disabled:opacity-50" 
                         placeholder="Describe your current challenge, project timeline, or system issues..."
                       ></textarea>
                     </div>
@@ -265,7 +262,7 @@ export default function Contact() {
                     <button 
                       type="submit" 
                       disabled={isSubmitting} 
-                      className="mt-4 flex items-center justify-center gap-3 transition-all transform hover:scale-[1.01] uppercase tracking-widest w-full disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed cursor-pointer bg-blue-600 hover:bg-blue-500 text-white font-black text-xs px-6 py-4 rounded-full shadow-[0_0_20px_rgba(37,99,235,0.35)] border border-white/10 btn-shimmer"
+                      className="mt-4 flex items-center justify-center gap-3 transition-all transform hover:scale-[1.01] uppercase tracking-widest w-full disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed cursor-pointer bg-brand-blue hover:bg-brand-accent text-white font-black text-xs px-6 py-4 rounded-full shadow-[0_0_20px_rgba(81,132,196,0.35)] border border-white/10 btn-shimmer"
                     >
                       {isSubmitting ? 'Sending...' : 'Submit Inquiry'}
                       {!isSubmitting && (
