@@ -1,0 +1,486 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "771facd8-edbf-4bbd-82fc-e0f61a5e88e7",
+      "name": "ISC Admin Helper Form"
+    },
+    "object": {
+      "id": "771facd8-edbf-4bbd-82fc-e0f61a5e88e7",
+      "name": "ISC Admin Helper Form",
+      "description": "",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+        "name": "tylerrettk"
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "optiondescription",
+          "type": "STRING",
+          "label": "optiondescription",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "617406742414",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "LEFT",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "alignment": "CENTER",
+                  "altText": "",
+                  "fileId": "01KY3N5B6D58Y5GMZFZVZ0B7DG.jpg",
+                  "label": "Image Field",
+                  "mimeType": "image/jpeg",
+                  "originalFilename": "IdentityEXE2-05.jpg",
+                  "showLabel": false
+                },
+                "elementType": "IMAGE",
+                "id": "1577170794467",
+                "key": "",
+                "validations": []
+              },
+              {
+                "config": {
+                  "description": "<p>{{$.form.input.optiondescription}}</p>",
+                  "label": "Description Field",
+                  "showLabel": false
+                },
+                "elementType": "DESCRIPTION",
+                "id": "725884265130",
+                "key": "",
+                "validations": []
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "options": [
+                        {
+                          "label": "Unoptimized Account Aggregation By Source",
+                          "sublabel": "",
+                          "value": "Unoptimized Account Aggregation By Source"
+                        },
+                        {
+                          "label": "Reset Accounts By Source",
+                          "sublabel": "",
+                          "value": "Reset Accounts By Source"
+                        },
+                        {
+                          "label": "Reset Entitlements By Source",
+                          "sublabel": "",
+                          "value": "Reset Entitlements By Source"
+                        },
+                        {
+                          "label": "Turn Off Health Check By Source",
+                          "sublabel": "",
+                          "value": "Turn Off Health Check By Source"
+                        },
+                        {
+                          "label": "Attribute Sync Report By Source",
+                          "sublabel": "",
+                          "value": "Attribute Sync Report By Source"
+                        },
+                        {
+                          "label": "Bulk Enable All Accounts For An Identity",
+                          "sublabel": "",
+                          "value": "Bulk Enable All Accounts For An Identity"
+                        },
+                        {
+                          "label": "Bulk Disable All Accounts For An Identity",
+                          "sublabel": "",
+                          "value": "Bulk Disable All Accounts For An Identity"
+                        }
+                      ]
+                    },
+                    "dataSourceType": "STATIC"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Option:",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1061968769917",
+                "key": "selectOption",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "SOURCES"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Source For Unoptimized Aggregation",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "357167933089",
+                "key": "selectSourceForUnoptimizedAggregation",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "SOURCES"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Source To Reset Accounts",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1458771110106",
+                "key": "selectSourceToResetAccounts",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "SOURCES"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Source To Reset Entitlements",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1518274385354",
+                "key": "selectSourceToResetEntitlements",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "SOURCES"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Source For Health Check Modification",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1673207794697",
+                "key": "selectSourceForHealthCheckModification",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "default": false,
+                  "falseLabel": "Enable",
+                  "helpText": "",
+                  "label": "Enable Or Disable Health Check",
+                  "trueLabel": "Disable"
+                },
+                "elementType": "TOGGLE",
+                "id": "25431040032",
+                "key": "enableOrDisableHealthCheck",
+                "validations": []
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "SOURCES"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Source For Attribute Sync Report",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1547063471610",
+                "key": "selectSourceForAttributeSyncReport",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "IDENTITY"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Identity To Enable All Accounts",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "590371394126",
+                "key": "selectIdentityToEnableAllAccounts",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "IDENTITY"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Identity To Disable All Accounts",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1618167429864",
+                "key": "SelectIdentityToDisableAllAccounts",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              }
+            ],
+            "label": "Section",
+            "labelStyle": "h2",
+            "showLabel": false
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectOption",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Unoptimized Account Aggregation By Source"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "357167933089"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectOption",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Reset Accounts By Source"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "1458771110106"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectOption",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Reset Entitlements By Source"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "1518274385354"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectOption",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Turn Off Health Check By Source"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "1673207794697"
+              }
+            },
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "25431040032"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectOption",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Attribute Sync Report By Source"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "1547063471610"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectOption",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Bulk Enable All Accounts For An Identity"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "590371394126"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectOption",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Bulk Disable All Accounts For An Identity"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "1618167429864"
+              }
+            }
+          ]
+        }
+      ],
+      "created": "2026-07-22T00:47:23.668000613Z",
+      "modified": "2026-07-25T21:52:55.443245219Z"
+    }
+  }
+]

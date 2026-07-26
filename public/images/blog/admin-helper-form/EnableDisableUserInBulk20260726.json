@@ -1,0 +1,212 @@
+{
+	"name": "Enable/Disable User In Bulk",
+	"description": "",
+	"modified": "2026-07-26T20:01:26.615041898Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+		"name": "tylerrettk"
+	},
+	"definition": {
+		"start": "HTTP Request",
+		"steps": {
+			"Compare Strings": {
+				"actionId": "sp:compare-strings",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "Serial Loop",
+						"variableA.$": "$.trigger.operation",
+						"variableB": "enable"
+					}
+				],
+				"defaultStep": "Serial Loop 1",
+				"displayName": "",
+				"type": "choice"
+			},
+			"End Step - Success 2": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "ea94ce43-17a5-4a3a-9f08-a4bbe2cc57f0"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"url": "https://ENTERYOURTENANTNAMEHERE.api.identitynow.com/accounts/v1",
+					"urlParams": {
+						"filters": "identityId eq \"{{$.trigger.identityid}}\""
+					}
+				},
+				"displayName": "Get Accounts From Identity",
+				"nextStep": "Compare Strings",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Serial Loop": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"input.$": "$.hTTPRequest.body",
+					"loopType": "forLoop",
+					"start": "Define Comparison 1",
+					"steps": {
+						"Define Comparison 1": {
+							"actionId": "sp:compare-multi-type",
+							"choiceList": [
+								{
+									"comparator": "BooleanEquals",
+									"nextStep": "HTTP Request 2",
+									"variableA.$": "$.loop.loopInput.disabled",
+									"variableB": true
+								}
+							],
+							"defaultStep": "End Step - Success 1",
+							"displayName": "",
+							"type": "choice"
+						},
+						"End Step - Success 1": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"HTTP Request 2": {
+							"actionId": "sp:http",
+							"attributes": {
+								"jsonRequestBody": {
+									"forceProvisioning": false
+								},
+								"method": "post",
+								"param_authenticationRef": "oauth",
+								"param_oauth": {
+									"mapping": {
+										"auth_client_id": "clientId",
+										"auth_client_secret": "clientSecret",
+										"auth_credential_location": "credentialLocation",
+										"auth_token_url": "tokenURL"
+									},
+									"paramID": "6e825815-d032-4764-80c9-06110f732185",
+									"paramType": "1.4",
+									"refID": "ea94ce43-17a5-4a3a-9f08-a4bbe2cc57f0"
+								},
+								"requestContentType": "json",
+								"url": "https://ENTERYOURTENANTNAMEHERE.api.identitynow.com/accounts/v1/{{$.loop.loopInput.id}}/enable"
+							},
+							"catch": [
+								{
+									"next": "End Step - Success 1"
+								}
+							],
+							"displayName": "Enable Account",
+							"nextStep": "End Step - Success 1",
+							"type": "action",
+							"versionNumber": 3
+						}
+					}
+				},
+				"displayName": "",
+				"nextStep": "End Step - Success 2",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Serial Loop 1": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"input.$": "$.hTTPRequest.body",
+					"loopType": "forLoop",
+					"start": "Define Comparison",
+					"steps": {
+						"Define Comparison": {
+							"actionId": "sp:compare-multi-type",
+							"choiceList": [
+								{
+									"comparator": "BooleanEquals",
+									"nextStep": "HTTP Request 1",
+									"variableA.$": "$.loop.loopInput.disabled",
+									"variableB": false
+								}
+							],
+							"defaultStep": "End Step - Success",
+							"displayName": "",
+							"type": "choice"
+						},
+						"End Step - Success": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"HTTP Request 1": {
+							"actionId": "sp:http",
+							"attributes": {
+								"jsonRequestBody": {
+									"forceProvisioning": false
+								},
+								"method": "post",
+								"param_authenticationRef": "oauth",
+								"param_oauth": {
+									"mapping": {
+										"auth_client_id": "clientId",
+										"auth_client_secret": "clientSecret",
+										"auth_credential_location": "credentialLocation",
+										"auth_token_url": "tokenURL"
+									},
+									"paramID": "6e825815-d032-4764-80c9-06110f732185",
+									"paramType": "1.4",
+									"refID": "ea94ce43-17a5-4a3a-9f08-a4bbe2cc57f0"
+								},
+								"requestContentType": "json",
+								"url": "https://ENTERYOURTENANTNAMEHERE.api.identitynow.com/accounts/v1/{{$.loop.loopInput.id}}/disable"
+							},
+							"catch": [
+								{
+									"next": "End Step - Success"
+								}
+							],
+							"displayName": "Disable Account",
+							"nextStep": "End Step - Success",
+							"type": "action",
+							"versionNumber": 3
+						}
+					}
+				},
+				"displayName": "",
+				"nextStep": "End Step - Success 2",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+		"name": "tylerrettk"
+	},
+	"trigger": {
+		"type": "EXTERNAL",
+		"attributes": {
+			"clientId": "2238e39e-fdd8-47cf-b859-a6a4cbdc6ede",
+			"description": "identityid\noperation",
+			"id": "idn:external-http",
+			"integrationId": null,
+			"url": "https://ENTERYOURTENANTNAMEHERE.api.identitynow.com/v2024/workflows/execute/external/c7ec8ce8-100b-44ab-9241-56b7741b08b9"
+		}
+	}
+}

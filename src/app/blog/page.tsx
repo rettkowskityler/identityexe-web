@@ -24,6 +24,26 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'admin-helper-form',
+      title: 'The Admin Helper Form: Architecting a Centralized Command Center',
+      category: 'Architecture',
+      date: 'July 2026',
+      description: 'A repeatable architectural methodology unifying interactive ISC forms with backend workflows and parallelized scripts for advanced operations.',
+      iconBgClass: 'bg-cyan-500/10',
+      iconBorderClass: 'border-cyan-500/20',
+      iconColorClass: 'text-cyan-400',
+      hoverTitleClass: 'group-hover:text-cyan-400',
+      readMoreColorClass: 'text-cyan-500',
+      gradientClass: 'from-cyan-600/20 to-teal-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <path d="M12 8v4"></path>
+          <path d="M12 16h.01"></path>
+        </svg>
+      )
+    },
+    {
       slug: 'transform-timezone-management',
       title: 'Managing Timezone Transforms & Daylight Savings',
       category: 'Architecture',

@@ -1,0 +1,393 @@
+{
+	"name": "Admin Helper Form!",
+	"description": "",
+	"modified": "2026-07-26T20:12:44.183880547Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+		"name": "tylerrettk"
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request",
+						"variableA.$": "$.interactiveForm.formData.selectOption",
+						"variableB": "Unoptimized Account Aggregation By Source"
+					}
+				],
+				"defaultStep": "Define Comparison 1",
+				"displayName": "Check - Unoptimized Account Aggregation",
+				"type": "choice"
+			},
+			"Define Comparison 1": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "Windows Server",
+						"variableA.$": "$.interactiveForm.formData.selectOption",
+						"variableB": "Reset Accounts By Source"
+					}
+				],
+				"defaultStep": "Define Comparison 2",
+				"displayName": "Check - Reset Accounts By Source",
+				"type": "choice"
+			},
+			"Define Comparison 2": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request 1",
+						"variableA.$": "$.interactiveForm.formData.selectOption",
+						"variableB": "Reset Entitlements By Source"
+					}
+				],
+				"defaultStep": "Define Comparison 3",
+				"displayName": "Check - Reset Entitlements By Source",
+				"type": "choice"
+			},
+			"Define Comparison 3": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request 2",
+						"variableA.$": "$.interactiveForm.formData.selectOption",
+						"variableB": "Turn Off Health Check By Source"
+					}
+				],
+				"defaultStep": "Define Comparison 4",
+				"displayName": "Check - Turn Off/On Health Check",
+				"type": "choice"
+			},
+			"Define Comparison 4": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "Windows Server 1",
+						"variableA.$": "$.interactiveForm.formData.selectOption",
+						"variableB": "Attribute Sync Report By Source"
+					}
+				],
+				"defaultStep": "Define Comparison 5",
+				"displayName": "Check - Attribute Sync Report",
+				"type": "choice"
+			},
+			"Define Comparison 5": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request 3",
+						"variableA.$": "$.interactiveForm.formData.selectOption",
+						"variableB": "Bulk Enable All Accounts For An Identity"
+					}
+				],
+				"defaultStep": "Define Comparison 6",
+				"displayName": "Check - Enable All Accounts By Identity",
+				"type": "choice"
+			},
+			"Define Comparison 6": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "HTTP Request 4",
+						"variableA.$": "$.interactiveForm.formData.selectOption",
+						"variableB": "Bulk Disable All Accounts For An Identity"
+					}
+				],
+				"defaultStep": "End Step - Failure",
+				"displayName": "Check - Disable Accounts By Identity",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "summaryvariable",
+							"transforms": [],
+							"variableA": "<style>.isc-main-accordion{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background-color:#f8fafc;border-radius:8px;border:1px solid #e2e8f0;margin-bottom:20px}.isc-main-summary{padding:14px 16px;font-size:1rem;font-weight:600;color:#0f172a;cursor:pointer;list-style:none;position:relative}.isc-main-summary::-webkit-details-marker{display:none}.isc-main-summary::after{content:'▼';position:absolute;right:16px;color:#e83e8c;font-size:0.8rem;top:50%;transform:translateY(-50%)}details[open].isc-main-accordion .isc-main-summary::after{content:'▲'}.isc-options-wrapper{padding:0 16px 16px 16px;border-top:1px solid #e2e8f0;margin-top:4px;padding-top:16px}.isc-option-card{background:#ffffff;border-left:4px solid #38bdf8;border-radius:6px;padding:14px;margin-bottom:12px;box-shadow:0 1px 2px 0 rgba(0,0,0,0.05)}.isc-option-card:last-child{margin-bottom:0}.isc-option-title{font-size:0.95rem;font-weight:600;color:#0f172a;margin-top:0;margin-bottom:6px}.isc-option-desc{font-size:0.85rem;color:#475569;margin-bottom:10px;line-height:1.4}.isc-tech-detail{font-size:0.75rem;background:#f1f5f9;padding:8px 10px;border-radius:4px;color:#334155;border:1px solid #e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,\"Liberation Mono\",\"Courier New\",monospace}.isc-tech-label{font-weight:600;color:#e83e8c;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;display:block}</style><details class=\"isc-main-accordion\"><summary class=\"isc-main-summary\">ℹ️ Click here to view details about each action</summary><div class=\"isc-options-wrapper\"><div class=\"isc-option-card\"><h4 class=\"isc-option-title\">Unoptimized Account Aggregation</h4><div class=\"isc-option-desc\">Triggers an account aggregation for a specific source without optimization. Useful for forcing a full refresh of accounts when standard aggregations might skip unchanged data.</div><div class=\"isc-tech-detail\"><span class=\"isc-tech-label\">Behind the scenes</span> API Call to <code>/sources/v1/:id/load-accounts</code> with body <code>{\"disableOptimization\":true}</code></div></div><div class=\"isc-option-card\"><h4 class=\"isc-option-title\">Reset Accounts On Source</h4><div class=\"isc-option-desc\">Removes all accounts from a target source. This utilizes a custom script to bypass known API limitations (where removing accounts tied to source owners fails), ensuring a complete wipe of accounts by processing them individually.</div><div class=\"isc-tech-detail\"><span class=\"isc-tech-label\">Behind the scenes</span> PowerShell Script (Individual account removal to bypass known API bug)</div></div><div class=\"isc-option-card\"><h4 class=\"isc-option-title\">Reset Entitlements</h4><div class=\"isc-option-desc\">Clears out and resets all entitlements associated with a specific source. Ideal for cleaning up stale entitlement data before a fresh aggregation.</div><div class=\"isc-tech-detail\"><span class=\"isc-tech-label\">Behind the scenes</span> API Call to <code>/entitlements/v1/reset/sources/:id</code></div></div><div class=\"isc-option-card\"><h4 class=\"isc-option-title\">Turn Off Health Check for a Source</h4><div class=\"isc-option-desc\">Disables the periodic health checks for a selected source. Helpful when troubleshooting connection issues or when a source is temporarily down and you want to stop health check alerts.</div><div class=\"isc-tech-detail\"><span class=\"isc-tech-label\">Behind the scenes</span> API PATCH to Source setting <code>disable_health_check:true</code></div></div><div class=\"isc-option-card\"><h4 class=\"isc-option-title\">Attribute Sync Report By Source (Crystal Ball)</h4><div class=\"isc-option-desc\">Generates a comprehensive report of all attributes currently synchronized for a given source. Gives administrators visibility into attribute mappings and current states.</div><div class=\"isc-tech-detail\"><span class=\"isc-tech-label\">Behind the scenes</span> PowerShell Script</div></div><div class=\"isc-option-card\"><h4 class=\"isc-option-title\">Bulk Enable All Accounts For Identities</h4><div class=\"isc-option-desc\">Quickly enables all accounts across all sources for one or more specific identities in a single action.</div><div class=\"isc-tech-detail\"><span class=\"isc-tech-label\">Behind the scenes</span> Calls workflow <code>Enable/Disable User In Bulk</code>, which triggers API Call to <code>https://sailpoint.api.identitynow.com/accounts/v1/:id/enable</code></div></div><div class=\"isc-option-card\"><h4 class=\"isc-option-title\">Bulk Disable Accounts For Identities</h4><div class=\"isc-option-desc\">Instantly disables all accounts associated with one or more target identities. Essential for rapid offboarding or security containment.</div><div class=\"isc-tech-detail\"><span class=\"isc-tech-label\">Behind the scenes</span> Calls workflow <code>Enable/Disable User In Bulk</code>, which triggers API Call to <code>https://sailpoint.api.identitynow.com/accounts/v1/:id/disable</code></div></div></div></details>"
+						}
+					]
+				},
+				"displayName": "",
+				"nextStep": "Interactive Form",
+				"type": "Mutation"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureName": "Failure - No Option Selected",
+				"type": "failure"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"Get Identity": {
+				"actionId": "sp:get-identity",
+				"attributes": {
+					"id.$": "$.trigger.launchedBy.id"
+				},
+				"displayName": "",
+				"nextStep": "Define Comparison",
+				"type": "action",
+				"versionNumber": 2
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"formRequestBody": {
+						"disableOptimization": "true"
+					},
+					"jsonRequestBody": null,
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "747cd7e4-130f-4e22-a25e-8f7fbe63146b"
+					},
+					"requestContentType": "form",
+					"requestHeaders": {
+						"Content-Type": "multipart/form-data"
+					},
+					"url": "https://ENTERYOURTENANTNAMEHERE.api.identitynow.com/sources/v1/{{$.interactiveForm.formData.selectSourceForUnoptimizedAggregation}}/load-accounts"
+				},
+				"displayName": "Unoptimized Account Aggregation HTTP Call",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 1": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody.$": "",
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "747cd7e4-130f-4e22-a25e-8f7fbe63146b"
+					},
+					"requestContentType": "json",
+					"url": "https://ENTERYOURTENANTNAMEHERE.api.identitynow.com/entitlements/v1/reset/sources/{{$.interactiveForm.formData.selectSourceToResetEntitlements}}"
+				},
+				"displayName": "Reset Source Entitlements HTTP Call",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 2": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonPatchRequestBody": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"/connectorAttributes/disable_health_check\",\n    \"value\": {{$.interactiveForm.formData.enableOrDisableHealthCheck}}\n  }\n]",
+					"jsonRequestBody.$": "",
+					"method": "patch",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "747cd7e4-130f-4e22-a25e-8f7fbe63146b"
+					},
+					"requestContentType": "json-patch+json",
+					"url": "https://ENTERYOURTENANTNAMEHERE.api.identitynow.com/sources/v1/{{$.interactiveForm.formData.selectSourceForHealthCheckModification}}"
+				},
+				"displayName": "Update Health Check For Source HTTP Call",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 3": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": {
+						"identityid": "{{$.interactiveForm.formData.selectIdentityToEnableAllAccounts}}",
+						"operation": "enable"
+					},
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "cbd728fe-b51b-4d30-a43d-819666e413ba",
+						"paramType": "1.4",
+						"refID": "31762080-32eb-47f8-9217-0e08dacc5d24"
+					},
+					"requestContentType": "json",
+					"url": "https://ENTERYOURTENANTNAMEHERE.api.identitynow.com/v2024/workflows/execute/external/c7ec8ce8-100b-44ab-9241-56b7741b08b9"
+				},
+				"displayName": "Call Enable Workflow",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 4": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody": {
+						"identityid": "{{$.interactiveForm.formData.SelectIdentityToDisableAllAccounts}}",
+						"operation": "disable"
+					},
+					"method": "post",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "cbd728fe-b51b-4d30-a43d-819666e413ba",
+						"paramType": "1.4",
+						"refID": "31762080-32eb-47f8-9217-0e08dacc5d24"
+					},
+					"requestContentType": "json",
+					"url": "https://ENTERYOURTENANTNAMEHERE.api.identitynow.com/v2024/workflows/execute/external/c7ec8ce8-100b-44ab-9241-56b7741b08b9"
+				},
+				"displayName": "Call Disable Workflow",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Interactive Form": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "771facd8-edbf-4bbd-82fc-e0f61a5e88e7",
+					"inputForForm_optiondescription.$": "$.defineVariable.summaryvariable",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Admin Helper Form!"
+				},
+				"displayName": "",
+				"nextStep": "Get Identity",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "192.168.0.180",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_checksum": null,
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_output_format": "text",
+					"inputForPag_script_arguments": {
+						"SourceId": "{{$.interactiveForm.formData.selectSourceToResetAccounts}}"
+					},
+					"inputForPag_script_path": "C:\\Scripts\\ResetAccountsBySource.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+					"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+						"paramType": "1.1",
+						"refID": "c67b4974-6afe-404b-ae85-38e2c9b47b87"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"displayName": "Reset Accounts By Source PS Script",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server 1": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "192.168.0.180",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_checksum": null,
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_output_format": "text",
+					"inputForPag_script_arguments": {
+						"RecipientEmail": "{{$.getIdentity.attributes.email}}",
+						"SourceId": "{{$.interactiveForm.formData.selectSourceForAttributeSyncReport}}"
+					},
+					"inputForPag_script_path": "C:\\Scripts\\AttributeSyncReport.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+					"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+						"paramType": "1.1",
+						"refID": "c67b4974-6afe-404b-ae85-38e2c9b47b87"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"displayName": "Attribute Sync Report PS Script",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+		"name": "tylerrettk"
+	},
+	"trigger": {
+		"type": "EVENT",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == '2cee7512-36eb-4ae5-bd64-93b5a6f15b45')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	}
+}
