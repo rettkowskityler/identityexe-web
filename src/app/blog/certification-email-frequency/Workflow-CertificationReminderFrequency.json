@@ -1,0 +1,420 @@
+{
+	"name": "Certification Reminder Frequency",
+	"description": "",
+	"modified": "2026-08-01T23:43:07.325637262Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+		"name": "tylerrettk"
+	},
+	"definition": {
+		"start": "HTTP Request",
+		"steps": {
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "counter for serial loop",
+							"name": "counter",
+							"transforms": [],
+							"variableA": 0
+						},
+						{
+							"description": "",
+							"name": "timeconverter",
+							"transforms": [
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "1 Day",
+										"replacement": "1d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "2 Days",
+										"replacement": "2d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "3 Days",
+										"replacement": "3d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "4 Days",
+										"replacement": "4d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "5 Days",
+										"replacement": "5d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "6 Days",
+										"replacement": "6d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "7 Days",
+										"replacement": "7d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "8 Days",
+										"replacement": "8d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "9 Days",
+										"replacement": "9d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "10 Days",
+										"replacement": "10d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "11 Days",
+										"replacement": "11d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "12 Days",
+										"replacement": "12d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "13 Days",
+										"replacement": "13d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "14 Days",
+										"replacement": "14d"
+									}
+								},
+								{
+									"id": "sp:transform:replace:string",
+									"input": {
+										"pattern": "15 Days",
+										"replacement": "15d"
+									}
+								}
+							],
+							"variableA.$": "$.interactiveForm.formData.selectTimeFrequency"
+						},
+						{
+							"description": "",
+							"name": "UpdatedselectAllActiveCampaigns",
+							"transforms": [],
+							"variableA.$": "$.interactiveForm.formData.selectallactivecampaigns"
+						},
+						{
+							"description": "",
+							"name": "Updatedcampaigns",
+							"transforms": [],
+							"variableA.$": "$.interactiveForm.formData.campaign"
+						}
+					]
+				},
+				"displayName": "Set Loop Variables",
+				"nextStep": "Windows Server",
+				"type": "Mutation"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "345759fc-a64c-48fe-a7ff-894800a0a6da"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/campaigns/v1",
+					"urlParams": {
+						"filters": "status eq \"ACTIVE\""
+					}
+				},
+				"displayName": "Get Active Campaigns",
+				"nextStep": "Interactive Form",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Interactive Form": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "eac434a0-e39b-4285-a56f-dd2f0f3d222d",
+					"inputForForm_array_activecampaigns.$": "$.hTTPRequest.body",
+					"inputForForm_array_activecampaigns_label": "$.name",
+					"inputForForm_array_activecampaigns_subLabel": "$.description",
+					"inputForForm_array_activecampaigns_value": "$.id",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Certification Campaign Reminder Frequency Selector"
+				},
+				"displayName": "",
+				"nextStep": "Define Variable",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Serial Loop": {
+				"actionId": "sp:serial:iterator",
+				"attributes": {
+					"condition": {
+						"comparator": "NumericLessThan",
+						"variableA.$": "$.defineVariable.counter",
+						"variableB.$": "$.windowsServer.result.data.iterations"
+					},
+					"loopType": "while",
+					"start": "Define Comparison",
+					"steps": {
+						"Define Comparison": {
+							"actionId": "sp:compare-multi-type",
+							"choiceList": [
+								{
+									"AND": [
+										{
+											"comparator": "BooleanEquals",
+											"variableA.$": "$.interactiveForm.formData.sendReminderNow",
+											"variableB": true
+										},
+										{
+											"comparator": "NumericEquals",
+											"variableA.$": "$.defineVariable.counter",
+											"variableB": 0
+										}
+									],
+									"nextStep": "Windows Server 1"
+								}
+							],
+							"defaultStep": "Wait",
+							"displayName": "Check if Send Reminder Now",
+							"type": "choice"
+						},
+						"End Step - Success 1": {
+							"actionId": "sp:operator-success",
+							"displayName": "",
+							"type": "success"
+						},
+						"Update Variable": {
+							"actionId": "sp:update-variable",
+							"attributes": {
+								"id": "sp:update-variable",
+								"variables": [
+									{
+										"description": "",
+										"name": "$.defineVariable.counter",
+										"transforms": [
+											{
+												"id": "sp:transform:add:number",
+												"input": {
+													"precision": 4,
+													"roundingMode": "roundHalfUp",
+													"variableB": 1
+												}
+											}
+										],
+										"variableA.$": "$.defineVariable.counter"
+									}
+								]
+							},
+							"displayName": "",
+							"nextStep": "End Step - Success 1",
+							"type": "Mutation"
+						},
+						"Wait": {
+							"actionId": "sp:sleep",
+							"attributes": {
+								"duration.$": "$.defineVariable.timeconverter",
+								"type": "waitFor"
+							},
+							"displayName": "",
+							"nextStep": "Windows Server 2",
+							"type": "action",
+							"versionNumber": 1
+						},
+						"Windows Server 1": {
+							"actionId": "sp:pag-windows-server",
+							"attributes": {
+								"inputForPag_address": "192.168.X.X",
+								"inputForPag_auth_type": "ntlm",
+								"inputForPag_checksum": "",
+								"inputForPag_command_timeout_seconds": 3600,
+								"inputForPag_configuration_name": "Microsoft.PowerShell",
+								"inputForPag_kdc_port": 88,
+								"inputForPag_kdc_protocol": "udp",
+								"inputForPag_output_format": "text",
+								"inputForPag_script_arguments": {
+									"campaigns": "{{$.defineVariable.updatedcampaigns}}",
+									"selectAllActiveCampaigns": "{{$.defineVariable.updatedselectAllActiveCampaigns}}"
+								},
+								"inputForPag_script_path": "C:\\Scripts\\Send-ReminderEmails.ps1",
+								"inputForPag_use_ssl": true,
+								"inputForPag_verify_cert": false,
+								"pagCommandType": "pag:windows_server:execute_powershell_script",
+								"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+								"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+								"param_connType": "paramInline",
+								"param_credential": {
+									"mapping": {
+										"auth_password": "password",
+										"auth_username": "username"
+									},
+									"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+									"paramType": "1.1",
+									"refID": "edf37440-d105-4863-aeef-9527a263fdfa"
+								},
+								"param_credentialType": "paramSPS",
+								"param_kerberosType": "paramInline"
+							},
+							"displayName": "Send Bulk Reminders",
+							"nextStep": "Update Variable",
+							"type": "action",
+							"versionNumber": 1
+						},
+						"Windows Server 2": {
+							"actionId": "sp:pag-windows-server",
+							"attributes": {
+								"inputForPag_address": "192.168.X.X",
+								"inputForPag_auth_type": "ntlm",
+								"inputForPag_checksum": "",
+								"inputForPag_command_timeout_seconds": 3600,
+								"inputForPag_configuration_name": "Microsoft.PowerShell",
+								"inputForPag_kdc_port": 88,
+								"inputForPag_kdc_protocol": "udp",
+								"inputForPag_output_format": "text",
+								"inputForPag_script_arguments": {
+									"campaigns": "{{$.defineVariable.updatedcampaigns}}",
+									"selectAllActiveCampaigns": "{{$.defineVariable.updatedselectAllActiveCampaigns}}"
+								},
+								"inputForPag_script_path": "C:\\Scripts\\Send-ReminderEmails.ps1",
+								"inputForPag_use_ssl": true,
+								"inputForPag_verify_cert": false,
+								"pagCommandType": "pag:windows_server:execute_powershell_script",
+								"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+								"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+								"param_connType": "paramInline",
+								"param_credential": {
+									"mapping": {
+										"auth_password": "password",
+										"auth_username": "username"
+									},
+									"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+									"paramType": "1.1",
+									"refID": "edf37440-d105-4863-aeef-9527a263fdfa"
+								},
+								"param_credentialType": "paramSPS",
+								"param_kerberosType": "paramInline"
+							},
+							"displayName": "Send Bulk Reminders",
+							"nextStep": "Update Variable",
+							"type": "action",
+							"versionNumber": 1
+						}
+					}
+				},
+				"displayName": "Email Reminder - Serial Loop",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "192.168.X.X",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_checksum": null,
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_output_format": "json",
+					"inputForPag_script_arguments": {
+						"campaigns": "{{$.interactiveForm.formData.campaign}}",
+						"selectAllActiveCampaigns": "{{$.interactiveForm.formData.selectallactivecampaigns}}",
+						"stopOnEndDate": "{{$.interactiveForm.formData.stopOnEndDate}}",
+						"timeFrequency": "{{$.interactiveForm.formData.selectTimeFrequency}}"
+					},
+					"inputForPag_script_path": "C:\\Scripts\\Calculate-Iterations.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+					"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+						"paramType": "1.1",
+						"refID": "edf37440-d105-4863-aeef-9527a263fdfa"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"displayName": "Get Iteration Count",
+				"nextStep": "Serial Loop",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "9e44a056b6864e7181fef89fb5c1c940",
+		"name": "IdentityEXE"
+	},
+	"trigger": {
+		"type": "EVENT",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == 'c54929d9-c72f-4759-a6bd-764b34d6c976')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	}
+}

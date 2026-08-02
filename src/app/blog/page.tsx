@@ -24,6 +24,25 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'certification-email-frequency',
+      title: 'Architecting Dynamic Certification Email Frequencies',
+      category: 'Architecture',
+      date: 'August 2026',
+      description: 'A repeatable architectural methodology designed to give you complete control over escalation timing and notification routing, stopping manager approval fatigue in its tracks.',
+      iconBgClass: 'bg-indigo-500/10',
+      iconBorderClass: 'border-indigo-500/20',
+      iconColorClass: 'text-indigo-400',
+      hoverTitleClass: 'group-hover:text-indigo-400',
+      readMoreColorClass: 'text-indigo-500',
+      gradientClass: 'from-indigo-600/20 to-blue-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+      )
+    },
+    {
       slug: 'admin-helper-form',
       title: 'The Admin Helper Form: Architecting a Centralized Command Center',
       category: 'Architecture',

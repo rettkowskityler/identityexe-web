@@ -1,0 +1,46 @@
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; line-height: 1.6; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; color: #333; }
+        tr:nth-child(even){background-color: #f9f9f9;}
+        a.button { 
+            background-color: #005A9C; 
+            color: white; 
+            padding: 8px 12px; 
+            text-decoration: none; 
+            border-radius: 4px; 
+            display: inline-block;
+        }
+        a.button:hover { background-color: #00407A; }
+    </style>
+</head>
+<body>
+    <p>Hello {{RecipientName}},</p>
+    <p>You have pending identity certification campaigns in SailPoint that require your attention. Please review the items below and complete the required actions.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Campaign Name</th>
+                <th>Status</th>
+                <th>Start Date</th>
+                <th>Due Date</th>
+                <th>Total Items</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+{{TableRows}}
+        </tbody>
+    </table>
+    
+    <p style="margin-top: 30px;">
+        <em>If the Status says "Pending Sign Off", you have completed all decisions but still need to formally sign off on the campaign.</em><br/><br/>
+        Thank you,<br/>
+        Identity Administration
+    </p>
+</body>
+</html>

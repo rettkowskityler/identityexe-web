@@ -1,0 +1,239 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "eac434a0-e39b-4285-a56f-dd2f0f3d222d",
+      "name": "Certification Campaign Frequency Selector"
+    },
+    "object": {
+      "id": "eac434a0-e39b-4285-a56f-dd2f0f3d222d",
+      "name": "Certification Campaign Frequency Selector",
+      "description": "Certification Campaign Frequency Selector",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "9e44a056b6864e7181fef89fb5c1c940",
+        "name": "IdentityEXE"
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "activecampaigns",
+          "type": "ARRAY",
+          "label": "activecampaigns",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "1300922688089",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "default": true,
+                  "falseLabel": "Set Campaigns Below",
+                  "helpText": "",
+                  "label": "Select All Active Campaigns Or Invidual Campaigns",
+                  "trueLabel": "Set  All Active Campaigns"
+                },
+                "elementType": "TOGGLE",
+                "id": "848306824842",
+                "key": "selectallactivecampaigns",
+                "validations": []
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "formInputId": "activecampaigns",
+                      "sortBy": "ASC"
+                    },
+                    "dataSourceType": "FORM_INPUT"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Campaign(s):",
+                  "maximum": 30,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "167674705917",
+                "key": "campaign",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "default": false,
+                  "falseLabel": "No",
+                  "helpText": "Toggle below to set whether you want to send a campaign reminder when this workflow is started or if it should send the first one based on the frequency set below.",
+                  "label": "Send Reminder Now?",
+                  "trueLabel": "Yes"
+                },
+                "elementType": "TOGGLE",
+                "id": "115511542856",
+                "key": "sendReminderNow",
+                "validations": []
+              },
+              {
+                "config": {
+                  "default": false,
+                  "falseLabel": "No",
+                  "helpText": "Toggle below to set whether you want to stop the reminder frequency once the end date has passed on the certification or if it should go until certification completion (Max 30 Days)",
+                  "label": "Stop On End Date?",
+                  "trueLabel": "Yes"
+                },
+                "elementType": "TOGGLE",
+                "id": "404775635426",
+                "key": "stopOnEndDate",
+                "validations": []
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "options": [
+                        {
+                          "label": "1 Day",
+                          "sublabel": "",
+                          "value": "1 Day"
+                        },
+                        {
+                          "label": "2 Days",
+                          "sublabel": "",
+                          "value": "2 Days"
+                        },
+                        {
+                          "label": "3 Days",
+                          "sublabel": "",
+                          "value": "3 Days"
+                        },
+                        {
+                          "label": "4 Days",
+                          "sublabel": "",
+                          "value": "4 Days"
+                        },
+                        {
+                          "label": "5 Days",
+                          "sublabel": "",
+                          "value": "5 Days"
+                        },
+                        {
+                          "label": "6 Days",
+                          "sublabel": "",
+                          "value": "6 Days"
+                        },
+                        {
+                          "label": "7 Days",
+                          "sublabel": "",
+                          "value": "7 Days"
+                        },
+                        {
+                          "label": "8 Days",
+                          "sublabel": "",
+                          "value": "8 Days"
+                        },
+                        {
+                          "label": "9 Days",
+                          "sublabel": "",
+                          "value": "9 Days"
+                        },
+                        {
+                          "label": "10 Days",
+                          "sublabel": "",
+                          "value": "10 Days"
+                        },
+                        {
+                          "label": "11 Days",
+                          "sublabel": "",
+                          "value": "11 Days"
+                        },
+                        {
+                          "label": "12 Days",
+                          "sublabel": "",
+                          "value": "12 Days"
+                        },
+                        {
+                          "label": "13 Days",
+                          "sublabel": "",
+                          "value": "13 Days"
+                        },
+                        {
+                          "label": "14 Days",
+                          "sublabel": "",
+                          "value": "14 Days"
+                        },
+                        {
+                          "label": "15 Days",
+                          "sublabel": "",
+                          "value": "15 Days"
+                        }
+                      ]
+                    },
+                    "dataSourceType": "STATIC"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Time Frequency",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "202367200260",
+                "key": "selectTimeFrequency",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              }
+            ],
+            "label": "Select Certification Campaign Frequency",
+            "labelStyle": "h1",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "selectallactivecampaigns",
+              "operator": "EQ",
+              "valueType": "BOOLEAN",
+              "value": "false"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "167674705917"
+              }
+            }
+          ]
+        }
+      ],
+      "created": "2026-07-31T02:05:31.173616256Z",
+      "modified": "2026-07-31T22:22:15.802476555Z"
+    }
+  }
+]

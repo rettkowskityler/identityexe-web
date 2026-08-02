@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://identityexe.com'),
   title: 'IdentityEXE',
   description: 'Elite SailPoint Identity Security Cloud implementation and architecture.',
   keywords: ['SailPoint', 'Identity Security Cloud', 'IdentityIQ', 'IAM Consulting', 'SailPoint Expert Ambassador', 'Cybersecurity', 'Identity Governance'],
