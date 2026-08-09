@@ -1,0 +1,293 @@
+{
+	"name": "Aggregation Schedule Manager",
+	"description": "",
+	"modified": "2026-08-09T20:06:32.701512001Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "YOUR_IDENTITY_ID",
+		"name": "YOUR_IDENTITY_NAME"
+	},
+	"definition": {
+		"start": "Get Identity",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"NOT": {
+							"comparator": "StringEquals",
+							"variableA.$": "$.windowsServer.result.data.Files[0].label",
+							"variableB": "No CSV files found"
+						},
+						"nextStep": "Interactive Form"
+					}
+				],
+				"defaultStep": "Interactive Message",
+				"displayName": "Ensure Valid Inputs",
+				"type": "choice"
+			},
+			"Define Comparison 1": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"OR": [
+							{
+								"AND": [
+									{
+										"comparator": "StringEquals",
+										"variableA.$": "$.interactiveForm.formData.options",
+										"variableB": "Back Up And Remove All"
+									},
+									{
+										"comparator": "BooleanEquals",
+										"variableA.$": "$.interactiveForm.formData.warningThisWillDisableAllAggregationsAcrossTheTenantProceed",
+										"variableB": true
+									}
+								]
+							},
+							{
+								"AND": [
+									{
+										"comparator": "StringEquals",
+										"variableA.$": "$.interactiveForm.formData.options",
+										"variableB": "Restore All"
+									},
+									{
+										"comparator": "BooleanEquals",
+										"variableA.$": "$.interactiveForm.formData.WarningThisWillEnableAllAggregationsAcrossTheTenantProceed",
+										"variableB": true
+									}
+								]
+							},
+							{
+								"OR": [
+									{
+										"comparator": "StringEquals",
+										"variableA.$": "$.interactiveForm.formData.options",
+										"variableB": "Export"
+									},
+									{
+										"comparator": "StringEquals",
+										"variableA.$": "$.interactiveForm.formData.options",
+										"variableB": "Import"
+									}
+								]
+							}
+						],
+						"nextStep": "Windows Server 1"
+					}
+				],
+				"defaultStep": "Interactive Message 2",
+				"displayName": "",
+				"type": "choice"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureDetails": "Check Inputs!",
+				"failureName": "Failure!",
+				"type": "failure"
+			},
+			"End Step - Failure 1": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureDetails": "Failure - No Toggle Confirmation. Please Re-Launch and select again.",
+				"failureName": "Failure - No Toggle Confirmation",
+				"type": "failure"
+			},
+			"End Step - Failure 2": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureDetails": "Failure - No Toggle Confirmation. Please Re-Launch and select again.",
+				"failureName": "Failure - No Toggle Confirmation",
+				"type": "failure"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"Get Identity": {
+				"actionId": "sp:get-identity",
+				"attributes": {
+					"id.$": "$.trigger.launchedBy.id",
+					"resultSelector": [
+						"$.getIdentity.attributes.email"
+					]
+				},
+				"displayName": "",
+				"nextStep": "Interactive Message 1",
+				"type": "action",
+				"versionNumber": 2
+			},
+			"Interactive Form": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "7fbf7e4e-9de5-4b48-8e67-e7c17c6b3aa3",
+					"inputForForm_array_importoptions.$": "$.windowsServer.result.data.Files",
+					"inputForForm_array_importoptions_label": "$.label",
+					"inputForForm_array_importoptions_value": "$.value",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Aggregation Schedule Manager"
+				},
+				"displayName": "Select Options Form",
+				"nextStep": "Define Comparison 1",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "ERROR",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>Please check the following from the \"Get-AggregationScheduleFiles.ps1\" file:</p>\n<ol>\n<li>It has a valid CSV file in the export folder.</li>\n<li>The script is properly named and referenced properly in the windows server action.</li>\n<li>The csvDirectory variable in the script is properly defined and pointing to the correct location.</li>\n</ol>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Input Failure"
+				},
+				"displayName": "Invalid Input Message",
+				"nextStep": "End Step - Failure",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message 1": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "INFO",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>Please wait while SailPoint loads your local files.&nbsp;</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Loading Local FIles!"
+				},
+				"displayName": "Loading Screen Message",
+				"nextStep": "Windows Server",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message 2": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "WARN",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>You must toggle the confirmation when selecting to restore all or back up all so there's no accidental large scale changes!</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Missed Confirming Selection!"
+				},
+				"displayName": "Toggle Not Selected Message",
+				"nextStep": "End Step - Failure 1",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message 3": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "ERROR",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>Check Execution Logs for Further Details!</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Script Execution Failure!"
+				},
+				"displayName": "Script Execution Failure Message",
+				"nextStep": "End Step - Failure 2",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "YOUR_PAG_SERVER_IP",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_output_format": "json",
+					"inputForPag_script_path": "C:\\Scripts\\Get-AggregationScheduleFiles.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+					"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+						"paramType": "1.1",
+						"refID": "08928ebf-f928-4582-b9f0-84a2457f6f78"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"catch": [
+					{
+						"next": "Interactive Message"
+					}
+				],
+				"displayName": "Get Input Files",
+				"nextStep": "Define Comparison",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server 1": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "YOUR_PAG_SERVER_IP",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_output_format": "text",
+					"inputForPag_script_arguments": {
+						"Action": "{{$.interactiveForm.formData.options}}",
+						"CsvPath": "{{$.interactiveForm.formData.importOptions}}",
+						"EmailCsvTo": "{{$.getIdentity.attributes.email}}"
+					},
+					"inputForPag_script_path": "C:\\Scripts\\Manage-AggregationSchedules.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+					"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+						"paramType": "1.1",
+						"refID": "08928ebf-f928-4582-b9f0-84a2457f6f78"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"catch": [
+					{
+						"next": "Interactive Message 3"
+					}
+				],
+				"displayName": "Execute Selected Options",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "YOUR_IDENTITY_ID",
+		"name": "YOUR_IDENTITY_NAME"
+	},
+	"trigger": {
+		"type": "EVENT",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == 'e63c8b18-c85b-4519-9a53-8bd19c6b9a82')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	}
+}

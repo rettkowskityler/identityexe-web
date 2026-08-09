@@ -1,0 +1,242 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "7fbf7e4e-9de5-4b48-8e67-e7c17c6b3aa3",
+      "name": "Aggregation Schedule Manager"
+    },
+    "object": {
+      "id": "7fbf7e4e-9de5-4b48-8e67-e7c17c6b3aa3",
+      "name": "Aggregation Schedule Manager",
+      "description": "Aggregation Schedule Manager",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "YOUR_IDENTITY_ID",
+        "name": "YOUR_IDENTITY_NAME"
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "importoptions",
+          "type": "ARRAY",
+          "label": "importoptions",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "919102201506",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "options": [
+                        {
+                          "label": "Export",
+                          "sublabel": "",
+                          "value": "Export"
+                        },
+                        {
+                          "label": "Import",
+                          "sublabel": "",
+                          "value": "Import"
+                        },
+                        {
+                          "label": "Back Up And Remove All",
+                          "sublabel": "",
+                          "value": "Back Up And Remove All"
+                        },
+                        {
+                          "label": "Restore All",
+                          "sublabel": "",
+                          "value": "Restore All"
+                        }
+                      ]
+                    },
+                    "dataSourceType": "STATIC"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Options:",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1733587487873",
+                "key": "options",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "formInputId": "importoptions",
+                      "sortBy": "ASC"
+                    },
+                    "dataSourceType": "FORM_INPUT"
+                  },
+                  "forceSelect": true,
+                  "helpText": "Please place file in the specified script location in \"Get-AggregationScheduleFiles.ps1\".",
+                  "label": "Import Options",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1612311221205",
+                "key": "importOptions",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "default": false,
+                  "falseLabel": "No",
+                  "helpText": "",
+                  "label": "WARNING: This will Disable All Aggregations Across the Tenant. Proceed?",
+                  "trueLabel": "Yes"
+                },
+                "elementType": "TOGGLE",
+                "id": "665969258678",
+                "key": "warningThisWillDisableAllAggregationsAcrossTheTenantProceed",
+                "validations": []
+              },
+              {
+                "config": {
+                  "default": false,
+                  "falseLabel": "No",
+                  "helpText": "",
+                  "label": "WARNING: This will Enable All Aggregations Across the Tenant. Proceed?",
+                  "trueLabel": "Yes"
+                },
+                "elementType": "TOGGLE",
+                "id": "1677173766208",
+                "key": "WarningThisWillEnableAllAggregationsAcrossTheTenantProceed",
+                "validations": []
+              },
+              {
+                "config": {
+                  "description": "<p>Once submitted, the export file will be emailed to you as well as exported to the folder location specified in &#34;Get-AggregationScheduleFiles.ps1&#34; &amp; &#34;Manage-AggregationSchedules.ps1&#34;. </p>",
+                  "label": "Export Details!",
+                  "showLabel": true
+                },
+                "elementType": "DESCRIPTION",
+                "id": "1605767772405",
+                "key": "",
+                "validations": []
+              }
+            ],
+            "label": "Aggregation Schedule Manager",
+            "labelStyle": "h1",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "options",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Import"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "1612311221205"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "options",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Back Up And Remove All"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "665969258678"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "options",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Restore All"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "1677173766208"
+              }
+            }
+          ]
+        },
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "options",
+              "operator": "EQ",
+              "valueType": "STRING",
+              "value": "Export"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "SHOW",
+              "config": {
+                "element": "1605767772405"
+              }
+            }
+          ]
+        }
+      ],
+      "created": "2026-08-08T16:42:32.708100002Z",
+      "modified": "2026-08-09T19:56:27.560100754Z"
+    }
+  }
+]

@@ -24,6 +24,26 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'aggregation-exporter-importer',
+      title: 'Automating Aggregation Schedules: A Complete Exporter & Importer',
+      category: 'Architecture',
+      date: 'August 2026',
+      description: 'A comprehensive, self-serve Toolkit utilizing SailPoint Workflows and PAG to give administrators granular, push-button control over their aggregation schedules tenant-wide.',
+      iconBgClass: 'bg-blue-500/10',
+      iconBorderClass: 'border-blue-500/20',
+      iconColorClass: 'text-blue-400',
+      hoverTitleClass: 'group-hover:text-blue-400',
+      readMoreColorClass: 'text-blue-500',
+      gradientClass: 'from-blue-600/20 to-indigo-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+      )
+    },
+    {
       slug: 'certification-email-frequency',
       title: 'Architecting Dynamic Certification Email Frequencies',
       category: 'Architecture',
