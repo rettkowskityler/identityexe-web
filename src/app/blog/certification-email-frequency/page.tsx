@@ -12,7 +12,7 @@ export default function CertificationEmailFrequencyPost() {
     { id: 'identityexe-blueprint', label: 'The IdentityEXE Blueprint: Customizable Cadence' },
     { id: 'user-interface', label: 'Interactive Launcher: The User Interface' },
     { id: 'backend-workflow', label: 'Back End Workflow Architecture' },
-    { id: 'pta-scripts', label: 'Privileged Task Automation (PTA) Scripts' },
+    { id: 'pta-scripts', label: 'Privileged Task Management (PTA) Scripts' },
     { id: 'configuration-downloads', label: 'Framework Downloads' },
     { id: 'conclusion', label: 'Conclusion' }
   ];
@@ -68,7 +68,7 @@ export default function CertificationEmailFrequencyPost() {
                 Leaving this limitation unsolved has severe commercial and operational impacts. Without dynamic reminder cadences, reviewers often ignore weekly digests, leading to a massive deployment lag in campaign completions. This creates manager approval fatigue when they are eventually flooded with manual follow-ups, introduces security vulnerabilities from unreviewed access, and puts the organization at risk of failed compliance audits.
               </p>
               <p className="text-slate-300 mb-8">
-                To overcome this, we rely on a repeatable architectural methodology designed by IdentityEXE. By unifying interactive forms, specialized workflows, and Privileged Task Automation (PTA), this framework ensures your ISC deployment avoids rigid boundaries, giving you complete control over escalation timing and notification routing.
+                To overcome this, we rely on a repeatable architectural methodology designed by IdentityEXE. By unifying interactive forms, specialized workflows, and Privileged Task Management (PTA), this framework ensures your ISC deployment avoids rigid boundaries, giving you complete control over escalation timing and notification routing.
               </p>
 
               <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">The IdentityEXE Blueprint: Customizable Cadence</h3>
@@ -147,7 +147,7 @@ export default function CertificationEmailFrequencyPost() {
                 <li><strong className="text-white">Serial Loop:</strong> A counter variable is initialized at 0. A "While" Serial Loop runs as long as the counter is less than the iterations. A Choice step evaluates the "Send Reminder Now?" flag, executing the reminder script immediately if true, or pausing via a Wait step if false.</li>
               </ul>
 
-              <h3 id="pta-scripts" className="text-2xl text-white mt-12 mb-4">Privileged Task Automation (PTA) Scripts</h3>
+              <h3 id="pta-scripts" className="text-2xl text-white mt-12 mb-4">Privileged Task Management (PTA) Scripts</h3>
               <p className="text-slate-300 mb-6">
                 Because there isn't an OOTB action to manually trigger campaign reminders in a workflow, we take complete ownership of the email delivery using PowerShell executed securely via PTA/PAG.
               </p>

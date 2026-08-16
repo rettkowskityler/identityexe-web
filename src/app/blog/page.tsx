@@ -28,7 +28,7 @@ export default function Blog() {
       title: 'Automating Source Offboarding in Identity Security Cloud',
       category: 'Architecture',
       date: 'August 2026',
-      description: 'A repeatable architectural methodology utilizing a self-serve automated toolkit through SailPoint Workflows and Privileged Task Automation to provide fail-safe source deletion.',
+      description: 'A repeatable architectural methodology utilizing a self-serve automated toolkit through SailPoint Workflows and Privileged Task Management to provide fail-safe source deletion.',
       iconBgClass: 'bg-orange-500/10',
       iconBorderClass: 'border-orange-500/20',
       iconColorClass: 'text-orange-400',

@@ -67,12 +67,12 @@ export default function SourceOffboardingPost() {
                 Leaving this architectural limitation unsolved forces administrators into hours of manual clicking, leading directly to a higher risk of catastrophic breaking changes. If a source tied to critical identity generation is accidentally wiped without careful validation, organizations face failed compliance audits, severe deployment lag, security vulnerabilities due to orphaned access, and devastating provisioning failures caused by "ghost" accounts triggering unexpected manager approval fatigue.
               </p>
               <p className="text-slate-300 mb-8">
-                IdentityEXE designed a repeatable architectural methodology to orchestrate this entire offboarding sequence securely. Rather than relying on simple scripts, this modular framework utilizes a self-serve automated toolkit through SailPoint Workflows and Privileged Task Automation (PTA) to provide fail-safe, multi-threaded source deletion while comprehensively analyzing downstream dependencies.
+                IdentityEXE designed a repeatable architectural methodology to orchestrate this entire offboarding sequence securely. Rather than relying on simple scripts, this modular framework utilizes a self-serve automated toolkit through SailPoint Workflows and Privileged Task Management (PTA) to provide fail-safe, multi-threaded source deletion while comprehensively analyzing downstream dependencies.
               </p>
 
               <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
               <ul className="space-y-4 text-slate-300 mb-8 list-disc pl-5">
-                <li><strong className="text-white">Tech Stack:</strong> 2 Forms + 1 Workflow + 1 Privileged Task Automation (PTA) Script.</li>
+                <li><strong className="text-white">Tech Stack:</strong> 2 Forms + 1 Workflow + 1 Privileged Task Management (PTA) Script.</li>
                 <li><strong className="text-white">High-Level Flow:</strong> The solution revolves around an interactive Workflow Form that allows administrators to select a source and optionally run it in a dry-run state.
                   <ul className="list-circle pl-5 mt-2 space-y-2">
                     <li><strong className="text-white">Preview Mode:</strong> A fail-safe toggle that executes all archival and dependency checks, sending the backup zip to the admin, but merely logging what downstream dependencies would be dismantled without actually destroying data.</li>

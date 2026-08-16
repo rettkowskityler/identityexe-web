@@ -66,7 +66,7 @@ export default function AggregationExporterImporterPost() {
                 Failing to resolve this architectural limitation directly impacts enterprise velocity and compliance. Uncoordinated maintenance windows can result in aggregation collisions, while the inability to instantly restore expected states creates severe deployment lag, introduces security vulnerabilities by delaying access revocation, and triggers massive manager approval fatigue when data syncs fail. 
               </p>
               <p className="text-slate-300 mb-8">
-                IdentityEXE designed a repeatable architectural methodology to eliminate these constraints natively. Rather than deploying isolated scripts, this solution integrates a comprehensive, self-serve Toolkit utilizing SailPoint Workflows and PAG (PowerShell Activity Gateway) to give administrators granular, push-button control over their aggregation schedules tenant-wide.
+                IdentityEXE designed a repeatable architectural methodology to eliminate these constraints natively. Rather than deploying isolated scripts, this solution integrates a comprehensive, self-serve Toolkit utilizing SailPoint Workflows and PAG (Privileged Access Gateway) to give administrators granular, push-button control over their aggregation schedules tenant-wide.
               </p>
 
               <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>

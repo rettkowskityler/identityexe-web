@@ -488,13 +488,13 @@ export default function IdentityTimelineReportPost() {
 
               <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
               <ul className="space-y-3 text-slate-300 mb-6 list-disc pl-5">
-                <li><strong className="text-white">Tech Stack:</strong> 1 Form + 1 Workflow + 1 Privileged Task Automation (PAG/PTA) Gateway + 1 PowerShell Reporting Script.</li>
+                <li><strong className="text-white">Tech Stack:</strong> 1 Form + 1 Workflow + 1 Privileged Task Management (PAG/PTA) Gateway + 1 PowerShell Reporting Script.</li>
                 <li><strong className="text-white">High-Level Flow:</strong>
                   <ol className="space-y-2 mt-2 list-decimal pl-5 text-slate-300">
                     <li>An administrator launches an <strong>Interactive Trigger</strong> workflow from the launchpad.</li>
                     <li>An <strong>Interactive Form</strong> displays, allowing them to select the target identity and the desired event categories to include.</li>
                     <li>The workflow retrieves the requester's email and passes the selections to a secure <strong>Windows Server</strong> on-premises.</li>
-                    <li>Execution is brokered securely using SailPoint's <strong>PAG (Privileged Account Gateway) / PTA (Privileged Task Automation)</strong> connector.</li>
+                    <li>Execution is brokered securely using SailPoint's <strong>PAG (Privileged Access Gateway) / PTA (Privileged Task Management)</strong> connector.</li>
                     <li>The PowerShell script executes on the server, authenticates to ISC via a Personal Access Token (PAT), retrieves and consolidates the event history, exports it to a CSV file, and emails the file to the requester.</li>
                     <li>The administrator receives a confirmation notification directly in their launcher interface.</li>
                   </ol>
@@ -506,7 +506,7 @@ export default function IdentityTimelineReportPost() {
                 Before setting up this solution, ensure you have the following components in place:
               </p>
               <ol className="space-y-3 text-slate-300 mb-8 list-decimal pl-5">
-                <li><strong className="text-white">PAG / PTA Virtual Appliance:</strong> A deployed and configured SailPoint Privileged Account Gateway / Privileged Task Automation VA to bridge cloud workflows to on-premises scripting environments securely.</li>
+                <li><strong className="text-white">PAG / PTA Virtual Appliance:</strong> A deployed and configured SailPoint Privileged Access Gateway / Privileged Task Management VA to bridge cloud workflows to on-premises scripting environments securely.</li>
                 <li><strong className="text-white">Target Windows Server:</strong> A server configured with a PAG agent where your PowerShell script will be stored and executed (e.g. at <code>C:\\Scripts\\CustomIdentityReport.ps1</code>).</li>
                 <li><strong className="text-white">SMTP Server:</strong> An active SMTP server (such as Purelymail, Office 365, or a local SMTP relay) allowing outbound mail to send the CSV reports.</li>
                 <li><strong className="text-white">SailPoint PAT (Personal Access Token):</strong> A service account PAT with scopes to query search, access requests, and work items (<code>idn:sources:read</code> / <code>idn:sources:manage</code> or equivalent query permissions).</li>
