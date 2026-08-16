@@ -1,0 +1,106 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "d41dd92c-9cd1-4ad9-bba4-e693192c7299",
+      "name": "Confirm Source Selection & Options"
+    },
+    "object": {
+      "id": "d41dd92c-9cd1-4ad9-bba4-e693192c7299",
+      "name": "Confirm Source Selection & Options",
+      "description": "",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+        "name": "tylerrettk"
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "sourcesummary",
+          "type": "STRING",
+          "label": "sourcesummary",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "14757962156",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "description": "<p>{{$.form.input.sourcesummary}}</p>",
+                  "label": "Description Field",
+                  "showLabel": false
+                },
+                "elementType": "DESCRIPTION",
+                "id": "1524290280406",
+                "key": "",
+                "validations": []
+              },
+              {
+                "config": {
+                  "default": false,
+                  "falseLabel": "Preview Mode Disabled",
+                  "helpText": "Select this if you would like to see the exports and what would be deleted or modified.",
+                  "label": "Turn On Preview Mode",
+                  "trueLabel": "Preview Mode Enabled"
+                },
+                "elementType": "TOGGLE",
+                "id": "364727969058",
+                "key": "TurnOnPreviewMode",
+                "validations": []
+              },
+              {
+                "config": {
+                  "default": false,
+                  "falseLabel": "No, do not delete this source.",
+                  "helpText": "",
+                  "label": "Confirm Source Should Be Offboarded?",
+                  "trueLabel": "Yes, I want to delete this source."
+                },
+                "elementType": "TOGGLE",
+                "id": "1616191446723",
+                "key": "confirmSourceOffboard",
+                "validations": []
+              }
+            ],
+            "label": "Confirm Source Selection & Options",
+            "labelStyle": "h2",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [
+        {
+          "ruleOperator": "AND",
+          "rules": [
+            {
+              "sourceType": "ELEMENT",
+              "source": "TurnOnPreviewMode",
+              "operator": "EQ",
+              "valueType": "BOOLEAN",
+              "value": "true"
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "HIDE",
+              "config": {
+                "element": "1616191446723"
+              }
+            }
+          ]
+        }
+      ],
+      "created": "2026-08-13T23:03:48.342904813Z",
+      "modified": "2026-08-15T18:46:56.101196487Z"
+    }
+  }
+]

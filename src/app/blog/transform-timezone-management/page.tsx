@@ -109,7 +109,7 @@ export default function TransformTimezoneManagementPost() {
             </div>
             <div className="flex gap-4 mb-8">
               <a 
-                href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(estToUtc, null, 2))}`}
+                href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(estToUtc, null, 2))}`}
                 download="EST To UTC.json"
                 className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
@@ -132,7 +132,7 @@ export default function TransformTimezoneManagementPost() {
             </div>
             <div className="flex gap-4 mb-8">
               <a 
-                href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(utcToEst, null, 2))}`}
+                href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(utcToEst, null, 2))}`}
                 download="UTC To EST.json"
                 className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
@@ -171,14 +171,14 @@ export default function TransformTimezoneManagementPost() {
                 <span className="text-slate-300 font-bold text-sm">Download Workflow Configurations:</span>
                 <div className="flex gap-2">
                   <a 
-                    href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(enterDs, null, 2))}`}
+                    href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(enterDs, null, 2))}`}
                     download="EnterDaylightSavings20260717.json"
                     className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                   >
                     Enter DS.json
                   </a>
                   <a 
-                    href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(exitDs, null, 2))}`}
+                    href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(exitDs, null, 2))}`}
                     download="ExitDaylightSavings20260717.json"
                     className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                   >
@@ -214,7 +214,7 @@ export default function TransformTimezoneManagementPost() {
             </p>
             <div className="flex gap-4 mb-8">
               <a 
-                href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(getLocalMidnight, null, 2))}`}
+                href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(getLocalMidnight, null, 2))}`}
                 download="Employee - Get Current Local Midnight.json"
                 className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
@@ -229,7 +229,7 @@ export default function TransformTimezoneManagementPost() {
             </p>
             <div className="flex gap-4 mb-8">
               <a 
-                href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(cloudLifecycleState, null, 2))}`}
+                href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(cloudLifecycleState, null, 2))}`}
                 download="Employee - CloudLifeCycleState.json"
                 className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
@@ -244,7 +244,7 @@ export default function TransformTimezoneManagementPost() {
             </p>
             <div className="flex gap-4 mb-8">
               <a 
-                href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(hireDate, null, 2))}`}
+                href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(hireDate, null, 2))}`}
                 download="Employee - HireDate.json"
                 className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
@@ -259,7 +259,7 @@ export default function TransformTimezoneManagementPost() {
             </p>
             <div className="flex gap-4 mb-8">
               <a 
-                href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(endOfBusinessDay, null, 2))}`}
+                href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(endOfBusinessDay, null, 2))}`}
                 download="Employee - End of Business Day Disablement.json"
                 className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
@@ -274,7 +274,7 @@ export default function TransformTimezoneManagementPost() {
             </p>
             <div className="flex gap-4 mb-8">
               <a 
-                href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(contractorExpWarning, null, 2))}`}
+                href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(contractorExpWarning, null, 2))}`}
                 download="Employee - Contractor Expiration Warning.json"
                 className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
@@ -289,7 +289,7 @@ export default function TransformTimezoneManagementPost() {
             </p>
             <div className="flex gap-4 mb-8">
               <a 
-                href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(inactive90Days, null, 2))}`}
+                href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(inactive90Days, null, 2))}`}
                 download="Employee - Inactive for 90 Days.json"
                 className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >
@@ -304,7 +304,7 @@ export default function TransformTimezoneManagementPost() {
             </p>
             <div className="flex gap-4 mb-8">
               <a 
-                href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(standardizeDate, null, 2))}`}
+                href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(standardizeDate, null, 2))}`}
                 download="Employee - Standardize Date Format to UTC.json"
                 className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
               >

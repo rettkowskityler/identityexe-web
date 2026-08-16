@@ -155,7 +155,7 @@ export default function DelegatedRoleManagementPost() {
               <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                 <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
                 <a 
-                  href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(roleSelectorFormData, null, 2))}`}
+                  href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(roleSelectorFormData, null, 2))}`}
                   download="RoleSelectorForm_cleansed.json"
                   className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                 >
@@ -181,7 +181,7 @@ export default function DelegatedRoleManagementPost() {
               <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                 <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
                 <a 
-                  href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(roleManagementFormData, null, 2))}`}
+                  href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(roleManagementFormData, null, 2))}`}
                   download="RoleManagementForm_cleansed.json"
                   className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                 >
@@ -218,7 +218,7 @@ export default function DelegatedRoleManagementPost() {
               <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                 <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
                 <a 
-                  href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(roleManagementData, null, 2))}`}
+                  href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(roleManagementData, null, 2))}`}
                   download="RoleManagement_cleansed.json"
                   className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                 >
@@ -253,7 +253,7 @@ export default function DelegatedRoleManagementPost() {
               <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                 <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
                 <a 
-                  href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(addEntitlementData, null, 2))}`}
+                  href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(addEntitlementData, null, 2))}`}
                   download="AddEntitlementFromRole_cleansed.json"
                   className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                 >
@@ -306,7 +306,7 @@ export default function DelegatedRoleManagementPost() {
               <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                 <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
                 <a 
-                  href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(removeEntitlementData, null, 2))}`}
+                  href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(removeEntitlementData, null, 2))}`}
                   download="RemoveEntitlementFromRole_cleansed.json"
                   className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                 >

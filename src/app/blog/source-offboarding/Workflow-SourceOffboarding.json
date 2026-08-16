@@ -1,0 +1,263 @@
+{
+	"name": "Source Offboarding",
+	"description": "",
+	"modified": "2026-08-15T19:07:22.475872295Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+		"name": "tylerrettk"
+	},
+	"definition": {
+		"start": "Interactive Form",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "BooleanEquals",
+						"nextStep": "Windows Server",
+						"variableA.$": "$.interactiveForm1.formData.confirmSourceOffboard",
+						"variableB": true
+					}
+				],
+				"defaultStep": "Interactive Message",
+				"displayName": "Check Confirm Source Deletion",
+				"type": "choice"
+			},
+			"Define Comparison 1": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "BooleanEquals",
+						"nextStep": "Windows Server 1",
+						"variableA.$": "$.interactiveForm1.formData.TurnOnPreviewMode",
+						"variableB": true
+					}
+				],
+				"defaultStep": "Define Comparison",
+				"displayName": "Check Preview Mode",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "sourcesummary",
+							"transforms": [],
+							"variableA": "<div style='background: #fff; border: 1px solid #d32f2f; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); max-width: 650px; font-family: sans-serif; overflow: hidden; margin: 0 auto 15px auto;'><div style='background: #d32f2f; color: #fff; padding: 12px 16px; font-weight: bold; font-size: 14px; display: flex; justify-content: space-between; align-items: center;'><span>Source Deletion Verification</span><span style='background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 12px; font-size: 11px; text-transform: uppercase;'>Critical Action</span></div><div style='padding: 16px;'><p style='margin: 0 0 14px 0; font-size: 13px; color: #333; line-height: 1.5;'>Please verify the source details below before authorizing the offboarding and deletion of this system. This action is <strong>irreversible</strong>.</p><div style='margin-bottom: 16px; background: #fff8e1; border: 1px solid #ffe082; border-left: 4px solid #ffb300; padding: 12px; border-radius: 4px;'><div style='font-size: 11px; font-weight: bold; color: #b78103; text-transform: uppercase; margin-bottom: 6px;'>Automated Deletion Sequence</div><ul style='margin: 0; padding-left: 18px; font-size: 12px; color: #5c4102; line-height: 1.5;'><li><strong>Pre-Flight Checks:</strong> If the source is bound to an Identity Profile or Transform, the script will abort. These bindings must be manually cleaned up before the offboarding sequence can execute.</li><li><strong>Archival:</strong> A full configuration, account, and entitlement backup will be generated and emailed to the address specified in the offboarding script.</li><li><strong>Data Wipe:</strong> All accounts and entitlements on this source will be forcefully bulk deleted.</li><li><strong>Dependencies:</strong> Associated Source Apps and Access Profiles will be disabled and deleted.</li><li><strong>Integrations:</strong> The source will be surgically unlinked from Service Desk (SDIM) configurations.</li></ul></div><div style='display: flex; gap: 10px; margin-bottom: 14px;'><div style='flex: 1; background: #fafafa; border: 1px solid #e0e0e0; padding: 10px; border-radius: 4px;'><span style='font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600;'>Target Source Name</span><br><code style='font-size: 13px; color: #1e88e5; font-weight: bold; word-break: break-all;'>{{$.hTTPRequest.body.name}}</code></div><div style='flex: 1; background: #fafafa; border: 1px solid #e0e0e0; padding: 10px; border-radius: 4px;'><span style='font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600;'>System Type</span><br><span style='font-size: 13px; color: #333; font-weight: bold;'>{{$.hTTPRequest.body.type}}</span></div></div><table style='width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 14px;'><tr style='background: #f5f5f5; border-bottom: 2px solid #e0e0e0; text-align: left;'><th style='padding: 6px 8px; color: #555;'>Configuration Context</th><th style='padding: 6px 8px; color: #555;'>Current Value</th></tr><tr style='border-bottom: 1px solid #eee;'><td style='padding: 6px 8px; font-weight: bold; color: #333;'>Source Owner</td><td style='padding: 6px 8px; color: #555;'>{{$.hTTPRequest.body.owner.name}}</td></tr><tr style='border-bottom: 1px solid #eee;'><td style='padding: 6px 8px; font-weight: bold; color: #333;'>Authoritative Identity Source?</td><td style='padding: 6px 8px; color: #d32f2f; font-weight: bold;'>{{$.hTTPRequest.body.authoritative}}</td></tr><tr style='border-bottom: 1px solid #eee;'><td style='padding: 6px 8px; font-weight: bold; color: #333;'>Source Health Status</td><td style='padding: 6px 8px; color: #555; font-family: monospace;'>{{$.hTTPRequest.body.status}}</td></tr></table><details style='cursor: pointer; background: #f8fafc; padding: 8px; border-radius: 4px; border: 1px solid #e2e8f0;'><summary style='font-weight: bold; font-size: 11px; color: #475569;'>View Extended Technical Identifiers</summary><div style='margin-top: 8px; font-family: monospace; font-size: 11px; color: #334155; border-top: 1px dashed #cbd5e1; padding-top: 6px;'>Source ID: {{$.hTTPRequest.body.id}}<br>Connector: {{$.hTTPRequest.body.connector}}<br>Connection Type: {{$.hTTPRequest.body.connectionType}}<br>Delete Threshold: {{$.hTTPRequest.body.deleteThreshold}}%<br>Description: {{$.hTTPRequest.body.description}}<br>Created: {{$.hTTPRequest.body.created}}</div></details></div></div>"
+						}
+					]
+				},
+				"displayName": "Define Source Summary Variable",
+				"nextStep": "Interactive Form 1",
+				"type": "Mutation"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureDetails": "",
+				"failureName": "Source Lookup Failure!",
+				"type": "failure"
+			},
+			"End Step - Failure 1": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureName": "PowerShell Execution Failed!",
+				"type": "failure"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"End Step - Success 1": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "c15ef66b-994f-4240-ab6b-afb37999c212"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": "json",
+					"url": "https://{tenant}.api.identitynow.com/sources/v1/{{$.interactiveForm.formData.selectSourceToBeOffboarded}}"
+				},
+				"catch": [
+					{
+						"next": "End Step - Failure"
+					}
+				],
+				"displayName": "Get Selected Source",
+				"nextStep": "Define Variable",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Interactive Form": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "3ff0e4ff-e221-4820-8bec-05e8b78ff0b7",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Source Offboarding"
+				},
+				"displayName": "Select Source Form",
+				"nextStep": "HTTP Request",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Form 1": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "d41dd92c-9cd1-4ad9-bba4-e693192c7299",
+					"inputForForm_sourcesummary.$": "$.defineVariable.sourcesummary",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Source Offboarding"
+				},
+				"displayName": "Source Confirmation Form",
+				"nextStep": "Define Comparison 1",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "WARN",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>Please ensure you use the toggle in the previous form before submitting for deletion. No action was taken on the selected role.&nbsp;</p>\n<p>&nbsp;</p>\n<p>If this was a mistake, please open a fresh launcher and select the role again with the toggle selected!</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Source Deletion Not Confirmed"
+				},
+				"displayName": "",
+				"nextStep": "End Step - Success 1",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "{PAG_IP}",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_checksum": null,
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_output_format": "text",
+					"inputForPag_script_arguments": {
+						"Preview": "{{$.interactiveForm1.formData.TurnOnPreviewMode}}",
+						"SourceId": "{{$.interactiveForm.formData.selectSourceToBeOffboarded}}"
+					},
+					"inputForPag_script_path": "C:\\Scripts\\Offboard-Source.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+					"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+						"paramType": "1.1",
+						"refID": "5d3ac03a-2ab5-4847-a856-ace8d0f2a85b"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"catch": [
+					{
+						"next": "End Step - Failure 1"
+					}
+				],
+				"displayName": "Run PowerShell Script (Non Preview)",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server 1": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "{PAG_IP}",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_checksum": null,
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_output_format": "text",
+					"inputForPag_script_arguments": {
+						"Preview": "{{$.interactiveForm1.formData.TurnOnPreviewMode}}",
+						"SourceId": "{{$.interactiveForm.formData.selectSourceToBeOffboarded}}"
+					},
+					"inputForPag_script_path": "C:\\Scripts\\Offboard-Source.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+					"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+						"paramType": "1.1",
+						"refID": "5d3ac03a-2ab5-4847-a856-ace8d0f2a85b"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"catch": [
+					{
+						"next": "End Step - Failure 1"
+					}
+				],
+				"displayName": "Run PowerShell Script (Preview Mode)",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+		"name": "tylerrettk"
+	},
+	"trigger": {
+		"type": "EVENT",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == '803c0c33-e34a-4f4a-a326-57c6cc4de82d')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	}
+}

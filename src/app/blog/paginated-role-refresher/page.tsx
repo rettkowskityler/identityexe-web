@@ -113,7 +113,7 @@ export default function PaginatedRoleRefresherPost() {
               <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                 <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
                 <a 
-                  href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(formRoleSelectorData, null, 2))}`}
+                  href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(formRoleSelectorData, null, 2))}`}
                   download="Form-Role-Selector.json"
                   className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                 >
@@ -144,7 +144,7 @@ export default function PaginatedRoleRefresherPost() {
               <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                 <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
                 <a 
-                  href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(workflowRoleRefresherData, null, 2))}`}
+                  href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(workflowRoleRefresherData, null, 2))}`}
                   download="Workflow-RoleRefresher.json"
                   className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                 >
@@ -186,7 +186,7 @@ export default function PaginatedRoleRefresherPost() {
               <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                 <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
                 <a 
-                  href={`data:application/json;charset=utf-8,\${encodeURIComponent(JSON.stringify(workflowPaginatedData, null, 2))}`}
+                  href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(workflowPaginatedData, null, 2))}`}
                   download="Workflow-PaginatedIdentityRefresher.json"
                   className="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
                 >
