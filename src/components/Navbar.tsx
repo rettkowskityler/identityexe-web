@@ -41,6 +41,12 @@ const Navbar = () => {
             Blog
           </a>
           <a 
+            href="/tools" 
+            className="text-slate-200 font-bold hover:text-brand-accent transition-colors uppercase tracking-widest text-xs"
+          >
+            Tools
+          </a>
+          <a 
             href="/contact" 
             className="bg-brand-blue hover:bg-brand-accent text-white font-black text-xs px-6 py-3 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(81,132,196,0.45)] border border-white/10 hover:shadow-[0_0_25px_rgba(84,199,231,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 btn-shimmer"
           >
@@ -78,6 +84,13 @@ const Navbar = () => {
             className="text-white font-bold hover:text-brand-accent transition-colors uppercase tracking-widest text-sm w-full text-center py-2"
           >
             Blog
+          </a>
+          <a 
+            href="/tools" 
+            onClick={() => setMobileMenuOpen(false)}
+            className="text-white font-bold hover:text-brand-accent transition-colors uppercase tracking-widest text-sm w-full text-center py-2"
+          >
+            Tools
           </a>
           <a 
             href="/contact" 
