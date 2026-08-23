@@ -1,0 +1,300 @@
+{
+	"name": "Workflow PAT Analyzer",
+	"description": "Workflow PAT Analyzer",
+	"modified": "2026-08-21T20:50:15.000562569Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+		"name": "tylerrettk"
+	},
+	"definition": {
+		"start": "HTTP Request",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "BooleanEquals",
+						"nextStep": "HTTP Request 1",
+						"variableA.$": "$.interactiveForm.formData.wantToUpdatePat",
+						"variableB": true
+					}
+				],
+				"defaultStep": "Windows Server",
+				"displayName": "Check If PAT Update",
+				"type": "choice"
+			},
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureDetails": "Script Execution Failed!",
+				"failureName": "Script Execution Failed!",
+				"type": "failure"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"End Step - Success 1": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"Get Identity": {
+				"actionId": "sp:get-identity",
+				"attributes": {
+					"id.$": "$.interactiveForm.formData.selectIdentity"
+				},
+				"displayName": "",
+				"nextStep": "Interactive Form 1",
+				"type": "action",
+				"versionNumber": 2
+			},
+			"HTTP Request": {
+				"actionId": "sp:http",
+				"attributes": {
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "28d5abb0-a616-4edd-bd40-426b66f4f74b"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"url": "https://{tenant}.api.identitynow.com/workflows/v1"
+				},
+				"displayName": "Get Workflows",
+				"nextStep": "Interactive Form",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"HTTP Request 1": {
+				"actionId": "sp:http",
+				"attributes": {
+					"jsonRequestBody.$": "",
+					"method": "get",
+					"param_authenticationRef": "oauth",
+					"param_oauth": {
+						"mapping": {
+							"auth_client_id": "clientId",
+							"auth_client_secret": "clientSecret",
+							"auth_credential_location": "credentialLocation",
+							"auth_token_url": "tokenURL"
+						},
+						"paramID": "6e825815-d032-4764-80c9-06110f732185",
+						"paramType": "1.4",
+						"refID": "28d5abb0-a616-4edd-bd40-426b66f4f74b"
+					},
+					"param_oauth_scopes": {
+						"mapping": {
+							"auth_scopes": "scopes"
+						},
+						"paramID": "",
+						"paramType": "3.1"
+					},
+					"requestContentType": null,
+					"url": "https://{tenant}.api.identitynow.com/personal-access-tokens/v1",
+					"urlParams": {
+						"owner-id": "{{$.interactiveForm.formData.selectIdentity}}"
+					}
+				},
+				"displayName": "Get PATs From Identity",
+				"nextStep": "Get Identity",
+				"type": "action",
+				"versionNumber": 3
+			},
+			"Interactive Form": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "6280e0d0-1685-4ddd-bef6-22dbbc57304f",
+					"inputForForm_array_workflows.$": "$.hTTPRequest.body",
+					"inputForForm_array_workflows_label": "$.name",
+					"inputForForm_array_workflows_subLabel": "$.description",
+					"inputForForm_array_workflows_value": "$.id",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Workflow Analyzer"
+				},
+				"displayName": "Select Workflow & Identity PAT Form",
+				"nextStep": "Define Comparison",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Form 1": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "35c5c22c-51d3-4224-b50f-c41ef0bef9d5",
+					"inputForForm_array_pats.$": "$.hTTPRequest1.body",
+					"inputForForm_array_pats_label": "$.name",
+					"inputForForm_array_pats_subLabel": "$.id",
+					"inputForForm_array_pats_value": "$.id",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Select {{$.getIdentity.attributes.displayName}} PAT To Update"
+				},
+				"displayName": "Select Identity PAT Form",
+				"nextStep": "Windows Server 1",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "INFO",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>{{$.windowsServer.result.data.PATsummary}}</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Least Privileged Scopes Required For Workflow!"
+				},
+				"displayName": "Summary",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message 1": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "ERROR",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>Script Execution Failed</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Script Execution Failed"
+				},
+				"displayName": "Error Message",
+				"nextStep": "End Step - Failure",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message 2": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "INFO",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>{{$.windowsServer1.result.data.PATsummary}}</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "PAT Has Been Updated!"
+				},
+				"displayName": "Success Message & Summary",
+				"nextStep": "End Step - Success 1",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "192.168.0.180",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_auth_username": null,
+					"inputForPag_checksum": "",
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_output_format": "json",
+					"inputForPag_script_arguments": {
+						"WorkflowId": "{{$.interactiveForm.formData.SelectWorkflows}}"
+					},
+					"inputForPag_script_path": "C:\\Scripts\\Update-WorkflowPatScopes.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+					"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+						"paramType": "1.1",
+						"refID": "60e14935-6d55-4df9-9dab-4056fd317a54"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"catch": [
+					{
+						"next": "Interactive Message 1"
+					}
+				],
+				"displayName": "Execute PowerShell Script",
+				"nextStep": "Interactive Message",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server 1": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "192.168.0.180",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_auth_username": null,
+					"inputForPag_checksum": "",
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_output_format": "json",
+					"inputForPag_script_arguments": {
+						"PatId": "{{$.interactiveForm1.formData.selectPat}}",
+						"WorkflowId": "{{$.interactiveForm.formData.SelectWorkflows}}"
+					},
+					"inputForPag_script_path": "C:\\Scripts\\Update-WorkflowPatScopes.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "89a905a7-f270-46c4-9390-17852197b306",
+					"pagSpecId": "7e479f41-e367-4e20-85c8-9e2936aa4658",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "4228baed-9720-4e06-a08d-87efc1c1c4a0",
+						"paramType": "1.1",
+						"refID": "60e14935-6d55-4df9-9dab-4056fd317a54"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"catch": [
+					{
+						"next": "Interactive Message 1"
+					}
+				],
+				"displayName": "Execute PowerShell Script",
+				"nextStep": "Interactive Message 2",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "a5d8bab7bcf44c78b9de71eaf2281cd0",
+		"name": "tylerrettk"
+	},
+	"trigger": {
+		"type": "EVENT",
+		"mode": "advanced",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == '54a2bed9-f92f-41ee-af49-67a6e0b56541')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	}
+}

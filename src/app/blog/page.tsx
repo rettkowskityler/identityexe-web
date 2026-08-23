@@ -24,6 +24,25 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'workflow-scope-analyzer',
+      title: 'Automating Least Privilege: The Workflow Scope Analyzer',
+      category: 'Architecture',
+      date: 'August 2026',
+      description: 'A repeatable architectural methodology designed by IdentityEXE to dynamically calculate and enforce precise HTTP endpoint scopes for SailPoint workflows.',
+      iconBgClass: 'bg-emerald-500/10',
+      iconBorderClass: 'border-emerald-500/20',
+      iconColorClass: 'text-emerald-400',
+      hoverTitleClass: 'group-hover:text-emerald-400',
+      readMoreColorClass: 'text-emerald-500',
+      gradientClass: 'from-emerald-600/20 to-teal-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="4 17 10 11 4 5"></polyline>
+          <line x1="12" y1="19" x2="20" y2="19"></line>
+        </svg>
+      )
+    },
+    {
       slug: 'source-offboarding',
       title: 'Automating Source Offboarding in Identity Security Cloud',
       category: 'Architecture',
