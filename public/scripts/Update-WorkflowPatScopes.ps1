@@ -17,8 +17,8 @@ param (
 
 # --- Hardcoded Configuration ---
 $TenantName = "{tenant}"
-$ClientId = "6e9b65f890184b0bae9fbd0ea3221ae5"
-$ClientSecret = "f96743de16c5616e2d20a4b2373a83ed1d7170aec45db69c8a779e7ebd8a3d6a"
+$ClientId = ""
+$ClientSecret = ""
 $TenantUrl = "https://$TenantName.api.identitynow-demo.com"
 
 # Enforce TLS 1.2 for API connections (Resolves PAG secure channel errors)
