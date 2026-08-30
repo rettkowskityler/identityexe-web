@@ -1,0 +1,68 @@
+{
+	"modified": "2026-08-29T22:48:49.290952453Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "",
+		"name": ""
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "include",
+							"transforms": [],
+							"variableA.$": [
+								"ERROR",
+								"IdentityEXE Employee Directory"
+							]
+						},
+						{
+							"description": "",
+							"name": "exclude",
+							"transforms": [],
+							"variableA": [
+								""
+							]
+						},
+						{
+							"description": "",
+							"name": "messageOnly",
+							"transforms": [],
+							"variableA": "false"
+						}
+					]
+				},
+				"displayName": "Filters",
+				"nextStep": "End Step - Success",
+				"type": "Mutation"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			}
+		}
+	},
+	"trigger": {
+		"type": "EXTERNAL",
+		"attributes": {
+			"clientId": "",
+			"id": "idn:external-http",
+			"integrationId": null,
+			"url": "https://{tenant}.api.identitynow.com/v2024/workflows/execute/external/1234-5678"
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "",
+		"name": ""
+	},
+	"name": "UI CCG Logger",
+	"description": "UI CCG Logger"
+}

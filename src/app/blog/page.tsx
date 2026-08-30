@@ -24,6 +24,27 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'ui-ccg-logs',
+      title: 'Bringing Virtual Appliance CCG Logs Directly into Identity Security Cloud',
+      category: 'Architecture',
+      date: 'August 2026',
+      description: 'A repeatable architectural methodology uniting Windows Tasks and Workflows to consolidate cluster CCG logs directly into the cloud.',
+      iconBgClass: 'bg-purple-500/10',
+      iconBorderClass: 'border-purple-500/20',
+      iconColorClass: 'text-purple-400',
+      hoverTitleClass: 'group-hover:text-purple-400',
+      readMoreColorClass: 'text-purple-500',
+      gradientClass: 'from-purple-600/20 to-blue-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+          <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+          <line x1="6" y1="6" x2="6.01" y2="6"></line>
+          <line x1="6" y1="18" x2="6.01" y2="18"></line>
+        </svg>
+      )
+    },
+    {
       slug: 'workflow-scope-analyzer',
       title: 'Automating Least Privilege: The Workflow Scope Analyzer',
       category: 'Architecture',
