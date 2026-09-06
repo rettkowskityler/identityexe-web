@@ -1,0 +1,101 @@
+{
+	"modified": "2026-09-06T22:01:22.686516393Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "[ADMIN_ID]",
+		"name": "[ADMIN_NAME]"
+	},
+	"definition": {
+		"start": "Windows Server",
+		"steps": {
+			"End Step - Failure": {
+				"actionId": "sp:operator-failure",
+				"displayName": "",
+				"failureDetails": "Revocation Script Failure",
+				"failureName": "Revocation Script Failure",
+				"type": "failure"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"Send Email": {
+				"actionId": "sp:send-email",
+				"attributes": {
+					"body.$": "$.windowsServer.result.data.Body",
+					"context": {},
+					"from": null,
+					"recipientEmailList": [
+						"admin@yourcompany.com"
+					],
+					"replyTo": null,
+					"subject": "LCS Access Removal For {{$.trigger.identity.name}}"
+				},
+				"displayName": "",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 2
+			},
+			"Windows Server": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "[SERVER_IP]",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_output_format": "json",
+					"inputForPag_script_arguments": {
+						"IdentityId": "{{$.trigger.identity.id}}",
+						"TestMode": "false"
+					},
+					"inputForPag_script_path": "C:\\Scripts\\Revoke-LcsAccess.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "[PAG_INSTANCE_ID]",
+					"pagSpecId": "[PAG_SPEC_ID]",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "[PARAM_ID]",
+						"paramType": "1.1",
+						"refID": "[REF_ID]"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"catch": [
+					{
+						"next": "End Step - Failure"
+					}
+				],
+				"displayName": "Execute Revocations & Summary",
+				"nextStep": "Send Email",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"trigger": {
+		"type": "EVENT",
+		"mode": "advanced",
+		"attributes": {
+			"filter.$": "$[?(@.newLifecycleState == 'terminated')]",
+			"id": "idn:identity-lifecycle-state-changed",
+			"integrationId": null
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "[ADMIN_ID]",
+		"name": "[ADMIN_NAME]"
+	},
+	"name": "Per Source LCS Access Removal",
+	"description": ""
+}

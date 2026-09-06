@@ -24,6 +24,24 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'lcs-revoke-sources',
+      title: 'Automating Per-Source Access Revocation',
+      category: 'Architecture',
+      date: 'September 2026',
+      description: 'A repeatable architectural methodology utilizing SailPoint Workflows to intelligently filter and selectively revoke access only on specific sources.',
+      iconBgClass: 'bg-red-500/10',
+      iconBorderClass: 'border-red-500/20',
+      iconColorClass: 'text-red-400',
+      hoverTitleClass: 'group-hover:text-red-400',
+      readMoreColorClass: 'text-red-500',
+      gradientClass: 'from-red-600/20 to-orange-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      )
+    },
+    {
       slug: 'ui-ccg-logs',
       title: 'Bringing Virtual Appliance CCG Logs Directly into Identity Security Cloud',
       category: 'Architecture',

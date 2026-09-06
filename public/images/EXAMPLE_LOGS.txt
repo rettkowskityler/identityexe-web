@@ -1,0 +1,26 @@
+**********************
+Authenticating to https://devrel-ga-20578.api.identitynow-demo.com...
+Fetching sources to determine Revoke Levels...
+Found Full Revoke Source: IdentityEXE Employee Directory
+Found Full Revoke Source: Demo Web Services
+Searching for Identity ID: d9966623c8794714a486cc3dbcea9c97...
+Found Identity ID: d9966623c8794714a486cc3dbcea9c97
+Marked for Revocation: [ENTITLEMENT] Administrator (Source: IdentityEXE Employee Directory)
+Marked for Revocation: [ENTITLEMENT] Financial Reporting (Source: IdentityEXE Employee Directory)
+Marked for Revocation: [ENTITLEMENT] HR Portal Access (Source: IdentityEXE Employee Directory)
+Marked for Revocation: [ENTITLEMENT] Administrator (Source: Demo Web Services)
+Marked for Revocation: [ENTITLEMENT] Financial Reporting (Source: Demo Web Services)
+Marked for Revocation: [ENTITLEMENT] HR Portal Access (Source: Demo Web Services)
+Marked for Revocation: [ACCESS_PROFILE] HR Portal Access (Source: IdentityEXE Employee Directory)
+Submitting Revocation Request for 7 items...
+Revocation request for item 46915599c95334e1bc9ceff3f1a72978 submitted successfully!
+Revocation request for item b1f50cffa8253b0ca130bf17d7158c62 submitted successfully!
+Revocation request for item a0ac64c6c3643680927890d9b234a57f submitted successfully!
+Revocation request for item 0b500faaa1673fccb1df1c50daf35982 submitted successfully!
+Revocation request for item 02c7f63e8fbb3e18973cd7a3960a0281 submitted successfully!
+Revocation request for item 7eb2421a3e8c3b699f96faa5ddb5de01 submitted successfully!
+Revocation request for item b9c087fa9c1148c78155413fb53b33e2 submitted successfully!
+**********************
+Windows PowerShell transcript end
+End time: 20260906145927
+**********************
