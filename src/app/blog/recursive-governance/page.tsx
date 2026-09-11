@@ -1,7 +1,29 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+
+
+export const metadata: Metadata = {
+  title: "Implementing Recursive Governance: Managing SailPoint PATs",
+  description: "Govern SailPoint ISC Personal Access Tokens (PATs) using a custom Web Services Connector to regain full enterprise visibility and security control.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/recursive-governance',
+  },
+  openGraph: {
+    title: "Implementing Recursive Governance: Managing SailPoint PATs | IdentityEXE",
+    description: "Govern SailPoint ISC Personal Access Tokens (PATs) using a custom Web Services Connector to regain full enterprise visibility and security control.",
+    url: 'https://identityexe.com/blog/recursive-governance',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Implementing Recursive Governance: Managing SailPoint PATs | IdentityEXE",
+    description: "Govern SailPoint ISC Personal Access Tokens (PATs) using a custom Web Services Connector to regain full enterprise visibility and security control.",
+  },
+};
 
 export default function RecursiveGovernancePost() {
   const tocItems = [

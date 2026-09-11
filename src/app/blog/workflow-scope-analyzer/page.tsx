@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -5,6 +6,27 @@ import TableOfContents from '../../../components/TableOfContents';
 import formSelectIdentityPatData from './Form-Select-Identity-PAT.json';
 import formSelectWorkflowIdentityPatData from './Form-Select-Workflow-Identity-PAT.json';
 import workflowPatAnalyzerData from './WorkflowPATAnalyzer.json';
+
+
+export const metadata: Metadata = {
+  title: "Automating Least Privilege: The Workflow Scope Analyzer Blueprint",
+  description: "A repeatable architectural methodology designed to dynamically calculate and enforce precise HTTP endpoint scopes for SailPoint workflows.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/workflow-scope-analyzer',
+  },
+  openGraph: {
+    title: "Automating Least Privilege: The Workflow Scope Analyzer Blueprint | IdentityEXE",
+    description: "A repeatable architectural methodology designed to dynamically calculate and enforce precise HTTP endpoint scopes for SailPoint workflows.",
+    url: 'https://identityexe.com/blog/workflow-scope-analyzer',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Automating Least Privilege: The Workflow Scope Analyzer Blueprint | IdentityEXE",
+    description: "A repeatable architectural methodology designed to dynamically calculate and enforce precise HTTP endpoint scopes for SailPoint workflows.",
+  },
+};
 
 export default function WorkflowScopeAnalyzerPost() {
   const tocItems = [

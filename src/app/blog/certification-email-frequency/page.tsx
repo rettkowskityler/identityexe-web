@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -5,6 +6,27 @@ import TableOfContents from '../../../components/TableOfContents';
 import Mermaid from '../../../components/Mermaid';
 import form1Data from './Form-CertificationCampaignFrequencySelector.json';
 import workflow1Data from './Workflow-CertificationReminderFrequency.json';
+
+
+export const metadata: Metadata = {
+  title: "Architecting Dynamic Certification Email Frequencies in SailPoint",
+  description: "An architectural methodology to control escalation timing and notification routing, stopping manager certification approval fatigue in SailPoint ISC.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/certification-email-frequency',
+  },
+  openGraph: {
+    title: "Architecting Dynamic Certification Email Frequencies in SailPoint | IdentityEXE",
+    description: "An architectural methodology to control escalation timing and notification routing, stopping manager certification approval fatigue in SailPoint ISC.",
+    url: 'https://identityexe.com/blog/certification-email-frequency',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Architecting Dynamic Certification Email Frequencies in SailPoint | IdentityEXE",
+    description: "An architectural methodology to control escalation timing and notification routing, stopping manager certification approval fatigue in SailPoint ISC.",
+  },
+};
 
 export default function CertificationEmailFrequencyPost() {
   const tocItems = [

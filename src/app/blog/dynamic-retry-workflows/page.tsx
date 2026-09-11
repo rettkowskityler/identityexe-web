@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -6,6 +7,27 @@ import httpPostData from './DynamicRetryWorkflowHTTPPOSTRequest20260620.json';
 import ntlmData from './DynamicRetryWorkflowNTLMPowerShellScript20260620.json';
 import launchCampaignData from './TestLaunchCertificationCampaign20260620.json';
 import testPowerShellData from './TestPowerShellScriptExecution20260620.json';
+
+
+export const metadata: Metadata = {
+  title: "Dynamic Retry Workflows in SailPoint Identity Security Cloud",
+  description: "Gracefully retry HTTP POST actions and PowerShell scripts to handle downstream dependency delays in SailPoint ISC workflows.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/dynamic-retry-workflows',
+  },
+  openGraph: {
+    title: "Dynamic Retry Workflows in SailPoint Identity Security Cloud | IdentityEXE",
+    description: "Gracefully retry HTTP POST actions and PowerShell scripts to handle downstream dependency delays in SailPoint ISC workflows.",
+    url: 'https://identityexe.com/blog/dynamic-retry-workflows',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Dynamic Retry Workflows in SailPoint Identity Security Cloud | IdentityEXE",
+    description: "Gracefully retry HTTP POST actions and PowerShell scripts to handle downstream dependency delays in SailPoint ISC workflows.",
+  },
+};
 
 export default function DynamicRetryWorkflowsPost() {
   const tocItems = [

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -5,6 +6,27 @@ import TableOfContents from '../../../components/TableOfContents';
 import formRoleSelectorData from './Form-Role-Selector.json';
 import workflowPaginatedData from './Workflow-PaginatedIdentityRefresher.json';
 import workflowRoleRefresherData from './Workflow-RoleRefresher.json';
+
+
+export const metadata: Metadata = {
+  title: "Paginated Role Refresher in SailPoint Identity Security Cloud",
+  description: "A modular implementation framework to intelligently refresh single roles without triggering tenant-wide global updates in SailPoint ISC.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/paginated-role-refresher',
+  },
+  openGraph: {
+    title: "Paginated Role Refresher in SailPoint Identity Security Cloud | IdentityEXE",
+    description: "A modular implementation framework to intelligently refresh single roles without triggering tenant-wide global updates in SailPoint ISC.",
+    url: 'https://identityexe.com/blog/paginated-role-refresher',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Paginated Role Refresher in SailPoint Identity Security Cloud | IdentityEXE",
+    description: "A modular implementation framework to intelligently refresh single roles without triggering tenant-wide global updates in SailPoint ISC.",
+  },
+};
 
 export default function PaginatedRoleRefresherPost() {
   const tocItems = [

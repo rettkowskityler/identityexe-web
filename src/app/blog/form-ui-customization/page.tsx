@@ -1,8 +1,30 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
 import formCustomizationTesterWorkflow from './FormCustomizationTester20260609.json';
+
+
+export const metadata: Metadata = {
+  title: "SailPoint Form UI Customization: Styling Beyond Default Layouts",
+  description: "The ultimate guide to SailPoint ISC Form UI customization with custom HTML elements, advanced CSS layout structures, and dynamic serial loops.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/form-ui-customization',
+  },
+  openGraph: {
+    title: "SailPoint Form UI Customization: Styling Beyond Default Layouts | IdentityEXE",
+    description: "The ultimate guide to SailPoint ISC Form UI customization with custom HTML elements, advanced CSS layout structures, and dynamic serial loops.",
+    url: 'https://identityexe.com/blog/form-ui-customization',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "SailPoint Form UI Customization: Styling Beyond Default Layouts | IdentityEXE",
+    description: "The ultimate guide to SailPoint ISC Form UI customization with custom HTML elements, advanced CSS layout structures, and dynamic serial loops.",
+  },
+};
 
 export default function FormUiCustomizationPost() {
   const tocItems = [

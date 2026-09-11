@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -6,6 +7,27 @@ import formCampaignSelector from './Form-CertificationCampaignSelector.json';
 import formConfirmSelection from './Form-ConfirmCampaignSelection.json';
 import workflowSelection from './Workflow-CertificationSelectionForEscalation.json';
 import workflowEscalator from './Workflow-CertificationEscalator.json';
+
+
+export const metadata: Metadata = {
+  title: "Self-Service Certification Escalation Workflow in SailPoint ISC",
+  description: "Automate overdue certification campaign escalations to reviewers' managers with custom SailPoint workflows and interactive forms.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/certification-escalation-workflow',
+  },
+  openGraph: {
+    title: "Self-Service Certification Escalation Workflow in SailPoint ISC | IdentityEXE",
+    description: "Automate overdue certification campaign escalations to reviewers' managers with custom SailPoint workflows and interactive forms.",
+    url: 'https://identityexe.com/blog/certification-escalation-workflow',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Self-Service Certification Escalation Workflow in SailPoint ISC | IdentityEXE",
+    description: "Automate overdue certification campaign escalations to reviewers' managers with custom SailPoint workflows and interactive forms.",
+  },
+};
 
 export default function CertificationEscalationWorkflowPost() {
   const tocItems = [

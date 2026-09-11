@@ -1,9 +1,31 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
 import formData from './Form-MaintenanceMode_final.json';
 import workflowData from './Workflow-MaintenanceMode_final.json';
+
+
+export const metadata: Metadata = {
+  title: "Bringing IdentityIQ Maintenance Mode to SailPoint ISC",
+  description: "A custom workflow forms solution to gracefully handle SailPoint source downtime and prevent sync disruptions using the Maintenance Guard pattern.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/maintenance-mode-isc',
+  },
+  openGraph: {
+    title: "Bringing IdentityIQ Maintenance Mode to SailPoint ISC | IdentityEXE",
+    description: "A custom workflow forms solution to gracefully handle SailPoint source downtime and prevent sync disruptions using the Maintenance Guard pattern.",
+    url: 'https://identityexe.com/blog/maintenance-mode-isc',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Bringing IdentityIQ Maintenance Mode to SailPoint ISC | IdentityEXE",
+    description: "A custom workflow forms solution to gracefully handle SailPoint source downtime and prevent sync disruptions using the Maintenance Guard pattern.",
+  },
+};
 
 export default function MaintenanceModePost() {
   const tocItems = [

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -421,6 +422,27 @@ if ($RecipientEmail) {
     }
 }
 `;
+
+
+export const metadata: Metadata = {
+  title: "Building a Custom Identity Timeline Report in SailPoint ISC",
+  description: "Consolidate identity lifecycle events, audit trails, provisioning activities, and access requests into a single chronological timeline in SailPoint ISC.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/identity-timeline-report',
+  },
+  openGraph: {
+    title: "Building a Custom Identity Timeline Report in SailPoint ISC | IdentityEXE",
+    description: "Consolidate identity lifecycle events, audit trails, provisioning activities, and access requests into a single chronological timeline in SailPoint ISC.",
+    url: 'https://identityexe.com/blog/identity-timeline-report',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Building a Custom Identity Timeline Report in SailPoint ISC | IdentityEXE",
+    description: "Consolidate identity lifecycle events, audit trails, provisioning activities, and access requests into a single chronological timeline in SailPoint ISC.",
+  },
+};
 
 export default function IdentityTimelineReportPost() {
   const tocItems = [

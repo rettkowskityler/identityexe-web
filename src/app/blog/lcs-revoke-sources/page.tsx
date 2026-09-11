@@ -1,9 +1,31 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
 
 import perSourceWorkflow from './PerSourceLCSAccessRemoval.json';
+
+
+export const metadata: Metadata = {
+  title: "Automating Per-Source Access Revocation in SailPoint ISC",
+  description: "A repeatable SailPoint Workflows architectural framework to intelligently filter and selectively revoke access only on specific sources during LCS changes.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/lcs-revoke-sources',
+  },
+  openGraph: {
+    title: "Automating Per-Source Access Revocation in SailPoint ISC | IdentityEXE",
+    description: "A repeatable SailPoint Workflows architectural framework to intelligently filter and selectively revoke access only on specific sources during LCS changes.",
+    url: 'https://identityexe.com/blog/lcs-revoke-sources',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Automating Per-Source Access Revocation in SailPoint ISC | IdentityEXE",
+    description: "A repeatable SailPoint Workflows architectural framework to intelligently filter and selectively revoke access only on specific sources during LCS changes.",
+  },
+};
 
 export default function LcsRevokeSourcesPost() {
   const tocItems = [

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -14,6 +15,27 @@ import endOfBusinessDay from './Employee - End of Business Day Disablement.json'
 import contractorExpWarning from './Employee - Contractor Expiration Warning.json';
 import inactive90Days from './Employee - Inactive for 90 Days.json';
 import standardizeDate from './Employee - Standardize Date Format to UTC.json';
+
+
+export const metadata: Metadata = {
+  title: "Managing Timezone Transforms & Daylight Savings in SailPoint ISC",
+  description: "A repeatable architectural blueprint to dynamically handle daylight savings offsets in SailPoint Identity Security Cloud using scheduled workflows.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/transform-timezone-management',
+  },
+  openGraph: {
+    title: "Managing Timezone Transforms & Daylight Savings in SailPoint ISC | IdentityEXE",
+    description: "A repeatable architectural blueprint to dynamically handle daylight savings offsets in SailPoint Identity Security Cloud using scheduled workflows.",
+    url: 'https://identityexe.com/blog/transform-timezone-management',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Managing Timezone Transforms & Daylight Savings in SailPoint ISC | IdentityEXE",
+    description: "A repeatable architectural blueprint to dynamically handle daylight savings offsets in SailPoint Identity Security Cloud using scheduled workflows.",
+  },
+};
 
 export default function TransformTimezoneManagementPost() {
   const tocItems = [

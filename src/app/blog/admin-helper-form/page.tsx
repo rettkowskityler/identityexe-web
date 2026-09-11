@@ -1,7 +1,29 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+
+
+export const metadata: Metadata = {
+  title: "Admin Helper Form: Centralized Command Center for SailPoint ISC",
+  description: "Architectural methodology unifying interactive ISC forms with backend workflows and parallelized scripts for centralized administrative operations.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/admin-helper-form',
+  },
+  openGraph: {
+    title: "Admin Helper Form: Centralized Command Center for SailPoint ISC | IdentityEXE",
+    description: "Architectural methodology unifying interactive ISC forms with backend workflows and parallelized scripts for centralized administrative operations.",
+    url: 'https://identityexe.com/blog/admin-helper-form',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Admin Helper Form: Centralized Command Center for SailPoint ISC | IdentityEXE",
+    description: "Architectural methodology unifying interactive ISC forms with backend workflows and parallelized scripts for centralized administrative operations.",
+  },
+};
 
 export default function AdminHelperFormPost() {
   const tocItems = [

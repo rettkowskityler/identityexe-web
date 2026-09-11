@@ -1,7 +1,29 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+
+
+export const metadata: Metadata = {
+  title: "Bringing Virtual Appliance CCG Logs Directly into SailPoint ISC",
+  description: "Unite Windows Tasks and SailPoint Workflows to consolidate cluster Virtual Appliance CCG logs directly into Identity Security Cloud.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/ui-ccg-logs',
+  },
+  openGraph: {
+    title: "Bringing Virtual Appliance CCG Logs Directly into SailPoint ISC | IdentityEXE",
+    description: "Unite Windows Tasks and SailPoint Workflows to consolidate cluster Virtual Appliance CCG logs directly into Identity Security Cloud.",
+    url: 'https://identityexe.com/blog/ui-ccg-logs',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Bringing Virtual Appliance CCG Logs Directly into SailPoint ISC | IdentityEXE",
+    description: "Unite Windows Tasks and SailPoint Workflows to consolidate cluster Virtual Appliance CCG logs directly into Identity Security Cloud.",
+  },
+};
 
 export default function UICCGLogsPost() {
   const tocItems = [

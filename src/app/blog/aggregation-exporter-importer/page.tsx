@@ -1,9 +1,31 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
 import formData from './Form-AggregationScheduleManager.json';
 import workflowData from './Workflow-AggregationScheduleManager.json';
+
+
+export const metadata: Metadata = {
+  title: "Automating Aggregation Schedules: Exporter & Importer for SailPoint ISC",
+  description: "A comprehensive toolkit utilizing SailPoint Workflows and PAG to give administrators granular push-button control over aggregation schedules tenant-wide.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/aggregation-exporter-importer',
+  },
+  openGraph: {
+    title: "Automating Aggregation Schedules: Exporter & Importer for SailPoint ISC | IdentityEXE",
+    description: "A comprehensive toolkit utilizing SailPoint Workflows and PAG to give administrators granular push-button control over aggregation schedules tenant-wide.",
+    url: 'https://identityexe.com/blog/aggregation-exporter-importer',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Automating Aggregation Schedules: Exporter & Importer for SailPoint ISC | IdentityEXE",
+    description: "A comprehensive toolkit utilizing SailPoint Workflows and PAG to give administrators granular push-button control over aggregation schedules tenant-wide.",
+  },
+};
 
 export default function AggregationExporterImporterPost() {
   const tocItems = [

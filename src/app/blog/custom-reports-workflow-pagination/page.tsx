@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -5,6 +6,27 @@ import TableOfContents from '../../../components/TableOfContents';
 import formData from './SelectSourceForReporting_Form_Cleansed.json';
 import launcherData from './InteractiveDisabledAccountsWithAccessReport_Cleansed.json';
 import workerData from './PaginationWorker_Cleansed.json';
+
+
+export const metadata: Metadata = {
+  title: "Custom Reports with Workflow Pagination in SailPoint ISC",
+  description: "A modular architectural framework for building native paginated custom reports within SailPoint Identity Security Cloud workflows.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/custom-reports-workflow-pagination',
+  },
+  openGraph: {
+    title: "Custom Reports with Workflow Pagination in SailPoint ISC | IdentityEXE",
+    description: "A modular architectural framework for building native paginated custom reports within SailPoint Identity Security Cloud workflows.",
+    url: 'https://identityexe.com/blog/custom-reports-workflow-pagination',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Custom Reports with Workflow Pagination in SailPoint ISC | IdentityEXE",
+    description: "A modular architectural framework for building native paginated custom reports within SailPoint Identity Security Cloud workflows.",
+  },
+};
 
 export default function CustomReportsWorkflowPaginationPost() {
   const tocItems = [

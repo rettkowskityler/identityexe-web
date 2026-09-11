@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -8,6 +9,27 @@ import removeEntitlementData from './RemoveEntitlementFromRole_cleansed.json';
 import roleSelectorFormData from './RoleSelectorForm_cleansed.json';
 import roleManagementFormData from './RoleManagementForm_cleansed.json';
 import Mermaid from '../../../components/Mermaid';
+
+
+export const metadata: Metadata = {
+  title: "Delegated Role Management in SailPoint Identity Security Cloud",
+  description: "Empower business owners to securely manage assigned SailPoint ISC roles without administrative bottlenecks using a modular implementation framework.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/delegated-role-management',
+  },
+  openGraph: {
+    title: "Delegated Role Management in SailPoint Identity Security Cloud | IdentityEXE",
+    description: "Empower business owners to securely manage assigned SailPoint ISC roles without administrative bottlenecks using a modular implementation framework.",
+    url: 'https://identityexe.com/blog/delegated-role-management',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Delegated Role Management in SailPoint Identity Security Cloud | IdentityEXE",
+    description: "Empower business owners to securely manage assigned SailPoint ISC roles without administrative bottlenecks using a modular implementation framework.",
+  },
+};
 
 export default function DelegatedRoleManagementPost() {
   const tocItems = [

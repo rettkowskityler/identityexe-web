@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -6,6 +7,27 @@ import form1Data from './Form-Governance_Group_Selector.json';
 import form2Data from './Form-Select_Action_and_User.json';
 import workflow1Data from './Workflow-Allow_Governance_Group_Owners_To_Manage_Groups.json';
 import workflow2Data from './Workflow-Add_Governance_Group_Owners_Automatically_to_Role.json';
+
+
+export const metadata: Metadata = {
+  title: "Self-Service Governance Group Management in SailPoint ISC",
+  description: "Securely delegate governance group administration to group owners using a multi-form pipeline architecture in SailPoint Identity Security Cloud.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/delegated-governance-groups',
+  },
+  openGraph: {
+    title: "Self-Service Governance Group Management in SailPoint ISC | IdentityEXE",
+    description: "Securely delegate governance group administration to group owners using a multi-form pipeline architecture in SailPoint Identity Security Cloud.",
+    url: 'https://identityexe.com/blog/delegated-governance-groups',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Self-Service Governance Group Management in SailPoint ISC | IdentityEXE",
+    description: "Securely delegate governance group administration to group owners using a multi-form pipeline architecture in SailPoint Identity Security Cloud.",
+  },
+};
 
 export default function DelegatedGovernanceGroupsPost() {
   const tocItems = [

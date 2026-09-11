@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -5,6 +6,27 @@ import TableOfContents from '../../../components/TableOfContents';
 import formSourceOffboardingData from './Form-Source-Offboarding.json';
 import formConfirmSelectionData from './Form-Confirm-Source-Selection.json';
 import workflowData from './Workflow-SourceOffboarding.json';
+
+
+export const metadata: Metadata = {
+  title: "Automating Source Offboarding in SailPoint Identity Security Cloud",
+  description: "A self-serve automated toolkit utilizing SailPoint Workflows and Privileged Task Management to provide fail-safe source deletion and dependency teardown.",
+  alternates: {
+    canonical: 'https://identityexe.com/blog/source-offboarding',
+  },
+  openGraph: {
+    title: "Automating Source Offboarding in SailPoint Identity Security Cloud | IdentityEXE",
+    description: "A self-serve automated toolkit utilizing SailPoint Workflows and Privileged Task Management to provide fail-safe source deletion and dependency teardown.",
+    url: 'https://identityexe.com/blog/source-offboarding',
+    type: 'article',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Automating Source Offboarding in SailPoint Identity Security Cloud | IdentityEXE",
+    description: "A self-serve automated toolkit utilizing SailPoint Workflows and Privileged Task Management to provide fail-safe source deletion and dependency teardown.",
+  },
+};
 
 export default function SourceOffboardingPost() {
   const tocItems = [

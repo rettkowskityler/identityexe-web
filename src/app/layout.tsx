@@ -4,14 +4,32 @@ import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://identityexe.com'),
-  title: 'IdentityEXE',
-  description: 'Elite SailPoint Identity Security Cloud implementation and architecture.',
-  keywords: ['SailPoint', 'Identity Security Cloud', 'IdentityIQ', 'IAM Consulting', 'SailPoint Expert Ambassador', 'Cybersecurity', 'Identity Governance'],
+  title: {
+    default: 'IdentityEXE | SailPoint Cloud Architecture & Performance Consulting',
+    template: '%s | IdentityEXE',
+  },
+  description: 'Premier SailPoint Identity Security Cloud implementation and architecture consultancy specializing in complex workflows, forms, and IIQ migrations.',
+  keywords: ['SailPoint', 'Identity Security Cloud', 'SailPoint ISC', 'IdentityIQ', 'IAM Consulting', 'SailPoint Expert Ambassador', 'Cybersecurity', 'Identity Governance', 'SailPoint Workflows'],
+  alternates: {
+    canonical: 'https://identityexe.com',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: 'IdentityEXE | SailPoint Performance Consulting',
     description: 'Premier direct-to-client SailPoint Identity Security Cloud consultancy specializing in IIQ migrations.',
     type: 'website',
     locale: 'en_US',
+    url: 'https://identityexe.com',
     siteName: 'IdentityEXE',
   },
   twitter: {
