@@ -84,7 +84,7 @@ export default function FormUiCustomizationPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-code:text-cyan-300 prose-code:bg-cyan-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Hook: Form Adoption vs Form Function */}
-              <h3 id="hook-form-adoption" className="text-2xl text-white mt-8 mb-4 font-black tracking-tight">Form Adoption vs. Form Function</h3>
+              <h3 id="hook-form-adoption" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">Form Adoption vs. Form Function</h3>
               <p className="text-slate-300 mb-6 leading-relaxed">
                 As Identity Access Management (IAM) professionals, we spend weeks designing robust joiner-mover-leaver processes, automated workflows, and complex approvals. When it's time to roll them out to the business, we deploy them using out-of-the-box, plain-text forms. We tell ourselves that as long as the form is functional and the backend APIs provision access correctly, our job is done.
               </p>

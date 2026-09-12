@@ -81,7 +81,7 @@ export default function AdminHelperFormPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-code:text-cyan-300 prose-code:bg-cyan-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* The Hook & Business Context */}
-              <h3 id="business-context" className="text-2xl text-white mt-8 mb-4 font-black tracking-tight">The Hook & Business Context</h3>
+              <h3 id="business-context" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">The Hook & Business Context</h3>
               <p className="text-slate-300 mb-6 leading-relaxed">
                 Administrators and engineers of SailPoint Identity Security Cloud (ISC) frequently encounter architectural limitations when executing specialized administrative actions, such as bypassing the source owner bug during account resets or surgically disabling health checks. Traditionally, managing these operations requires manual intervention via API tools like Postman or running disparate PowerShell scripts outside of the platform.
               </p>

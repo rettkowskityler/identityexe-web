@@ -81,7 +81,7 @@ export default function CustomReportsWorkflowPaginationPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="executive-summary" className="text-2xl text-white mt-8 mb-4">Executive Summary</h3>
+            <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
             <p className="text-slate-300 mb-4">
               Organizations mandate custom reports to identify security gaps, such as a comprehensive list of all disabled accounts retaining active access entitlements across all sources. While out-of-the-box methods exist using external PowerShell scripts or PTA, native execution inside Identity Security Cloud (ISC) Workflows is required for operational simplicity and reduced maintenance overhead. However, workflows impose a strict execution time limit and lack native pagination support for HTTP requests. If an API returns more than 250 items, standard workflow architectures fail to process the remaining data.
             </p>

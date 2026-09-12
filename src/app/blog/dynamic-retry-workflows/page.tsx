@@ -84,7 +84,7 @@ export default function DynamicRetryWorkflowsPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="executive-summary" className="text-2xl text-white mt-8 mb-4">Executive Summary</h3>
+            <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
             <p className="text-slate-300 mb-4">
               In Identity Security Cloud (ISC), engineering teams often interact with APIs or external scripts that require variable execution time or occasionally fail on the first attempt. Launching a certification campaign and waiting for generation before activating it is a frequent bottleneck. Instead of relying on arbitrary "Wait" commands that congest operations, architectures require a dynamic mechanism to retry, evaluate status, and proceed only when downstream dependencies are ready.
             </p>

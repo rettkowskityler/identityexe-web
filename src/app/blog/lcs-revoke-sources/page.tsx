@@ -58,7 +58,7 @@ export default function LcsRevokeSourcesPost() {
               <span className="text-slate-400">Targeted Access Revocation</span>
             </nav>
 
-            <header className="border-b border-white/10 pb-4 mb-4">
+            <header className="mb-12 border-b border-white/10 pb-8">
             <div className="flex items-center gap-3 mb-6 text-xs font-bold tracking-widest uppercase text-brand-accent">
               <span>Architecture</span>
               <span className="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
@@ -81,7 +81,7 @@ export default function LcsRevokeSourcesPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="executive-summary" className="text-2xl text-white mt-0 mb-4">Executive Summary</h3>
+            <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
             <p className="text-slate-300 mb-4">
               A frequent architectural limitation when configuring SailPoint ISC Identity Profiles is managing how access is removed when a user leaves the company. Out of the box, there is only a global "Remove All Access" toggle. When enabled, it blindly revokes all access across every single source in ISC as soon as a lifecycle state change triggers it.
             </p>

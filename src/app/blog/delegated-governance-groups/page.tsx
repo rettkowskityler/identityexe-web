@@ -83,7 +83,7 @@ export default function DelegatedGovernanceGroupsPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="problem-governance-bottleneck" className="text-2xl text-white mt-8 mb-4">The Problem: The Governance Group Bottleneck</h3>
+            <h3 id="problem-governance-bottleneck" className="text-2xl text-white !mt-0 mb-4">The Problem: The Governance Group Bottleneck</h3>
             <p className="text-slate-300 mb-6">
               If you manage a SailPoint Identity Security Cloud (ISC) environment, you’re likely familiar with the gap with managing governance groups natively. Idea Portal post <a href="https://ideas.sailpoint.com/ideas/GOV-I-1808" target="_blank" rel="noopener noreferrer">GOV-I-1808</a> goes into this lack of functionality with requests for a way so governance group owners can manage their own groups.
             </p>

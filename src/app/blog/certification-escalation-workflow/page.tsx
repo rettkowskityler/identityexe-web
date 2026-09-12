@@ -85,7 +85,7 @@ export default function CertificationEscalationWorkflowPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Introduction/Problem */}
-              <h3 id="problem-certification-crunch" className="text-2xl text-white mt-8 mb-4 font-black tracking-tight">The Problem: The End-of-Quarter Certification Crunch</h3>
+              <h3 id="problem-certification-crunch" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">The Problem: The End-of-Quarter Certification Crunch</h3>
               <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
                 <li><strong className="text-white">The Late-Reviewer Dilemma:</strong> At the end of a quarterly or semi-annual access certification cycle, compliance administrators often face a common problem: a handful of non-responsive certifiers who have let their reviews sit past the deadline.</li>
                 <li><strong className="text-white">The Manual Overhead:</strong> Standard SailPoint Identity Security Cloud (ISC) campaigns allow notifications and automated reminders, but escalating past-due items to a reviewer's manager typically requires manual intervention. An admin has to track down the certifications, identify the managers, and manually reassign each certification inside the UI.</li>

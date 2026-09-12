@@ -80,7 +80,7 @@ export default function RecursiveGovernancePost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="problem-invisible-access" className="text-2xl text-white mt-8 mb-4">The Problem: "Invisible" Access</h3>
+            <h3 id="problem-invisible-access" className="text-2xl text-white !mt-0 mb-4">The Problem: "Invisible" Access</h3>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">The Rise of PATs:</strong> Personal Access Tokens (PATs) are very common in SailPoint ISC implementations due to almost all ISC API endpoints requiring a PAT to execute the call.</li>
               <li><strong className="text-white">The Governance Gap:</strong> Most organizations certify User-to-Group memberships but lose visibility once a user generates a long-lived PAT.</li>

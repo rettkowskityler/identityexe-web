@@ -83,7 +83,7 @@ export default function MaintenanceModePost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="introduction" className="text-2xl text-white mt-8 mb-4">Introduction</h3>
+            <h3 id="introduction" className="text-2xl text-white !mt-0 mb-4">Introduction</h3>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Why:</strong> During a recent IIQ to ISC migration, a key requirement was to replicate IIQ's Maintenance Mode functionality. Currently, ISC does not offer an OOTB equivalent, and there is no immediate roadmap for its implementation. If you need to ensure sources stop "pinging" or interacting with destination applications during a window, this solution is for you.</li>
               <li><strong className="text-white">Problem:</strong> Currently there is no way to ensure that an ISC source doesn't attempt to ping the end system in the UI because of the health check functionality. The only way possible is using a combination of API calls to change the configuration of the source.</li>

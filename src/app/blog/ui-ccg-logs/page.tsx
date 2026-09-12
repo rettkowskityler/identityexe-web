@@ -79,7 +79,7 @@ export default function UICCGLogsPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-purple-400 hover:prose-a:text-purple-300 prose-code:text-purple-300 prose-code:bg-purple-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Business Context */}
-              <h3 id="business-context" className="text-2xl text-white mt-0 mb-4 font-black tracking-tight">Business Context</h3>
+              <h3 id="business-context" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">Business Context</h3>
               <p className="text-slate-300 mb-6 leading-relaxed">
                 When troubleshooting Virtual Appliance (VA) issues, engineers and administrators constantly find themselves needing to manually SSH into the VAs, navigate the file system, and run various <code>grep</code> commands against the <code>ccg.log</code> file. One of the biggest architectural limitations is the need to individually SSH into multiple different VAs in a cluster just to piece together a single execution trail.
               </p>

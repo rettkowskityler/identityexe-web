@@ -501,7 +501,7 @@ export default function IdentityTimelineReportPost() {
 
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
-              <h3 id="introduction" className="text-2xl text-white mt-8 mb-4">Introduction</h3>
+              <h3 id="introduction" className="text-2xl text-white !mt-0 mb-4">Introduction</h3>
               <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
                 <li><strong className="text-white">Why:</strong> During audits, governance reviews, or troubleshooting security events, administrators frequently need a single, chronological timeline of everything that has occurred for a specific identity in Identity Security Cloud (ISC). Reconstructing this path manually requires querying multiple disjointed areas of the UI and APIs—such as search history, access request logs, provisioning tasks, and manual work items.</li>
                 <li><strong className="text-white">Problem:</strong> There is no out-of-the-box UI report in ISC that combines core identity lifecycle states, audit events, account provisioning activity, access requests, and manual work items into a single, unified chronological timeline.</li>

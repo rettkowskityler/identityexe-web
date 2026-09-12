@@ -92,7 +92,7 @@ export default function TransformTimezoneManagementPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="executive-summary" className="text-2xl text-white mt-8 mb-4">Executive Summary</h3>
+            <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
             <p className="text-slate-300 mb-4">
               If your engineering team manages time-dependent logic in SailPoint Identity Security Cloud (ISC), you likely know the severe architectural limitation of daylight savings time. Hardcoding offsets like <code>+5h</code> in a <code>dateMath</code> transform works perfectly until the time changes. Once daylight savings begins or ends, your local midnight calculations, grace periods, and lifecycle states start triggering an hour early or an hour late, breaking time-dependent logic across your tenant.
             </p>

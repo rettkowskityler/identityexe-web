@@ -81,8 +81,8 @@ export default function CertificationEmailFrequencyPost() {
             </header>
 
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
-              
-              <h3 id="business-context" className="text-2xl text-white mt-8 mb-4">The Problem: Rigid Reminders & Approval Fatigue</h3>
+              {/* Business Context */}
+              <h3 id="business-context" className="text-2xl text-white !mt-0 mb-4">The Problem: Rigid Reminders & Approval Fatigue</h3>
               <p className="text-slate-300 mb-6">
                 By default, SailPoint Identity Security Cloud (ISC) sends certification campaign reminders once a week, with no out-of-the-box (OOTB) capability to adjust the frequency or stop them automatically when a campaign is overdue. This rigid architectural limitation creates friction for organizations operating under aggressive compliance deadlines or specialized regulatory requirements.
               </p>
