@@ -1,0 +1,353 @@
+{
+    "description": "Employee Directory - Web Services Connector (Transient Values Pattern)",
+    "owner": {
+        "type": "IDENTITY",
+        "id": "YOUR_ADMIN_IDENTITY_ID",
+        "name": "Administrator"
+    },
+    "cluster": {
+        "type": "CLUSTER",
+        "id": "YOUR_CLUSTER_ID",
+        "name": "Corporate VA Cluster"
+    },
+    "accountCorrelationConfig": {
+        "type": "ACCOUNT_CORRELATION_CONFIG",
+        "id": "YOUR_CORRELATION_CONFIG_ID",
+        "name": "Account Correlation Config"
+    },
+    "accountCorrelationRule": null,
+    "managerCorrelationMapping": null,
+    "managerCorrelationRule": null,
+    "beforeProvisioningRule": null,
+    "schemas": [
+        {
+            "configuration": {},
+            "type": "CONNECTOR_SCHEMA",
+            "id": "YOUR_ACCOUNT_SCHEMA_ID",
+            "name": "account"
+        },
+        {
+            "configuration": {},
+            "type": "CONNECTOR_SCHEMA",
+            "id": "YOUR_GROUP_SCHEMA_ID",
+            "name": "group"
+        }
+    ],
+    "passwordPolicies": null,
+    "features": [
+        "AUTHENTICATE",
+        "ENABLE",
+        "UNLOCK",
+        "PROVISIONING",
+        "PASSWORD",
+        "DELETE"
+    ],
+    "type": "Web Services",
+    "connector": "web-services-angularsc",
+    "connectorClass": "sailpoint.connector.webservices.WebServicesConnector",
+    "connectorAttributes": {
+        "healthCheckTimeout": 30,
+        "clientCertificate": null,
+        "deltaAggregationEnabled": false,
+        "accesstoken": null,
+        "throwProvBeforeRuleException": true,
+        "checkDeletedDisabled": false,
+        "connectionType": "direct",
+        "client_id": "YOUR_CLIENT_ID",
+        "numPartitionThreads": null,
+        "enableProvisioningFeature": true,
+        "password": null,
+        "client_secret": "********",
+        "clientKeySpec": null,
+        "saml_headers_to_exclude": null,
+        "sourceConnected": true,
+        "createAccountWithEntReq": true,
+        "saml_headers": null,
+        "disableCookies": false,
+        "private_key": null,
+        "version": "v2",
+        "labels": [
+            "standard"
+        ],
+        "slpt-source-diagnostics": null,
+        "refresh_token": null,
+        "cloudCacheUpdate": null,
+        "saml_request_body": null,
+        "authenticationMethod": "OAuth2Login",
+        "httpCookieSpecsStandard": "true",
+        "connectorName": "Web Services",
+        "enableStatus": "active=true",
+        "since": null,
+        "status": "SOURCE_STATE_HEALTHY",
+        "supportsDeltaAgg": "true",
+        "lastAggregationDate_group": null,
+        "RevokeAll": true,
+        "resourceOwnerUsername": null,
+        "oAuthJwtHeader": null,
+        "enableHasMore": false,
+        "isGetObjectRequiredForPTA": true,
+        "timeoutInSeconds": "60",
+        "genericWebServiceBaseUrl": "https://api.example.com",
+        "resourceOwnerPassword": null,
+        "connectionParameters": [
+            {
+                "contextUrl": "/users/count",
+                "httpMethodType": "GET",
+                "pagingInitialOffset": 0,
+                "pagingSize": 50,
+                "sequenceNumberForEndpoint": "1",
+                "uniqueNameForEndPoint": "Test Connection",
+                "curlEnabled": false,
+                "operationType": "Test Connection",
+                "body": {
+                    "bodyFormat": "raw"
+                },
+                "responseCode": [
+                    "2**"
+                ]
+            },
+            {
+                "httpMethodType": "GET",
+                "pagingInitialOffset": 0,
+                "sequenceNumberForEndpoint": "2",
+                "uniqueNameForEndPoint": "Account Aggregation",
+                "afterRule": "Transient Values After Aggregation Rule",
+                "rootPath": "$",
+                "body": {
+                    "jsonBody": null,
+                    "bodyFormat": "raw"
+                },
+                "paginationSteps": "TERMINATE_IF $RECORDS_COUNT$ < $limit$\n$offset$ = $offset$ + $limit$\n$endpoint.fullUrl$ = $application.baseUrl$ + \"/users?offset=\" + $offset$ + \"&limit=\" + $limit$",
+                "responseCode": [
+                    "2**"
+                ],
+                "resMappingObj": {
+                    "firstName": "firstName",
+                    "lastName": "lastName",
+                    "permissions": "permissions",
+                    "active": "active",
+                    "id": "id",
+                    "department": "department",
+                    "title": "title",
+                    "email": "email"
+                },
+                "contextUrl": "/users",
+                "pagingSize": 100,
+                "curlEnabled": false,
+                "header": null,
+                "operationType": "Account Aggregation",
+                "xpathNamespaces": null,
+                "parentEndpointName": null
+            },
+            {
+                "resMappingObj": {
+                    "displayName": "displayName",
+                    "description": "description",
+                    "id": "id"
+                },
+                "contextUrl": "/permissions",
+                "httpMethodType": "GET",
+                "pagingInitialOffset": 0,
+                "pagingSize": 50,
+                "sequenceNumberForEndpoint": "3",
+                "uniqueNameForEndPoint": "Group Aggregation",
+                "curlEnabled": false,
+                "operationType": "Group Aggregation",
+                "rootPath": "$",
+                "body": {
+                    "bodyFormat": "raw"
+                },
+                "responseCode": [
+                    "2**"
+                ]
+            },
+            {
+                "resMappingObj": {
+                    "firstName": "firstName",
+                    "lastName": "lastName",
+                    "permissions": "permissions",
+                    "active": "active",
+                    "id": "id",
+                    "department": "department",
+                    "title": "title",
+                    "email": "email"
+                },
+                "contextUrl": "/users/$getobject.nativeIdentity$",
+                "httpMethodType": "GET",
+                "pagingInitialOffset": 0,
+                "pagingSize": 50,
+                "sequenceNumberForEndpoint": "4",
+                "uniqueNameForEndPoint": "Get Object - Single User Aggregation",
+                "curlEnabled": false,
+                "operationType": "Get Object",
+                "rootPath": "$",
+                "body": {
+                    "bodyFormat": "raw"
+                },
+                "responseCode": [
+                    "2**"
+                ]
+            },
+            {
+                "contextUrl": "/users",
+                "httpMethodType": "POST",
+                "pagingInitialOffset": 0,
+                "pagingSize": 50,
+                "sequenceNumberForEndpoint": "5",
+                "uniqueNameForEndPoint": "Create Account",
+                "curlEnabled": false,
+                "operationType": "Create Account",
+                "rootPath": "$",
+                "beforeRule": null,
+                "body": {
+                    "jsonBody": "{\n  \"id\": \"$plan.userid$\",\n  \"firstName\": \"$plan.firstName$\",\n  \"lastName\": \"$plan.lastName$\",\n  \"email\": \"$plan.email$\",\n  \"department\": \"$plan.department$\",\n  \"title\": \"$plan.title$\",\n  \"active\": true,\n  \"permissions\": $plan.permissions$\n}",
+                    "bodyFormat": "raw"
+                },
+                "responseCode": [
+                    "2**"
+                ]
+            },
+            {
+                "contextUrl": "/users/$getObject.nativeIdentity$",
+                "httpMethodType": "PATCH",
+                "pagingInitialOffset": 0,
+                "pagingSize": 50,
+                "sequenceNumberForEndpoint": "6",
+                "uniqueNameForEndPoint": "Update Account",
+                "curlEnabled": false,
+                "operationType": "Update Account",
+                "rootPath": "$",
+                "body": {
+                    "jsonBody": "{\n  \"firstName\": \"$plan.firstName$\",\n  \"lastName\": \"$plan.lastName$\",\n  \"email\": \"$plan.email$\",\n  \"department\": \"$plan.department$\",\n  \"title\": \"$plan.title$\"\n}",
+                    "bodyFormat": "raw"
+                },
+                "responseCode": [
+                    "2**"
+                ]
+            },
+            {
+                "contextUrl": "/users/$getObject.nativeIdentity$",
+                "httpMethodType": "PATCH",
+                "pagingInitialOffset": 0,
+                "pagingSize": 50,
+                "sequenceNumberForEndpoint": "7",
+                "uniqueNameForEndPoint": "Disable Account",
+                "curlEnabled": false,
+                "operationType": "Disable Account",
+                "rootPath": "$",
+                "body": {
+                    "jsonBody": "{\n  \"active\": false\n}",
+                    "bodyFormat": "raw"
+                },
+                "responseCode": [
+                    "2**"
+                ]
+            },
+            {
+                "contextUrl": "/users/$getObject.nativeIdentity$",
+                "httpMethodType": "PATCH",
+                "pagingInitialOffset": 0,
+                "pagingSize": 50,
+                "sequenceNumberForEndpoint": "8",
+                "uniqueNameForEndPoint": "Enable Account",
+                "curlEnabled": false,
+                "operationType": "Enable Account",
+                "rootPath": "$",
+                "body": {
+                    "jsonBody": "{\n  \"active\": true\n}",
+                    "bodyFormat": "raw"
+                },
+                "responseCode": [
+                    "2**"
+                ]
+            },
+            {
+                "contextUrl": "/users/$getObject.nativeIdentity$/permissions",
+                "httpMethodType": "POST",
+                "pagingInitialOffset": 0,
+                "pagingSize": 50,
+                "sequenceNumberForEndpoint": "9",
+                "uniqueNameForEndPoint": "Add Entitlement",
+                "curlEnabled": false,
+                "operationType": "Add Entitlement",
+                "rootPath": "$",
+                "beforeRule": null,
+                "body": {
+                    "jsonBody": "{\n  \"permissions\": [\"$plan.permissions$\"]\n}",
+                    "bodyFormat": "raw"
+                },
+                "responseCode": [
+                    "2**"
+                ]
+            },
+            {
+                "contextUrl": "/users/$getObject.nativeIdentity$/permissions",
+                "httpMethodType": "DELETE",
+                "pagingInitialOffset": 0,
+                "pagingSize": 50,
+                "sequenceNumberForEndpoint": "10",
+                "uniqueNameForEndPoint": "Remove Entitlement",
+                "curlEnabled": false,
+                "operationType": "Remove Entitlement",
+                "rootPath": "$",
+                "body": {
+                    "jsonBody": "{\n  \"permissions\": [\"$plan.permissions$\"]\n}",
+                    "bodyFormat": "raw"
+                },
+                "responseCode": [
+                    "2**"
+                ]
+            }
+        ],
+        "lockStatus": null,
+        "oauth_request_parameters": null,
+        "grant_type": "CLIENT_CREDENTIALS",
+        "partitionAggregationEnabled": false,
+        "throwBeforeAfterRuleException": false,
+        "deleteStatus": null,
+        "hasFullAggregationCompleted": true,
+        "deltaAggregation": null,
+        "token_url": "https://api.example.com/oauth/token",
+        "possibleHttpErrors": {
+            "errorMessages": null,
+            "errorCodes": null
+        },
+        "oauth_body_attrs_to_exclude": null,
+        "throwProvAfterRuleException": true,
+        "lastAggregationDate_account": null,
+        "deleteThresholdPercentage": 100,
+        "fixedPlanMultivaluedAttribute": "true",
+        "oauth_headers": null,
+        "templateApplication": "Web Services Template",
+        "oauth_token_info": "********",
+        "encrypted": "accesstoken,refresh_token,oauth_token_info,client_secret,private_key,private_key_password,clientCertificate,clientKeySpec,resourceOwnerPassword,custom_auth_token_info",
+        "healthy": true,
+        "private_key_password": null,
+        "cloudDisplayName": "Employee Directory - Transient Values",
+        "oAuthJwtPayload": null,
+        "oauth_headers_to_exclude": null,
+        "saml_assertion_url": null,
+        "updateAttrWithChangePassword": false,
+        "beforeProvisioningRule": null,
+        "username": null
+    },
+    "deleteThreshold": 100,
+    "authoritative": false,
+    "healthy": true,
+    "status": "SOURCE_STATE_HEALTHY",
+    "since": null,
+    "connectorId": "web-services-angularsc",
+    "connectorName": "Web Services",
+    "connectionType": "direct",
+    "connectorImplementationId": "web-services-angularsc",
+    "managementWorkgroup": null,
+    "credentialProviderEnabled": false,
+    "category": null,
+    "accountsFile": null,
+    "entitlementFiles": null,
+    "meta": null,
+    "id": "YOUR_SOURCE_ID_V1",
+    "name": "Employee Directory - Transient Values",
+    "created": null,
+    "modified": null
+}

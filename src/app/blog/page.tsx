@@ -24,6 +24,24 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'app-onboarding-transient-values',
+      title: 'Optimizing SailPoint Web Services: The Transient Values Pattern',
+      category: 'Architecture',
+      date: 'September 2026',
+      description: 'A repeatable architectural methodology leveraging in-memory transientValues in After-Operation rules to eliminate the N+1 REST API request explosion and slash aggregation runtimes by over 90%.',
+      iconBgClass: 'bg-cyan-500/10',
+      iconBorderClass: 'border-cyan-500/20',
+      iconColorClass: 'text-cyan-400',
+      hoverTitleClass: 'group-hover:text-cyan-400',
+      readMoreColorClass: 'text-cyan-500',
+      gradientClass: 'from-cyan-600/20 to-blue-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+      )
+    },
+    {
       slug: 'lcs-revoke-sources',
       title: 'Automating Per-Source Access Revocation',
       category: 'Architecture',
