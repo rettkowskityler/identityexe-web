@@ -1,0 +1,164 @@
+[
+  {
+    "version": 1,
+    "self": {
+      "type": "FORM_DEFINITION",
+      "id": "YOUR_FORM_ID_SOURCE_SELECTOR",
+      "name": "Source Selector - Leaver By Source"
+    },
+    "object": {
+      "id": "YOUR_FORM_ID_SOURCE_SELECTOR",
+      "name": "Source Selector - Leaver By Source",
+      "description": "Interactive form for selecting the target source, cleanup mode, and lifecycle states for remediation.",
+      "owner": {
+        "type": "IDENTITY",
+        "id": "YOUR_ADMIN_ID",
+        "name": "admin"
+      },
+      "usedBy": [],
+      "formInput": [
+        {
+          "id": "lcs",
+          "type": "ARRAY",
+          "label": "lcs",
+          "description": ""
+        }
+      ],
+      "formElements": [
+        {
+          "id": "1403869518743",
+          "elementType": "SECTION",
+          "config": {
+            "alignment": "CENTER",
+            "description": "",
+            "formElements": [
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "objectType": "SOURCES"
+                    },
+                    "dataSourceType": "INTERNAL"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Source",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "877341618572",
+                "key": "source",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "options": [
+                        {
+                          "label": "Remove Entitlements & Disable Account",
+                          "sublabel": "",
+                          "value": "Remove Entitlements & Disable Account"
+                        },
+                        {
+                          "label": "Remove Entitlements",
+                          "sublabel": "",
+                          "value": "Remove Entitlements"
+                        },
+                        {
+                          "label": "Disable Accounts",
+                          "sublabel": "",
+                          "value": "Disable Accounts"
+                        },
+                        {
+                          "label": "Preview Only Mode",
+                          "sublabel": "",
+                          "value": "Preview Only Mode"
+                        }
+                      ]
+                    },
+                    "dataSourceType": "STATIC"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Clean Up Options",
+                  "maximum": 1,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "1253271616532",
+                "key": "cleanUpOptions",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "dataSource": {
+                    "config": {
+                      "formInputId": "lcs",
+                      "sortBy": "ASC"
+                    },
+                    "dataSourceType": "FORM_INPUT"
+                  },
+                  "forceSelect": true,
+                  "helpText": "",
+                  "label": "Select Lifecycle States",
+                  "maximum": 30,
+                  "placeholder": "",
+                  "required": true
+                },
+                "elementType": "SELECT",
+                "id": "685344808482",
+                "key": "SelectLifecycleStates",
+                "validations": [
+                  {
+                    "validationType": "DATA_SOURCE"
+                  },
+                  {
+                    "validationType": "REQUIRED"
+                  }
+                ]
+              },
+              {
+                "config": {
+                  "default": false,
+                  "falseLabel": "No",
+                  "helpText": "",
+                  "label": "Send Summary Via Email",
+                  "trueLabel": "Yes"
+                },
+                "elementType": "TOGGLE",
+                "id": "2646141568",
+                "key": "sendSummaryEmail",
+                "validations": []
+              }
+            ],
+            "label": "Select Source To Perform Access Clean Up",
+            "labelStyle": "h2",
+            "showLabel": true
+          },
+          "validations": []
+        }
+      ],
+      "formConditions": [],
+      "created": "2026-09-14T21:23:52.782796026Z",
+      "modified": "2026-09-17T17:12:14.079001883Z"
+    }
+  }
+]

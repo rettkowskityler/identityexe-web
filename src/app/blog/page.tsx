@@ -24,6 +24,27 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'source-access-cleaner',
+      title: 'Automating Source Access Cleanup in Identity Security Cloud',
+      category: 'Architecture',
+      date: 'September 2026',
+      description: 'A repeatable architectural methodology designed by IdentityEXE to safely audit, preview, and remediate lingering access on newly onboarded sources, overcoming native lifecycle state deprovisioning limitations.',
+      iconBgClass: 'bg-indigo-500/10',
+      iconBorderClass: 'border-indigo-500/20',
+      iconColorClass: 'text-indigo-400',
+      hoverTitleClass: 'group-hover:text-indigo-400',
+      readMoreColorClass: 'text-indigo-500',
+      gradientClass: 'from-indigo-600/20 to-blue-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <line x1="17" y1="8" x2="23" y2="14" />
+          <line x1="23" y1="8" x2="17" y2="14" />
+        </svg>
+      )
+    },
+    {
       slug: 'app-onboarding-transient-values',
       title: 'Optimizing SailPoint Web Services: The Transient Values Pattern',
       category: 'Architecture',

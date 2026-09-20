@@ -1,0 +1,315 @@
+{
+	"modified": "2026-09-19T18:46:40.635476626Z",
+	"modifiedBy": {
+		"type": "IDENTITY",
+		"id": "YOUR_ADMIN_ID",
+		"name": "admin"
+	},
+	"definition": {
+		"start": "Define Variable",
+		"steps": {
+			"Define Comparison": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "Interactive Message",
+						"variableA.$": "$.windowsServer.result.data.metrics.status",
+						"variableB": "Clean"
+					}
+				],
+				"defaultStep": "Define Comparison 1",
+				"displayName": "Check If No Users",
+				"type": "choice"
+			},
+			"Define Comparison 1": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "StringEquals",
+						"nextStep": "Interactive Message 1",
+						"variableA.$": "$.interactiveForm.formData.cleanUpOptions",
+						"variableB": "Preview Only Mode"
+					}
+				],
+				"defaultStep": "Interactive Form 1",
+				"displayName": "Check If Preview Mode",
+				"type": "choice"
+			},
+			"Define Comparison 2": {
+				"actionId": "sp:compare-multi-type",
+				"choiceList": [
+					{
+						"comparator": "BooleanEquals",
+						"nextStep": "Windows Server 2",
+						"variableA.$": "$.interactiveForm1.formData.approveOrDeny",
+						"variableB": true
+					}
+				],
+				"defaultStep": "Interactive Message 2",
+				"displayName": "Check Confirmation",
+				"type": "choice"
+			},
+			"Define Variable": {
+				"actionId": "sp:define-variable",
+				"attributes": {
+					"id": "sp:define-variable",
+					"variables": [
+						{
+							"description": "",
+							"name": "EmailToSendTo",
+							"transforms": [],
+							"variableA": "iam-admin@example.com"
+						}
+					]
+				},
+				"displayName": "Set Email Variable",
+				"nextStep": "Windows Server 1",
+				"type": "Mutation"
+			},
+			"End Step - Success": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"End Step - Success 1": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"End Step - Success 2": {
+				"actionId": "sp:operator-success",
+				"displayName": "",
+				"type": "success"
+			},
+			"Interactive Form": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "YOUR_SELECTION_FORM_ID",
+					"inputForForm_array_lcs.$": "$.windowsServer1.result.data",
+					"inputForForm_array_lcs_label": "$.LCSName",
+					"inputForForm_array_lcs_subLabel": "$.IDPName",
+					"inputForForm_array_lcs_value": "$.LCSID",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Select Source For Access Cleanup"
+				},
+				"description": null,
+				"displayName": "Form - Select Options, Sources, LCS",
+				"nextStep": "Windows Server",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Form 1": {
+				"actionId": "sp:interactive-form",
+				"attributes": {
+					"formDefinitionId": "YOUR_CONFIRMATION_FORM_ID",
+					"inputForForm_formTableHtml.$": "$.windowsServer.result.data.formTableHtml",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Select Source For Access Cleanup"
+				},
+				"displayName": "Form - Confirm Removal Summary",
+				"nextStep": "Define Comparison 2",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "INFO",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>{{$.windowsServer.result.data.formTableHtml}}</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Clean Source! "
+				},
+				"displayName": "Message - Clean Source",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message 1": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "INFO",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>{{$.windowsServer.result.data.formTableHtml}}</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Preview Mode Summary"
+				},
+				"displayName": "Message - Preview Mode Summary",
+				"nextStep": "End Step - Success",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message 2": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "INFO",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>Please re-run this form if you want to run the clean up!&nbsp;</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Denied Clean Up!"
+				},
+				"displayName": "Message - Denied Clean Up",
+				"nextStep": "End Step - Success 2",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Interactive Message 3": {
+				"actionId": "sp:interactive-message",
+				"attributes": {
+					"category": "INFO",
+					"interactiveProcessId.$": "$.trigger.interactiveProcessId",
+					"message": "<p>You can monitor the clean up requests in the Activities page or re-run with preview mode to see what access was not removed.&nbsp;</p>",
+					"ownerId.$": "$.trigger.launchedBy.id",
+					"title": "Clean Up Submitted!"
+				},
+				"displayName": "Message - Clean Up Submitted",
+				"nextStep": "End Step - Success 1",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "YOUR_WINDOWS_PAG_HOST",
+					"inputForPag_auth_password": "secrets://your-vault/safe/password",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_auth_username": "secrets://your-vault/safe/username",
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_address": "",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_kdc_realm": "",
+					"inputForPag_output_format": "json",
+					"inputForPag_script_arguments": {
+						"ActionMode": "{{$.interactiveForm.formData.cleanUpOptions}}",
+						"EmailToSendTo": "{{$.defineVariable.emailToSendTo}}",
+						"LifecycleStateId": "{{$.interactiveForm.formData.SelectLifecycleStates}}",
+						"SourceName": "{{$.interactiveForm.formData.source}}",
+						"SummaryEmail": "{{$.interactiveForm.formData.sendSummaryEmail}}"
+					},
+					"inputForPag_script_path": "C:\\SailPoint\\Scripts\\source-access-cleaner\\Get-RemovalSummary.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "YOUR_PAG_INSTANCE_ID",
+					"pagSpecId": "YOUR_PAG_SPEC_ID",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "YOUR_PARAM_ID",
+						"paramType": "1.1",
+						"refID": "YOUR_REF_ID"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"displayName": "Run Get-RemovalSummary",
+				"nextStep": "Define Comparison",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server 1": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "YOUR_WINDOWS_PAG_HOST",
+					"inputForPag_auth_password": "secrets://your-vault/safe/password",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_auth_username": "secrets://your-vault/safe/username",
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_address": "",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_kdc_realm": "",
+					"inputForPag_output_format": "json",
+					"inputForPag_script_arguments": null,
+					"inputForPag_script_path": "C:\\SailPoint\\Scripts\\source-access-cleaner\\Get-LifecycleStates.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "YOUR_PAG_INSTANCE_ID",
+					"pagSpecId": "YOUR_PAG_SPEC_ID",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "YOUR_PARAM_ID",
+						"paramType": "1.1",
+						"refID": "YOUR_REF_ID"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"displayName": "Run Get-LifecycleStates",
+				"nextStep": "Interactive Form",
+				"type": "action",
+				"versionNumber": 1
+			},
+			"Windows Server 2": {
+				"actionId": "sp:pag-windows-server",
+				"attributes": {
+					"inputForPag_address": "YOUR_WINDOWS_PAG_HOST",
+					"inputForPag_auth_password": "secrets://your-vault/safe/password",
+					"inputForPag_auth_type": "ntlm",
+					"inputForPag_auth_username": "secrets://your-vault/safe/username",
+					"inputForPag_command_timeout_seconds": 3600,
+					"inputForPag_configuration_name": "Microsoft.PowerShell",
+					"inputForPag_kdc_address": "",
+					"inputForPag_kdc_port": 88,
+					"inputForPag_kdc_protocol": "udp",
+					"inputForPag_kdc_realm": "",
+					"inputForPag_output_format": "json",
+					"inputForPag_script_arguments": {
+						"remediationMap": "{{$.windowsServer.result.data.remediationMap.JSON()}}"
+					},
+					"inputForPag_script_path": "C:\\SailPoint\\Scripts\\source-access-cleaner\\Invoke-AccessRemediation.ps1",
+					"inputForPag_use_ssl": true,
+					"inputForPag_verify_cert": false,
+					"pagCommandType": "pag:windows_server:execute_powershell_script",
+					"pagInstanceId": "YOUR_PAG_INSTANCE_ID",
+					"pagSpecId": "YOUR_PAG_SPEC_ID",
+					"param_connType": "paramInline",
+					"param_credential": {
+						"mapping": {
+							"auth_password": "password",
+							"auth_username": "username"
+						},
+						"paramID": "YOUR_PARAM_ID",
+						"paramType": "1.1",
+						"refID": "YOUR_REF_ID"
+					},
+					"param_credentialType": "paramSPS",
+					"param_kerberosType": "paramInline"
+				},
+				"displayName": "Run Invoke-AccessRemediation",
+				"nextStep": "Interactive Message 3",
+				"type": "action",
+				"versionNumber": 1
+			}
+		}
+	},
+	"trigger": {
+		"type": "EVENT",
+		"attributes": {
+			"filter.$": "$[?(@.workflowId == 'YOUR_WORKFLOW_ID')]",
+			"id": "idn:interactive-process-launched",
+			"integrationId": null
+		}
+	},
+	"creator": {
+		"type": "IDENTITY",
+		"id": "YOUR_ADMIN_ID",
+		"name": "admin"
+	},
+	"name": "Source Access Cleaner",
+	"description": "Automated workflow for evaluating and remediating source accounts and entitlements by lifecycle state."
+}
