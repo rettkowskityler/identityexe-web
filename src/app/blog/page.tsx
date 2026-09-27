@@ -24,6 +24,27 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'webservices-attribute-sync',
+      title: 'Mastering SailPoint Web Services Attribute Sync: 5 Enterprise Integration Patterns',
+      category: 'Architecture',
+      date: 'September 2026',
+      description: 'A repeatable architectural methodology designed by IdentityEXE to master Web Services attribute synchronization in SailPoint ISC, overcoming partial update limitations, PUT data loss, and retry locks.',
+      iconBgClass: 'bg-blue-500/10',
+      iconBorderClass: 'border-blue-500/20',
+      iconColorClass: 'text-blue-400',
+      hoverTitleClass: 'group-hover:text-blue-400',
+      readMoreColorClass: 'text-blue-500',
+      gradientClass: 'from-blue-600/20 to-cyan-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m16 3 4 4-4 4" />
+          <path d="M20 7H4" />
+          <path d="m8 21-4-4 4-4" />
+          <path d="M4 17h16" />
+        </svg>
+      )
+    },
+    {
       slug: 'source-access-cleaner',
       title: 'Automating Source Access Cleanup in Identity Security Cloud',
       category: 'Architecture',

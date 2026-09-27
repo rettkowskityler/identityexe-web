@@ -4,6 +4,8 @@ const BASE_URL = 'https://identityexe.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = [
+    { slug: 'webservices-attribute-sync', date: '2026-09-27' },
+    { slug: 'source-access-cleaner', date: '2026-09-20' },
     { slug: 'app-onboarding-transient-values', date: '2026-09-13' },
     { slug: 'lcs-revoke-sources', date: '2026-09-06' },
     { slug: 'ui-ccg-logs', date: '2026-08-20' },
