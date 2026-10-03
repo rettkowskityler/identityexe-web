@@ -1,0 +1,158 @@
+{
+  "modified": "2026-10-02T23:03:05.182843811Z",
+  "modifiedBy": {
+    "type": "IDENTITY",
+    "id": "2c91808568c529c60168cca6930f1ecf",
+    "name": "admin"
+  },
+  "definition": {
+    "start": "Define Variable",
+    "steps": {
+      "Define Comparison": {
+        "actionId": "sp:compare-multi-type",
+        "choiceList": [
+          {
+            "comparator": "StringEquals",
+            "nextStep": "End Step - Success",
+            "variableA.$": "$.windowsServer.result.data.status",
+            "variableB": "success"
+          }
+        ],
+        "defaultStep": "End Step - Failure 1",
+        "displayName": "Check For Success",
+        "type": "choice"
+      },
+      "Define Variable": {
+        "actionId": "sp:define-variable",
+        "attributes": {
+          "id": "sp:define-variable",
+          "variables": [
+            {
+              "description": "",
+              "name": "EmailToSendTo",
+              "transforms": [],
+              "variableA": "identity-team@yourcompany.com"
+            },
+            {
+              "description": "",
+              "name": "ErrorThresholdPercent",
+              "transforms": [],
+              "variableA": "3.0"
+            },
+            {
+              "description": "",
+              "name": "LookbackHours",
+              "transforms": [],
+              "variableA": "24"
+            },
+            {
+              "description": "",
+              "name": "ExcludedSources",
+              "transforms": []
+            },
+            {
+              "description": "",
+              "name": "CreateTickets",
+              "transforms": [],
+              "variableA": "true"
+            },
+            {
+              "description": "",
+              "name": "TicketEmailToSendTo",
+              "transforms": [],
+              "variableA": "servicedesk-incidents@yourcompany.com"
+            }
+          ]
+        },
+        "displayName": "Set Parameters",
+        "nextStep": "Windows Server",
+        "type": "Mutation"
+      },
+      "End Step - Failure": {
+        "actionId": "sp:operator-failure",
+        "displayName": "",
+        "failureDetails": "PowerShell Script Execution Failure",
+        "failureName": "PowerShell Script Execution Failure",
+        "type": "failure"
+      },
+      "End Step - Failure 1": {
+        "actionId": "sp:operator-failure",
+        "displayName": "",
+        "failureDetails": "PowerShell Script Encountered Errors",
+        "failureName": "PowerShell Script Encountered Errors",
+        "type": "failure"
+      },
+      "End Step - Success": {
+        "actionId": "sp:operator-success",
+        "description": null,
+        "displayName": "",
+        "type": "success"
+      },
+      "Windows Server": {
+        "actionId": "sp:pag-windows-server",
+        "attributes": {
+          "inputForPag_address": "10.0.0.50",
+          "inputForPag_auth_type": "ntlm",
+          "inputForPag_checksum": "",
+          "inputForPag_command_timeout_seconds": 3600,
+          "inputForPag_configuration_name": "Microsoft.PowerShell",
+          "inputForPag_kdc_port": 88,
+          "inputForPag_kdc_protocol": "udp",
+          "inputForPag_output_format": "json",
+          "inputForPag_script_arguments": {
+            "CreateTickets": "{{$.defineVariable.createTickets}}",
+            "EmailToSendTo": "{{$.defineVariable.emailToSendTo}}",
+            "ErrorThresholdPercent": "{{$.defineVariable.errorThresholdPercent}}",
+            "ExcludedSources": "{{$.defineVariable.excludedSources}}",
+            "LookbackHours": "{{$.defineVariable.lookbackHours}}",
+            "TicketEmailToSendTo": "{{$.defineVariable.ticketEmailToSendTo}}"
+          },
+          "inputForPag_script_path": "C:\\Scripts\\Source-Health-Report.ps1",
+          "inputForPag_use_ssl": true,
+          "inputForPag_verify_cert": false,
+          "pagCommandType": "pag:windows_server:execute_powershell_script",
+          "pagInstanceId": "00000000-0000-0000-0000-000000000000",
+          "pagSpecId": "00000000-0000-0000-0000-000000000000",
+          "param_connType": "paramInline",
+          "param_credential": {
+            "mapping": {
+              "auth_password": "password",
+              "auth_username": "username"
+            },
+            "paramID": "00000000-0000-0000-0000-000000000000",
+            "paramType": "1.1",
+            "refID": "00000000-0000-0000-0000-000000000000"
+          },
+          "param_credentialType": "paramSPS",
+          "param_kerberosType": "paramInline"
+        },
+        "catch": [
+          {
+            "next": "End Step - Failure"
+          }
+        ],
+        "displayName": "Execute PowerShell Script",
+        "nextStep": "Define Comparison",
+        "type": "action",
+        "versionNumber": 1
+      }
+    }
+  },
+  "trigger": {
+    "type": "SCHEDULED",
+    "attributes": {
+      "cronString": "0 * * * *",
+      "frequency": "cronSchedule",
+      "id": "idn:cron-schedule",
+      "integrationId": null,
+      "timeZone": "America/Phoenix"
+    }
+  },
+  "creator": {
+    "type": "IDENTITY",
+    "id": "2c91808568c529c60168cca6930f1ecf",
+    "name": "admin"
+  },
+  "name": "Source Health Reporting",
+  "description": "Source Health Reporting"
+}

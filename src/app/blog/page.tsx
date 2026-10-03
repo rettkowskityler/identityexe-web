@@ -24,6 +24,24 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'comprehensive-source-reporting',
+      title: 'Comprehensive SailPoint Source Health Reporting & Automated Incident Alerting',
+      category: 'Architecture',
+      date: 'October 2026',
+      description: 'A repeatable architectural methodology designed by IdentityEXE to continuously audit tenant-wide source health across eight core operations, detect silent aggregation and provisioning failures, and dispatch automated ITSM incident alerts.',
+      iconBgClass: 'bg-emerald-500/10',
+      iconBorderClass: 'border-emerald-500/20',
+      iconColorClass: 'text-emerald-400',
+      hoverTitleClass: 'group-hover:text-emerald-400',
+      readMoreColorClass: 'text-emerald-500',
+      gradientClass: 'from-emerald-600/20 to-teal-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+        </svg>
+      )
+    },
+    {
       slug: 'webservices-attribute-sync',
       title: 'Mastering SailPoint Web Services Attribute Sync: 5 Enterprise Integration Patterns',
       category: 'Architecture',
