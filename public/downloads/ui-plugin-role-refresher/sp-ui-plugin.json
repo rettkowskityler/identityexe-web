@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "manifest": {
+    "alias": "role-refresher",
+    "name": {
+      "en": "Role Refresher & Criteria Simulator"
+    },
+    "description": {
+      "en": "Interactive ISC role membership preview and targeted identity recalculation simulator"
+    },
+    "apiScopes": [
+      "sp:scopes:all"
+    ],
+    "contentSecurityPolicies": {},
+    "permissionPolicy": {},
+    "iframeAllow": {},
+    "state": "ENABLED",
+    "slots": [
+      {
+        "slotId": "full-page"
+      }
+    ]
+  },
+  "build": {
+    "outDir": "./dist/role-refresher/browser",
+    "port": 4200
+  }
+}

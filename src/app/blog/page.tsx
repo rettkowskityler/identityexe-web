@@ -24,6 +24,26 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'ui-plugin-role-refresher',
+      title: 'UI Plugin Role Refresher in Identity Security Cloud',
+      category: 'Architecture',
+      date: 'October 2026',
+      description: 'A repeatable architectural methodology designed by IdentityEXE to simulate complex role criteria trees client-side, preview live membership deltas, catch deprovisioning risks, and dispatch targeted identity recalculations via the SailPoint UI Plugin SDK.',
+      iconBgClass: 'bg-cyan-500/10',
+      iconBorderClass: 'border-cyan-500/20',
+      iconColorClass: 'text-cyan-400',
+      hoverTitleClass: 'group-hover:text-cyan-400',
+      readMoreColorClass: 'text-cyan-500',
+      gradientClass: 'from-cyan-600/20 to-blue-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M22 11l-3-3m0 0l-3 3m3-3v8" />
+        </svg>
+      )
+    },
+    {
       slug: 'comprehensive-source-reporting',
       title: 'Comprehensive SailPoint Source Health Reporting & Automated Incident Alerting',
       category: 'Architecture',
