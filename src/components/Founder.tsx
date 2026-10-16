@@ -2,7 +2,7 @@ import React from 'react';
 
 const Founder = () => {
   return (
-    <section className="py-32 px-6 relative z-10 w-full" id="founder">
+    <section className="pt-12 pb-32 px-6 relative z-10 w-full" id="founder">
       <div className="max-w-6xl mx-auto glass-card rounded-[3rem] p-8 md:p-16 relative overflow-hidden animate-fade-in-up">
         {/* Colorful Glow Background Accents */}
         <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-brand-accent/10 blur-[150px] -translate-y-1/2 -z-10 rounded-full"></div>
@@ -37,13 +37,13 @@ const Founder = () => {
             {/* Custom Quote Highlights block */}
             <div className="border-l-4 border-brand-accent pl-6 my-8 py-1 bg-white/3 rounded-r-2xl border-white/5 pr-4">
               <p className="text-white font-medium text-lg md:text-xl italic leading-relaxed">
-                "When you hire IdentityEXE, you aren't handed off to junior developers. You get an architect who understands the platform parameter-by-parameter."
+                "When you hire IdentityEXE, you aren't handed off to junior developers. You work directly with an architect who knows the platform inside and out."
               </p>
             </div>
 
             <div className="space-y-6 text-slate-300 leading-relaxed text-base md:text-lg font-light">
               <p>
-                My mission is to deliver SailPoint solutions that work. 
+                My mission is to deliver SailPoint solutions tailored to your organization.
               </p>
               <p>
                 I founded <strong className="text-white font-medium">IdentityEXE</strong> to provide direct-to-client expertise. 

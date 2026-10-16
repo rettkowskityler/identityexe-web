@@ -64,8 +64,7 @@ export default function AdminHelperFormPost() {
                 <span>July 2026</span>
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-                The Admin Helper Form: <br />
-                <span className="text-cyan-500 text-2xl md:text-3xl">Architecting a Centralized Command Center for Advanced Operations</span>
+                The Admin Helper Form: Architecting a Centralized Command Center
               </h1>
               <div className="flex items-center gap-4 text-sm text-slate-400 font-medium">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-600 to-teal-600 flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">

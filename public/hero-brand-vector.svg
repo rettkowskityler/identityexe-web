@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Solid Cyan Primary Chevron Gradient (Subtle Brand Depth) -->
+    <linearGradient id="cyan-chevron-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#54c7e7" />
+      <stop offset="100%" stop-color="#47b8dc" />
+    </linearGradient>
+
+    <!-- Top-Right Wing 3D Shadow Gradient -->
+    <linearGradient id="wing-top-grad" x1="1800" y1="0" x2="1450" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5d94d8" stop-opacity="0.95" />
+      <stop offset="40%" stop-color="#3c6ca8" stop-opacity="0.72" />
+      <stop offset="80%" stop-color="#13294b" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#02081b" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Bottom-Right Wing 3D Shadow Gradient -->
+    <linearGradient id="wing-bottom-grad" x1="1800" y1="1080" x2="1450" y2="650" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4b83c4" stop-opacity="0.9" />
+      <stop offset="40%" stop-color="#325d93" stop-opacity="0.68" />
+      <stop offset="80%" stop-color="#102442" stop-opacity="0.32" />
+      <stop offset="100%" stop-color="#02081b" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Vertical Fade Stroke for Echo Chevrons -->
+    <linearGradient id="echo-stroke-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5184c4" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#54c7e7" stop-opacity="1" />
+      <stop offset="100%" stop-color="#5184c4" stop-opacity="0.8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Deep Slate Brand Canvas -->
+  <rect width="1920" height="1080" fill="#02081b" />
+
+  <!-- Cascading Parallel Echo Chevrons -->
+  <g stroke="url(#echo-stroke-grad)" stroke-width="2.25" fill="none">
+    <polyline points="293.2,0 664.7,540 293.2,1080" opacity="0.03" />
+    <polyline points="353.2,0 724.7,540 353.2,1080" opacity="0.06" />
+    <polyline points="413.2,0 784.7,540 413.2,1080" opacity="0.10" />
+    <polyline points="473.2,0 844.7,540 473.2,1080" opacity="0.15" />
+    <polyline points="533.2,0 904.7,540 533.2,1080" opacity="0.21" />
+    <polyline points="593.2,0 964.7,540 593.2,1080" opacity="0.29" />
+    <polyline points="653.2,0 1024.7,540 653.2,1080" opacity="0.38" />
+    <polyline points="713.2,0 1084.7,540 713.2,1080" opacity="0.48" />
+    <polyline points="773.2,0 1144.7,540 773.2,1080" opacity="0.60" />
+    <polyline points="833.2,0 1204.7,540 833.2,1080" opacity="0.74" />
+  </g>
+
+  <!-- Primary Solid Cyan Brand Chevron (#54c7e7) -->
+  <polygon
+    points="893.2,0 1134.2,0 1505.7,540 1134.2,1080 893.2,1080 1264.7,540"
+    fill="url(#cyan-chevron-grad)"
+  />
+
+  <!-- Top-Right Shaded Wing of the EXE 'X' -->
+  <polygon
+    points="1636.3,0 1877.4,0 1532.7,501.0 1412.3,325.6"
+    fill="url(#wing-top-grad)"
+  />
+
+  <!-- Bottom-Right Shaded Wing of the EXE 'X' -->
+  <polygon
+    points="1412.3,754.4 1532.7,579.0 1877.4,1080 1636.3,1080"
+    fill="url(#wing-bottom-grad)"
+  />
+</svg>

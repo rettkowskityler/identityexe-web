@@ -76,8 +76,7 @@ export default function TransformTimezoneManagementPost() {
               <span>July 2026</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-              Managing Timezone Transforms & Daylight Savings <br />
-              <span className="text-brand-blue text-2xl md:text-3xl">(Architectural Implementation Framework)</span>
+              Managing Timezone Transforms & Daylight Savings
             </h1>
             <div className="flex items-center gap-4 text-sm text-slate-400 font-medium">
               <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-brand-accent flex items-center justify-center text-white font-bold text-lg shadow-lg overflow-hidden p-[2px]">
