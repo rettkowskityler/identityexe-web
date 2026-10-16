@@ -96,8 +96,8 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* Three-Line Left-Aligned Lockup with Clean Vertical Separation */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 animate-fade-in-up">
+      {/* Three-Line Left-Aligned Lockup Hugging the Left Side of the Viewport */}
+      <div className="relative z-10 w-full px-7 sm:px-11 md:px-16 lg:px-24 xl:px-28 animate-fade-in-up">
         <div className="max-w-2xl">
           <p className="text-brand-accent font-bold uppercase tracking-[0.35em] text-xs sm:text-sm mb-6">
             SailPoint Consulting

@@ -34,7 +34,7 @@ const Navbar = () => {
           : 'py-5 bg-transparent border-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+      <div className="w-full px-7 sm:px-11 md:px-16 lg:px-24 xl:px-28 flex items-center justify-between">
         <a href="/" className="flex items-center justify-center no-underline group">
           <img
             src="/logo.svg"
