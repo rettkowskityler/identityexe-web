@@ -53,12 +53,12 @@ export default function ComprehensiveSourceReportingPost() {
       <Navbar />
 
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-          <aside className="lg:col-span-1 sticky top-32 hidden lg:block">
+        <div className="max-w-[1600px] mx-auto grid grid-cols-1 xl:grid-cols-[260px_minmax(0,1fr)_260px] 2xl:grid-cols-[280px_minmax(0,1fr)_280px] gap-8 items-start">
+          <aside className="xl:col-start-1 sticky top-32 hidden xl:block">
             <TableOfContents items={tocItems} />
           </aside>
 
-          <article className="lg:col-span-3 min-w-0 w-full overflow-hidden glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 animate-fade-in-up">
+          <article className="xl:col-start-2 max-w-5xl mx-auto min-w-0 w-full overflow-hidden glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 animate-fade-in-up">
             
             <nav className="flex items-center gap-2 text-[10px] text-slate-500 mb-6 font-bold uppercase tracking-widest">
               <a href="/" className="hover:text-brand-accent transition-colors no-underline">Home</a>

@@ -519,7 +519,7 @@ export default function Blog() {
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1600px] mx-auto">
           <div className="mb-12">
             <h1 className="text-5xl md:text-6xl font-black tracking-tighter text-white mb-4 animate-fade-in-up">
               Insights & <span className="gradient-text">Engineering</span>
@@ -560,7 +560,7 @@ export default function Blog() {
 
           {/* Grid Layout of Cards */}
           {filteredPosts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {filteredPosts.map((post, idx) => (
                 <a 
                   key={post.slug}
