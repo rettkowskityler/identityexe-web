@@ -24,6 +24,26 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'ui-plugin-isc-debug-mode',
+      title: 'Bringing the IIQ Debug Page to ISC: The Administrator Console UI Plugin',
+      category: 'Architecture',
+      date: 'October 2026',
+      description: 'A repeatable architectural methodology designed by IdentityEXE to unify 19 ISC object categories, Transform and Connector Rule studios, source diagnostics, SP-Config packaging, and pre-commit RFC 6902 diff reviews inside the SailPoint ISC browser UI.',
+      iconBgClass: 'bg-indigo-500/10',
+      iconBorderClass: 'border-indigo-500/20',
+      iconColorClass: 'text-indigo-400',
+      hoverTitleClass: 'group-hover:text-indigo-400',
+      readMoreColorClass: 'text-indigo-500',
+      gradientClass: 'from-indigo-600/20 to-cyan-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+          <line x1="14" y1="4" x2="10" y2="20" />
+        </svg>
+      )
+    },
+    {
       slug: 'ui-plugin-role-refresher',
       title: 'UI Plugin Role Refresher in Identity Security Cloud',
       category: 'Architecture',
