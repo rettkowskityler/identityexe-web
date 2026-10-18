@@ -1,10 +1,26 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Navbar from '../../components/Navbar';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'IdentityEXE Tools',
-  description: 'A suite of powerful utilities for identity security professionals.',
+export const metadata: Metadata = {
+  title: 'SailPoint Developer Tools & Utilities',
+  description: 'Free, client-side utilities designed by IdentityEXE to accelerate SailPoint Identity Security Cloud engineering workflows and least-privilege automation.',
+  alternates: {
+    canonical: 'https://identityexe.com/tools',
+  },
+  openGraph: {
+    title: 'SailPoint Developer Tools & Utilities | IdentityEXE',
+    description: 'Free, client-side utilities designed by IdentityEXE to accelerate SailPoint Identity Security Cloud engineering workflows.',
+    url: 'https://identityexe.com/tools',
+    type: 'website',
+    siteName: 'IdentityEXE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SailPoint Developer Tools & Utilities | IdentityEXE',
+    description: 'Free, client-side utilities designed by IdentityEXE to accelerate SailPoint Identity Security Cloud engineering workflows.',
+  },
 };
 
 export default function ToolsLandingPage() {

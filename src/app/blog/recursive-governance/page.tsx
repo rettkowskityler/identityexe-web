@@ -3,11 +3,14 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 
 export const metadata: Metadata = {
   title: "Implementing Recursive Governance: Managing SailPoint PATs",
   description: "Govern SailPoint ISC Personal Access Tokens (PATs) using a custom Web Services Connector to regain full enterprise visibility and security control.",
+  keywords: getBlogPostSeo('recursive-governance')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/recursive-governance',
   },
@@ -16,6 +19,8 @@ export const metadata: Metadata = {
     description: "Govern SailPoint ISC Personal Access Tokens (PATs) using a custom Web Services Connector to regain full enterprise visibility and security control.",
     url: 'https://identityexe.com/blog/recursive-governance',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('recursive-governance')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -38,6 +43,10 @@ export default function RecursiveGovernancePost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('recursive-governance')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -79,14 +88,14 @@ export default function RecursiveGovernancePost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="problem-invisible-access" className="text-2xl text-white !mt-0 mb-4">The Problem: "Invisible" Access</h3>
+            <h2 id="problem-invisible-access" className="text-2xl text-white !mt-0 mb-4">The Problem: "Invisible" Access</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">The Rise of PATs:</strong> Personal Access Tokens (PATs) are very common in SailPoint ISC implementations due to almost all ISC API endpoints requiring a PAT to execute the call.</li>
               <li><strong className="text-white">The Governance Gap:</strong> Most organizations certify User-to-Group memberships but lose visibility once a user generates a long-lived PAT.</li>
               <li><strong className="text-white">The Risk:</strong> A PAT often carries the full permissions of the user who created it, effectively acting as a "ghost" credential that bypasses standard SSO/MFA after creation.</li>
             </ul>
 
-            <h3 id="architecture-recursive-governance" className="text-2xl text-white mt-12 mb-4">The Architecture: Recursive Governance</h3>
+            <h2 id="architecture-recursive-governance" className="text-2xl text-white mt-12 mb-4">The Architecture: Recursive Governance</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">The "Why":</strong> Why build a custom connector? Because treating PATs as "Entitlements" in a separate Source allows them to be pulled into the standard Identity Cube and gain crucial visibility.</li>
               <li><strong className="text-white">Connector Choice:</strong> By using a Web Services connector, we can automate the aggregation, removal, and reviews of PATs without manual effort.</li>
@@ -108,7 +117,7 @@ export default function RecursiveGovernancePost() {
               </li>
             </ul>
 
-            <h3 id="implementation-deep-dive" className="text-2xl text-white mt-12 mb-4">Implementation Deep Dive</h3>
+            <h2 id="implementation-deep-dive" className="text-2xl text-white mt-12 mb-4">Implementation Deep Dive</h2>
             <div className="bg-slate-900/50 border border-white/5 rounded-xl p-6 mb-8">
               <h4 className="text-xl text-white mb-3">Schema Design: What attributes are we mapping and from where?</h4>
               
@@ -142,8 +151,7 @@ export default function RecursiveGovernancePost() {
             </p>
 
             <div className="my-10 flex justify-center bg-[#0d1117] rounded-xl border border-white/10 overflow-hidden p-4">
-              <img 
-                src="/images/blog/recursive-governance/virtual_entitlement.png" 
+              <img loading="lazy" decoding="async" src="/images/blog/recursive-governance/virtual_entitlement.png" 
                 alt="Virtual Entitlement representation in SailPoint ISC"
                 className="max-w-full h-auto object-contain rounded-lg shadow-2xl"
               />
@@ -153,15 +161,14 @@ export default function RecursiveGovernancePost() {
               <strong className="text-white">Source JSON Changes:</strong> Since this connector is custom and serves a very specific purpose, I've removed many of the standard features that web services connectors typically have so we don't accidentally call them and throw errors in the tenant. You'll see in the source JSON below that the <code>features</code> flag only contains <code>PROVISIONING</code>, which is all this connector needs to be able to pull in and revoke PATs.
             </p>
 
-            <h3 id="closing-loop-certifications" className="text-2xl text-white mt-12 mb-4">Closing the Loop: The Certification Campaign</h3>
+            <h2 id="closing-loop-certifications" className="text-2xl text-white mt-12 mb-4">Closing the Loop: The Certification Campaign</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Visibility:</strong> Since we can now store these PATs as entitlements on a user's identity cube, this opens the door for us to run certification campaigns on the PATs.</li>
               <li><strong className="text-white">The Review Process:</strong> Managers can now see <em>exactly</em> how many active tokens their developers have and when they were last used.</li>
             </ul>
 
             <div className="my-10 flex justify-center bg-[#0d1117] rounded-xl border border-white/10 overflow-hidden p-4">
-              <img 
-                src="/images/blog/recursive-governance/certification_campaign.png" 
+              <img loading="lazy" decoding="async" src="/images/blog/recursive-governance/certification_campaign.png" 
                 alt="Certification Campaign Manager Review"
                 className="max-w-full h-auto object-contain rounded-lg shadow-2xl"
               />
@@ -172,14 +179,13 @@ export default function RecursiveGovernancePost() {
             </ul>
 
             <div className="my-10 flex justify-center bg-[#0d1117] rounded-xl border border-white/10 overflow-hidden p-4">
-              <img 
-                src="/images/blog/recursive-governance/remediation_action.png" 
+              <img loading="lazy" decoding="async" src="/images/blog/recursive-governance/remediation_action.png" 
                 alt="Remediation Revoke Action"
                 className="max-w-full h-auto object-contain rounded-lg shadow-2xl"
               />
             </div>
 
-            <h3 id="code-design-choices" className="text-2xl text-white mt-12 mb-4">Code & Design Choices</h3>
+            <h2 id="code-design-choices" className="text-2xl text-white mt-12 mb-4">Code & Design Choices</h2>
 
             {/* AFTER ACCOUNT AGGREGATION RULE CARD */}
             <h4 className="text-xl text-brand-accent mt-8 mb-3">After Account Aggregation Rule</h4>
@@ -993,7 +999,7 @@ return processedResponseObject;`}</code></pre>
               </details>
             </div>
 
-            <h3 id="how-it-works-benefits" className="text-2xl text-white mt-12 mb-4">How It Works & Key Benefits</h3>
+            <h2 id="how-it-works-benefits" className="text-2xl text-white mt-12 mb-4">How It Works & Key Benefits</h2>
             <p className="text-slate-300 mb-6">
               Now that the source configuration and rules are in place, let's look at how the entire solution functions end-to-end:
             </p>
@@ -1030,7 +1036,7 @@ return processedResponseObject;`}</code></pre>
             </div>
 
             <div className="mt-16 pt-12 border-t border-white/10">
-              <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
               <ul className="space-y-4 text-slate-300 mb-8 list-none pl-0 leading-relaxed font-light">
                 <li className="flex gap-2">
                   <span className="text-brand-accent font-bold shrink-0">Summary:</span>

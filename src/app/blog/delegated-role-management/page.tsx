@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import roleManagementData from './RoleManagement_cleansed.json';
 import addEntitlementData from './AddEntitlementFromRole_cleansed.json';
 import removeEntitlementData from './RemoveEntitlementFromRole_cleansed.json';
@@ -14,6 +15,8 @@ import Mermaid from '../../../components/Mermaid';
 export const metadata: Metadata = {
   title: "Delegated Role Management in SailPoint Identity Security Cloud",
   description: "Empower business owners to securely manage assigned SailPoint ISC roles without administrative bottlenecks using a modular implementation framework.",
+  keywords: getBlogPostSeo('delegated-role-management')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/delegated-role-management',
   },
@@ -22,6 +25,8 @@ export const metadata: Metadata = {
     description: "Empower business owners to securely manage assigned SailPoint ISC roles without administrative bottlenecks using a modular implementation framework.",
     url: 'https://identityexe.com/blog/delegated-role-management',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('delegated-role-management')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -42,6 +47,10 @@ export default function DelegatedRoleManagementPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('delegated-role-management')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -83,7 +92,7 @@ export default function DelegatedRoleManagementPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+            <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
             <p className="text-slate-300 mb-4">
               Out-of-the-box, SailPoint Identity Security Cloud (ISC) requires an administrator to modify role configurations, such as adding or removing entitlements, updating descriptions, or changing owners. This monolithic approach restricts business units from autonomously managing their own access models and forces the core IAM team to act as a bottleneck for routine administrative changes.
             </p>
@@ -94,7 +103,7 @@ export default function DelegatedRoleManagementPost() {
               To eliminate this bottleneck, IdentityEXE has developed a repeatable architectural methodology for delegated role management. This is not just a script—it is a modular implementation framework designed to empower business owners to manage their assigned roles directly and securely through an interactive launcher, fundamentally shifting the administrative burden away from the core identity team.
             </p>
 
-            <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">The IdentityEXE Blueprint</h3>
+            <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">The IdentityEXE Blueprint</h2>
             <p className="text-slate-300 mb-6">
               When we architect this solution for our enterprise clients, we utilize two interactive forms and three workflows. This modular framework ensures that your ISC deployment avoids administrative bottlenecks.
             </p>
@@ -152,7 +161,7 @@ export default function DelegatedRoleManagementPost() {
               </p>
             </div>
 
-            <h3 id="ui-execution-forms" className="text-2xl text-white mt-12 mb-4">User Interface (Forms)</h3>
+            <h2 id="ui-execution-forms" className="text-2xl text-white mt-12 mb-4">User Interface (Forms)</h2>
             <p className="text-slate-300 mb-6">
               The user experience is split into two distinct forms to ensure clarity and provide dynamic context.
             </p>
@@ -167,8 +176,7 @@ export default function DelegatedRoleManagementPost() {
 
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/Sample_Execution_Select_Role_Form.png" 
+                <img loading="lazy" decoding="async" src="/images/Sample_Execution_Select_Role_Form.png" 
                   alt="Select Role Form"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -193,8 +201,7 @@ export default function DelegatedRoleManagementPost() {
             
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/Sample_Execution_Modify_Role_Form.png" 
+                <img loading="lazy" decoding="async" src="/images/Sample_Execution_Modify_Role_Form.png" 
                   alt="Modify Role Form"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -218,7 +225,7 @@ export default function DelegatedRoleManagementPost() {
               <li><strong className="text-white">Smart Entitlement Selection:</strong> For the "Remove Entitlement" action, the form uses the entitlements field from the <code>roles/v1/</code> API call as an input. This ensures the user can only select entitlements that are actually assigned to the role, preventing errors.</li>
             </ul>
 
-            <h3 id="implementation-frameworks" className="text-2xl text-white mt-12 mb-4">Implementation Frameworks (Back End)</h3>
+            <h2 id="implementation-frameworks" className="text-2xl text-white mt-12 mb-4">Implementation Frameworks (Back End)</h2>
             <p className="text-slate-300 mb-8">
               The backend consists of three workflows to handle the logic. The primary workflow manages standard modifications, while two external trigger workflows handle the complexities of adding and removing entitlements.
             </p>
@@ -230,8 +237,7 @@ export default function DelegatedRoleManagementPost() {
             
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/RoleManagement20260712.png" 
+                <img loading="lazy" decoding="async" src="/images/RoleManagement20260712.png" 
                   alt="Role Management Workflow Diagram"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -265,8 +271,7 @@ export default function DelegatedRoleManagementPost() {
 
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/AddEntitlementFromRole20260712.png" 
+                <img loading="lazy" decoding="async" src="/images/AddEntitlementFromRole20260712.png" 
                   alt="Add Entitlement Workflow"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -318,8 +323,7 @@ export default function DelegatedRoleManagementPost() {
 
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/RemoveEntitlementFromRole20260712.png" 
+                <img loading="lazy" decoding="async" src="/images/RemoveEntitlementFromRole20260712.png" 
                   alt="Remove Entitlement Workflow"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -338,7 +342,7 @@ export default function DelegatedRoleManagementPost() {
             </div>
 
             <div className="mt-16 pt-12 border-t border-white/10">
-              <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
               <p className="text-slate-300 mb-8 leading-relaxed font-light">
                 This modular architecture provides a streamlined, secure approach to delegated role management, eliminating reliance on native, centralized configuration limitations. By implementing this IdentityEXE framework, enterprises empower their role owners and accelerate identity lifecycle operations.
               </p>

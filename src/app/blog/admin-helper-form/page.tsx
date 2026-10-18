@@ -3,11 +3,14 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 
 export const metadata: Metadata = {
   title: "Admin Helper Form: Centralized Command Center for SailPoint ISC",
   description: "Architectural methodology unifying interactive ISC forms with backend workflows and parallelized scripts for centralized administrative operations.",
+  keywords: getBlogPostSeo('admin-helper-form')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/admin-helper-form',
   },
@@ -16,6 +19,8 @@ export const metadata: Metadata = {
     description: "Architectural methodology unifying interactive ISC forms with backend workflows and parallelized scripts for centralized administrative operations.",
     url: 'https://identityexe.com/blog/admin-helper-form',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('admin-helper-form')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -38,6 +43,10 @@ export default function AdminHelperFormPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('admin-helper-form')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -80,7 +89,7 @@ export default function AdminHelperFormPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-code:text-cyan-300 prose-code:bg-cyan-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* The Hook & Business Context */}
-              <h3 id="business-context" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">The Hook & Business Context</h3>
+              <h2 id="business-context" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">The Hook & Business Context</h2>
               <p className="text-slate-300 mb-6 leading-relaxed">
                 Administrators and engineers of SailPoint Identity Security Cloud (ISC) frequently encounter architectural limitations when executing specialized administrative actions, such as bypassing the source owner bug during account resets or surgically disabling health checks. Traditionally, managing these operations requires manual intervention via API tools like Postman or running disparate PowerShell scripts outside of the platform.
               </p>
@@ -94,7 +103,7 @@ export default function AdminHelperFormPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Solution Overview */}
-              <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Solution Overview</h3>
+              <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Solution Overview</h2>
               <p className="text-slate-300 mb-6">
                 When we architect this solution for our enterprise clients, we utilize a robust technical stack comprising <strong>1 Form + 2 Workflows + 2 PowerShell Scripts</strong>.
               </p>
@@ -103,7 +112,7 @@ export default function AdminHelperFormPost() {
               </p>
 
               {/* User Interface */}
-              <h3 id="user-interface" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">User Interface</h3>
+              <h2 id="user-interface" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">User Interface</h2>
               <p className="text-slate-300 mb-4">
                 <strong>Input Fields:</strong>
               </p>
@@ -116,13 +125,13 @@ export default function AdminHelperFormPost() {
               </p>
 
               <div className="my-10 flex flex-col items-center gap-6">
-                <img src="/images/blog/admin-helper-form/Admin_Helper_Form_-_Example_Form_Execution_-_Non_Expanded_Descriptions.png" alt="Admin Helper Form Execution" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
+                <img loading="lazy" decoding="async" src="/images/blog/admin-helper-form/Admin_Helper_Form_-_Example_Form_Execution_-_Non_Expanded_Descriptions.png" alt="Admin Helper Form Execution" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
               </div>
               <div className="my-10 flex flex-col items-center gap-6">
-                <img src="/images/blog/admin-helper-form/Admin_Helper_Form_-_Example_Form_Execution_-_Expanded_Descriptions_-_1.png" alt="Admin Helper Form Expanded 1" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
+                <img loading="lazy" decoding="async" src="/images/blog/admin-helper-form/Admin_Helper_Form_-_Example_Form_Execution_-_Expanded_Descriptions_-_1.png" alt="Admin Helper Form Expanded 1" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
               </div>
               <div className="my-10 flex flex-col items-center gap-6">
-                <img src="/images/blog/admin-helper-form/Admin_Helper_Form_-_Example_Form_Execution_-_Expanded_Descriptions_-_2.png" alt="Admin Helper Form Expanded 2" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
+                <img loading="lazy" decoding="async" src="/images/blog/admin-helper-form/Admin_Helper_Form_-_Example_Form_Execution_-_Expanded_Descriptions_-_2.png" alt="Admin Helper Form Expanded 2" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
               </div>
 
 
@@ -130,7 +139,7 @@ export default function AdminHelperFormPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Workflow Engine */}
-              <h3 id="workflow-engine" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">The Main Workflow Engine</h3>
+              <h2 id="workflow-engine" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">The Main Workflow Engine</h2>
               <p className="text-slate-300 mb-6">
                 At the core of this IdentityEXE Blueprint is the main workflow that ties everything together. It uses an <strong>Interactive Form Trigger</strong> to display the user interface shown above. Once submitted, the workflow processes selected inputs using a series of <strong>Compare Strings</strong> operators to branch the logic and determine precisely which API call or PowerShell script to execute next.
               </p>
@@ -138,13 +147,13 @@ export default function AdminHelperFormPost() {
 
 
               <div className="my-10 flex flex-col items-center gap-6">
-                <img src="/images/blog/admin-helper-form/AdminHelperForm20260726.png" alt="Admin Helper Form Workflow" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
+                <img loading="lazy" decoding="async" src="/images/blog/admin-helper-form/AdminHelperForm20260726.png" alt="Admin Helper Form Workflow" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
               </div>
 
               <hr className="border-white/10 my-10" />
 
               {/* Actions & Back End */}
-              <h3 id="actions-backend" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Actions & Back End</h3>
+              <h2 id="actions-backend" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Actions & Back End</h2>
               <p className="text-slate-300 mb-6">
                 Here are the actions supported by the IdentityEXE Implementation Framework and what happens under the hood when selected:
               </p>
@@ -183,7 +192,7 @@ export default function AdminHelperFormPost() {
 
               
               <div className="my-10 flex flex-col items-center gap-6">
-                <img src="/images/blog/admin-helper-form/EnableDisableUserInBulk20260726.png" alt="Bulk Enable Disable Workflow" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
+                <img loading="lazy" decoding="async" src="/images/blog/admin-helper-form/EnableDisableUserInBulk20260726.png" alt="Bulk Enable Disable Workflow" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
               </div>
 
               <h4 className="text-lg font-bold text-white mt-6 mb-3">6. Attribute Sync Report By Source (Crystal Ball)</h4>
@@ -203,13 +212,13 @@ export default function AdminHelperFormPost() {
 
               
               <div className="my-10 flex flex-col items-center gap-6">
-                <img src="/images/blog/admin-helper-form/Crystal_Ball_Report_Example_Email_Screenshot.png" alt="Crystal Ball Report Email" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
+                <img loading="lazy" decoding="async" src="/images/blog/admin-helper-form/Crystal_Ball_Report_Example_Email_Screenshot.png" alt="Crystal Ball Report Email" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
               </div>
 
               <hr className="border-white/10 my-10" />
 
               {/* Considerations & Best Practices */}
-              <h3 id="considerations-best-practices" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Considerations & Best Practices</h3>
+              <h2 id="considerations-best-practices" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Considerations & Best Practices</h2>
               <ul className="space-y-4 text-slate-300 mb-8 list-disc pl-5">
                 <li><strong>Permissioning:</strong> The launcher for this form should be strictly granted to administrators in ISC. The actions performed, such as deleting all accounts on a source or bulk enabling and disabling, are highly privileged.</li>
                 <li><strong>Error Handling:</strong> When running the PowerShell scripts, ensure you review the console outputs if any surgical removals fail due to rate limits or other issues.</li>
@@ -303,7 +312,7 @@ export default function AdminHelperFormPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Conclusion and CTA */}
-              <h3 id="conclusion" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Conclusion</h2>
               <p className="text-slate-300 mb-10 leading-relaxed">
                 The Admin Helper Form provides a scalable and interactive way to perform complex, multi-step actions natively inside ISC, eliminating the need to context-switch to external terminals for critical operations. 
               </p>

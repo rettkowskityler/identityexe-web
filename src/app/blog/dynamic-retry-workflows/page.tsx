@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import httpPostData from './DynamicRetryWorkflowHTTPPOSTRequest20260620.json';
 import ntlmData from './DynamicRetryWorkflowNTLMPowerShellScript20260620.json';
 import launchCampaignData from './TestLaunchCertificationCampaign20260620.json';
@@ -12,6 +13,8 @@ import testPowerShellData from './TestPowerShellScriptExecution20260620.json';
 export const metadata: Metadata = {
   title: "Dynamic Retry Workflows in SailPoint Identity Security Cloud",
   description: "Gracefully retry HTTP POST actions and PowerShell scripts to handle downstream dependency delays in SailPoint ISC workflows.",
+  keywords: getBlogPostSeo('dynamic-retry-workflows')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/dynamic-retry-workflows',
   },
@@ -20,6 +23,8 @@ export const metadata: Metadata = {
     description: "Gracefully retry HTTP POST actions and PowerShell scripts to handle downstream dependency delays in SailPoint ISC workflows.",
     url: 'https://identityexe.com/blog/dynamic-retry-workflows',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('dynamic-retry-workflows')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -42,6 +47,10 @@ export default function DynamicRetryWorkflowsPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('dynamic-retry-workflows')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -83,7 +92,7 @@ export default function DynamicRetryWorkflowsPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+            <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
             <p className="text-slate-300 mb-4">
               In Identity Security Cloud (ISC), engineering teams often interact with APIs or external scripts that require variable execution time or occasionally fail on the first attempt. Launching a certification campaign and waiting for generation before activating it is a frequent bottleneck. Instead of relying on arbitrary "Wait" commands that congest operations, architectures require a dynamic mechanism to retry, evaluate status, and proceed only when downstream dependencies are ready.
             </p>
@@ -94,13 +103,13 @@ export default function DynamicRetryWorkflowsPost() {
               To resolve this, IdentityEXE designed a repeatable architectural methodology. This is not a mere script, but a modular framework where an external "Retry Workflow" assumes control over HTTP POSTs or Windows Server PowerShell script executions. It natively handles retries, aggregates error telemetry, and exposes a polling capability for the primary workflow to safely verify status.
             </p>
 
-            <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+            <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Tech Stack:</strong> 4 Workflows (2 Core Retry Workflows + 2 Starting Workflows)</li>
               <li><strong className="text-white">High-Level Flow:</strong> Instead of executing a complex POST or PowerShell task right in your main workflow, you hand off the execution to a dedicated Retry Workflow via an HTTP Request using an External trigger. The initial workflow then polls the Retry Workflow to check its status. If the external task succeeds, the polling loop breaks and the original workflow marks as successful. If the retry workflow exhausts its retries and fails, the original workflow is marked as failed. This prevents confusion when debugging.</li>
             </ul>
 
-            <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: Core Concepts</h3>
+            <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: Core Concepts</h2>
             <p className="text-slate-300 mb-6">
               When we architect this solution for our enterprise clients, we utilize several key methodologies inside the data layer to ensure fault tolerance:
             </p>
@@ -120,7 +129,7 @@ export default function DynamicRetryWorkflowsPost() {
               <li><strong className="text-white">Visibility & Debugging:</strong> By polling from the original workflow and returning an execution ID, any failure correctly bubbles up. Successful triggers will not mask failed back-end work.</li>
             </ul>
 
-            <h3 id="json-payload-structures" className="text-2xl text-white mt-12 mb-4">JSON Payload Structures</h3>
+            <h2 id="json-payload-structures" className="text-2xl text-white mt-12 mb-4">JSON Payload Structures</h2>
             <p className="text-slate-300 mb-6">
               When calling these retry workflows, you must pass the exact expected JSON format. If you do not have the correct structure and naming, the workflow will fail to parameterize into the correct API or PowerShell calls.
             </p>
@@ -160,7 +169,7 @@ export default function DynamicRetryWorkflowsPost() {
               <strong>Note on <code>originalworkflow</code>:</strong> The <code>originalworkflow</code> parameter is used strictly for debugging purposes. If your retry workflow is being executed from multiple different parent workflows across your tenant, this parameter makes it immediately evident where the execution originated when you look at the execution logs.
             </p>
 
-            <h3 id="workflow-frameworks" className="text-2xl text-white mt-12 mb-4">Implementation Frameworks</h3>
+            <h2 id="workflow-frameworks" className="text-2xl text-white mt-12 mb-4">Implementation Frameworks</h2>
             <p className="text-slate-300 mb-8">
               Below are the 4 workflow JSON components and their corresponding architectural diagrams to visualize the data flow.
             </p>
@@ -176,8 +185,7 @@ export default function DynamicRetryWorkflowsPost() {
             
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/DynamicRetryWorkflowHTTPPOSTRequest20260620.png" 
+                <img loading="lazy" decoding="async" src="/images/DynamicRetryWorkflowHTTPPOSTRequest20260620.png" 
                   alt="HTTP POST Workflow Diagram"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -200,8 +208,7 @@ export default function DynamicRetryWorkflowsPost() {
 
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/DynamicRetryWorkflowNTLMPowerShellScript20260620.png" 
+                <img loading="lazy" decoding="async" src="/images/DynamicRetryWorkflowNTLMPowerShellScript20260620.png" 
                   alt="NTLM PowerShell Workflow Diagram"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -224,8 +231,7 @@ export default function DynamicRetryWorkflowsPost() {
 
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/TestLaunchCertificationCampaign20260620.png" 
+                <img loading="lazy" decoding="async" src="/images/TestLaunchCertificationCampaign20260620.png" 
                   alt="Launch Certification Campaign Workflow Diagram"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -248,8 +254,7 @@ export default function DynamicRetryWorkflowsPost() {
 
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/TestPowerShellScriptExecution20260620.png" 
+                <img loading="lazy" decoding="async" src="/images/TestPowerShellScriptExecution20260620.png" 
                   alt="Test PowerShell Execution Workflow Diagram"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -267,7 +272,7 @@ export default function DynamicRetryWorkflowsPost() {
               </div>
             </div>
 
-            <h3 id="considerations-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices</h3>
+            <h2 id="considerations-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Permissions:</strong> Ensure your service account or PAT used to execute these external workflows has the necessary authorization scopes (like <code>idn:campaigns:manage</code> for campaigns, etc.).</li>
               <li><strong className="text-white">Error Handling:</strong> Many of the HTTP Request steps inside the retry loop will intentionally log as failures until they finally succeed. Use the execution ID and status check in your polling workflow to understand the final result.</li>
@@ -275,7 +280,7 @@ export default function DynamicRetryWorkflowsPost() {
             </ul>
 
             <div className="mt-16 pt-12 border-t border-white/10">
-              <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
               <p className="text-slate-300 mb-8 leading-relaxed font-light">
                 Using a parent-child workflow model via external triggers establishes a modular retry mechanism within your identity infrastructure. By passing strict payload parameters and polling for an execution ID, engineering teams achieve durable error handling without artificially clustering monolithic workflows.
               </p>

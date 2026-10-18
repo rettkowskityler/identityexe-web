@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import Mermaid from '../../../components/Mermaid';
 import form1Data from './Form-CertificationCampaignFrequencySelector.json';
 import workflow1Data from './Workflow-CertificationReminderFrequency.json';
@@ -11,6 +12,8 @@ import workflow1Data from './Workflow-CertificationReminderFrequency.json';
 export const metadata: Metadata = {
   title: "Architecting Dynamic Certification Email Frequencies in SailPoint",
   description: "An architectural methodology to control escalation timing and notification routing, stopping manager certification approval fatigue in SailPoint ISC.",
+  keywords: getBlogPostSeo('certification-email-frequency')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/certification-email-frequency',
   },
@@ -19,6 +22,8 @@ export const metadata: Metadata = {
     description: "An architectural methodology to control escalation timing and notification routing, stopping manager certification approval fatigue in SailPoint ISC.",
     url: 'https://identityexe.com/blog/certification-email-frequency',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('certification-email-frequency')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -41,6 +46,10 @@ export default function CertificationEmailFrequencyPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('certification-email-frequency')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -81,7 +90,7 @@ export default function CertificationEmailFrequencyPost() {
 
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               {/* Business Context */}
-              <h3 id="business-context" className="text-2xl text-white !mt-0 mb-4">The Problem: Rigid Reminders & Approval Fatigue</h3>
+              <h2 id="business-context" className="text-2xl text-white !mt-0 mb-4">The Problem: Rigid Reminders & Approval Fatigue</h2>
               <p className="text-slate-300 mb-6">
                 By default, SailPoint Identity Security Cloud (ISC) sends certification campaign reminders once a week, with no out-of-the-box (OOTB) capability to adjust the frequency or stop them automatically when a campaign is overdue. This rigid architectural limitation creates friction for organizations operating under aggressive compliance deadlines or specialized regulatory requirements.
               </p>
@@ -92,7 +101,7 @@ export default function CertificationEmailFrequencyPost() {
                 To overcome this, we rely on a repeatable architectural methodology designed by IdentityEXE. By unifying interactive forms, specialized workflows, and Privileged Task Management (PTA), this framework ensures your ISC deployment avoids rigid boundaries, giving you complete control over escalation timing and notification routing.
               </p>
 
-              <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">The IdentityEXE Blueprint: Customizable Cadence</h3>
+              <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">The IdentityEXE Blueprint: Customizable Cadence</h2>
               <p className="text-slate-300 mb-6">
                 When we architect this solution for our enterprise clients, we utilize a unified tech stack: <strong>1 Form + 1 Workflow + 2 PowerShell Scripts + 1 HTML Email Template</strong>.
               </p>
@@ -100,7 +109,7 @@ export default function CertificationEmailFrequencyPost() {
                 Our core engineering methodology structures the data layer to allow administrators to select active campaigns dynamically, dictate immediate reminder actions, configure exact time intervals (in days), and safely halt execution based on campaign end dates. The workflow acts as the orchestration engine, calculating the required iterations and pausing through a serial loop while securely invoking PowerShell scripts via the Privileged Access Gateway.
               </p>
 
-              <h3 id="user-interface" className="text-2xl text-white mt-12 mb-4">Interactive Launcher: The User Interface</h3>
+              <h2 id="user-interface" className="text-2xl text-white mt-12 mb-4">Interactive Launcher: The User Interface</h2>
               <p className="text-slate-300 mb-4">
                 We use an interactive form to act as the launcher for the workflow. This allows administrators to quickly select target campaigns and define frequency parameters without hardcoding anything. The form utilizes dynamic showing/hiding so the campaign selector only appears if you opt not to select all active campaigns.
               </p>
@@ -115,8 +124,7 @@ export default function CertificationEmailFrequencyPost() {
 
               <div className="my-10 flex flex-col items-center">
                 <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden max-w-md w-full p-4">
-                  <img 
-                    src="/images/blog/certification-email-frequency/sample_form_run.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/certification-email-frequency/sample_form_run.png" 
                     alt="Interactive form for configuring reminder frequency"
                     className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                   />
@@ -126,7 +134,7 @@ export default function CertificationEmailFrequencyPost() {
                 </div>
               </div>
 
-              <h3 id="backend-workflow" className="text-2xl text-white mt-12 mb-4">Back End Workflow Architecture</h3>
+              <h2 id="backend-workflow" className="text-2xl text-white mt-12 mb-4">Back End Workflow Architecture</h2>
               <p className="text-slate-300 mb-6">
                 This modular framework ensures that your ISC deployment avoids infinite loop boundaries and formats all duration logic safely. Here is a visual representation of the orchestration:
               </p>
@@ -150,8 +158,7 @@ export default function CertificationEmailFrequencyPost() {
 
               <div className="my-10 flex flex-col items-center">
                 <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden max-w-4xl w-full p-4">
-                  <img 
-                    src="/images/blog/certification-email-frequency/CertificationReminderFrequency20260801.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/certification-email-frequency/CertificationReminderFrequency20260801.png" 
                     alt="Workflow Architecture Diagram"
                     className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                   />
@@ -168,7 +175,7 @@ export default function CertificationEmailFrequencyPost() {
                 <li><strong className="text-white">Serial Loop:</strong> A counter variable is initialized at 0. A "While" Serial Loop runs as long as the counter is less than the iterations. A Choice step evaluates the "Send Reminder Now?" flag, executing the reminder script immediately if true, or pausing via a Wait step if false.</li>
               </ul>
 
-              <h3 id="pta-scripts" className="text-2xl text-white mt-12 mb-4">Privileged Task Management (PTA) Scripts</h3>
+              <h2 id="pta-scripts" className="text-2xl text-white mt-12 mb-4">Privileged Task Management (PTA) Scripts</h2>
               <p className="text-slate-300 mb-6">
                 Because there isn't an OOTB action to manually trigger campaign reminders in a workflow, we take complete ownership of the email delivery using PowerShell executed securely via PTA/PAG.
               </p>
@@ -191,8 +198,7 @@ export default function CertificationEmailFrequencyPost() {
 
               <div className="my-10 flex flex-col items-center">
                 <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden max-w-2xl w-full p-4">
-                  <img 
-                    src="/images/blog/certification-email-frequency/sample_email_reminder.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/certification-email-frequency/sample_email_reminder.png" 
                     alt="Sample Consolidated Email Reminder"
                     className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                   />
@@ -214,7 +220,7 @@ export default function CertificationEmailFrequencyPost() {
                 </ul>
               </div>
 
-              <h3 id="configuration-downloads" className="text-2xl text-white mt-12 mb-4">Framework Downloads</h3>
+              <h2 id="configuration-downloads" className="text-2xl text-white mt-12 mb-4">Framework Downloads</h2>
               <p className="text-slate-300 mb-8">
                 Download the configuration files below to import directly into your Identity Security Cloud environment.
               </p>
@@ -297,7 +303,7 @@ export default function CertificationEmailFrequencyPost() {
               </div>
 
               <div className="mt-16 pt-12 border-t border-white/10">
-                <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+                <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
                 
                 <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-deep-slate to-brand-blue/20 p-8 rounded-3xl border border-white/5 shadow-2xl mt-8">
                   <div className="flex-1">

@@ -3,10 +3,13 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 export const metadata: Metadata = {
-  title: "SailPoint Web Services Attribute Sync: Enterprise Architectural Framework | IdentityEXE",
+  title: "SailPoint Web Services Attribute Sync: Enterprise Architectural Framework",
   description: "A repeatable architectural methodology designed by IdentityEXE to master Web Services attribute synchronization in SailPoint ISC, overcoming partial update limitations, PUT data loss, and retry locks.",
+  keywords: getBlogPostSeo('webservices-attribute-sync')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/webservices-attribute-sync',
   },
@@ -15,6 +18,8 @@ export const metadata: Metadata = {
     description: "A repeatable architectural methodology designed by IdentityEXE to master Web Services attribute synchronization in SailPoint ISC, overcoming partial update limitations, PUT data loss, and retry locks.",
     url: 'https://identityexe.com/blog/webservices-attribute-sync',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('webservices-attribute-sync')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
     images: [
       {
@@ -51,6 +56,10 @@ export default function WebServicesAttributeSyncPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('webservices-attribute-sync')) }}
+      />
       <Navbar />
 
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -92,7 +101,7 @@ export default function WebServicesAttributeSyncPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Executive Summary */}
-              <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+              <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 While SailPoint Identity Security Cloud (ISC) provides out-of-the-box attribute synchronization, deploying it over the Virtual Appliance (VA) Web Services connector exposes a critical architectural limitation: target enterprise REST and SOAP endpoints do not conform to a singular, uniform update pattern. Out of the box, ISC relies entirely on the standard <code className="text-xs">Update Account</code> operation to synchronize disparate identity attributes, assuming a naive direct mapping. In production environments, downstream systems present fundamentally conflicting requirements: some APIs reject partial updates demanding full resource representations, some strictly mandate HTTP <code className="text-xs">PUT</code> over <code className="text-xs">PATCH</code>, some scatter attributes across nested child endpoints (such as <code className="text-xs">/contact-info</code>), while others operate without an update verb entirely or silently drop cleared attributes due to line-dropping null evaluation.
               </p>
@@ -104,7 +113,7 @@ export default function WebServicesAttributeSyncPost() {
               </p>
 
               {/* Architecture Overview */}
-              <h3 id="architecture-overview" className="text-2xl text-white mt-12 mb-4">How Attribute Sync Operates in ISC Web Services</h3>
+              <h2 id="architecture-overview" className="text-2xl text-white mt-12 mb-4">How Attribute Sync Operates in ISC Web Services</h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 Before evaluating payloads and rules, identity architects must understand the baseline mechanics of how SailPoint ISC evaluates and dispatches attribute updates over the Web Services connector.
               </p>
@@ -136,8 +145,7 @@ export default function WebServicesAttributeSyncPost() {
 
               <div className="my-8">
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/Source Attribute Sync Configuration UI.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/Source Attribute Sync Configuration UI.png" 
                     alt="SailPoint ISC Source Attribute Sync Configuration UI" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
@@ -148,9 +156,9 @@ export default function WebServicesAttributeSyncPost() {
               </div>
 
               {/* Pattern 1 */}
-              <h3 id="pattern-1-line-dropping" className="text-2xl text-white mt-12 mb-4">
+              <h2 id="pattern-1-line-dropping" className="text-2xl text-white mt-12 mb-4">
                 Pattern 1: Raw Body Line-Dropping PATCH (Zero-Rule Baseline)
-              </h3>
+              </h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 When target APIs adhere to standard REST semantics and support partial payload updates via HTTP <code className="text-xs">PATCH</code>, this pattern represents the cleanest, zero-code architectural baseline.
               </p>
@@ -180,16 +188,14 @@ export default function WebServicesAttributeSyncPost() {
 
               <div className="space-y-6 my-8">
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/Update Account Operation Configuration General.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/Update Account Operation Configuration General.png" 
                     alt="Update Account Operation General Settings" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
                   <p className="text-xs text-slate-400 text-center mt-2 mb-1">Update Account General Settings: Method PATCH, Context URL /users/$getObject.nativeIdentity$</p>
                 </div>
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/Update Account Operation Configuration Raw Body.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/Update Account Operation Configuration Raw Body.png" 
                     alt="Update Account Operation Raw Body" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
@@ -217,9 +223,9 @@ export default function WebServicesAttributeSyncPost() {
 }`}</code></pre>
 
               {/* Pattern 2 */}
-              <h3 id="pattern-2-synthetic-patch" className="text-2xl text-white mt-12 mb-4">
+              <h2 id="pattern-2-synthetic-patch" className="text-2xl text-white mt-12 mb-4">
                 Pattern 2: Policy-Based PATCH with Synthetic Schema Fields
-              </h3>
+              </h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 Enterprise SaaS APIs frequently implement strict JSON schema validators. Even when an endpoint accepts HTTP <code className="text-xs">PATCH</code>, it may reject partial updates with HTTP <code className="text-xs">400 Bad Request</code> unless mandatory fields (such as <code className="text-xs">email</code>, <code className="text-xs">firstName</code>, and <code className="text-xs">lastName</code>) are present in every payload.
               </p>
@@ -282,16 +288,14 @@ export default function WebServicesAttributeSyncPost() {
 
               <div className="space-y-6 my-8">
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/Update Policy With Synthetic Schema Attribute General.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/Update Policy With Synthetic Schema Attribute General.png" 
                     alt="Update Policy Synthetic Schema General Settings" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
                   <p className="text-xs text-slate-400 text-center mt-2 mb-1">Configuring Update Account with Synthetic Attributes.</p>
                 </div>
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/Update Policy With Synthetic Schema Attribute Raw Body.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/Update Policy With Synthetic Schema Attribute Raw Body.png" 
                     alt="Update Policy Synthetic Schema Raw Body" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
@@ -319,9 +323,9 @@ BODY: {
 }`}</code></pre>
 
               {/* Pattern 3 */}
-              <h3 id="pattern-3-synthetic-put" className="text-2xl text-white mt-12 mb-4">
+              <h2 id="pattern-3-synthetic-put" className="text-2xl text-white mt-12 mb-4">
                 Pattern 3: Policy-Based PUT with Full Resource Replacement
-              </h3>
+              </h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 Numerous enterprise platforms reject HTTP <code className="text-xs">PATCH</code> entirely, mandating HTTP <code className="text-xs">PUT</code>. In REST architecture, <code className="text-xs">PUT</code> signifies complete resource replacement.
               </p>
@@ -357,9 +361,9 @@ BODY: {
 }`}</code></pre>
 
               {/* Pattern 4 */}
-              <h3 id="pattern-4-rule-patch" className="text-2xl text-white mt-12 mb-4">
+              <h2 id="pattern-4-rule-patch" className="text-2xl text-white mt-12 mb-4">
                 Pattern 4: Rule-Based PATCH (State-Fetch & In-Memory Merge)
-              </h3>
+              </h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 While synthetic attributes eliminate rules, they clutter ISC source schemas with artificial properties. Furthermore, when target systems maintain dynamic, unmapped metadata, static policies cannot dynamically reconstruct the user state.
               </p>
@@ -483,9 +487,9 @@ BODY: {
 }`}</code></pre>
 
               {/* Pattern 5 */}
-              <h3 id="pattern-5-rule-put" className="text-2xl text-white mt-12 mb-4">
+              <h2 id="pattern-5-rule-put" className="text-2xl text-white mt-12 mb-4">
                 Pattern 5: Rule-Based PUT (Resource Replacement & Data Protection)
-              </h3>
+              </h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 Target SaaS systems frequently store unmanaged data structures, such as dynamic permission arrays (<code className="text-xs">permissions: [&quot;legal-hold-counsel&quot;]</code>), audit timestamps, or location metadata, that are not mapped inside SailPoint ISC. Executing an HTTP <code className="text-xs">PUT</code> via static Update Policies completely wipes those arrays from the downstream system.
               </p>
@@ -580,9 +584,9 @@ BODY: {
 }`}</code></pre>
 
               {/* Testing Toolchain */}
-              <h3 id="testing-toolchain" className="text-2xl text-white mt-12 mb-4">
+              <h2 id="testing-toolchain" className="text-2xl text-white mt-12 mb-4">
                 The IdentityEXE Testing & Verification Toolchain
-              </h3>
+              </h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 Production attribute sync cannot be validated by waiting for manual HR updates. IdentityEXE engineered three high-leverage PowerShell tools specifically for enterprise SailPoint ISC tenants.
               </p>
@@ -656,16 +660,14 @@ BODY: {
 
               <div className="space-y-6 my-8">
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/PowerShell Tools in Action - DryRun.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/PowerShell Tools in Action - DryRun.png" 
                     alt="Dry Run Mode Execution" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
                   <p className="text-xs text-slate-400 text-center mt-2 mb-1">ActiveOnly DryRun mode demonstrating safely skipping terminated workers.</p>
                 </div>
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/PowerShell Tools in Action - AllRun.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/PowerShell Tools in Action - AllRun.png" 
                     alt="All Lifecycle State Execution" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
@@ -704,9 +706,9 @@ Result              : PASSED - ATTRIBUTE SYNC VERIFIED IN 9s!
 ======================================================================`}</code></pre>
 
               {/* Non-Standard APIs */}
-              <h3 id="non-standard-apis" className="text-2xl text-white mt-12 mb-4">
+              <h2 id="non-standard-apis" className="text-2xl text-white mt-12 mb-4">
                 Non-Standard API Topologies & Architectural Workarounds
-              </h3>
+              </h2>
               <p className="text-slate-300 mb-6 leading-relaxed font-light">
                 Enterprise application portfolios invariably include custom, legacy, or microservice endpoints that break standard REST conventions.
               </p>
@@ -766,9 +768,9 @@ requestEndPoint.setHeader(headers);`}</code></pre>
 }`}</code></pre>
 
               {/* Consulting Gotchas */}
-              <h3 id="consulting-gotchas" className="text-2xl text-white mt-12 mb-4">
+              <h2 id="consulting-gotchas" className="text-2xl text-white mt-12 mb-4">
                 Production Gotchas & Lessons from Enterprise Consulting
-              </h3>
+              </h2>
               <p className="text-slate-300 mb-6 leading-relaxed font-light">
                 During large-scale identity governance rollouts, enterprise teams encounter recurring diagnostic hurdles:
               </p>
@@ -785,16 +787,14 @@ requestEndPoint.setHeader(headers);`}</code></pre>
 
               <div className="space-y-6 my-8">
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/SearchPage_One_Event_Per_Attribute.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/SearchPage_One_Event_Per_Attribute.png" 
                     alt="Search UI Events per Attribute" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
                   <p className="text-xs text-slate-400 text-center mt-2 mb-1">Search UI displays one audit event per attribute.</p>
                 </div>
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/SearchPage_One_Event_Per_Attribute_Details.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/SearchPage_One_Event_Per_Attribute_Details.png" 
                     alt="Search Event Details" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
@@ -813,16 +813,14 @@ requestEndPoint.setHeader(headers);`}</code></pre>
 
               <div className="space-y-6 my-8">
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/UI Options to Clear the Retry Lock - Sync Attributes.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/UI Options to Clear the Retry Lock - Sync Attributes.png" 
                     alt="Identity Synchronize Attributes" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
                   <p className="text-xs text-slate-400 text-center mt-2 mb-1">Method 1: Interactive Synchronize Attributes on the Identity.</p>
                 </div>
                 <div className="bg-[#0d1117] rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden">
-                  <img 
-                    src="/images/blog/webservices-attribute-sync/UI Options to Clear the Retry Lock - Single Aggregation.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/webservices-attribute-sync/UI Options to Clear the Retry Lock - Single Aggregation.png" 
                     alt="Aggregate Account UI Option" 
                     className="w-full h-auto object-contain rounded-lg" 
                   />
@@ -831,9 +829,9 @@ requestEndPoint.setHeader(headers);`}</code></pre>
               </div>
 
               {/* Implementation Downloads */}
-              <h3 id="implementation-downloads" className="text-2xl text-white mt-12 mb-4">
+              <h2 id="implementation-downloads" className="text-2xl text-white mt-12 mb-4">
                 Downloads & Implementation Code
-              </h3>
+              </h2>
               <p className="text-slate-300 mb-6 leading-relaxed font-light">
                 Download the complete IdentityEXE Web Services Attribute Synchronization toolchain below:
               </p>
@@ -887,7 +885,7 @@ requestEndPoint.setHeader(headers);`}</code></pre>
 
               {/* Conclusion & High-Leverage Call to Action */}
               <div className="mt-16 pt-12 border-t border-white/10">
-                <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+                <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
                 <p className="text-slate-300 mb-8 leading-relaxed font-light">
                   Attribute synchronization over the SailPoint Web Services connector requires deliberate architectural design. By categorizing downstream endpoints into validated patterns (whether leveraging zero-code line-dropping, synthetic schema policies, or in-memory state-fetch BeanShell rules), enterprise identity teams eradicate data loss, prevent runaway retry locks, and maintain complete audit compliance across heterogeneous application landscapes.
                 </p>

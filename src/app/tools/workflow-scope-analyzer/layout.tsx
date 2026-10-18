@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { getWorkflowScopeAnalyzerJsonLd } from '../../../lib/seo';
 
 export const metadata: Metadata = {
   title: 'Workflow Scope Analyzer (SailPoint PAT Least Privilege Tool)',
@@ -19,5 +20,15 @@ export default function WorkflowScopeAnalyzerLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  const jsonLd = getWorkflowScopeAnalyzerJsonLd();
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {children}
+    </>
+  );
 }

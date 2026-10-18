@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import formSourceOffboardingData from './Form-Source-Offboarding.json';
 import formConfirmSelectionData from './Form-Confirm-Source-Selection.json';
 import workflowData from './Workflow-SourceOffboarding.json';
@@ -11,6 +12,8 @@ import workflowData from './Workflow-SourceOffboarding.json';
 export const metadata: Metadata = {
   title: "Automating Source Offboarding in SailPoint Identity Security Cloud",
   description: "A self-serve automated toolkit utilizing SailPoint Workflows and Privileged Task Management to provide fail-safe source deletion and dependency teardown.",
+  keywords: getBlogPostSeo('source-offboarding')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/source-offboarding',
   },
@@ -19,6 +22,8 @@ export const metadata: Metadata = {
     description: "A self-serve automated toolkit utilizing SailPoint Workflows and Privileged Task Management to provide fail-safe source deletion and dependency teardown.",
     url: 'https://identityexe.com/blog/source-offboarding',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('source-offboarding')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -40,6 +45,10 @@ export default function SourceOffboardingPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('source-offboarding')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -80,7 +89,7 @@ export default function SourceOffboardingPost() {
 
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
-              <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+              <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
               <p className="text-slate-300 mb-4">
                 Safely offboarding and deleting a Source in SailPoint Identity Security Cloud is one of the most tedious and potentially dangerous administrative tasks. Native platform constraints prevent source deletion until all downstream dependencies, such as Access Profiles, Apps, Service Desk Integrations, and Identity Profiles, are systematically dismantled, creating massive operational friction.
               </p>
@@ -91,7 +100,7 @@ export default function SourceOffboardingPost() {
                 IdentityEXE designed a repeatable architectural methodology to orchestrate this entire offboarding sequence securely. Rather than relying on simple scripts, this modular framework utilizes a self-serve automated toolkit through SailPoint Workflows and Privileged Task Management (PTA) to provide fail-safe, multi-threaded source deletion while comprehensively analyzing downstream dependencies.
               </p>
 
-              <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+              <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
               <ul className="space-y-4 text-slate-300 mb-8 list-disc pl-5">
                 <li><strong className="text-white">Tech Stack:</strong> 2 Forms + 1 Workflow + 1 Privileged Task Management (PTA) Script.</li>
                 <li><strong className="text-white">High-Level Flow:</strong> The solution revolves around an interactive Workflow Form that allows administrators to select a source and optionally run it in a dry-run state.
@@ -112,7 +121,7 @@ export default function SourceOffboardingPost() {
                 </p>
               </div>
 
-              <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: User Interface</h3>
+              <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: User Interface</h2>
               <p className="text-slate-300 mb-4">
                 When we architect this solution for our enterprise clients, we utilize a highly governed launcher experience. The admin initiates the workflow via a launcher, selects the source from a dynamic dropdown, reviews the automated sequence overview, and chooses whether to run a preview or perform the live deletion.
               </p>
@@ -121,10 +130,10 @@ export default function SourceOffboardingPost() {
                 <strong className="text-white block mb-4 text-lg">Preview Mode Execution:</strong>
                 <div className="flex flex-col gap-6 items-center">
                   <div className="w-full max-w-4xl flex justify-center overflow-hidden rounded-xl">
-                    <img src="/images/SourceOffbording_Form_Execution_Preview_1.png" alt="Form Preview 1" className="w-full h-auto object-contain" />
+                    <img loading="lazy" decoding="async" src="/images/SourceOffbording_Form_Execution_Preview_1.png" alt="Form Preview 1" className="w-full h-auto object-contain" />
                   </div>
                   <div className="w-full max-w-4xl flex justify-center overflow-hidden rounded-xl">
-                    <img src="/images/SourceOffbording_Form_Execution_Preview_2.png" alt="Form Preview 2" className="w-full h-auto object-contain" />
+                    <img loading="lazy" decoding="async" src="/images/SourceOffbording_Form_Execution_Preview_2.png" alt="Form Preview 2" className="w-full h-auto object-contain" />
                   </div>
                 </div>
               </div>
@@ -133,15 +142,15 @@ export default function SourceOffboardingPost() {
                 <strong className="text-white block mb-4 text-lg">Full Deletion Execution:</strong>
                 <div className="flex flex-col gap-6 items-center">
                   <div className="w-full max-w-4xl flex justify-center overflow-hidden rounded-xl">
-                    <img src="/images/SourceOffbording_Form_Execution_FullDeletion_1.png" alt="Form Full Deletion 1" className="w-full h-auto object-contain" />
+                    <img loading="lazy" decoding="async" src="/images/SourceOffbording_Form_Execution_FullDeletion_1.png" alt="Form Full Deletion 1" className="w-full h-auto object-contain" />
                   </div>
                   <div className="w-full max-w-4xl flex justify-center overflow-hidden rounded-xl">
-                    <img src="/images/SourceOffbording_Form_Execution_FullDeletion_2.png" alt="Form Full Deletion 2" className="w-full h-auto object-contain" />
+                    <img loading="lazy" decoding="async" src="/images/SourceOffbording_Form_Execution_FullDeletion_2.png" alt="Form Full Deletion 2" className="w-full h-auto object-contain" />
                   </div>
                 </div>
               </div>
 
-              <h3 id="technical-deep-dive" className="text-2xl text-white mt-12 mb-4">Technical Deep Dive: The PowerShell Engine</h3>
+              <h2 id="technical-deep-dive" className="text-2xl text-white mt-12 mb-4">Technical Deep Dive: The PowerShell Engine</h2>
               <p className="text-slate-300 mb-6">
                 Our core engineering methodology structures the data layer to handle the complexities of SailPoint's backend APIs effortlessly. The script (<code>Offboard-Source.ps1</code>) executed via PTA contains several advanced mechanisms.
               </p>
@@ -218,19 +227,19 @@ for ($i = 0; $i -lt $pages; $i++) {
                   <div>
                     <span className="text-slate-300 font-bold text-sm block mb-2">Preview Output:</span>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
-                      <img src="/images/SourceOffbording_EmailExample_Preview.png" alt="Preview Email" className="w-full h-auto" />
+                      <img loading="lazy" decoding="async" src="/images/SourceOffbording_EmailExample_Preview.png" alt="Preview Email" className="w-full h-auto" />
                     </div>
                   </div>
                   <div>
                     <span className="text-slate-300 font-bold text-sm block mb-2">Deletion Output:</span>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
-                      <img src="/images/SourceOffbording_EmailExample_FullDeletion.png" alt="Full Deletion Email" className="w-full h-auto" />
+                      <img loading="lazy" decoding="async" src="/images/SourceOffbording_EmailExample_FullDeletion.png" alt="Full Deletion Email" className="w-full h-auto" />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <h3 id="implementation-framework" className="text-2xl text-white mt-12 mb-4">Implementation Framework</h3>
+              <h2 id="implementation-framework" className="text-2xl text-white mt-12 mb-4">Implementation Framework</h2>
               <p className="text-slate-300 mb-8">
                 Below are the workflow diagrams and implementation files for deployment into your environment. You will need a configured PAG instance and valid SMTP credentials.
               </p>
@@ -238,7 +247,7 @@ for ($i = 0; $i -lt $pages; $i++) {
               <h4 className="text-xl text-white mt-10 mb-4">1. Main Workflow</h4>
               <div className="my-6">
                 <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                  <img src="/images/SourceOffboarding20260815.png" alt="Main Workflow" className="max-w-full h-auto object-contain shadow-2xl" />
+                  <img loading="lazy" decoding="async" src="/images/SourceOffboarding20260815.png" alt="Main Workflow" className="max-w-full h-auto object-contain shadow-2xl" />
                 </div>
                 <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                   <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
@@ -291,7 +300,7 @@ for ($i = 0; $i -lt $pages; $i++) {
               </div>
 
               <div className="mt-16 pt-12 border-t border-white/10">
-                <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+                <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
                 <p className="text-slate-300 mb-8 leading-relaxed font-light">
                   By utilizing this architectural solution, organizations can confidently decommission stale systems, generate compliant backup archives, and save countless hours of manual effort—all while ensuring zero catastrophic breaking changes to identity generation.
                 </p>

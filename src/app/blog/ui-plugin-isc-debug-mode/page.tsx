@@ -3,10 +3,13 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 export const metadata: Metadata = {
-  title: "Bringing the IIQ Debug Page to ISC: The Administrator Console UI Plugin | IdentityEXE",
+  title: "Bringing the IIQ Debug Page to ISC: The Administrator Console UI Plugin",
   description: "A repeatable architectural methodology designed by IdentityEXE to unify 19 ISC object categories, Transform and Connector Rule studios, source diagnostics, SP-Config packaging, and pre-commit RFC 6902 diff reviews inside the SailPoint ISC browser UI.",
+  keywords: getBlogPostSeo('ui-plugin-isc-debug-mode')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/ui-plugin-isc-debug-mode',
   },
@@ -15,6 +18,8 @@ export const metadata: Metadata = {
     description: "A repeatable architectural methodology designed by IdentityEXE to unify 19 ISC object categories, Transform and Connector Rule studios, source diagnostics, SP-Config packaging, and pre-commit RFC 6902 diff reviews inside the SailPoint ISC browser UI.",
     url: 'https://identityexe.com/blog/ui-plugin-isc-debug-mode',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('ui-plugin-isc-debug-mode')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
     images: [
       {
@@ -52,6 +57,10 @@ export default function UIPluginISCDebugModePost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('ui-plugin-isc-debug-mode')) }}
+      />
       <Navbar />
 
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -94,7 +103,7 @@ export default function UIPluginISCDebugModePost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* 1. THE HOOK & BUSINESS CONTEXT */}
-              <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">Executive Summary</h3>
+              <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">Executive Summary</h2>
               <p className="text-slate-300 mb-6 leading-relaxed">
                 Every engineer who has administered SailPoint IdentityIQ (IIQ) relies on the built-in <code>/debug</code> page (<code>debug.jsf</code>) to inspect raw backend objects, modify configurations, test rules, and troubleshoot connectors from a single browser tab. In SailPoint Identity Security Cloud (ISC), those underlying object definitions are abstracted behind dozens of disparate REST API endpoints. While external utilities like Postman collections and the SailPoint VS Code Extension provide API access, enterprise administrators are forced to context-switch between the ISC browser UI, Postman, VS Code, and local text editors just to inspect a raw JSON object, evaluate a transform against an identity, edit a JSON-escaped BeanShell connector rule, export tenant configurations, or trigger an unoptimized source aggregation. Worse yet, dispatching raw <code>PUT</code> or <code>PATCH</code> payloads from external API clients lacks native pre-commit validation, making it easy to overwrite production configurations without reviewing a line-by-line diff first.
               </p>
@@ -106,8 +115,7 @@ export default function UIPluginISCDebugModePost() {
               </p>
 
               <div className="my-10 flex flex-col items-center gap-6">
-                <img 
-                  src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_MainWorkbench.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_MainWorkbench.png" 
                   alt="Administrator Console Main Workbench" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -116,7 +124,7 @@ export default function UIPluginISCDebugModePost() {
               <hr className="border-white/10 my-10" />
 
               {/* 2. THE TECHNICAL CORE */}
-              <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Solution Overview &amp; Architectural Flow</h3>
+              <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Solution Overview &amp; Architectural Flow</h2>
               
               <div className="bg-[#0d1117] border border-brand-blue/30 border-l-4 border-l-brand-blue rounded-r-xl p-5 mb-8">
                 <h4 className="text-brand-blue font-bold mb-2 flex items-center gap-2 text-base">
@@ -162,14 +170,13 @@ export default function UIPluginISCDebugModePost() {
               <hr className="border-white/10 my-10" />
 
               {/* Consolidated Walkthrough */}
-              <h3 id="vscode-workbench" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">1. The VS Code Workbench &amp; 19-Object Explorer</h3>
+              <h2 id="vscode-workbench" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">1. The VS Code Workbench &amp; 19-Object Explorer</h2>
               <p className="text-slate-300 mb-6">
                 This modular framework ensures that your ISC deployment avoids fragmented tooling by consolidating the entire developer and administrator workflow into one unified workspace. When you launch the Administrator Console from the ISC navigation bar, you are presented with an interactive overview grid and a resizable left Object Explorer sidebar covering 19 core ISC object types: <code>Transforms</code>, <code>Connector Rules</code>, <code>Sources</code>, <code>Roles</code>, <code>Entitlements</code>, <code>Access Profiles</code>, <code>Applications</code>, <code>Workflows</code>, <code>Forms</code>, <code>Identity Profiles</code>, <code>Accounts</code>, <code>Identity Attributes</code>, <code>Search Attributes</code>, <code>Machine Identities</code>, <code>Notification Templates</code>, <code>Service Desk Integrations</code>, <code>Segments</code>, <code>SOD Policies</code>, and <code>Identities</code>.
               </p>
 
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_MainWorkbench.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_MainWorkbench.png" 
                   alt="Administrator Console Main Workbench and 19-Object Explorer" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -187,14 +194,13 @@ export default function UIPluginISCDebugModePost() {
                 </li>
               </ul>
 
-              <h3 id="source-operations" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">2. Source Associated Objects, Aggregations, Resets &amp; Diagnostics</h3>
+              <h2 id="source-operations" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">2. Source Associated Objects, Aggregations, Resets &amp; Diagnostics</h2>
               <p className="text-slate-300 mb-6">
                 In the standard ISC UI, inspecting a source&apos;s underlying schemas, provisioning policies, or attribute sync configuration requires navigating through several nested screens, and critical operations—such as unoptimized aggregations, source resets, or peeking raw connector objects—require external API calls.
               </p>
 
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_SourceOperations.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_SourceOperations.png" 
                   alt="Source Associated Objects and Quick Action Bar" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -214,14 +220,13 @@ export default function UIPluginISCDebugModePost() {
                 </li>
               </ul>
 
-              <h3 id="transform-studio" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">3. Transform Studio &amp; Live Identity Preview Simulator</h3>
+              <h2 id="transform-studio" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">3. Transform Studio &amp; Live Identity Preview Simulator</h2>
               <p className="text-slate-300 mb-6">
                 Writing complex nested transforms in raw JSON is notoriously error-prone when you cannot immediately see the output. When we architect this solution for our enterprise clients, we utilize the integrated <strong>Transform Studio</strong> whenever a Transform object is opened in the workspace.
               </p>
 
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_TransformStudio.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_TransformStudio.png" 
                   alt="Transform Studio and Live Identity Preview" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -236,14 +241,13 @@ export default function UIPluginISCDebugModePost() {
                 </li>
               </ul>
 
-              <h3 id="connector-rule-studio" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">4. Connector Rule Studio (Unescaped BeanShell Editor)</h3>
+              <h2 id="connector-rule-studio" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">4. Connector Rule Studio (Unescaped BeanShell Editor)</h2>
               <p className="text-slate-300 mb-6">
                 Connector Rules in ISC store their Java/BeanShell code inside a JSON-escaped string (<code>sourceCode.script</code>). Editing raw escaped strings with <code>\n</code> and <code>\&quot;</code> characters in Postman is slow and introduces syntax defects. Opening any rule in the plugin launches <strong>Connector Rule Studio</strong>.
               </p>
 
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_ConnectorRuleStudio.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_ConnectorRuleStudio.png" 
                   alt="Connector Rule Studio Unescaped BeanShell Editor" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -261,14 +265,13 @@ export default function UIPluginISCDebugModePost() {
                 </li>
               </ul>
 
-              <h3 id="sp-config-packaging" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">5. Tenant Configuration Packaging (SP-Config Export &amp; Import)</h3>
+              <h2 id="sp-config-packaging" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">5. Tenant Configuration Packaging (SP-Config Export &amp; Import)</h2>
               <p className="text-slate-300 mb-6">
                 Promoting configurations between sandbox and production tenants or capturing point-in-time backups before executing major updates typically requires configuring external CLI scripts or Postman jobs. Clicking the cloud icon in the left Activity Bar opens the built-in <strong>Tenant Configuration (SP-Config)</strong> manager.
               </p>
 
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_SPConfig.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_SPConfig.png" 
                   alt="Tenant Configuration SP-Config Modal" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -283,14 +286,13 @@ export default function UIPluginISCDebugModePost() {
                 </li>
               </ul>
 
-              <h3 id="differential-review" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">6. Pre-Commit GitHub-Style Differential Review</h3>
+              <h2 id="differential-review" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">6. Pre-Commit GitHub-Style Differential Review</h2>
               <p className="text-slate-300 mb-6">
                 This modular framework ensures that your ISC deployment avoids accidental configuration overwrites. The plugin never blindly commits an object when you click <strong>Review Diff &amp; Save</strong>.
               </p>
 
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_DiffReviewModal.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_DiffReviewModal.png" 
                   alt="Pre-Commit Differential Review Modal" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -305,14 +307,13 @@ export default function UIPluginISCDebugModePost() {
                 </li>
               </ul>
 
-              <h3 id="api-activity-log" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">7. Built-In API &amp; Network Activity Log Viewer</h3>
+              <h2 id="api-activity-log" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">7. Built-In API &amp; Network Activity Log Viewer</h2>
               <p className="text-slate-300 mb-6">
                 For identity architects who need to inspect the exact REST calls executing behind the scenes, troubleshoot a <code>400 Bad Request</code> validation error, or export a request into an external automation script, the left Activity Bar includes a live <strong>API &amp; Network Activity</strong> console.
               </p>
 
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_ApiActivityLog.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-isc-debug-mode/AdminConsole_ApiActivityLog.png" 
                   alt="API and Network Activity Log Viewer" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -330,7 +331,7 @@ export default function UIPluginISCDebugModePost() {
               <hr className="border-white/10 my-10" />
 
               {/* Architecture & Key Code Highlights */}
-              <h3 id="architecture-code-highlights" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Architecture &amp; Key Code Highlights</h3>
+              <h2 id="architecture-code-highlights" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Architecture &amp; Key Code Highlights</h2>
               <p className="text-slate-300 mb-6">
                 Our core engineering methodology structures the data layer around three foundational components inside the IdentityEXE implementation blueprint:
               </p>
@@ -462,7 +463,7 @@ export default function UIPluginISCDebugModePost() {
               <hr className="border-white/10 my-10" />
 
               {/* Considerations & Production Best Practices */}
-              <h3 id="production-best-practices" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Considerations &amp; Production Best Practices</h3>
+              <h2 id="production-best-practices" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Considerations &amp; Production Best Practices</h2>
               <p className="text-slate-300 mb-6">
                 When deploying the Administrator Console UI Plugin across enterprise ISC environments, enforce the following operational guardrails:
               </p>
@@ -485,7 +486,7 @@ export default function UIPluginISCDebugModePost() {
               <hr className="border-white/10 my-10" />
 
               {/* Resources & Source Code */}
-              <h3 id="resources-source-code" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Resources &amp; Implementation Artifacts</h3>
+              <h2 id="resources-source-code" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Resources &amp; Implementation Artifacts</h2>
               <p className="text-slate-300 mb-6">
                 All source code, specialized studio components, and the UI plugin manifest are available in the official GitHub repository:
               </p>
@@ -531,7 +532,7 @@ export default function UIPluginISCDebugModePost() {
 
               {/* 3. THE CONVERSION BRIDGE */}
               <div className="mt-16 pt-12 border-t border-white/10">
-                <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+                <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
                 <p className="text-slate-300 mb-8 leading-relaxed font-light">
                   Fragmented external tooling and blind API overwrites do not have to be an accepted reality of administering SailPoint Identity Security Cloud. By embedding a VS Code-style 19-object explorer, specialized Transform and Connector Rule studios, real-time source diagnostics, SP-Config packaging, a pre-commit RFC 6902 diff engine, and a live API traffic logger directly inside the ISC browser UI, the Administrator Console UI Plugin restores the unified <code>/debug</code> control plane that enterprise identity teams demand.
                 </p>

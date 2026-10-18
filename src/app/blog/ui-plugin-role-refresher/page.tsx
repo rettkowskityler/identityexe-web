@@ -3,10 +3,13 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 export const metadata: Metadata = {
-  title: "UI Plugin Role Refresher in Identity Security Cloud | IdentityEXE",
+  title: "UI Plugin Role Refresher in Identity Security Cloud",
   description: "A repeatable architectural methodology designed by IdentityEXE to simulate complex role criteria trees client-side, preview live membership deltas, catch deprovisioning risks, and dispatch targeted identity recalculations via the SailPoint UI Plugin SDK.",
+  keywords: getBlogPostSeo('ui-plugin-role-refresher')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/ui-plugin-role-refresher',
   },
@@ -15,6 +18,8 @@ export const metadata: Metadata = {
     description: "A repeatable architectural methodology designed by IdentityEXE to simulate complex role criteria trees client-side, preview live membership deltas, catch deprovisioning risks, and dispatch targeted identity recalculations via the SailPoint UI Plugin SDK.",
     url: 'https://identityexe.com/blog/ui-plugin-role-refresher',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('ui-plugin-role-refresher')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
     images: [
       {
@@ -49,6 +54,10 @@ export default function UIPluginRoleRefresherPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('ui-plugin-role-refresher')) }}
+      />
       <Navbar />
 
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -91,7 +100,7 @@ export default function UIPluginRoleRefresherPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Executive Summary */}
-              <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">Executive Summary</h3>
+              <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">Executive Summary</h2>
               <p className="text-slate-300 mb-6 leading-relaxed">
                 In SailPoint Identity Security Cloud (ISC), updating automated role criteria carries real operational risk. Role membership relies on nested criteria trees built from identity attributes, connected source accounts, and entitlements. However, the ISC console does not let you preview or simulate criteria changes before you save them. To see who qualifies, administrators have to click &quot;Apply Changes.&quot; That action launches a background recalculation across every identity in the tenant. In large environments with hundreds of thousands of users, this global update can take hours and tie up valuable system resources.
               </p>
@@ -103,8 +112,7 @@ export default function UIPluginRoleRefresherPost() {
               </p>
 
               <div className="my-10 flex flex-col items-center gap-6">
-                <img 
-                  src="/images/blog/ui-plugin-role-refresher/RoleRefresher_MainPage.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-role-refresher/RoleRefresher_MainPage.png" 
                   alt="IdentityEXE Role Refresher Main Interface" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -113,7 +121,7 @@ export default function UIPluginRoleRefresherPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Solution Overview */}
-              <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Solution Overview &amp; Architectural Flow</h3>
+              <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Solution Overview &amp; Architectural Flow</h2>
               <p className="text-slate-300 mb-6">
                 When we architect this solution for enterprise clients, we utilize the official <strong>SailPoint UI Plugin Framework (<code>@sailpoint/ui-plugin-sdk</code>), Angular 21, TypeScript, PrimeNG components, modern SailPoint <code>/v1</code> REST APIs</strong>, and an automated PowerShell validation suite.
               </p>
@@ -147,7 +155,7 @@ export default function UIPluginRoleRefresherPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Interactive In-Tenant Workflow Walkthrough */}
-              <h3 id="interactive-ui" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Interactive In-Tenant Workflow Walkthrough</h3>
+              <h2 id="interactive-ui" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Interactive In-Tenant Workflow Walkthrough</h2>
               <p className="text-slate-300 mb-6">
                 This modular framework ensures that your ISC deployment avoids guesswork by giving administrators complete visibility before criteria changes are applied.
               </p>
@@ -158,8 +166,7 @@ export default function UIPluginRoleRefresherPost() {
               </p>
               
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-role-refresher/RoleRefresher_MainPage.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-role-refresher/RoleRefresher_MainPage.png" 
                   alt="Role Refresher Main Page KPI Cards" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -181,8 +188,7 @@ export default function UIPluginRoleRefresherPost() {
               </p>
 
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-role-refresher/RoleRefresher_PreviewImpacted.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-role-refresher/RoleRefresher_PreviewImpacted.png" 
                   alt="Previewing Impacted Identities" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -198,8 +204,7 @@ export default function UIPluginRoleRefresherPost() {
               </p>
 
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-role-refresher/RoleRefresher_DeprovisioningRisk.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-role-refresher/RoleRefresher_DeprovisioningRisk.png" 
                   alt="Deprovisioning Risk Detection Alert" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-rose-500/30" 
                 />
@@ -215,8 +220,7 @@ export default function UIPluginRoleRefresherPost() {
               </p>
 
               <div className="my-8 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-role-refresher/RoleRefresher_DispatchedSuccess.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-role-refresher/RoleRefresher_DispatchedSuccess.png" 
                   alt="Targeted Recalculation Dispatched Successfully" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-emerald-500/30" 
                 />
@@ -229,7 +233,7 @@ export default function UIPluginRoleRefresherPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Architecture Deep Dive */}
-              <h3 id="architecture-deep-dive" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Architecture &amp; Implementation Deep Dive</h3>
+              <h2 id="architecture-deep-dive" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Architecture &amp; Implementation Deep Dive</h2>
               <p className="text-slate-300 mb-6">
                 Building a client-side criteria simulator that mirrors SailPoint ISC&apos;s backend recalculation engine requires strict adherence to security boundaries and API protocols.
               </p>
@@ -324,7 +328,7 @@ export default function UIPluginRoleRefresherPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Reverse Engineering the Criteria Evaluation Engine */}
-              <h3 id="criteria-engine" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Replicating ISC Criteria Evaluation Mechanics</h3>
+              <h2 id="criteria-engine" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Replicating ISC Criteria Evaluation Mechanics</h2>
               <p className="text-slate-300 mb-6">
                 SailPoint ISC stores role assignment rules as recursive JSON trees composed of branch nodes (<code>AND</code>, <code>OR</code>) and leaf conditions (<code>IDENTITY</code>, <code>ENTITLEMENT</code>, <code>ACCOUNT</code>). To build an accurate simulator, we developed an in-memory Abstract Syntax Tree evaluator in TypeScript (<code>criteria-tree-parser.ts</code> and <code>leaf-resolver.ts</code>).
               </p>
@@ -426,7 +430,7 @@ export default function UIPluginRoleRefresherPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Targeted Recalculation via /identities/v1/process */}
-              <h3 id="targeted-recalculation" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Targeted Recalculation via <code>/identities/v1/process</code></h3>
+              <h2 id="targeted-recalculation" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Targeted Recalculation via <code>/identities/v1/process</code></h2>
               <p className="text-slate-300 mb-4">
                 When refreshing identities from the UI, the component batches target identity IDs into chunks of 250 (the hard limit enforced by the ISC endpoint) and dispatches processing tasks asynchronously:
               </p>
@@ -462,7 +466,7 @@ export default function UIPluginRoleRefresherPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Empirical Validation: 100% Equivalence Across 163 Scenarios */}
-              <h3 id="empirical-validation" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Empirical Validation: 100% Equivalence Across 163 Scenarios</h3>
+              <h2 id="empirical-validation" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Empirical Validation: 100% Equivalence Across 163 Scenarios</h2>
               <p className="text-slate-300 mb-6">
                 Deploying a client-side criteria simulator into an enterprise production environment demands mathematical certainty that its predictions match SailPoint&apos;s native backend engine with 100% fidelity across all edge cases.
               </p>
@@ -506,8 +510,7 @@ export default function UIPluginRoleRefresherPost() {
                 Executing the validation suite begins with provisioning all 163 role definitions into the target tenant:
               </p>
               <div className="my-6 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-role-refresher/RoleCriteria_TestScript_Upload.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-role-refresher/RoleCriteria_TestScript_Upload.png" 
                   alt="Validation Script Role Upload Phase" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -517,8 +520,7 @@ export default function UIPluginRoleRefresherPost() {
                 Once roles are staged, the test harness predicts qualifying identity sets, dispatches batch identity recalculations across the tenant, and continuously polls assignment states:
               </p>
               <div className="my-6 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-role-refresher/RoleCriteria_TestScript_Processing.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-role-refresher/RoleCriteria_TestScript_Processing.png" 
                   alt="Validation Script Processing and Polling Phase" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -528,8 +530,7 @@ export default function UIPluginRoleRefresherPost() {
                 Within approximately two minutes, the tenant completes recalculation. The harness evaluates set differences across every test role, verifying that every single role assignment matches engine predictions with zero variance:
               </p>
               <div className="my-6 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-role-refresher/RoleCriteria_TestScript_ValidationPass.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-role-refresher/RoleCriteria_TestScript_ValidationPass.png" 
                   alt="Validation Suite 100 Percent Pass Rate" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-emerald-500/30" 
                 />
@@ -539,8 +540,7 @@ export default function UIPluginRoleRefresherPost() {
                 Every single test case achieved <code>PASS</code> status with 0 missing and 0 extra identities. Upon verification, the script automatically tears down all temporary test roles, preserving tenant integrity:
               </p>
               <div className="my-6 flex flex-col items-center gap-4">
-                <img 
-                  src="/images/blog/ui-plugin-role-refresher/RoleCriteria_TestScript_Cleanup.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/ui-plugin-role-refresher/RoleCriteria_TestScript_Cleanup.png" 
                   alt="Automated Test Role Cleanup" 
                   className="max-w-full h-auto object-contain shadow-2xl rounded-2xl border border-white/10" 
                 />
@@ -549,7 +549,7 @@ export default function UIPluginRoleRefresherPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Enterprise Considerations & Production Best Practices */}
-              <h3 id="production-best-practices" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Enterprise Considerations &amp; Production Best Practices</h3>
+              <h2 id="production-best-practices" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Enterprise Considerations &amp; Production Best Practices</h2>
               <p className="text-slate-300 mb-6">
                 When architecting role simulation and targeted recalculation within enterprise tenants, incorporate these engineering guardrails:
               </p>
@@ -572,7 +572,7 @@ export default function UIPluginRoleRefresherPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Resources & Source Code */}
-              <h3 id="resources-source-code" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Resources &amp; Source Code</h3>
+              <h2 id="resources-source-code" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Resources &amp; Source Code</h2>
               <p className="text-slate-300 mb-6">
                 All source code, configuration manifests, and validation test suites are open source and available directly in the GitHub repository:
               </p>
@@ -618,7 +618,7 @@ export default function UIPluginRoleRefresherPost() {
 
               {/* Conclusion & High-Leverage Call to Action */}
               <div className="mt-16 pt-12 border-t border-white/10">
-                <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+                <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
                 <p className="text-slate-300 mb-8 leading-relaxed font-light">
                   Blind role recalculations and tenant-wide processing delays do not have to be an accepted cost of managing SailPoint Identity Security Cloud. By combining in-memory Abstract Syntax Tree evaluation with native UI Plugins and targeted <code>/identities/v1/process</code> recalculations, enterprise identity teams can completely eliminate deprovisioning risk, protect executive access, and compress multi-hour update cycles down to seconds.
                 </p>

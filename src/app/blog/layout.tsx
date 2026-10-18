@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { getBlogCollectionJsonLd } from '../../lib/seo';
 
 export const metadata: Metadata = {
   title: 'SailPoint Engineering Insights & Architecture Blueprints',
@@ -19,5 +20,15 @@ export default function BlogLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  const collectionJsonLd = getBlogCollectionJsonLd();
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+      />
+      {children}
+    </>
+  );
 }

@@ -3,10 +3,13 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 export const metadata: Metadata = {
-  title: "Comprehensive SailPoint Source Health Reporting & Automated Incident Alerting | IdentityEXE",
+  title: "Comprehensive SailPoint Source Health Reporting & Automated Incident Alerting",
   description: "A repeatable architectural methodology designed by IdentityEXE to continuously audit tenant-wide source health across eight core operations, detect silent aggregation and provisioning failures, and dispatch automated ITSM incident alerts.",
+  keywords: getBlogPostSeo('comprehensive-source-reporting')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/comprehensive-source-reporting',
   },
@@ -15,6 +18,8 @@ export const metadata: Metadata = {
     description: "A repeatable architectural methodology designed by IdentityEXE to continuously audit tenant-wide source health across eight core operations, detect silent aggregation and provisioning failures, and dispatch automated ITSM incident alerts.",
     url: 'https://identityexe.com/blog/comprehensive-source-reporting',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('comprehensive-source-reporting')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
     images: [
       {
@@ -50,6 +55,10 @@ export default function ComprehensiveSourceReportingPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('comprehensive-source-reporting')) }}
+      />
       <Navbar />
 
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -91,7 +100,7 @@ export default function ComprehensiveSourceReportingPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Executive Summary */}
-              <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+              <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 In SailPoint Identity Security Cloud (ISC), seeing a green &quot;Healthy&quot; badge on a connected source in the administrative console creates a dangerous operational illusion. That status indicator reflects nothing more than a successful connectivity ping between the Cloud Connector Gateway (CCG) or SaaS connector and the target managed endpoint. It merely verifies network reachability. The out-of-the-box health check is entirely blind to silent operational failures: scheduled account aggregations failing on unhandled filestream locks or schema parse errors, entitlement aggregations failing to sync newly created security groups, automated account provisioning actions (Create, Modify, Disable, Enable, Delete) aborting due to LDAP schema constraints or expired service account credentials, and attribute synchronization failing to push authoritative changes down to managed applications.
               </p>
@@ -103,7 +112,7 @@ export default function ComprehensiveSourceReportingPost() {
               </p>
 
               {/* Solution Overview */}
-              <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+              <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
               <ul className="space-y-4 text-slate-300 mb-8 list-disc pl-5">
                 <li><strong className="text-white">Tech Stack:</strong> 1 Scheduled SailPoint Workflow + 1 PowerShell Automation Engine + 2 Modular HTML Templates + CSV Audit Export.</li>
                 <li><strong className="text-white">Execution Plane:</strong> Runs on a scheduled cadence within SailPoint Workflows and executes via the Privileged Action Gateway (PAG) on a secured Windows Server host over WinRM.</li>
@@ -122,7 +131,7 @@ export default function ComprehensiveSourceReportingPost() {
               </div>
 
               {/* Architecture & High-Level Flow */}
-              <h3 id="architecture-flow" className="text-2xl text-white mt-12 mb-4">Architecture & High-Level Flow</h3>
+              <h2 id="architecture-flow" className="text-2xl text-white mt-12 mb-4">Architecture & High-Level Flow</h2>
               <p className="text-slate-300 mb-6 leading-relaxed font-light">
                 Our core engineering methodology structures the data layer to isolate capability discovery from health auditing, preventing false positive alarms while guaranteeing 100% event capture across high-volume enterprise tenants.
               </p>
@@ -170,7 +179,7 @@ export default function ComprehensiveSourceReportingPost() {
               </div>
 
               {/* Monitored Operations & Capability Detection */}
-              <h3 id="monitored-operations" className="text-2xl text-white mt-12 mb-4">Monitored Operations & Capability Detection</h3>
+              <h2 id="monitored-operations" className="text-2xl text-white mt-12 mb-4">Monitored Operations & Capability Detection</h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 A primary engineering challenge when auditing source health across an entire enterprise tenant is preventing false positives. In complex environments managing hundreds of sources, you cannot simply evaluate every operation against every source. For example, auditing account creation against an authoritative flat-file HR source that does not support provisioning would produce false error alerts.
               </p>
@@ -243,7 +252,7 @@ export default function ComprehensiveSourceReportingPost() {
               </ul>
 
               {/* Data Completeness & Pagination Architecture */}
-              <h3 id="pagination-architecture" className="text-2xl text-white mt-12 mb-4">Data Completeness & Pagination Architecture</h3>
+              <h2 id="pagination-architecture" className="text-2xl text-white mt-12 mb-4">Data Completeness & Pagination Architecture</h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 In enterprise tenants managing hundreds of sources and tens of thousands of daily provisioning actions, simple API queries fall victim to payload limits, timeouts, or silent data truncation. To guarantee complete visibility, the engine implements three distinct pagination techniques:
               </p>
@@ -278,7 +287,7 @@ export default function ComprehensiveSourceReportingPost() {
               </div>
 
               {/* Executive Reporting & ITSM Incident Ticketing */}
-              <h3 id="reporting-ticketing" className="text-2xl text-white mt-12 mb-4">Executive Reporting & ITSM Incident Ticketing</h3>
+              <h2 id="reporting-ticketing" className="text-2xl text-white mt-12 mb-4">Executive Reporting & ITSM Incident Ticketing</h2>
               <p className="text-slate-300 mb-6 leading-relaxed font-light">
                 The solution produces three distinct outputs tailored for administrators, compliance auditors, and automated service desk queues:
               </p>
@@ -289,8 +298,7 @@ export default function ComprehensiveSourceReportingPost() {
               </p>
 
               <div className="my-6 bg-[#0d1117] rounded-2xl border border-white/10 p-2 shadow-2xl overflow-hidden">
-                <img 
-                  src="/images/blog/comprehensive-source-reporting/Screenshot_ALERT_EMAIL.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/comprehensive-source-reporting/Screenshot_ALERT_EMAIL.png" 
                   alt="Executive Summary Email Report" 
                   className="w-full h-auto rounded-xl object-contain" 
                 />
@@ -312,8 +320,7 @@ export default function ComprehensiveSourceReportingPost() {
               </p>
 
               <div className="my-6 bg-[#0d1117] rounded-2xl border border-white/10 p-2 shadow-2xl overflow-hidden">
-                <img 
-                  src="/images/blog/comprehensive-source-reporting/Screenshot_INCIDENT_EMAIL.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/comprehensive-source-reporting/Screenshot_INCIDENT_EMAIL.png" 
                   alt="Automated Incident Ticket Email" 
                   className="w-full h-auto rounded-xl object-contain" 
                 />
@@ -347,14 +354,13 @@ export default function ComprehensiveSourceReportingPost() {
               </p>
 
               {/* SailPoint Workflow & PAG Canvas */}
-              <h3 id="workflow-pag-canvas" className="text-2xl text-white mt-12 mb-4">SailPoint Workflow & PAG Canvas</h3>
+              <h2 id="workflow-pag-canvas" className="text-2xl text-white mt-12 mb-4">SailPoint Workflow & PAG Canvas</h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 The automation is orchestrated natively within SailPoint ISC through a scheduled workflow that invokes the script execution via the Privileged Action Gateway (PAG):
               </p>
 
               <div className="my-6 bg-[#0d1117] rounded-2xl border border-white/10 p-2 shadow-2xl overflow-hidden">
-                <img 
-                  src="/images/blog/comprehensive-source-reporting/SourceHealthReporting20261002.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/comprehensive-source-reporting/SourceHealthReporting20261002.png" 
                   alt="SailPoint Workflow Canvas" 
                   className="w-full h-auto rounded-xl object-contain" 
                 />
@@ -416,7 +422,7 @@ export default function ComprehensiveSourceReportingPost() {
               </p>
 
               {/* Key Code Highlights */}
-              <h3 id="code-highlights" className="text-2xl text-white mt-12 mb-4">Key Code Highlights & Implementation Choices</h3>
+              <h2 id="code-highlights" className="text-2xl text-white mt-12 mb-4">Key Code Highlights & Implementation Choices</h2>
               <p className="text-slate-300 mb-6 leading-relaxed font-light">
                 Here is a closer look at core architectural patterns embedded within the IdentityEXE PowerShell engine:
               </p>
@@ -501,7 +507,7 @@ if ($combinedRate -ge $ErrorThresholdPercent -and $totalSourceRuns -gt 0) {
               </pre>
 
               {/* Considerations & Production Best Practices */}
-              <h3 id="best-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Production Best Practices</h3>
+              <h2 id="best-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Production Best Practices</h2>
               <ul className="space-y-4 text-slate-300 mb-8 list-disc pl-5 font-light">
                 <li>
                   <strong className="text-white">API Client Scopes & Least Privilege:</strong> Ensure the Personal Access Token (PAT) or OAuth 2.0 Client Credentials Grant assigned to the automation is constrained to read-only scopes:
@@ -523,7 +529,7 @@ if ($combinedRate -ge $ErrorThresholdPercent -and $totalSourceRuns -gt 0) {
               </ul>
 
               {/* Downloads & Implementation Code */}
-              <h3 id="implementation-downloads" className="text-2xl text-white mt-12 mb-4">Downloads & Implementation Code</h3>
+              <h2 id="implementation-downloads" className="text-2xl text-white mt-12 mb-4">Downloads & Implementation Code</h2>
               <p className="text-slate-300 mb-6 leading-relaxed font-light">
                 Download the complete IdentityEXE Comprehensive Source Reporting implementation package below:
               </p>
@@ -607,7 +613,7 @@ if ($combinedRate -ge $ErrorThresholdPercent -and $totalSourceRuns -gt 0) {
 
               {/* Conclusion & High-Leverage Call to Action */}
               <div className="mt-16 pt-12 border-t border-white/10">
-                <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+                <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
                 <p className="text-slate-300 mb-8 leading-relaxed font-light">
                   Relying solely on green &quot;Healthy&quot; connectivity pings leaves critical blind spots in your identity governance posture. By combining SailPoint Workflows, the Privileged Action Gateway, and automated ISC API auditing across eight core operations, enterprise identity teams can proactively track aggregation health, catch failing provisioning events before users or auditors notice, and eliminate the audit findings that plague enterprise rollouts.
                 </p>

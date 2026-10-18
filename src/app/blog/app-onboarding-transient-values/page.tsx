@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 import v1SourceConfig from './sourceconfig_transient_values_v1.json';
 import v2SourceConfig from './sourceconfig_parent_chaining_v2.json';
@@ -10,6 +11,8 @@ import v2SourceConfig from './sourceconfig_parent_chaining_v2.json';
 export const metadata: Metadata = {
   title: "Optimizing SailPoint Web Services: The Transient Values Pattern",
   description: "Eliminate the N+1 REST API aggregation explosion in SailPoint Identity Security Cloud by leveraging in-memory transientValues to slash aggregation runtimes by over 90%.",
+  keywords: getBlogPostSeo('app-onboarding-transient-values')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/app-onboarding-transient-values',
   },
@@ -18,6 +21,8 @@ export const metadata: Metadata = {
     description: "Eliminate the N+1 REST API aggregation explosion in SailPoint Identity Security Cloud by leveraging in-memory transientValues to slash aggregation runtimes by over 90%.",
     url: 'https://identityexe.com/blog/app-onboarding-transient-values',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('app-onboarding-transient-values')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
     images: [
       {
@@ -51,6 +56,10 @@ export default function AppOnboardingTransientValuesPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('app-onboarding-transient-values')) }}
+      />
       <Navbar />
 
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -92,7 +101,7 @@ export default function AppOnboardingTransientValuesPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Executive Hook & Business Context */}
-              <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+              <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
               <p className="text-slate-300 mb-4 leading-relaxed">
                 In enterprise Identity Security Cloud (ISC) and IdentityIQ deployments, onboarding target SaaS applications via the Web Services Connector frequently encounters a severe architectural mismatch: modern REST APIs decouple user identity records from permission assignments across disparate endpoints. Specifically, querying the user endpoint (<code className="text-xs">GET /users</code>) returns basic identity profiles (name, email, department, status) while omitting permission assignments entirely; meanwhile, a separate entitlement endpoint (<code className="text-xs">GET /permissions</code>) hosts inverted membership arrays where permissions list their assigned user IDs. Out of the box, SailPoint attempts to bridge this gap through Parent-Child Endpoint Chaining by executing the parent user query and sequentially firing a secondary child HTTP request for every individual identity returned.
               </p>
@@ -104,7 +113,7 @@ export default function AppOnboardingTransientValuesPost() {
               </p>
 
               {/* The Problem: N+1 Endpoint Chaining Trap */}
-              <h3 id="endpoint-chaining-trap" className="text-2xl text-white mt-12 mb-4">The N+1 Endpoint Chaining Trap</h3>
+              <h2 id="endpoint-chaining-trap" className="text-2xl text-white mt-12 mb-4">The N+1 Endpoint Chaining Trap</h2>
               <p className="text-slate-300 mb-4">
                 Consider a standard enterprise target REST API where identities and permissions are segregated:
               </p>
@@ -172,7 +181,7 @@ export default function AppOnboardingTransientValuesPost() {
               </div>
 
               {/* The Blueprint */}
-              <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: The Transient Values Pattern</h3>
+              <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: The Transient Values Pattern</h2>
               <p className="text-slate-300 mb-6">
                 When we architect this solution for our enterprise clients, we utilize SailPoint&apos;s in-memory execution context known as <code className="text-brand-accent">transientValues</code>. Instead of making thousands of repetitive child requests, our core engineering methodology structures the data layer to fetch and invert the entire permissions dataset <strong className="text-white">exactly once</strong> during Account Aggregation.
               </p>
@@ -180,8 +189,7 @@ export default function AppOnboardingTransientValuesPost() {
               {/* Architecture Diagram */}
               <div className="my-8">
                 <div className="flex justify-center bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-2xl">
-                  <img 
-                    src="/images/blog/app-onboarding-transient-values/transient_values_architecture.png" 
+                  <img loading="lazy" decoding="async" src="/images/blog/app-onboarding-transient-values/transient_values_architecture.png" 
                     alt="Transient Values Inversion Pattern Architecture Diagram" 
                     className="max-w-full h-auto object-contain"
                   />
@@ -219,7 +227,7 @@ export default function AppOnboardingTransientValuesPost() {
               </div>
 
               {/* Lab Benchmarks */}
-              <h3 id="empirical-benchmarks" className="text-2xl text-white mt-12 mb-4">Empirical Lab Benchmarks: 100 vs. 1,000 vs. 10,000 Users</h3>
+              <h2 id="empirical-benchmarks" className="text-2xl text-white mt-12 mb-4">Empirical Lab Benchmarks: 100 vs. 1,000 vs. 10,000 Users</h2>
               <p className="text-slate-300 mb-6">
                 To empirically validate the pattern under realistic conditions, we executed identical aggregation runs comparing <strong className="text-white">V1 (Transient Values)</strong> against <strong className="text-white">V2 (Standard Parent-Child Chaining)</strong>. Tests were configured with 150 enterprise permissions and a simulated 100ms cloud network round-trip time (RTT).
               </p>
@@ -277,16 +285,14 @@ export default function AppOnboardingTransientValuesPost() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-[#0d1117] p-4 rounded-xl border border-brand-accent/30 text-center">
                     <span className="text-xs font-bold text-brand-accent uppercase tracking-wider block mb-2">V1: Transient Values (6 Seconds)</span>
-                    <img 
-                      src="/images/blog/app-onboarding-transient-values/v1_100_users_aggregation.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/app-onboarding-transient-values/v1_100_users_aggregation.png" 
                       alt="100 Users Aggregation V1" 
                       className="rounded-lg shadow-md mx-auto"
                     />
                   </div>
                   <div className="bg-[#0d1117] p-4 rounded-xl border border-white/10 text-center">
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">V2: Parent-Child Chaining (17 Seconds)</span>
-                    <img 
-                      src="/images/blog/app-onboarding-transient-values/v2_100_users_aggregation.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/app-onboarding-transient-values/v2_100_users_aggregation.png" 
                       alt="100 Users Aggregation V2" 
                       className="rounded-lg shadow-md mx-auto"
                     />
@@ -300,16 +306,14 @@ export default function AppOnboardingTransientValuesPost() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-[#0d1117] p-4 rounded-xl border border-brand-accent/30 text-center">
                     <span className="text-xs font-bold text-brand-accent uppercase tracking-wider block mb-2">V1: Transient Values (21 Seconds)</span>
-                    <img 
-                      src="/images/blog/app-onboarding-transient-values/v1_1k_users_aggregation.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/app-onboarding-transient-values/v1_1k_users_aggregation.png" 
                       alt="1,000 Users Aggregation V1" 
                       className="rounded-lg shadow-md mx-auto"
                     />
                   </div>
                   <div className="bg-[#0d1117] p-4 rounded-xl border border-white/10 text-center">
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">V2: Parent-Child Chaining (1 min 56 sec)</span>
-                    <img 
-                      src="/images/blog/app-onboarding-transient-values/v2_1k_users_aggregation.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/app-onboarding-transient-values/v2_1k_users_aggregation.png" 
                       alt="1,000 Users Aggregation V2" 
                       className="rounded-lg shadow-md mx-auto"
                     />
@@ -323,16 +327,14 @@ export default function AppOnboardingTransientValuesPost() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-[#0d1117] p-4 rounded-xl border border-brand-accent/30 text-center">
                     <span className="text-xs font-bold text-brand-accent uppercase tracking-wider block mb-2">V1: Transient Values (1 min 7 sec)</span>
-                    <img 
-                      src="/images/blog/app-onboarding-transient-values/v1_10k_users_aggregation.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/app-onboarding-transient-values/v1_10k_users_aggregation.png" 
                       alt="10,000 Users Aggregation V1" 
                       className="rounded-lg shadow-md mx-auto"
                     />
                   </div>
                   <div className="bg-[#0d1117] p-4 rounded-xl border border-white/10 text-center">
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">V2: Parent-Child Chaining (22 Minutes)</span>
-                    <img 
-                      src="/images/blog/app-onboarding-transient-values/v2_10k_users_aggregation.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/app-onboarding-transient-values/v2_10k_users_aggregation.png" 
                       alt="10,000 Users Aggregation V2" 
                       className="rounded-lg shadow-md mx-auto"
                     />
@@ -341,7 +343,7 @@ export default function AppOnboardingTransientValuesPost() {
               </div>
 
               {/* Connector Framework */}
-              <h3 id="connector-framework" className="text-2xl text-white mt-12 mb-4">Implementation Framework: Connector Configuration</h3>
+              <h2 id="connector-framework" className="text-2xl text-white mt-12 mb-4">Implementation Framework: Connector Configuration</h2>
               <p className="text-slate-300 mb-6">
                 Our core engineering methodology structures the connector configuration to eliminate unnecessary endpoint definitions. In <strong className="text-white">V1 (Transient Values)</strong>, only a single endpoint is declared for Account Aggregation, binding the custom After-Operation Rule directly to the response pipeline.
               </p>
@@ -387,7 +389,7 @@ export default function AppOnboardingTransientValuesPost() {
               </div>
 
               {/* Rule Architecture */}
-              <h3 id="rule-architecture" className="text-2xl text-white mt-12 mb-4">After-Operation Rule Deep Dive</h3>
+              <h2 id="rule-architecture" className="text-2xl text-white mt-12 mb-4">After-Operation Rule Deep Dive</h2>
               <p className="text-slate-300 mb-6">
                 The After-Operation Rule acts as the core engine for this pattern. Below is the step-by-step breakdown of how the rule lazily loads permissions on Page 1 and provides <span className="font-mono text-white">O(1)</span> lookups across subsequent pages.
               </p>
@@ -499,7 +501,7 @@ return processedResponseObject;`}</code></pre>
               </div>
 
               {/* Production Hardening & Gotchas */}
-              <h3 id="production-hardening" className="text-2xl text-white mt-12 mb-4">Production Hardening & Scripting Gotchas</h3>
+              <h2 id="production-hardening" className="text-2xl text-white mt-12 mb-4">Production Hardening & Scripting Gotchas</h2>
               <p className="text-slate-300 mb-6">
                 When deploying this pattern into enterprise ISC tenants, several critical runtime nuances must be addressed to ensure complete stability:
               </p>
@@ -535,7 +537,7 @@ return processedResponseObject;`}</code></pre>
               </div>
 
               {/* Downloads & Resources */}
-              <h3 id="downloads" className="text-2xl text-white mt-12 mb-4">Code & Blueprint Downloads</h3>
+              <h2 id="downloads" className="text-2xl text-white mt-12 mb-4">Code & Blueprint Downloads</h2>
               <p className="text-slate-300 mb-6">
                 All production blueprints, connector JSON exports, and the After-Operation Java Rule are available for direct download below:
               </p>
@@ -589,7 +591,7 @@ return processedResponseObject;`}</code></pre>
 
               {/* Conclusion & High-Converting CTA */}
               <div className="mt-16 pt-12 border-t border-white/10">
-                <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+                <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
                 <p className="text-slate-300 mb-8 leading-relaxed font-light">
                   Relying on out-of-the-box parent-child endpoint chaining for decoupled REST APIs creates a dangerous architectural scalability bottleneck. As identity populations expand into the thousands, the resulting N+1 request cascade degrades system performance, triggers API rate limits, and compromises compliance audit integrity. By implementing the Transient Values Pattern, enterprises eliminate over 99% of network overhead, transform multi-hour aggregation lag into sub-minute runs, and ensure robust, enterprise-grade identity governance.
                 </p>

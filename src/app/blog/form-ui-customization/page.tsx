@@ -3,12 +3,15 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import formCustomizationTesterWorkflow from './FormCustomizationTester20260609.json';
 
 
 export const metadata: Metadata = {
   title: "SailPoint Form UI Customization: Styling Beyond Default Layouts",
   description: "The ultimate guide to SailPoint ISC Form UI customization with custom HTML elements, advanced CSS layout structures, and dynamic serial loops.",
+  keywords: getBlogPostSeo('form-ui-customization')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/form-ui-customization',
   },
@@ -17,6 +20,8 @@ export const metadata: Metadata = {
     description: "The ultimate guide to SailPoint ISC Form UI customization with custom HTML elements, advanced CSS layout structures, and dynamic serial loops.",
     url: 'https://identityexe.com/blog/form-ui-customization',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('form-ui-customization')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -41,6 +46,10 @@ export default function FormUiCustomizationPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('form-ui-customization')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -83,7 +92,7 @@ export default function FormUiCustomizationPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-code:text-cyan-300 prose-code:bg-cyan-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Hook: Form Adoption vs Form Function */}
-              <h3 id="hook-form-adoption" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">Form Adoption vs. Form Function</h3>
+              <h2 id="hook-form-adoption" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">Form Adoption vs. Form Function</h2>
               <p className="text-slate-300 mb-6 leading-relaxed">
                 As Identity Access Management (IAM) professionals, we spend weeks designing robust joiner-mover-leaver processes, automated workflows, and complex approvals. When it's time to roll them out to the business, we deploy them using out-of-the-box, plain-text forms. We tell ourselves that as long as the form is functional and the backend APIs provision access correctly, our job is done.
               </p>
@@ -100,7 +109,7 @@ export default function FormUiCustomizationPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Section 1: Basics */}
-              <h3 id="basics-body-customization" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Form Body-Based Customization: The Basics</h3>
+              <h2 id="basics-body-customization" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Form Body-Based Customization: The Basics</h2>
               <p className="text-slate-300 mb-6">
                 When designing forms within SailPoint ISC, the section descriptions, field descriptions, and injected workflow variables are not restricted to plain text. The Form UI rendering engine features a robust Document Object Model (DOM) pipeline that parses standard HTML tags and basic inline CSS.
               </p>
@@ -112,8 +121,7 @@ export default function FormUiCustomizationPost() {
               <div className="my-10 flex flex-col items-center gap-6">
                 <div className="w-full max-w-2xl">
                   <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden p-4">
-                    <img 
-                      src="/images/blog/form-ui-customization/Example-Of-UI-Editing-Options.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/form-ui-customization/Example-Of-UI-Editing-Options.png" 
                       alt="Form UI Editing Options"
                       className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                     />
@@ -196,7 +204,7 @@ export default function FormUiCustomizationPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Section 2: Intermediate */}
-              <h3 id="intermediate-layouts-tables" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Intermediate Layouts, Spacing & Tables</h3>
+              <h2 id="intermediate-layouts-tables" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Intermediate Layouts, Spacing & Tables</h2>
               <p className="text-slate-300 mb-6">
                 Forms often need to present lists of entitlements or tabular summaries of requested roles. Instead of relying on long, hard-to-read paragraphs, you can structure your forms using tables, bulleted lists, and inline CSS box alignment properties.
               </p>
@@ -278,7 +286,7 @@ export default function FormUiCustomizationPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Section 3: Advanced CSS */}
-              <h3 id="advanced-css-polish" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Advanced CSS, Visual Polish & Interactive Elements</h3>
+              <h2 id="advanced-css-polish" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Advanced CSS, Visual Polish & Interactive Elements</h2>
               <p className="text-slate-300 mb-6">
                 If you want to take your forms from basic HTML layouts to premium, enterprise-grade dashboards, you can leverage advanced CSS techniques like border accents, box shadows, text rendering overrides, and native interactive components.
               </p>
@@ -357,7 +365,7 @@ export default function FormUiCustomizationPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Section 4: Showcase */}
-              <h3 id="showcase-layouts" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Showcase: Advanced Layout Designs (Complex Custom Dashboards)</h3>
+              <h2 id="showcase-layouts" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Showcase: Advanced Layout Designs (Complex Custom Dashboards)</h2>
               <p className="text-slate-300 mb-6">
                 To show you just how far you can push this styling engine, let's look at three complex, enterprise-ready dashboard components. These widgets combine borders, flexbox grid spacing, custom table alignments, and color-coded status pills to convey high-density security parameters cleanly:
               </p>
@@ -409,8 +417,7 @@ export default function FormUiCustomizationPost() {
               <div className="my-10 flex flex-col items-center gap-6">
                 <div className="w-full max-w-2xl">
                   <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden p-4">
-                    <img 
-                      src="/images/blog/form-ui-customization/Loop-Variable-Builder-Customized-Form-2.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/form-ui-customization/Loop-Variable-Builder-Customized-Form-2.png" 
                       alt="High-Risk Governance Override Detected UI"
                       className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                     />
@@ -466,8 +473,7 @@ export default function FormUiCustomizationPost() {
               <div className="my-10 flex flex-col items-center gap-6">
                 <div className="w-full max-w-2xl">
                   <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden p-4">
-                    <img 
-                      src="/images/blog/form-ui-customization/Loop-Variable-Builder-Customized-Form-3.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/form-ui-customization/Loop-Variable-Builder-Customized-Form-3.png" 
                       alt="Core Identity Context Card UI"
                       className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                     />
@@ -508,8 +514,7 @@ export default function FormUiCustomizationPost() {
               <div className="my-10 flex flex-col items-center gap-6">
                 <div className="w-full max-w-2xl">
                   <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden p-4">
-                    <img 
-                      src="/images/blog/form-ui-customization/Loop-Variable-Builder-Customized-Form-4.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/form-ui-customization/Loop-Variable-Builder-Customized-Form-4.png" 
                       alt="Pre-Provisioning Compliance Verification Checksheet UI"
                       className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                     />
@@ -523,7 +528,7 @@ export default function FormUiCustomizationPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Section 5: Title Customization */}
-              <h3 id="title-customization" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Form Title Customization (Unicode, Emojis & Pseudo-Fonts)</h3>
+              <h2 id="title-customization" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Form Title Customization (Unicode, Emojis & Pseudo-Fonts)</h2>
               <p className="text-slate-300 mb-6">
                 While the form <em>body</em> is highly customizable via HTML and CSS, the form <em>title</em> is handled differently. The title is processed as a <strong className="text-white">strict plain-text text node</strong>.
               </p>
@@ -577,7 +582,7 @@ export default function FormUiCustomizationPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Section 6: Security and contrast guardrails */}
-              <h3 id="security-contrast-schema" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Security, Contrast & Schema Guardrails</h3>
+              <h2 id="security-contrast-schema" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Security, Contrast & Schema Guardrails</h2>
               <p className="text-slate-300 mb-6">
                 When pushing the limits of Form UI customization, you must stay within SailPoint's platform boundaries. Breaking these rules will result in either broken layouts or deployment errors.
               </p>
@@ -622,7 +627,7 @@ export default function FormUiCustomizationPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Section 7: Masterclass Serial Loops */}
-              <h3 id="masterclass-dynamic-loops" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">The Masterclass: Dynamic HTML Compilation via Serial Loops</h3>
+              <h2 id="masterclass-dynamic-loops" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">The Masterclass: Dynamic HTML Compilation via Serial Loops</h2>
               <p className="text-slate-300 mb-6">
                 Now that we understand the visual thresholds of the Form body, let's explore how to dynamically inject customized HTML widgets into your forms using SailPoint Workflows.
               </p>
@@ -825,8 +830,7 @@ export default function FormUiCustomizationPost() {
               <div className="my-10 flex flex-col items-center gap-6">
                 <div className="w-full max-w-2xl">
                   <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden p-4">
-                    <img 
-                      src="/images/blog/form-ui-customization/Loop-Variable-Builder-Customized-Form-1.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/form-ui-customization/Loop-Variable-Builder-Customized-Form-1.png" 
                       alt="Form Customization Loop Output"
                       className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                     />
@@ -840,7 +844,7 @@ export default function FormUiCustomizationPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Section 8: Conclusion */}
-              <h3 id="conclusion" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Conclusion & Call to Action</h3>
+              <h2 id="conclusion" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Conclusion & Call to Action</h2>
               <p className="text-slate-300 mb-6 leading-relaxed font-light">
                 Form design is often treated as an afterthought in Identity Governance, but it has a massive impact on adoption, accuracy, and operational overhead. By leveraging basic HTML, advanced Flexbox alignments, interactive <code>&lt;details&gt;</code> dropdowns, and dynamic serial loop variables, you can elevate your SailPoint Form UI from a simple input collector to a powerful dashboard experience.
               </p>

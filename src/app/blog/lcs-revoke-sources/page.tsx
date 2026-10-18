@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 import perSourceWorkflow from './PerSourceLCSAccessRemoval.json';
 
@@ -10,6 +11,8 @@ import perSourceWorkflow from './PerSourceLCSAccessRemoval.json';
 export const metadata: Metadata = {
   title: "Automating Per-Source Access Revocation in SailPoint ISC",
   description: "A repeatable SailPoint Workflows architectural framework to intelligently filter and selectively revoke access only on specific sources during LCS changes.",
+  keywords: getBlogPostSeo('lcs-revoke-sources')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/lcs-revoke-sources',
   },
@@ -18,6 +21,8 @@ export const metadata: Metadata = {
     description: "A repeatable SailPoint Workflows architectural framework to intelligently filter and selectively revoke access only on specific sources during LCS changes.",
     url: 'https://identityexe.com/blog/lcs-revoke-sources',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('lcs-revoke-sources')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -39,6 +44,10 @@ export default function LcsRevokeSourcesPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('lcs-revoke-sources')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -80,7 +89,7 @@ export default function LcsRevokeSourcesPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+            <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
             <p className="text-slate-300 mb-4">
               A frequent architectural limitation when configuring SailPoint ISC Identity Profiles is managing how access is removed when a user leaves the company. Out of the box, there is only a global "Remove All Access" toggle. When enabled, it blindly revokes all access across every single source in ISC as soon as a lifecycle state change triggers it.
             </p>
@@ -91,15 +100,14 @@ export default function LcsRevokeSourcesPost() {
               To resolve this permanently, we don't just deploy a one-off script. We engineered a repeatable architectural methodology designed by IdentityEXE. This modular framework integrates directly with SailPoint Workflows and custom connector attributes to intelligently filter and selectively revoke access only on specific, flagged sources, ensuring your core deployments remain completely stable.
             </p>
 
-            <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+            <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
             <p className="text-slate-300 mb-6">
               When we architect this solution for our enterprise clients, we utilize a custom PowerShell script triggered by SailPoint Workflows. It allows administrators to flag individual sources that should be completely revoked during termination, leaving other unflagged sources completely untouched.
             </p>
             
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-xl border border-white/10 overflow-hidden">
-                <img 
-                  src="/images/PerSourceLCSAccessRemoval20260906.png" 
+                <img loading="lazy" decoding="async" src="/images/PerSourceLCSAccessRemoval20260906.png" 
                   alt="Workflow Diagram"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -115,7 +123,7 @@ export default function LcsRevokeSourcesPost() {
               <li><strong className="text-white">Audit & Logging:</strong> Full execution logging is captured on the server via <code>Start-Transcript</code>.</li>
             </ul>
 
-            <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: Per-Source LCS Revocation</h3>
+            <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: Per-Source LCS Revocation</h2>
             
             <p className="text-slate-300 mb-6">
               Our core engineering methodology structures the data layer to ensure robust and safe execution. The general flow is as follows:
@@ -130,8 +138,8 @@ export default function LcsRevokeSourcesPost() {
             </ol>
 
             <div className="flex flex-col gap-8 mb-8">
-              <img src="/images/Screenshot_SampleExecution.png" alt="Workflow Execution Data" className="rounded-lg shadow-xl w-full" />
-              <img src="/images/Screenshot_RemovalExample.png" alt="Removal Example Email" className="rounded-lg shadow-xl w-full" />
+              <img loading="lazy" decoding="async" src="/images/Screenshot_SampleExecution.png" alt="Workflow Execution Data" className="rounded-lg shadow-xl w-full" />
+              <img loading="lazy" decoding="async" src="/images/Screenshot_RemovalExample.png" alt="Removal Example Email" className="rounded-lg shadow-xl w-full" />
             </div>
 
             <p className="text-slate-300 mb-4">
@@ -139,11 +147,11 @@ export default function LcsRevokeSourcesPost() {
             </p>
             
             <div className="flex flex-col gap-8 mb-8">
-              <img src="/images/Screenshot_NoRevocableAccessFound.png" alt="No Revocable Access Found" className="rounded-lg shadow-xl w-full" />
-              <img src="/images/Screenshot_NoSourcesFound.png" alt="No Sources Found" className="rounded-lg shadow-xl w-full" />
+              <img loading="lazy" decoding="async" src="/images/Screenshot_NoRevocableAccessFound.png" alt="No Revocable Access Found" className="rounded-lg shadow-xl w-full" />
+              <img loading="lazy" decoding="async" src="/images/Screenshot_NoSourcesFound.png" alt="No Sources Found" className="rounded-lg shadow-xl w-full" />
             </div>
 
-            <h3 id="implementation-framework" className="text-2xl text-white mt-12 mb-4">Implementation Framework: Core Execution</h3>
+            <h2 id="implementation-framework" className="text-2xl text-white mt-12 mb-4">Implementation Framework: Core Execution</h2>
             
             <p className="text-slate-300 mb-6">
               The <code>Revoke-LcsAccess.ps1</code> script acts as the core engine for evaluating and removing access. Here is a breakdown of the technical decisions made in the script:
@@ -230,7 +238,7 @@ foreach ($source in $sources) {
 Write-Output $jsonResponse`}</code></pre>
             </div>
 
-            <h3 id="code-and-resources" className="text-2xl text-white mt-12 mb-4">Code & Design Resources</h3>
+            <h2 id="code-and-resources" className="text-2xl text-white mt-12 mb-4">Code & Design Resources</h2>
             <p className="text-slate-300 mb-6">
               You can utilize the resources below to deploy this in your environment. Make sure to update the PowerShell script variables to match your tenant configuration. Ensure secure credentials handling via DPAPI or a similar secrets manager.
             </p>
@@ -262,7 +270,7 @@ Write-Output $jsonResponse`}</code></pre>
               </a>
             </div>
 
-            <h3 id="conclusion" className="text-2xl text-white mt-12 mb-4">Conclusion</h3>
+            <h2 id="conclusion" className="text-2xl text-white mt-12 mb-4">Conclusion</h2>
             <p className="text-slate-300 mb-8">
               This architectural blueprint provides a targeted, automated approach to access revocation during termination, solving the aggressive global revocation problem. By leveraging custom connector attributes and a workflow-triggered script, organizations gain fine-grained control over which sources should have their access fully revoked.
             </p>

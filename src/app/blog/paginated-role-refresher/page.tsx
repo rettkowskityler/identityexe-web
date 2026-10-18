@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import formRoleSelectorData from './Form-Role-Selector.json';
 import workflowPaginatedData from './Workflow-PaginatedIdentityRefresher.json';
 import workflowRoleRefresherData from './Workflow-RoleRefresher.json';
@@ -11,6 +12,8 @@ import workflowRoleRefresherData from './Workflow-RoleRefresher.json';
 export const metadata: Metadata = {
   title: "Paginated Role Refresher in SailPoint Identity Security Cloud",
   description: "A modular implementation framework to intelligently refresh single roles without triggering tenant-wide global updates in SailPoint ISC.",
+  keywords: getBlogPostSeo('paginated-role-refresher')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/paginated-role-refresher',
   },
@@ -19,6 +22,8 @@ export const metadata: Metadata = {
     description: "A modular implementation framework to intelligently refresh single roles without triggering tenant-wide global updates in SailPoint ISC.",
     url: 'https://identityexe.com/blog/paginated-role-refresher',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('paginated-role-refresher')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -41,6 +46,10 @@ export default function PaginatedRoleRefresherPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('paginated-role-refresher')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -82,7 +91,7 @@ export default function PaginatedRoleRefresherPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+            <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
             <p className="text-slate-300 mb-4">
               In SailPoint Identity Security Cloud (ISC), enterprise engineering teams often encounter a critical architectural limitation: the inability to refresh a single role without triggering an "Apply Changes" for the entire tenant. While a global role refresh might be feasible for smaller organizations, executing this across environments with 100k+ identities consumes significant time and system resources.
             </p>
@@ -93,13 +102,13 @@ export default function PaginatedRoleRefresherPost() {
               To overcome this, IdentityEXE designed a repeatable architectural methodology to streamline role processing. This is not just a script, but a modular implementation framework designed to allow administrators to select an individual role and intelligently refresh only the identities associated with that specific role.
             </p>
 
-            <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+            <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Tech Stack:</strong> 1 Custom Form + 2 Workflows (Launcher & Paginated Worker)</li>
               <li><strong className="text-white">High-Level Flow:</strong> Using a custom interactive form, an administrator can select the specific role they wish to refresh. A primary workflow takes this input and sends the role data to a dedicated "Paginated Worker" external trigger workflow. This worker handles the pagination and identity refresh API calls in chunks of 250, avoiding timeouts and efficiently processing the users.</li>
             </ul>
 
-            <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: What It Can and Cannot Do</h3>
+            <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: What It Can and Cannot Do</h2>
             <p className="text-slate-300 mb-6">
               When we architect this solution for our enterprise clients, it is important to understand the boundaries of this solution. Our core engineering methodology structures the data layer to handle the following:
             </p>
@@ -118,15 +127,14 @@ export default function PaginatedRoleRefresherPost() {
               <li><strong className="text-white">When Removing Entitlements From Roles:</strong> This modular framework does not automatically remove the access from the user. You must remove them from the membership of the role for the access to be completely removed from the user.</li>
             </ul>
 
-            <h3 id="ui-execution-forms" className="text-2xl text-white mt-12 mb-4">User Interface (Forms)</h3>
+            <h2 id="ui-execution-forms" className="text-2xl text-white mt-12 mb-4">User Interface (Forms)</h2>
             <p className="text-slate-300 mb-6">
               We start with an interactive form. Since we cannot build this directly into the role management UI, the form provides a simple drop-down to pick the role and a toggle for <strong>"Identity List Refresh Needed?"</strong> This option is crucial because roles can have members assigned via criteria or specifically via an identity list, and they require different API approaches to refresh.
             </p>
 
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/UI_Form_Execution.png" 
+                <img loading="lazy" decoding="async" src="/images/UI_Form_Execution.png" 
                   alt="UI Form Execution"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -144,7 +152,7 @@ export default function PaginatedRoleRefresherPost() {
               </div>
             </div>
 
-            <h3 id="workflow-frameworks" className="text-2xl text-white mt-12 mb-4">Implementation Frameworks</h3>
+            <h2 id="workflow-frameworks" className="text-2xl text-white mt-12 mb-4">Implementation Frameworks</h2>
             <p className="text-slate-300 mb-8">
               This modular framework ensures that your ISC deployment avoids rigid boundaries, relying on two workflows working together.
             </p>
@@ -156,8 +164,7 @@ export default function PaginatedRoleRefresherPost() {
             
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/DIAGRAM_RoleRefresher20260630.png" 
+                <img loading="lazy" decoding="async" src="/images/DIAGRAM_RoleRefresher20260630.png" 
                   alt="Role Refresher Workflow Diagram"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -198,8 +205,7 @@ export default function PaginatedRoleRefresherPost() {
 
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/DIAGRAM_PaginatedIdentityRefresher20260630.png" 
+                <img loading="lazy" decoding="async" src="/images/DIAGRAM_PaginatedIdentityRefresher20260630.png" 
                   alt="Paginated Worker Diagram"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -217,7 +223,7 @@ export default function PaginatedRoleRefresherPost() {
               </div>
             </div>
 
-            <h3 id="considerations-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices</h3>
+            <h2 id="considerations-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Permissions:</strong> Restrict access to this form to administrators who understand the impact of manual identity processing.</li>
               <li><strong className="text-white">API Limits:</strong> The <code>/identities/v1/process</code> endpoint is powerful. Paginating at 250 ensures we stay within acceptable processing limits and timeouts.</li>
@@ -225,7 +231,7 @@ export default function PaginatedRoleRefresherPost() {
             </ul>
 
             <div className="mt-16 pt-12 border-t border-white/10">
-              <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
               <p className="text-slate-300 mb-8 leading-relaxed font-light">
                 This architecture provides a targeted approach to role refreshing, bypassing the need for global tenant changes. By leveraging our framework, identity teams save massive amounts of operational time and system resources, ensuring agile and resilient lifecycle governance.
               </p>

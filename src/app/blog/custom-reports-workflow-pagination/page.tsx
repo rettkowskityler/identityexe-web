@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import formData from './SelectSourceForReporting_Form_Cleansed.json';
 import launcherData from './InteractiveDisabledAccountsWithAccessReport_Cleansed.json';
 import workerData from './PaginationWorker_Cleansed.json';
@@ -11,6 +12,8 @@ import workerData from './PaginationWorker_Cleansed.json';
 export const metadata: Metadata = {
   title: "Custom Reports with Workflow Pagination in SailPoint ISC",
   description: "A modular architectural framework for building native paginated custom reports within SailPoint Identity Security Cloud workflows.",
+  keywords: getBlogPostSeo('custom-reports-workflow-pagination')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/custom-reports-workflow-pagination',
   },
@@ -19,6 +22,8 @@ export const metadata: Metadata = {
     description: "A modular architectural framework for building native paginated custom reports within SailPoint Identity Security Cloud workflows.",
     url: 'https://identityexe.com/blog/custom-reports-workflow-pagination',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('custom-reports-workflow-pagination')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -39,6 +44,10 @@ export default function CustomReportsWorkflowPaginationPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('custom-reports-workflow-pagination')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -80,7 +89,7 @@ export default function CustomReportsWorkflowPaginationPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+            <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
             <p className="text-slate-300 mb-4">
               Organizations mandate custom reports to identify security gaps, such as a comprehensive list of all disabled accounts retaining active access entitlements across all sources. While out-of-the-box methods exist using external PowerShell scripts or PTA, native execution inside Identity Security Cloud (ISC) Workflows is required for operational simplicity and reduced maintenance overhead. However, workflows impose a strict execution time limit and lack native pagination support for HTTP requests. If an API returns more than 250 items, standard workflow architectures fail to process the remaining data.
             </p>
@@ -91,7 +100,7 @@ export default function CustomReportsWorkflowPaginationPost() {
               IdentityEXE designed a repeatable architectural methodology to solve this constraint natively. This is not a standalone script, but a modular framework. By using self-calling workflows, state passing, and string manipulation, we bypass standard platform limits and build complex, paginated reports natively within SailPoint ISC Workflows, distributing the output via email without external dependencies.
             </p>
 
-            <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+            <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
             <p className="text-slate-300 mb-4">
               We separate this methodology into two connected components:
             </p>
@@ -100,7 +109,7 @@ export default function CustomReportsWorkflowPaginationPost() {
               <li><strong className="text-white">Pagination Worker Workflow:</strong> Executes the API calls, processes pagination by recursively calling itself, constructs the HTML payload using update variables, and dispatches the final email upon completion.</li>
             </ul>
 
-            <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: Implementation Architecture</h3>
+            <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: Implementation Architecture</h2>
             
             <h4 className="text-xl text-white mt-8 mb-3">Interactive Forms & User Experience</h4>
             <p className="text-slate-300 mb-4">
@@ -108,7 +117,7 @@ export default function CustomReportsWorkflowPaginationPost() {
             </p>
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-xl border border-white/10 overflow-hidden">
-                <img src="/images/Form_Execution_Screenshot.png" alt="Form Execution Example" className="max-w-full h-auto object-contain shadow-2xl" />
+                <img loading="lazy" decoding="async" src="/images/Form_Execution_Screenshot.png" alt="Form Execution Example" className="max-w-full h-auto object-contain shadow-2xl" />
               </div>
             </div>
             <p className="text-slate-300 mb-8">
@@ -151,17 +160,17 @@ export default function CustomReportsWorkflowPaginationPost() {
             <div className="my-6">
               <p className="text-slate-300 mb-2 font-medium">Email Example with Accounts:</p>
               <div className="flex justify-center bg-white/5 rounded-xl border border-white/10 overflow-hidden">
-                <img src="/images/Email_Example_Output_With_Accounts.png" alt="Email Example Output With Accounts" className="max-w-full h-auto object-contain shadow-2xl" />
+                <img loading="lazy" decoding="async" src="/images/Email_Example_Output_With_Accounts.png" alt="Email Example Output With Accounts" className="max-w-full h-auto object-contain shadow-2xl" />
               </div>
             </div>
             <div className="my-6">
               <p className="text-slate-300 mb-2 font-medium">Email Example without Accounts (Success):</p>
               <div className="flex justify-center bg-white/5 rounded-xl border border-white/10 overflow-hidden">
-                <img src="/images/Email_Example_Output_Without_Accounts.png" alt="Email Example Output Without Accounts" className="max-w-full h-auto object-contain shadow-2xl" />
+                <img loading="lazy" decoding="async" src="/images/Email_Example_Output_Without_Accounts.png" alt="Email Example Output Without Accounts" className="max-w-full h-auto object-contain shadow-2xl" />
               </div>
             </div>
 
-            <h3 id="workflow-frameworks" className="text-2xl text-white mt-12 mb-4">Implementation Frameworks</h3>
+            <h2 id="workflow-frameworks" className="text-2xl text-white mt-12 mb-4">Implementation Frameworks</h2>
             <p className="text-slate-300 mb-8">
               Below are the workflow diagrams and implementation files for deployment into your environment. Update your Client ID, Secret, and Tenant URLs where required.
             </p>
@@ -182,7 +191,7 @@ export default function CustomReportsWorkflowPaginationPost() {
             <h4 className="text-xl text-white mt-10 mb-4">2. Launcher Workflow</h4>
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img src="/images/InteractiveDisabledAccountsWithAccessReport20260625.png" alt="Launcher Workflow" className="max-w-full h-auto object-contain shadow-2xl" />
+                <img loading="lazy" decoding="async" src="/images/InteractiveDisabledAccountsWithAccessReport20260625.png" alt="Launcher Workflow" className="max-w-full h-auto object-contain shadow-2xl" />
               </div>
               <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                 <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
@@ -200,7 +209,7 @@ export default function CustomReportsWorkflowPaginationPost() {
             <h4 className="text-xl text-white mt-10 mb-4">3. Pagination Worker Workflow</h4>
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img src="/images/PaginationWorker20260625.png" alt="Pagination Worker Workflow" className="max-w-full h-auto object-contain shadow-2xl" />
+                <img loading="lazy" decoding="async" src="/images/PaginationWorker20260625.png" alt="Pagination Worker Workflow" className="max-w-full h-auto object-contain shadow-2xl" />
               </div>
               <div className="bg-[#0d1117] border border-white/10 rounded-b-xl p-4 flex items-center justify-between">
                 <span className="text-slate-300 font-bold text-sm">Download Implementation Code:</span>
@@ -216,7 +225,7 @@ export default function CustomReportsWorkflowPaginationPost() {
             </div>
 
             <div className="mt-16 pt-12 border-t border-white/10">
-              <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
               <p className="text-slate-300 mb-8 leading-relaxed font-light">
                 By leveraging self-calling workflows, state passing via updated variables, and recursive execution paths, Identity Security Cloud can natively bypass standard execution limits. This framework delivers comprehensive, paginated reporting securely within your existing governance ecosystem without the continuous overhead of maintaining external infrastructure or arbitrary external scripts.
               </p>

@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import form1Data from './Form-Governance_Group_Selector.json';
 import form2Data from './Form-Select_Action_and_User.json';
 import workflow1Data from './Workflow-Allow_Governance_Group_Owners_To_Manage_Groups.json';
@@ -12,6 +13,8 @@ import workflow2Data from './Workflow-Add_Governance_Group_Owners_Automatically_
 export const metadata: Metadata = {
   title: "Self-Service Governance Group Management in SailPoint ISC",
   description: "Securely delegate governance group administration to group owners using a multi-form pipeline architecture in SailPoint Identity Security Cloud.",
+  keywords: getBlogPostSeo('delegated-governance-groups')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/delegated-governance-groups',
   },
@@ -20,6 +23,8 @@ export const metadata: Metadata = {
     description: "Securely delegate governance group administration to group owners using a multi-form pipeline architecture in SailPoint Identity Security Cloud.",
     url: 'https://identityexe.com/blog/delegated-governance-groups',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('delegated-governance-groups')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -41,6 +46,10 @@ export default function DelegatedGovernanceGroupsPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('delegated-governance-groups')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -82,7 +91,7 @@ export default function DelegatedGovernanceGroupsPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="problem-governance-bottleneck" className="text-2xl text-white !mt-0 mb-4">The Problem: The Governance Group Bottleneck</h3>
+            <h2 id="problem-governance-bottleneck" className="text-2xl text-white !mt-0 mb-4">The Problem: The Governance Group Bottleneck</h2>
             <p className="text-slate-300 mb-6">
               If you manage a SailPoint Identity Security Cloud (ISC) environment, you’re likely familiar with the gap with managing governance groups natively. Idea Portal post <a href="https://ideas.sailpoint.com/ideas/GOV-I-1808" target="_blank" rel="noopener noreferrer">GOV-I-1808</a> goes into this lack of functionality with requests for a way so governance group owners can manage their own groups.
             </p>
@@ -99,8 +108,7 @@ export default function DelegatedGovernanceGroupsPost() {
             
             <div className="my-10 flex flex-col items-center">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden max-w-md w-full p-4">
-                <img 
-                  src="/images/blog/delegated-governance-groups/governance-group-form.png" 
+                <img loading="lazy" decoding="async" src="/images/blog/delegated-governance-groups/governance-group-form.png" 
                   alt="Self-Service Governance Group management interactive form mockup"
                   className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                 />
@@ -110,7 +118,7 @@ export default function DelegatedGovernanceGroupsPost() {
               </div>
             </div>
 
-            <h3 id="architectural-overview-pipeline" className="text-2xl text-white mt-12 mb-4">Architectural Overview: The Two-Form Pipeline Pattern</h3>
+            <h2 id="architectural-overview-pipeline" className="text-2xl text-white mt-12 mb-4">Architectural Overview: The Two-Form Pipeline Pattern</h2>
             <p className="text-slate-300 mb-6">
               You might wonder: <em>Why not just use one form?</em> The technical challenge lies in dynamic filtering. A single ISC form cannot dynamically fetch and refresh a dropdown box based on a previous selection within the same active session. If an owner selects "Group A", we need to query the API to find the exact current members of "Group A" so the owner doesn't have to guess who to remove.
             </p>
@@ -123,7 +131,7 @@ export default function DelegatedGovernanceGroupsPost() {
               <li><strong className="text-white">Form 2 (Action):</strong> Pipes that API response into a dynamic dropdown, allowing owners to selectively remove existing members or add new ones.</li>
             </ol>
 
-            <h3 id="implementation-step-by-step" className="text-2xl text-white mt-12 mb-4">Implementation Step-by-Step</h3>
+            <h2 id="implementation-step-by-step" className="text-2xl text-white mt-12 mb-4">Implementation Step-by-Step</h2>
 
             <h4 className="text-xl text-brand-accent mt-6 mb-3">Phase A: Automated Launcher Access (Workflow 2)</h4>
             <p className="text-slate-300 mb-6">
@@ -195,14 +203,14 @@ export default function DelegatedGovernanceGroupsPost() {
               </li>
             </ol>
 
-            <h3 id="key-considerations-boundaries" className="text-2xl text-white mt-12 mb-4">Key Considerations & Security Boundaries</h3>
+            <h2 id="key-considerations-boundaries" className="text-2xl text-white mt-12 mb-4">Key Considerations & Security Boundaries</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">API Calls:</strong> We deliberately use <code>/v2026/workgroups</code> and <code>/v2026/roles</code> to leverage the bulk modifications and complex role management.</li>
               <li><strong className="text-white">Scalability:</strong> Ensure your form's maximum item limits (e.g., 30 identities for bulk add/remove) align with your workgroup sizes. If you go outside this boundary, the form will not be able to handle it in one submission, and multiple submissions will be required.</li>
               <li><strong className="text-white">Tenant-Specific Variables:</strong> When importing the JSON files below, remember to update the Base URLs &amp; Role IDs (replace <code>TENANT</code> &amp; <code>ROLEID</code> with your tenant URL and Role ID).</li>
             </ul>
 
-            <h3 id="configuration-json-snippets" className="text-2xl text-white mt-12 mb-4">Configuration JSON Snippets</h3>
+            <h2 id="configuration-json-snippets" className="text-2xl text-white mt-12 mb-4">Configuration JSON Snippets</h2>
             <p className="text-slate-300 mb-8">
               You can import these directly into your tenant. <em>Note: Please update the tenant URLs and Role IDs to match your environment.</em>
             </p>
@@ -419,7 +427,7 @@ if ($ownersToAdd.Count -gt 0) {
             </div>
 
             <div className="mt-16 pt-12 border-t border-white/10">
-              <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
               <p className="text-slate-300 mb-8 leading-relaxed font-light">
                 This multi-form pipeline effectively solves an immediate operational gap using standard, native tools—no external middleware required. It empowers governance owners, tightens up access modification timelines, and frees up your identity engineering team from routine ticket management.
               </p>

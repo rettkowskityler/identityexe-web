@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import formData from './Form-MaintenanceMode_final.json';
 import workflowData from './Workflow-MaintenanceMode_final.json';
 
@@ -10,6 +11,8 @@ import workflowData from './Workflow-MaintenanceMode_final.json';
 export const metadata: Metadata = {
   title: "Bringing IdentityIQ Maintenance Mode to SailPoint ISC",
   description: "A custom workflow forms solution to gracefully handle SailPoint source downtime and prevent sync disruptions using the Maintenance Guard pattern.",
+  keywords: getBlogPostSeo('maintenance-mode-isc')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/maintenance-mode-isc',
   },
@@ -18,6 +21,8 @@ export const metadata: Metadata = {
     description: "A custom workflow forms solution to gracefully handle SailPoint source downtime and prevent sync disruptions using the Maintenance Guard pattern.",
     url: 'https://identityexe.com/blog/maintenance-mode-isc',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('maintenance-mode-isc')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -41,6 +46,10 @@ export default function MaintenanceModePost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('maintenance-mode-isc')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -82,21 +91,21 @@ export default function MaintenanceModePost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="introduction" className="text-2xl text-white !mt-0 mb-4">Introduction</h3>
+            <h2 id="introduction" className="text-2xl text-white !mt-0 mb-4">Introduction</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Why:</strong> During a recent IIQ to ISC migration, a key requirement was to replicate IIQ's Maintenance Mode functionality. Currently, ISC does not offer an OOTB equivalent, and there is no immediate roadmap for its implementation. If you need to ensure sources stop "pinging" or interacting with destination applications during a window, this solution is for you.</li>
               <li><strong className="text-white">Problem:</strong> Currently there is no way to ensure that an ISC source doesn't attempt to ping the end system in the UI because of the health check functionality. The only way possible is using a combination of API calls to change the configuration of the source.</li>
               <li><strong className="text-white">Goal:</strong> A solution that matches IIQ's Maintenance Mode checkbox as close as possible in ISC.</li>
             </ul>
 
-            <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+            <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Tech Stack:</strong> 1 Form + 1 Workflow + 1 PowerShell Reporting Script.</li>
               <li><strong className="text-white">High-Level Flow:</strong> Through an interactive form and custom workflow approach, I've created a launcher where any source can be toggled from Maintenance Mode On/Off. This solution also includes a PowerShell script that reports on the status of all sources with Maintenance Mode currently enabled.</li>
               <li><strong className="text-white">Behavior Note:</strong> For those familiar with SailPoint IIQ, Maintenance Mode marks an application as offline for a defined period, which causes scheduled activities (such as aggregations) to be skipped. This ISC workflow replicates that behavior by taking the source completely offline for a specified timeframe, pausing all automated tasks. If your operational requirements dictate that a source must remain continuously active, this Maintenance Mode workflow should not be applied.</li>
             </ul>
 
-            <h3 id="user-interface" className="text-2xl text-white mt-12 mb-4">User Interface</h3>
+            <h2 id="user-interface" className="text-2xl text-white mt-12 mb-4">User Interface</h2>
             <div className="bg-slate-900/50 border border-white/5 rounded-xl p-6 mb-8">
               <h4 className="text-xl text-white mb-3">Input Fields</h4>
               <ul className="list-disc pl-5 text-slate-300 space-y-2 mb-6">
@@ -112,8 +121,7 @@ export default function MaintenanceModePost() {
 
             <div className="my-10">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/maintenance-mode-form.png" 
+                <img loading="lazy" decoding="async" src="/maintenance-mode-form.png" 
                   alt="Interactive source selector with Enable/Disable dropdown"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -131,7 +139,7 @@ export default function MaintenanceModePost() {
               </div>
             </div>
 
-            <h3 id="back-end" className="text-2xl text-white mt-12 mb-4">Back End</h3>
+            <h2 id="back-end" className="text-2xl text-white mt-12 mb-4">Back End</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Trigger:</strong> This solution utilizes an <code>Interactive Trigger</code> so we can use the interactive forms options in the next step of the workflow.</li>
               <li><strong className="text-white">Interactive Form:</strong> You'll select the form in the section above in this Action step so the user can see and fill out the form in the launcher.</li>
@@ -151,7 +159,7 @@ export default function MaintenanceModePost() {
               </a>
             </div>
 
-            <h3 id="api-calls" className="text-2xl text-white mt-12 mb-4">API Calls</h3>
+            <h2 id="api-calls" className="text-2xl text-white mt-12 mb-4">API Calls</h2>
             
             <h4 className="text-xl text-brand-accent mt-6 mb-3">Enable Maintenance Mode API Calls</h4>
             <ul className="space-y-2 text-slate-300 mb-4 list-none pl-0">
@@ -189,7 +197,7 @@ export default function MaintenanceModePost() {
 ]`}</code></pre>
             </div>
 
-            <h3 id="monitoring-audit" className="text-2xl text-white mt-12 mb-4">Monitoring & Audit</h3>
+            <h2 id="monitoring-audit" className="text-2xl text-white mt-12 mb-4">Monitoring & Audit</h2>
             <ul className="space-y-3 text-slate-300 mb-6 list-disc pl-5">
               <li><strong className="text-white">Purpose:</strong> A script to quickly audit which sources are currently in Maintenance Mode.</li>
               <li><strong className="text-white">Functionality:</strong> The script queries the <code>/sources</code> endpoint to grab all the sources in the tenant with the connectorAttribute <code>maintenancemode</code> == true. It exports a list of all the sources that contain that flag and puts them into a CSV file with the current date & time. In my environment, it currently runs as a scheduled task on a windows server, but you can modify it to fit your org's needs.</li>
@@ -265,7 +273,7 @@ if ($results) {
 }`}</code></pre>
             </div>
 
-            <h3 id="considerations-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices</h3>
+            <h2 id="considerations-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Permissioning:</strong> The launcher should only be granted to admins in ISC as this will basically give you access to disable provisioning/aggregations/health checks completely for a source.</li>
               <li><strong className="text-white">Error Handling:</strong> Many of the HTTP Request steps in the workflow will log as failures and thus show in your execution logs as a failure for you to investigate. If you're seeing any weird behavior, the easiest way to check if it performed the execution successfully is by viewing the source configuration in VSCode and looking if the proper connectorAttributes were set.</li>
@@ -273,7 +281,7 @@ if ($results) {
             </ul>
 
             <div className="mt-16 pt-12 border-t border-white/10">
-              <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
               <p className="text-slate-300 mb-8 leading-relaxed font-light">
                 This is a solid architectural workaround if your organization requires Maintenance Mode functionality in ISC and previously relied on it in IIQ or another legacy system.
               </p>

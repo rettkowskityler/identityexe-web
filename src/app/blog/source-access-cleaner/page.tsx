@@ -3,13 +3,16 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import workflowData from './SourceAccessCleaner.json';
 import formSourceSelectorData from './Form-SourceSelector.json';
 import formConfirmSelectionData from './Form-ConfirmSourceSelection.json';
 
 export const metadata: Metadata = {
-  title: "Automating Source Access Cleanup in SailPoint Identity Security Cloud | IdentityEXE",
+  title: "Automating Source Access Cleanup in SailPoint Identity Security Cloud",
   description: "A repeatable architectural methodology designed by IdentityEXE to safely audit, preview, and remediate lingering access on newly onboarded sources, overcoming native lifecycle state deprovisioning limitations.",
+  keywords: getBlogPostSeo('source-access-cleaner')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/source-access-cleaner',
   },
@@ -18,6 +21,8 @@ export const metadata: Metadata = {
     description: "A repeatable architectural methodology designed by IdentityEXE to safely audit, preview, and remediate lingering access on newly onboarded sources, overcoming native lifecycle state deprovisioning limitations.",
     url: 'https://identityexe.com/blog/source-access-cleaner',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('source-access-cleaner')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
     images: [
       {
@@ -51,6 +56,10 @@ export default function SourceAccessCleanerPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('source-access-cleaner')) }}
+      />
       <Navbar />
 
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -92,7 +101,7 @@ export default function SourceAccessCleanerPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Executive Summary */}
-              <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+              <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 When onboarding legacy applications and directories into SailPoint Identity Security Cloud (ISC), enterprise sources arrive laden with accounts and entitlements belonging to users who separated months or years prior. A standard architectural limitation of ISC is that native Lifecycle State (LCS) deprovisioning triggers exclusively on real-time state transitions—such as an identity moving from Active to Terminated. ISC does not perform recurring, retroactive evaluations across accounts whose corresponding identity records were already placed into a Terminated or Inactive state prior to application aggregation.
               </p>
@@ -104,7 +113,7 @@ export default function SourceAccessCleanerPost() {
               </p>
 
               {/* Solution Overview */}
-              <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+              <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
               <ul className="space-y-4 text-slate-300 mb-8 list-disc pl-5">
                 <li><strong className="text-white">Tech Stack:</strong> 1 Interactive Workflow + 2 Interactive Forms + 3 PowerShell Scripts (WinRM / Windows Server execution host).</li>
                 <li><strong className="text-white">High-Level Flow:</strong> Launched on demand directly from the SailPoint Launchpad, the workflow dynamically queries all active Lifecycle States across your tenant's Identity Profiles. The operator selects the target application source, target lifecycle state(s), and desired remediation posture. The engine calculates affected identities via modern ISC APIs, displays an interactive HTML preview table directly inside a confirmation Form, and executes surgical removals upon administrator approval.</li>
@@ -129,7 +138,7 @@ export default function SourceAccessCleanerPost() {
               </div>
 
               {/* IdentityEXE Blueprint */}
-              <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: Interactive UI & Decision Gates</h3>
+              <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: Interactive UI & Decision Gates</h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 When we architect this solution for our enterprise clients, we utilize a two-stage guided interface within SailPoint Forms. This ensures complete operator visibility and prevents unauthorized or blind remediations against production identity repositories.
               </p>
@@ -149,7 +158,7 @@ export default function SourceAccessCleanerPost() {
                 <div>
                   <strong className="text-white block mb-2 text-sm font-semibold">1. Full Removal Mode Selection:</strong>
                   <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-2xl">
-                    <img src="/images/blog/source-access-cleaner/Execution_Screenshot_FullRemoval_1.png" alt="Form Selection - Full Removal" className="w-full h-auto object-contain" />
+                    <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Execution_Screenshot_FullRemoval_1.png" alt="Form Selection - Full Removal" className="w-full h-auto object-contain" />
                   </div>
                   <span className="text-xs text-slate-400 block mt-2 text-center">Configuring full remediation: Revoking entitlements and disabling accounts for Terminated identities.</span>
                 </div>
@@ -158,14 +167,14 @@ export default function SourceAccessCleanerPost() {
                   <div>
                     <strong className="text-white block mb-2 text-sm font-semibold">2. Entitlement Removal Only:</strong>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-xl">
-                      <img src="/images/blog/source-access-cleaner/Execution_Screenshot_RemoveEntitlements_1.png" alt="Form Selection - Remove Entitlements" className="w-full h-auto object-contain" />
+                      <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Execution_Screenshot_RemoveEntitlements_1.png" alt="Form Selection - Remove Entitlements" className="w-full h-auto object-contain" />
                     </div>
                     <span className="text-xs text-slate-400 block mt-2 text-center">Targeting entitlement revocation while preserving underlying accounts.</span>
                   </div>
                   <div>
                     <strong className="text-white block mb-2 text-sm font-semibold">3. Account Disablement Only:</strong>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-xl">
-                      <img src="/images/blog/source-access-cleaner/Execution_Screenshot_DisableAccounts_1.png" alt="Form Selection - Disable Accounts" className="w-full h-auto object-contain" />
+                      <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Execution_Screenshot_DisableAccounts_1.png" alt="Form Selection - Disable Accounts" className="w-full h-auto object-contain" />
                     </div>
                     <span className="text-xs text-slate-400 block mt-2 text-center">Suspending application accounts while retaining permission assignments.</span>
                   </div>
@@ -181,7 +190,7 @@ export default function SourceAccessCleanerPost() {
                 <div>
                   <strong className="text-white block mb-2 text-sm font-semibold">Full Removal Review Widget:</strong>
                   <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-2xl">
-                    <img src="/images/blog/source-access-cleaner/Execution_Screenshot_FullRemoval_2.png" alt="Review Widget - Full Removal" className="w-full h-auto object-contain" />
+                    <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Execution_Screenshot_FullRemoval_2.png" alt="Review Widget - Full Removal" className="w-full h-auto object-contain" />
                   </div>
                   <span className="text-xs text-slate-400 block mt-2 text-center">Summary cards isolate users, entitlements, and accounts requiring disablement with an explicit confirmation toggle.</span>
                 </div>
@@ -190,14 +199,14 @@ export default function SourceAccessCleanerPost() {
                   <div>
                     <strong className="text-white block mb-2 text-sm font-semibold">Remove Entitlements Review:</strong>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-xl">
-                      <img src="/images/blog/source-access-cleaner/Execution_Screenshot_RemoveEntitlements_2.png" alt="Review Widget - Remove Entitlements" className="w-full h-auto object-contain" />
+                      <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Execution_Screenshot_RemoveEntitlements_2.png" alt="Review Widget - Remove Entitlements" className="w-full h-auto object-contain" />
                     </div>
                     <span className="text-xs text-slate-400 block mt-2 text-center">Entitlements marked for revocation; active accounts flagged as Retained.</span>
                   </div>
                   <div>
                     <strong className="text-white block mb-2 text-sm font-semibold">Disable Accounts Review:</strong>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-xl">
-                      <img src="/images/blog/source-access-cleaner/Execution_Screenshot_DisableAccounts_2.png" alt="Review Widget - Disable Accounts" className="w-full h-auto object-contain" />
+                      <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Execution_Screenshot_DisableAccounts_2.png" alt="Review Widget - Disable Accounts" className="w-full h-auto object-contain" />
                     </div>
                     <span className="text-xs text-slate-400 block mt-2 text-center">Accounts needing disablement isolated while group memberships remain intact.</span>
                   </div>
@@ -212,37 +221,37 @@ export default function SourceAccessCleanerPost() {
                 <li>
                   <strong className="text-white">Preview Mode Safe Exit:</strong> If the operator selects Preview Only Mode, the workflow bypasses all write actions, renders the interactive preview widget inside an informational message, and safely terminates.
                   <div className="mt-3 bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-xl">
-                    <img src="/images/blog/source-access-cleaner/Execution_Screenshot_PreviewMode.png" alt="Preview Mode Summary Message" className="w-full h-auto" />
+                    <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Execution_Screenshot_PreviewMode.png" alt="Preview Mode Summary Message" className="w-full h-auto" />
                   </div>
                 </li>
                 <li>
                   <strong className="text-white">Clean Source Bypass:</strong> If the audit engine determines that the target source contains zero stale accounts or entitlements for the target lifecycle states, the workflow displays a verified "Compliant" badge and exits immediately, preventing wasteful approval cycles.
                   <div className="mt-3 bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-xl">
-                    <img src="/images/blog/source-access-cleaner/Execution_Screenshot_CleanSource.png" alt="Clean Source Compliant Message" className="w-full h-auto" />
+                    <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Execution_Screenshot_CleanSource.png" alt="Clean Source Compliant Message" className="w-full h-auto" />
                   </div>
                 </li>
                 <li>
                   <strong className="text-white">Operator Denial Safeguard:</strong> If the administrator toggles the "Approve Or Deny" switch to false during confirmation, the workflow aborts execution instantly with zero modifications applied to the target application.
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-lg">
-                      <img src="/images/blog/source-access-cleaner/Execution_Screenshot_Denied_1.png" alt="Operator Denying Remediation" className="w-full h-auto" />
+                      <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Execution_Screenshot_Denied_1.png" alt="Operator Denying Remediation" className="w-full h-auto" />
                     </div>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-lg">
-                      <img src="/images/blog/source-access-cleaner/Execution_Screenshot_Denied_2.png" alt="Safe Exit Notification" className="w-full h-auto" />
+                      <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Execution_Screenshot_Denied_2.png" alt="Safe Exit Notification" className="w-full h-auto" />
                     </div>
                   </div>
                 </li>
               </ul>
 
               {/* Workflow Orchestration */}
-              <h3 id="workflow-orchestration" className="text-2xl text-white mt-12 mb-4">Workflow Orchestration & Script Routing</h3>
+              <h2 id="workflow-orchestration" className="text-2xl text-white mt-12 mb-4">Workflow Orchestration & Script Routing</h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 The SailPoint Workflow acts as the central control plane, bridging user interaction via SailPoint Forms with backend PowerShell automation executing on the Windows Server host.
               </p>
 
               <div className="my-8">
                 <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-2xl p-2">
-                  <img src="/images/blog/source-access-cleaner/SourceAccessCleaner20260919.png" alt="Source Access Cleaner Workflow Canvas Mapping" className="w-full h-auto object-contain" />
+                  <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/SourceAccessCleaner20260919.png" alt="Source Access Cleaner Workflow Canvas Mapping" className="w-full h-auto object-contain" />
                 </div>
                 <span className="text-xs text-slate-400 block mt-2 text-center">Complete visual canvas mapping of the Source Access Cleaner workflow logic and node routing.</span>
               </div>
@@ -268,7 +277,7 @@ export default function SourceAccessCleanerPost() {
               </ol>
 
               {/* Engineering Methodology */}
-              <h3 id="engineering-methodology" className="text-2xl text-white mt-12 mb-4">Technical Deep Dive: The PowerShell & API Engine</h3>
+              <h2 id="engineering-methodology" className="text-2xl text-white mt-12 mb-4">Technical Deep Dive: The PowerShell & API Engine</h2>
               <p className="text-slate-300 mb-6 leading-relaxed font-light">
                 Our core engineering methodology structures the data layer to interface with SailPoint ISC's modern <code className="text-brand-light">/v1</code> endpoints with strict idempotency and zero search-index race conditions.
               </p>
@@ -389,7 +398,7 @@ $reqResponse = Invoke-RestMethod -Method Post -Uri "$BaseUrl/access-requests/v1"
 $disResponse = Invoke-RestMethod -Method Post -Uri "$BaseUrl/accounts/v1/$accountId/disable" -Headers $Headers -Body "{}"`}</code></pre>
 
               {/* Audit Trail & Reporting */}
-              <h3 id="audit-trail-reporting" className="text-2xl text-white mt-12 mb-4">Governance Audit Trail, Notifications & Reporting</h3>
+              <h2 id="audit-trail-reporting" className="text-2xl text-white mt-12 mb-4">Governance Audit Trail, Notifications & Reporting</h2>
               <p className="text-slate-300 mb-4 leading-relaxed font-light">
                 In regulated enterprise environments, remediating access without forensic proof is unacceptable. The framework generates a closed-loop audit trail across CSV exports, SMTP executive summaries, and native ISC activity tracking.
               </p>
@@ -445,7 +454,7 @@ $disResponse = Invoke-RestMethod -Method Post -Uri "$BaseUrl/accounts/v1/$accoun
                 <div>
                   <strong className="text-white block mb-2 text-sm font-semibold">Full Removal Email with Attached CSV:</strong>
                   <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-xl">
-                    <img src="/images/blog/source-access-cleaner/Email_Screenshot_FullRemoval.png" alt="Email Notification - Full Removal" className="w-full h-auto" />
+                    <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Email_Screenshot_FullRemoval.png" alt="Email Notification - Full Removal" className="w-full h-auto" />
                   </div>
                 </div>
 
@@ -453,13 +462,13 @@ $disResponse = Invoke-RestMethod -Method Post -Uri "$BaseUrl/accounts/v1/$accoun
                   <div>
                     <strong className="text-white block mb-2 text-sm font-semibold">Remove Entitlements Email:</strong>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-lg">
-                      <img src="/images/blog/source-access-cleaner/Email_Screenshot_RemoveEntitlements.png" alt="Email Notification - Remove Entitlements" className="w-full h-auto" />
+                      <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Email_Screenshot_RemoveEntitlements.png" alt="Email Notification - Remove Entitlements" className="w-full h-auto" />
                     </div>
                   </div>
                   <div>
                     <strong className="text-white block mb-2 text-sm font-semibold">Disable Accounts Email:</strong>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-lg">
-                      <img src="/images/blog/source-access-cleaner/Email_Screenshot_DisableAccounts.png" alt="Email Notification - Disable Accounts" className="w-full h-auto" />
+                      <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Email_Screenshot_DisableAccounts.png" alt="Email Notification - Disable Accounts" className="w-full h-auto" />
                     </div>
                   </div>
                 </div>
@@ -468,13 +477,13 @@ $disResponse = Invoke-RestMethod -Method Post -Uri "$BaseUrl/accounts/v1/$accoun
                   <div>
                     <strong className="text-white block mb-2 text-sm font-semibold">Preview Mode Email:</strong>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-lg">
-                      <img src="/images/blog/source-access-cleaner/Email_Screenshot_PreviewMode.png" alt="Email Notification - Preview Mode" className="w-full h-auto" />
+                      <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Email_Screenshot_PreviewMode.png" alt="Email Notification - Preview Mode" className="w-full h-auto" />
                     </div>
                   </div>
                   <div>
                     <strong className="text-white block mb-2 text-sm font-semibold">Clean Source Compliance Email:</strong>
                     <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-lg">
-                      <img src="/images/blog/source-access-cleaner/Email_Screenshot_CleanSource.png" alt="Email Notification - Clean Source" className="w-full h-auto" />
+                      <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Email_Screenshot_CleanSource.png" alt="Email Notification - Clean Source" className="w-full h-auto" />
                     </div>
                   </div>
                 </div>
@@ -487,13 +496,13 @@ $disResponse = Invoke-RestMethod -Method Post -Uri "$BaseUrl/accounts/v1/$accoun
 
               <div className="my-6">
                 <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-2xl">
-                  <img src="/images/blog/source-access-cleaner/Activities_Screenshot_FullRemoval.png" alt="ISC Activities Tracking" className="w-full h-auto" />
+                  <img loading="lazy" decoding="async" src="/images/blog/source-access-cleaner/Activities_Screenshot_FullRemoval.png" alt="ISC Activities Tracking" className="w-full h-auto" />
                 </div>
                 <span className="text-xs text-slate-400 block mt-2 text-center">Tracking automated access revocation requests within the SailPoint ISC Activities view.</span>
               </div>
 
               {/* Considerations & Best Practices */}
-              <h3 id="production-hardening" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices</h3>
+              <h2 id="production-hardening" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices</h2>
               <ul className="space-y-4 text-slate-300 mb-8 list-disc pl-5 font-light">
                 <li><strong className="text-white">Post-Onboarding Baseline SOP:</strong> Embed this workflow as a mandatory standard operating procedure (SOP) on your enterprise application onboarding checklist. Running Source Access Cleaner immediately after initial account aggregation establishes a verified, clean baseline before enabling event-driven LCS rules.</li>
                 <li><strong className="text-white">Windows Server &amp; Gateway Security:</strong> Ensure the execution host has outbound HTTPS connectivity to your tenant's API gateway (<code className="text-brand-light">https://&#123;tenant&#125;.api.identitynow.com</code>). Protect API client credentials using enterprise secrets management.</li>
@@ -512,7 +521,7 @@ $disResponse = Invoke-RestMethod -Method Post -Uri "$BaseUrl/accounts/v1/$accoun
               </ul>
 
               {/* Implementation Framework Downloads */}
-              <h3 id="implementation-framework" className="text-2xl text-white mt-12 mb-4">Downloads & Implementation Code</h3>
+              <h2 id="implementation-framework" className="text-2xl text-white mt-12 mb-4">Downloads & Implementation Code</h2>
               <p className="text-slate-300 mb-8 leading-relaxed font-light">
                 All production workflow definitions, interactive form schemas, PowerShell scripts, and audit templates are available for direct implementation:
               </p>
@@ -606,7 +615,7 @@ $disResponse = Invoke-RestMethod -Method Post -Uri "$BaseUrl/accounts/v1/$accoun
 
               {/* Conclusion & High-Leverage Call to Action */}
               <div className="mt-16 pt-12 border-t border-white/10">
-                <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+                <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
                 <p className="text-slate-300 mb-8 leading-relaxed font-light">
                   Onboarding connected applications into SailPoint Identity Security Cloud without baselining existing accounts leaves a dangerous governance blind spot. By implementing this architectural methodology, identity teams bridge the native lifecycle gap, enforce zero-trust least privilege across newly connected systems, and eliminate the audit findings that plague enterprise rollouts.
                 </p>

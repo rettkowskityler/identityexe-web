@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 import estToUtc from './EST To UTC.json';
 import utcToEst from './UTC To EST.json';
@@ -20,6 +21,8 @@ import standardizeDate from './Employee - Standardize Date Format to UTC.json';
 export const metadata: Metadata = {
   title: "Managing Timezone Transforms & Daylight Savings in SailPoint ISC",
   description: "A repeatable architectural blueprint to dynamically handle daylight savings offsets in SailPoint Identity Security Cloud using scheduled workflows.",
+  keywords: getBlogPostSeo('transform-timezone-management')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/transform-timezone-management',
   },
@@ -28,6 +31,8 @@ export const metadata: Metadata = {
     description: "A repeatable architectural blueprint to dynamically handle daylight savings offsets in SailPoint Identity Security Cloud using scheduled workflows.",
     url: 'https://identityexe.com/blog/transform-timezone-management',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('transform-timezone-management')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -50,6 +55,10 @@ export default function TransformTimezoneManagementPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('transform-timezone-management')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -91,7 +100,7 @@ export default function TransformTimezoneManagementPost() {
 
           <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
             
-            <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+            <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
             <p className="text-slate-300 mb-4">
               If your engineering team manages time-dependent logic in SailPoint Identity Security Cloud (ISC), you likely know the severe architectural limitation of daylight savings time. Hardcoding offsets like <code>+5h</code> in a <code>dateMath</code> transform works perfectly until the time changes. Once daylight savings begins or ends, your local midnight calculations, grace periods, and lifecycle states start triggering an hour early or an hour late, breaking time-dependent logic across your tenant.
             </p>
@@ -102,14 +111,14 @@ export default function TransformTimezoneManagementPost() {
               To resolve this permanently, IdentityEXE engineered a repeatable architectural methodology. This is not just a one-off script, but a dynamic framework utilizing scheduled Workflows to automatically update base timezone Transforms when daylight savings occurs, ensuring all nested date calculations remain accurate year-round.
             </p>
 
-            <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+            <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
             <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
               <li><strong className="text-white">Tech Stack:</strong> 2 Workflows + 2 Base Transforms.</li>
               <li><strong className="text-white">High-Level Flow:</strong> We establish two foundational transforms: <code>EST To UTC</code> and <code>UTC To EST</code>. All other time-based transforms reference these two base transforms instead of hardcoding their own offsets. We then deploy two scheduled Workflows—one for entering daylight savings and one for exiting. These workflows automatically run on the specific Sundays when time changes and use the ISC API to update the <code>dateMath</code> expressions inside our base transforms.</li>
               <li><strong className="text-white">Global Scalability:</strong> <em>Note: This blueprint assumes a single timezone (EST/EDT) for simplicity. If your tenant supports global users, you would incorporate a lookup transform to map the correct offset based on the user's location.</em></li>
             </ul>
 
-            <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: Base Components</h3>
+            <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: Base Components</h2>
             <p className="text-slate-300 mb-6">
               When we architect this solution for our enterprise clients, we utilize a single source of truth for timezone offsets. First, you need to create the two base transforms that will act as the foundation for your architecture.
             </p>
@@ -162,7 +171,7 @@ export default function TransformTimezoneManagementPost() {
               </a>
             </div>
 
-            <h3 id="implementation-framework" className="text-2xl text-white mt-12 mb-4">Implementation Framework: Automated Workflows</h3>
+            <h2 id="implementation-framework" className="text-2xl text-white mt-12 mb-4">Implementation Framework: Automated Workflows</h2>
             <p className="text-slate-300 mb-6">
               Our core engineering methodology structures the data layer to automatically manage the offset shift. We configure the workflows that handle the offset adjustments. The "Enter Daylight Savings" workflow triggers yearly on the second Sunday of March, while the "Exit Daylight Savings" workflow triggers on the first Sunday of November.
             </p>
@@ -182,8 +191,7 @@ export default function TransformTimezoneManagementPost() {
 
             <div className="my-6">
               <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden">
-                <img 
-                  src="/images/EnterDaylightSavings20260717.png" 
+                <img loading="lazy" decoding="async" src="/images/EnterDaylightSavings20260717.png" 
                   alt="Enter Daylight Savings Workflow Diagram"
                   className="max-w-full h-auto object-contain shadow-2xl"
                 />
@@ -214,11 +222,11 @@ export default function TransformTimezoneManagementPost() {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <img src="/images/Enter_Daylight_Savings_Email_Success_Screenshot.png" alt="Email Success" className="rounded-lg shadow-xl" />
-              <img src="/images/Enter_Daylight_Savings_Email_Failure_Screenshot.png" alt="Email Failure" className="rounded-lg shadow-xl" />
+              <img loading="lazy" decoding="async" src="/images/Enter_Daylight_Savings_Email_Success_Screenshot.png" alt="Email Success" className="rounded-lg shadow-xl" />
+              <img loading="lazy" decoding="async" src="/images/Enter_Daylight_Savings_Email_Failure_Screenshot.png" alt="Email Failure" className="rounded-lg shadow-xl" />
             </div>
 
-            <h3 id="transform-use-cases" className="text-2xl text-white mt-12 mb-4">Transform Use Cases</h3>
+            <h2 id="transform-use-cases" className="text-2xl text-white mt-12 mb-4">Transform Use Cases</h2>
             <p className="text-slate-300 mb-6">
               Now that the foundation is set, you can build reliable, timezone-aware transforms. Here are practical examples of how to utilize the base transforms. Notice how each date math expression leverages rounding <code>/d</code> to dynamically interact with midnight.
             </p>
@@ -334,7 +342,7 @@ export default function TransformTimezoneManagementPost() {
               </a>
             </div>
 
-            <h3 id="considerations-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices: <code>requiresPeriodicRefresh</code></h3>
+            <h2 id="considerations-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices: <code>requiresPeriodicRefresh</code></h2>
             <p className="text-slate-300 mb-4">
               You might notice that the Cloud Life Cycle State example uses the <code>"requiresPeriodicRefresh": true</code> attribute as a boolean. This is a critical parameter when working with time-dependent logic.
             </p>
@@ -361,7 +369,7 @@ export default function TransformTimezoneManagementPost() {
               Be selective when enabling this flag. Turning it on everywhere forces the Identity Refresh process to do extra work for no benefit, which can noticeably increase your refresh duration and queue load.
             </p>
 
-            <h3 id="conclusion" className="text-2xl text-white mt-12 mb-4">Conclusion</h3>
+            <h2 id="conclusion" className="text-2xl text-white mt-12 mb-4">Conclusion</h2>
             <p className="text-slate-300 mb-8">
               Handling timezone offsets and daylight savings inside ISC transforms does not have to be a manual headache. By centralizing your offsets into two base transforms and automating their updates via scheduled workflows, you can build a robust date calculation architecture that works flawlessly year-round.
             </p>

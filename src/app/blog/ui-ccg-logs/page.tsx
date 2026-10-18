@@ -3,11 +3,14 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 
 export const metadata: Metadata = {
   title: "Bringing Virtual Appliance CCG Logs Directly into SailPoint ISC",
   description: "Unite Windows Tasks and SailPoint Workflows to consolidate cluster Virtual Appliance CCG logs directly into Identity Security Cloud.",
+  keywords: getBlogPostSeo('ui-ccg-logs')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/ui-ccg-logs',
   },
@@ -16,6 +19,8 @@ export const metadata: Metadata = {
     description: "Unite Windows Tasks and SailPoint Workflows to consolidate cluster Virtual Appliance CCG logs directly into Identity Security Cloud.",
     url: 'https://identityexe.com/blog/ui-ccg-logs',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('ui-ccg-logs')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -36,6 +41,10 @@ export default function UICCGLogsPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('ui-ccg-logs')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -79,7 +88,7 @@ export default function UICCGLogsPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-purple-400 hover:prose-a:text-purple-300 prose-code:text-purple-300 prose-code:bg-purple-900/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Business Context */}
-              <h3 id="business-context" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">Business Context</h3>
+              <h2 id="business-context" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">Business Context</h2>
               <p className="text-slate-300 mb-6 leading-relaxed">
                 When troubleshooting Virtual Appliance (VA) issues, engineers and administrators constantly find themselves needing to manually SSH into the VAs, navigate the file system, and run various <code>grep</code> commands against the <code>ccg.log</code> file. One of the biggest architectural limitations is the need to individually SSH into multiple different VAs in a cluster just to piece together a single execution trail.
               </p>
@@ -93,7 +102,7 @@ export default function UICCGLogsPost() {
               <hr className="border-white/10 my-10" />
 
               {/* Solution Overview */}
-              <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Solution Overview</h3>
+              <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Solution Overview</h2>
               <p className="text-slate-300 mb-6">
                 When we architect this solution for our enterprise clients, we utilize a highly secure technical stack comprising <strong>3 PowerShell Scripts, 1 ISC Workflow, and a Windows Scheduled Task</strong>.
               </p>
@@ -102,13 +111,13 @@ export default function UICCGLogsPost() {
               </p>
 
               <div className="my-10 flex flex-col items-center gap-6">
-                <img src="/images/blog/ui-ccg-logs/ExampleUILog_FullLogs.png" alt="Example UI Log" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
+                <img loading="lazy" decoding="async" src="/images/blog/ui-ccg-logs/ExampleUILog_FullLogs.png" alt="Example UI Log" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
               </div>
 
               <hr className="border-white/10 my-10" />
 
               {/* Dynamic Cloud Filtering */}
-              <h3 id="dynamic-cloud-filtering" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Dynamic Cloud Filtering</h3>
+              <h2 id="dynamic-cloud-filtering" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Dynamic Cloud Filtering</h2>
               <p className="text-slate-300 mb-6">
                 This modular framework ensures that your ISC deployment avoids rigid configurations. The script dynamically reads its <code>grep</code> filters from the target SailPoint Workflow's <code>sp:define-variable</code> step, so you never have to touch the Windows Server when adjusting filters.
               </p>
@@ -117,25 +126,25 @@ export default function UICCGLogsPost() {
                 <li>
                   <strong className="text-white"><code>include</code> (List of Strings):</strong> Only return log lines containing these exact strings. Multiple strings act as an AND condition.
                   <div className="my-6">
-                    <img src="/images/blog/ui-ccg-logs/FilterScreenshot_Include.png" alt="Filter Include" className="w-full max-w-lg h-auto object-contain border border-white/10 rounded-lg shadow-xl" />
+                    <img loading="lazy" decoding="async" src="/images/blog/ui-ccg-logs/FilterScreenshot_Include.png" alt="Filter Include" className="w-full max-w-lg h-auto object-contain border border-white/10 rounded-lg shadow-xl" />
                   </div>
                 </li>
                 <li>
                   <strong className="text-white"><code>exclude</code> (List of Strings):</strong> Strictly ignore any lines containing these strings to filter out noise.
                   <div className="my-6">
-                    <img src="/images/blog/ui-ccg-logs/FilterScreenshot_Exclude.png" alt="Filter Exclude" className="w-full max-w-lg h-auto object-contain border border-white/10 rounded-lg shadow-xl" />
+                    <img loading="lazy" decoding="async" src="/images/blog/ui-ccg-logs/FilterScreenshot_Exclude.png" alt="Filter Exclude" className="w-full max-w-lg h-auto object-contain border border-white/10 rounded-lg shadow-xl" />
                   </div>
                 </li>
                 <li>
                   <strong className="text-white"><code>messageOnly</code> (String):</strong> Setting this to "true" strips out the VA IP, Timestamp, and Level prefixes, returning purely the raw log message to save horizontal space.
                   <div className="my-6">
-                    <img src="/images/blog/ui-ccg-logs/FilterScreenshot_messageOnly.png" alt="Filter Message Only" className="w-full max-w-lg h-auto object-contain border border-white/10 rounded-lg shadow-xl" />
+                    <img loading="lazy" decoding="async" src="/images/blog/ui-ccg-logs/FilterScreenshot_messageOnly.png" alt="Filter Message Only" className="w-full max-w-lg h-auto object-contain border border-white/10 rounded-lg shadow-xl" />
                   </div>
                 </li>
               </ul>
 
               <div className="my-10 flex flex-col items-center gap-6">
-                <img src="/images/blog/ui-ccg-logs/ExampleUILog_MessageOnly.png" alt="Message Only View" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
+                <img loading="lazy" decoding="async" src="/images/blog/ui-ccg-logs/ExampleUILog_MessageOnly.png" alt="Message Only View" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
               </div>
 
               <p className="text-slate-300 mb-6">
@@ -147,16 +156,16 @@ export default function UICCGLogsPost() {
               </p>
 
               <div className="my-10 flex flex-col items-center gap-6">
-                <img src="/images/blog/ui-ccg-logs/SearchQuery_Results.png" alt="Search Query Results" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
+                <img loading="lazy" decoding="async" src="/images/blog/ui-ccg-logs/SearchQuery_Results.png" alt="Search Query Results" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
               </div>
               <div className="my-10 flex flex-col items-center gap-6">
-                <img src="/images/blog/ui-ccg-logs/UICCGLogger20260829.png" alt="Workflow Configuration" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
+                <img loading="lazy" decoding="async" src="/images/blog/ui-ccg-logs/UICCGLogger20260829.png" alt="Workflow Configuration" className="max-w-full h-auto object-contain shadow-2xl rounded-lg border border-white/10" />
               </div>
 
               <hr className="border-white/10 my-10" />
 
               {/* Implementation Deep Dive */}
-              <h3 id="implementation-deep-dive" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Implementation Deep Dive</h3>
+              <h2 id="implementation-deep-dive" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Implementation Deep Dive</h2>
               <p className="text-slate-300 mb-8">
                 The solution relies on a few key components running on a secure Windows Server in your network. This IdentityEXE Blueprint utilizes the following logic:
               </p>
@@ -269,7 +278,7 @@ $sshResult = & $plinkPath -ssh $SshUser@$hostIp -pw $plainVaPassword -batch "$ss
               <hr className="border-white/10 my-10" />
 
               {/* Conclusion */}
-              <h3 id="conclusion" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Conclusion</h2>
               <p className="text-slate-300 mb-10 leading-relaxed">
                 By combining native Windows encryption, reliable SSH tools, and the extensibility of Identity Security Cloud Workflows, this solution bridges the gap between on-premise Virtual Appliances and the cloud UI.
               </p>

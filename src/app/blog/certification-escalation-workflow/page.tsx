@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import formCampaignSelector from './Form-CertificationCampaignSelector.json';
 import formConfirmSelection from './Form-ConfirmCampaignSelection.json';
 import workflowSelection from './Workflow-CertificationSelectionForEscalation.json';
@@ -12,6 +13,8 @@ import workflowEscalator from './Workflow-CertificationEscalator.json';
 export const metadata: Metadata = {
   title: "Self-Service Certification Escalation Workflow in SailPoint ISC",
   description: "Automate overdue certification campaign escalations to reviewers' managers with custom SailPoint workflows and interactive forms.",
+  keywords: getBlogPostSeo('certification-escalation-workflow')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/certification-escalation-workflow',
   },
@@ -20,6 +23,8 @@ export const metadata: Metadata = {
     description: "Automate overdue certification campaign escalations to reviewers' managers with custom SailPoint workflows and interactive forms.",
     url: 'https://identityexe.com/blog/certification-escalation-workflow',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('certification-escalation-workflow')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -42,6 +47,10 @@ export default function CertificationEscalationWorkflowPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('certification-escalation-workflow')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -84,7 +93,7 @@ export default function CertificationEscalationWorkflowPost() {
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
               {/* Introduction/Problem */}
-              <h3 id="problem-certification-crunch" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">The Problem: The End-of-Quarter Certification Crunch</h3>
+              <h2 id="problem-certification-crunch" className="text-2xl text-white !mt-0 mb-4 font-black tracking-tight">The Problem: The End-of-Quarter Certification Crunch</h2>
               <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
                 <li><strong className="text-white">The Late-Reviewer Dilemma:</strong> At the end of a quarterly or semi-annual access certification cycle, compliance administrators often face a common problem: a handful of non-responsive certifiers who have let their reviews sit past the deadline.</li>
                 <li><strong className="text-white">The Manual Overhead:</strong> Standard SailPoint Identity Security Cloud (ISC) campaigns allow notifications and automated reminders, but escalating past-due items to a reviewer's manager typically requires manual intervention. An admin has to track down the certifications, identify the managers, and manually reassign each certification inside the UI.</li>
@@ -92,7 +101,7 @@ export default function CertificationEscalationWorkflowPost() {
               </ul>
 
               {/* Architecture */}
-              <h3 id="architecture-escalation-combo" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">The Architecture: A Two-Phase Escalation Combo</h3>
+              <h2 id="architecture-escalation-combo" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">The Architecture: A Two-Phase Escalation Combo</h2>
               <p className="text-slate-300 mb-6">
                 To build an efficient, rate-limit-conscious solution that does not cause workflow execution timeouts, the architecture is split into two distinct workflows and two interactive forms. This keeps execution runs short, structured, and modular.
               </p>
@@ -192,7 +201,7 @@ export default function CertificationEscalationWorkflowPost() {
               </div>
 
               {/* User Interface */}
-              <h3 id="user-interface-forms" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">User Interface: Interactive Forms</h3>
+              <h2 id="user-interface-forms" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">User Interface: Interactive Forms</h2>
               <p className="text-slate-300 mb-6">
                 By leveraging ISC Interactive Forms, we can build a clean, guided wizard experience. 
               </p>
@@ -210,8 +219,7 @@ export default function CertificationEscalationWorkflowPost() {
               <div className="my-10 flex flex-col items-center gap-6">
                 <div className="w-full max-w-2xl">
                   <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden p-4">
-                    <img 
-                      src="/images/blog/certification-escalation-workflow/campaign-selector.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/certification-escalation-workflow/campaign-selector.png" 
                       alt="Form 1: Campaign Selector UI"
                       className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                     />
@@ -235,8 +243,7 @@ export default function CertificationEscalationWorkflowPost() {
               <div className="my-10 flex flex-col items-center gap-6">
                 <div className="w-full max-w-2xl">
                   <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden p-4">
-                    <img 
-                      src="/images/blog/certification-escalation-workflow/confirm-selection.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/certification-escalation-workflow/confirm-selection.png" 
                       alt="Form 2: Confirmation UI"
                       className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                     />
@@ -248,7 +255,7 @@ export default function CertificationEscalationWorkflowPost() {
               </div>
 
               {/* Back End Workflow Details */}
-              <h3 id="back-end-workflows" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Back End: Workflow Details</h3>
+              <h2 id="back-end-workflows" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Back End: Workflow Details</h2>
               
               <h4 className="text-xl text-brand-accent mt-8 mb-3">Workflow 1: Certification Selection For Escalation</h4>
               <p className="text-slate-300 mb-4">
@@ -280,7 +287,7 @@ export default function CertificationEscalationWorkflowPost() {
               </p>
 
               {/* API Operations */}
-              <h3 id="api-operations" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">API Operations</h3>
+              <h2 id="api-operations" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">API Operations</h2>
               <p className="text-slate-300 mb-6">
                 The workflow relies on three core API calls from SailPoint's v2026 endpoint:
               </p>
@@ -317,7 +324,7 @@ export default function CertificationEscalationWorkflowPost() {
               </div>
 
               {/* Platform Limitations */}
-              <h3 id="limitations-best-practices" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Platform Limitations & Best Practices</h3>
+              <h2 id="limitations-best-practices" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Platform Limitations & Best Practices</h2>
               <p className="text-slate-300 mb-4">
                 When deploying this solution, keep the following platform behaviors and limits in mind:
               </p>
@@ -336,7 +343,7 @@ export default function CertificationEscalationWorkflowPost() {
               </ul>
 
               {/* Conclusion */}
-              <h3 id="conclusion" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mt-12 mb-4 font-black tracking-tight">Conclusion</h2>
               <p className="text-slate-300 mb-8 leading-relaxed font-light">
                 Splitting this escalation solution into a selection UI workflow and an asynchronous worker workflow ensures speed, compliance reviews, and high reliability. Interactive forms bring IIQ-like workflow flexibility to the modern Identity Security Cloud platform.
               </p>

@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import formSelectIdentityPatData from './Form-Select-Identity-PAT.json';
 import formSelectWorkflowIdentityPatData from './Form-Select-Workflow-Identity-PAT.json';
 import workflowPatAnalyzerData from './WorkflowPATAnalyzer.json';
@@ -11,6 +12,8 @@ import workflowPatAnalyzerData from './WorkflowPATAnalyzer.json';
 export const metadata: Metadata = {
   title: "Automating Least Privilege: The Workflow Scope Analyzer Blueprint",
   description: "A repeatable architectural methodology designed to dynamically calculate and enforce precise HTTP endpoint scopes for SailPoint workflows.",
+  keywords: getBlogPostSeo('workflow-scope-analyzer')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/workflow-scope-analyzer',
   },
@@ -19,6 +22,8 @@ export const metadata: Metadata = {
     description: "A repeatable architectural methodology designed to dynamically calculate and enforce precise HTTP endpoint scopes for SailPoint workflows.",
     url: 'https://identityexe.com/blog/workflow-scope-analyzer',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('workflow-scope-analyzer')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -42,6 +47,10 @@ export default function WorkflowScopeAnalyzerPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('workflow-scope-analyzer')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -82,7 +91,7 @@ export default function WorkflowScopeAnalyzerPost() {
 
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
-              <h3 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h3>
+              <h2 id="executive-summary" className="text-2xl text-white !mt-0 mb-4">Executive Summary</h2>
               <p className="text-slate-300 mb-4">
                 Determining the exact least-privileged scopes for complex HTTP requests within SailPoint Workflows is a notoriously tedious endeavor. Administrators are often forced to sift through extensive API documentation to pinpoint the exact endpoints needed for their operations. This architectural friction leads to a dangerous shortcut: assigning the overly permissive <code>sp:scopes:all</code> scope to ensure workflows execute without failure.
               </p>
@@ -115,7 +124,7 @@ export default function WorkflowScopeAnalyzerPost() {
                 </div>
               </div>
 
-              <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+              <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
               <ul className="space-y-4 text-slate-300 mb-8 list-disc pl-5">
                 <li><strong className="text-white">What it is:</strong> A self-service SailPoint Workflow toolkit that analyzes other workflows, cross-references all <code>sp:http</code> request endpoints against SailPoint's official OpenAPI specifications, and dynamically calculates the precise list of scopes needed. It even includes the ability to automatically update the PAT.</li>
                 <li><strong className="text-white">Tech Stack:</strong> 1 Native Workflow + 2 Interactive Forms + 2 PowerShell Scripts (via PAG).</li>
@@ -123,7 +132,7 @@ export default function WorkflowScopeAnalyzerPost() {
                 <li><strong className="text-white">The Underlying Engine:</strong> To ensure the solution stays up to date, a vital secondary sync script (<code>Update-ScopesMap.ps1</code>) is provided to automatically download the absolute latest OpenAPI YAML specs directly from SailPoint's GitHub repository and generate the underlying mapping file that drives the analyzer.</li>
               </ul>
               
-              <h3 id="prerequisites-setup" className="text-2xl text-white mt-12 mb-4">Prerequisites & Setup</h3>
+              <h2 id="prerequisites-setup" className="text-2xl text-white mt-12 mb-4">Prerequisites & Setup</h2>
               <p className="text-slate-300 mb-4">
                 Before deploying this methodology, there are a few prerequisites you'll need to configure:
               </p>
@@ -143,7 +152,7 @@ export default function WorkflowScopeAnalyzerPost() {
                 </p>
               </div>
 
-              <h3 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: User Interface</h3>
+              <h2 id="identityexe-blueprint" className="text-2xl text-white mt-12 mb-4">IdentityEXE Blueprint: User Interface</h2>
               <p className="text-slate-300 mb-4">
                 When we architect this solution for our enterprise clients, we utilize interactive forms that feed native dashboard-like reporting. The process starts with a self-service form where the admin selects the workflow to analyze and toggles automatic PAT updates. Once analysis completes, the script returns a formatted HTML table directly back to the UI as an Interactive Message, detailing every endpoint and its exact required scopes.
               </p>
@@ -151,32 +160,32 @@ export default function WorkflowScopeAnalyzerPost() {
               <div className="my-8">
                 <strong className="text-white block mb-4 text-lg">Analysis Summary (No Update):</strong>
                 <div className="flex justify-center overflow-hidden rounded-xl border border-white/10">
-                  <img src="/images/FormScreenshot_NoUpdate.png" alt="Form No Update" className="max-w-full h-auto object-contain shadow-2xl" />
+                  <img loading="lazy" decoding="async" src="/images/FormScreenshot_NoUpdate.png" alt="Form No Update" className="max-w-full h-auto object-contain shadow-2xl" />
                 </div>
               </div>
 
               <div className="my-8">
                 <strong className="text-white block mb-4 text-lg">Automated Scope Updating:</strong>
                 <div className="flex justify-center overflow-hidden rounded-xl border border-white/10">
-                  <img src="/images/FormScreenshot_Update.png" alt="Form Update" className="max-w-full h-auto object-contain shadow-2xl" />
+                  <img loading="lazy" decoding="async" src="/images/FormScreenshot_Update.png" alt="Form Update" className="max-w-full h-auto object-contain shadow-2xl" />
                 </div>
               </div>
 
               <div className="my-8">
                 <strong className="text-white block mb-4 text-lg">Zero HTTP Requests Scenario:</strong>
                 <div className="flex justify-center overflow-hidden rounded-xl border border-white/10">
-                  <img src="/images/FormScreenshot_NoHTTPRequestsFound.png" alt="No HTTP Requests" className="max-w-full h-auto object-contain shadow-2xl" />
+                  <img loading="lazy" decoding="async" src="/images/FormScreenshot_NoHTTPRequestsFound.png" alt="No HTTP Requests" className="max-w-full h-auto object-contain shadow-2xl" />
                 </div>
               </div>
               
               <div className="my-8">
                 <strong className="text-white block mb-4 text-lg">Workflow PAT Analyzer Example:</strong>
                 <div className="flex justify-center overflow-hidden rounded-xl border border-white/10">
-                  <img src="/images/WorkflowPATAnalyzer.png" alt="Workflow PAT Analyzer Example" className="max-w-full h-auto object-contain shadow-2xl" />
+                  <img loading="lazy" decoding="async" src="/images/WorkflowPATAnalyzer.png" alt="Workflow PAT Analyzer Example" className="max-w-full h-auto object-contain shadow-2xl" />
                 </div>
               </div>
 
-              <h3 id="technical-deep-dive" className="text-2xl text-white mt-12 mb-4">Technical Deep Dive: The Analyzer Engine</h3>
+              <h2 id="technical-deep-dive" className="text-2xl text-white mt-12 mb-4">Technical Deep Dive: The Analyzer Engine</h2>
               <p className="text-slate-300 mb-6">
                 Our core engineering methodology structures the data layer to intelligently traverse deeply nested workflow definitions and normalize dynamic payload variables seamlessly.
               </p>
@@ -212,7 +221,7 @@ foreach ($Ep in $EndpointScopes) {
     # ... Rest of table row logic ...
 }`}</code></pre>
 
-              <h3 id="backend-engine" className="text-2xl text-white mt-12 mb-4">The Backend Engine: Fully Integrated OpenAPI Mapping</h3>
+              <h2 id="backend-engine" className="text-2xl text-white mt-12 mb-4">The Backend Engine: Fully Integrated OpenAPI Mapping</h2>
               <p className="text-slate-300 mb-4">
                 The underlying engine runs on a custom-generated map (<code>scopes_map.json</code>) compiled directly from SailPoint's GitHub repository. It maps v3, beta, yearly releases (v2024, v2025, v2026), and the newest root microservice definitions.
               </p>
@@ -231,7 +240,7 @@ foreach ($Ep in $EndpointScopes) {
                 <code className="text-xs bg-black/50 p-2 rounded block text-brand-light">.\Update-WorkflowPatScopes.ps1 -WorkflowPath "C:\Exports\MyWorkflow.json" -SkipUpdate</code>
               </div>
 
-              <h3 id="implementation-framework" className="text-2xl text-white mt-12 mb-4">Implementation Framework</h3>
+              <h2 id="implementation-framework" className="text-2xl text-white mt-12 mb-4">Implementation Framework</h2>
               <p className="text-slate-300 mb-8">
                 Below are the workflow definitions, forms, and scripts for deployment into your environment.
               </p>
@@ -306,7 +315,7 @@ foreach ($Ep in $EndpointScopes) {
               </div>
 
               <div className="mt-16 pt-12 border-t border-white/10">
-                <h3 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h3>
+                <h2 id="conclusion" className="text-2xl text-white mb-4">Conclusion</h2>
                 <p className="text-slate-300 mb-8 leading-relaxed font-light">
                   Deploying the Workflow Scope Analyzer empowers organizations to firmly enforce least privilege securely across all automated SailPoint processes, removing the security risks associated with over-provisioned access tokens.
                 </p>

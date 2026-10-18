@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import TableOfContents from '../../../components/TableOfContents';
+import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 import formData from './Form-SelectIdentity_final.json';
 import workflowData from './Workflow-IdentityReport_final.json';
 
@@ -427,6 +428,8 @@ if ($RecipientEmail) {
 export const metadata: Metadata = {
   title: "Building a Custom Identity Timeline Report in SailPoint ISC",
   description: "Consolidate identity lifecycle events, audit trails, provisioning activities, and access requests into a single chronological timeline in SailPoint ISC.",
+  keywords: getBlogPostSeo('identity-timeline-report')?.keywords,
+  authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
     canonical: 'https://identityexe.com/blog/identity-timeline-report',
   },
@@ -435,6 +438,8 @@ export const metadata: Metadata = {
     description: "Consolidate identity lifecycle events, audit trails, provisioning activities, and access requests into a single chronological timeline in SailPoint ISC.",
     url: 'https://identityexe.com/blog/identity-timeline-report',
     type: 'article',
+    publishedTime: `${getBlogPostSeo('identity-timeline-report')!.datePublished}T08:00:00+00:00`, 
+    authors: ['Tyler'],
     siteName: 'IdentityEXE',
   },
   twitter: {
@@ -459,6 +464,10 @@ export default function IdentityTimelineReportPost() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBlogPostJsonLd('identity-timeline-report')) }}
+      />
       <Navbar />
       
       <main className="pt-28 pb-16 px-4 sm:px-6 min-h-screen">
@@ -500,14 +509,14 @@ export default function IdentityTimelineReportPost() {
 
             <div className="prose prose-invert break-words w-full overflow-x-hidden prose-pre:max-w-[85vw] sm:prose-pre:max-w-full prose-pre:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-base md:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-brand-accent hover:prose-a:text-brand-light prose-code:text-brand-light prose-code:bg-brand-blue/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
               
-              <h3 id="introduction" className="text-2xl text-white !mt-0 mb-4">Introduction</h3>
+              <h2 id="introduction" className="text-2xl text-white !mt-0 mb-4">Introduction</h2>
               <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
                 <li><strong className="text-white">Why:</strong> During audits, governance reviews, or troubleshooting security events, administrators frequently need a single, chronological timeline of everything that has occurred for a specific identity in Identity Security Cloud (ISC). Reconstructing this path manually requires querying multiple disjointed areas of the UI and APIs—such as search history, access request logs, provisioning tasks, and manual work items.</li>
                 <li><strong className="text-white">Problem:</strong> There is no out-of-the-box UI report in ISC that combines core identity lifecycle states, audit events, account provisioning activity, access requests, and manual work items into a single, unified chronological timeline.</li>
                 <li><strong className="text-white">Goal:</strong> Create a self-service utility for administrators to select any identity, filter by event categories, and receive a comprehensive, sorted timeline report directly in their email.</li>
               </ul>
 
-              <h3 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h3>
+              <h2 id="solution-overview" className="text-2xl text-white mt-12 mb-4">Solution Overview</h2>
               <ul className="space-y-3 text-slate-300 mb-6 list-disc pl-5">
                 <li><strong className="text-white">Tech Stack:</strong> 1 Form + 1 Workflow + 1 Privileged Task Management (PAG/PTA) Gateway + 1 PowerShell Reporting Script.</li>
                 <li><strong className="text-white">High-Level Flow:</strong>
@@ -522,7 +531,7 @@ export default function IdentityTimelineReportPost() {
                 </li>
               </ul>
 
-              <h3 id="dependencies-requirements" className="text-2xl text-white mt-12 mb-4">Dependencies & Infrastructure Requirements</h3>
+              <h2 id="dependencies-requirements" className="text-2xl text-white mt-12 mb-4">Dependencies & Infrastructure Requirements</h2>
               <p className="text-slate-300 mb-6">
                 Before setting up this solution, ensure you have the following components in place:
               </p>
@@ -533,7 +542,7 @@ export default function IdentityTimelineReportPost() {
                 <li><strong className="text-white">SailPoint PAT (Personal Access Token):</strong> A service account PAT with scopes to query search, access requests, and work items (<code>idn:sources:read</code> / <code>idn:sources:manage</code> or equivalent query permissions).</li>
               </ol>
 
-              <h3 id="user-interface-form" className="text-2xl text-white mt-12 mb-4">User Interface (Interactive Form)</h3>
+              <h2 id="user-interface-form" className="text-2xl text-white mt-12 mb-4">User Interface (Interactive Form)</h2>
               <p className="text-slate-300 mb-4">
                 We use an interactive form in ISC to capture administrator inputs.
               </p>
@@ -558,8 +567,7 @@ export default function IdentityTimelineReportPost() {
                 {/* Launchpad Preview */}
                 <div className="w-full max-w-2xl animate-none">
                   <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden p-4">
-                    <img 
-                      src="/images/blog/identity-timeline-report/identity-timeline-launchpad.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/identity-timeline-report/identity-timeline-launchpad.png" 
                       alt="Identity Report option in the Launcher Interface"
                       className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                     />
@@ -572,8 +580,7 @@ export default function IdentityTimelineReportPost() {
                 {/* Form Input Preview */}
                 <div className="w-full max-w-2xl animate-none">
                   <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden p-4">
-                    <img 
-                      src="/images/blog/identity-timeline-report/identity-timeline-form.png" 
+                    <img loading="lazy" decoding="async" src="/images/blog/identity-timeline-report/identity-timeline-form.png" 
                       alt="Interactive Form selection fields mockup"
                       className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                     />
@@ -593,7 +600,7 @@ export default function IdentityTimelineReportPost() {
                 <pre className="text-sm text-brand-light m-0"><code>{JSON.stringify(formData, null, 2)}</code></pre>
               </div>
 
-              <h3 id="back-end-workflow" className="text-2xl text-white mt-12 mb-4">Back End (Workflow)</h3>
+              <h2 id="back-end-workflow" className="text-2xl text-white mt-12 mb-4">Back End (Workflow)</h2>
               <p className="text-slate-300 mb-6">
                 The backend automation is built in ISC Workflows.
               </p>
@@ -621,7 +628,7 @@ export default function IdentityTimelineReportPost() {
                 <pre className="text-sm text-brand-light m-0"><code>{JSON.stringify(workflowData, null, 2)}</code></pre>
               </div>
 
-              <h3 id="powershell-script" className="text-2xl text-white mt-12 mb-4">PowerShell Script</h3>
+              <h2 id="powershell-script" className="text-2xl text-white mt-12 mb-4">PowerShell Script</h2>
               <p className="text-slate-300 mb-6">
                 The PowerShell script executes locally on the target Windows Server. It handles parameter normalization (including JSON string array formatting), authenticates to ISC, aggregates the events chronologically, formats the output, and emails the resulting CSV file back to the requester.
               </p>
@@ -630,15 +637,14 @@ export default function IdentityTimelineReportPost() {
                 <pre className="text-sm text-brand-light m-0"><code>{psScriptCode}</code></pre>
               </div>
 
-              <h3 id="execution-demo" className="text-2xl text-white mt-12 mb-4">Execution & Output Demo</h3>
+              <h2 id="execution-demo" className="text-2xl text-white mt-12 mb-4">Execution & Output Demo</h2>
               <ul className="space-y-6 text-slate-300 mb-8 list-none pl-0">
                 <li>
                   <strong className="text-white block mb-2">1. SailPoint Workflow Execution</strong>
                   <p className="mb-4">Below is a preview showing what a successful execution looks like in the SailPoint Workflow execution UI. You will see the trigger from the Interactive Form, resolving the identity data, calling the Windows Server PAG agent successfully, and sending the final confirmation message.</p>
                   <div className="flex flex-col items-center">
                     <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden max-w-2xl w-full p-4">
-                      <img 
-                        src="/images/blog/identity-timeline-report/identity-timeline-workflow.png" 
+                      <img loading="lazy" decoding="async" src="/images/blog/identity-timeline-report/identity-timeline-workflow.png" 
                         alt="Workflow Execution History UI in SailPoint ISC"
                         className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                       />
@@ -653,8 +659,7 @@ export default function IdentityTimelineReportPost() {
                   <p className="mb-4">The requester receives an automated HTML email from the configured SMTP server detailing the requested report parameters and containing the generated timeline CSV report attachment.</p>
                   <div className="flex flex-col items-center">
                     <div className="flex justify-center bg-white/5 rounded-t-xl border border-white/10 border-b-0 overflow-hidden max-w-2xl w-full p-4">
-                      <img 
-                        src="/images/blog/identity-timeline-report/identity-timeline-email.png" 
+                      <img loading="lazy" decoding="async" src="/images/blog/identity-timeline-report/identity-timeline-email.png" 
                         alt="SMTP Generated Email Notification containing timeline metrics"
                         className="max-w-full h-auto object-contain shadow-2xl rounded-lg"
                       />
@@ -666,14 +671,14 @@ export default function IdentityTimelineReportPost() {
                 </li>
               </ul>
 
-              <h3 id="considerations-best-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices</h3>
+              <h2 id="considerations-best-practices" className="text-2xl text-white mt-12 mb-4">Considerations & Best Practices</h2>
               <ul className="space-y-3 text-slate-300 mb-8 list-disc pl-5">
                 <li><strong className="text-white">Permissions & Security:</strong> Running administrative scripts on local target servers via PAG/PTA must be carefully restricted. Ensure the workflow interactive launcher is only shared with authorized IAM administrators in ISC.</li>
                 <li><strong className="text-white">SMTP Settings:</strong> Make sure the target Windows Server hosting the script has network firewall access to communicate with your SMTP server (e.g. on port 587 or 25).</li>
                 <li><strong className="text-white">Workflows API Limits & Timeouts:</strong> If an identity has a massive amount of historical search records, the script handles page limits automatically using native PowerShell loops, keeping each query structured and compliant with API rate limits.</li>
               </ul>
 
-              <h3 id="conclusion" className="text-2xl text-white mt-12 mb-4">Conclusion</h3>
+              <h2 id="conclusion" className="text-2xl text-white mt-12 mb-4">Conclusion</h2>
               <p className="text-slate-300 mb-8 leading-relaxed font-light">
                 By combining interactive forms, custom workflows, and secure Windows Server script execution via SailPoint PAG/PTA, you can provide administrators with a powerful, self-service chronological timeline utility for identity audit and troubleshooting.
               </p>
