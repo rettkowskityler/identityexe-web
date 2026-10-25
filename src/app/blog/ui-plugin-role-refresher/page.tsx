@@ -7,7 +7,7 @@ import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 export const metadata: Metadata = {
   title: "UI Plugin Role Refresher in Identity Security Cloud",
-  description: "A repeatable architectural methodology designed by IdentityEXE to simulate complex role criteria trees client-side, preview live membership deltas, catch deprovisioning risks, and dispatch targeted identity recalculations via the SailPoint UI Plugin SDK.",
+  description: "Simulate complex role membership criteria in memory, preview exact gain/loss identity deltas, flag mass-deprovisioning risks, and trigger surgical single-role recalculations without running a global tenant refresh.",
   keywords: getBlogPostSeo('ui-plugin-role-refresher')?.keywords,
   authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "UI Plugin Role Refresher in Identity Security Cloud | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to simulate complex role criteria trees client-side, preview live membership deltas, catch deprovisioning risks, and dispatch targeted identity recalculations via the SailPoint UI Plugin SDK.",
+    description: "Simulate complex role membership criteria in memory, preview exact gain/loss identity deltas, flag mass-deprovisioning risks, and trigger surgical single-role recalculations without running a global tenant refresh.",
     url: 'https://identityexe.com/blog/ui-plugin-role-refresher',
     type: 'article',
     publishedTime: `${getBlogPostSeo('ui-plugin-role-refresher')!.datePublished}T08:00:00+00:00`, 
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "UI Plugin Role Refresher in Identity Security Cloud | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to simulate complex role criteria trees client-side, preview live membership deltas, catch deprovisioning risks, and dispatch targeted identity recalculations via the SailPoint UI Plugin SDK.",
+    description: "Simulate complex role membership criteria in memory, preview exact gain/loss identity deltas, flag mass-deprovisioning risks, and trigger surgical single-role recalculations without running a global tenant refresh.",
     images: ['/images/blog/ui-plugin-role-refresher/opengraph-image.png'],
   },
 };

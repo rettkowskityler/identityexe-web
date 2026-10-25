@@ -7,7 +7,7 @@ import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 export const metadata: Metadata = {
   title: "SailPoint Web Services Attribute Sync: Enterprise Architectural Framework",
-  description: "A repeatable architectural methodology designed by IdentityEXE to master Web Services attribute synchronization in SailPoint ISC, overcoming partial update limitations, PUT data loss, and retry locks.",
+  description: "Prevent full-object PUT overwrites, partial-payload failures, and infinite retry locks in Web Services connectors using five battle-tested synchronization patterns and an automated PowerShell verification suite.",
   keywords: getBlogPostSeo('webservices-attribute-sync')?.keywords,
   authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "SailPoint Web Services Attribute Sync: Enterprise Architectural Framework | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to master Web Services attribute synchronization in SailPoint ISC, overcoming partial update limitations, PUT data loss, and retry locks.",
+    description: "Prevent full-object PUT overwrites, partial-payload failures, and infinite retry locks in Web Services connectors using five battle-tested synchronization patterns and an automated PowerShell verification suite.",
     url: 'https://identityexe.com/blog/webservices-attribute-sync',
     type: 'article',
     publishedTime: `${getBlogPostSeo('webservices-attribute-sync')!.datePublished}T08:00:00+00:00`, 
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "SailPoint Web Services Attribute Sync: Enterprise Architectural Framework | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to master Web Services attribute synchronization in SailPoint ISC, overcoming partial update limitations, PUT data loss, and retry locks.",
+    description: "Prevent full-object PUT overwrites, partial-payload failures, and infinite retry locks in Web Services connectors using five battle-tested synchronization patterns and an automated PowerShell verification suite.",
     images: ['/images/blog/webservices-attribute-sync/opengraph-image.png'],
   },
 };

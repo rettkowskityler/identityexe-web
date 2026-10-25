@@ -10,7 +10,7 @@ import formConfirmSelectionData from './Form-ConfirmSourceSelection.json';
 
 export const metadata: Metadata = {
   title: "Automating Source Access Cleanup in SailPoint Identity Security Cloud",
-  description: "A repeatable architectural methodology designed by IdentityEXE to safely audit, preview, and remediate lingering access on newly onboarded sources, overcoming native lifecycle state deprovisioning limitations.",
+  description: "Close the day-one onboarding gap by auditing newly connected sources for already-terminated identities, previewing lingering entitlements in an interactive form, and executing rate-limited bulk revocations.",
   keywords: getBlogPostSeo('source-access-cleaner')?.keywords,
   authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Automating Source Access Cleanup in SailPoint Identity Security Cloud | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to safely audit, preview, and remediate lingering access on newly onboarded sources, overcoming native lifecycle state deprovisioning limitations.",
+    description: "Close the day-one onboarding gap by auditing newly connected sources for already-terminated identities, previewing lingering entitlements in an interactive form, and executing rate-limited bulk revocations.",
     url: 'https://identityexe.com/blog/source-access-cleaner',
     type: 'article',
     publishedTime: `${getBlogPostSeo('source-access-cleaner')!.datePublished}T08:00:00+00:00`, 
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Automating Source Access Cleanup in SailPoint Identity Security Cloud | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to safely audit, preview, and remediate lingering access on newly onboarded sources, overcoming native lifecycle state deprovisioning limitations.",
+    description: "Close the day-one onboarding gap by auditing newly connected sources for already-terminated identities, previewing lingering entitlements in an interactive form, and executing rate-limited bulk revocations.",
     images: ['/images/blog/source-access-cleaner/opengraph-image.png'],
   },
 };

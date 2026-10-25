@@ -7,7 +7,7 @@ import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 export const metadata: Metadata = {
   title: "Bringing the IIQ Debug Page to ISC: The Administrator Console UI Plugin",
-  description: "A repeatable architectural methodology designed by IdentityEXE to unify 19 ISC object categories, Transform and Connector Rule studios, source diagnostics, SP-Config packaging, and pre-commit RFC 6902 diff reviews inside the SailPoint ISC browser UI.",
+  description: "Reclaim the speed of the classic IdentityIQ Debug page inside ISC with a 19-category object browser, interactive Transform and Connector Rule studios, source diagnostics, and pre-commit RFC 6902 diff reviews.",
   keywords: getBlogPostSeo('ui-plugin-isc-debug-mode')?.keywords,
   authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Bringing the IIQ Debug Page to ISC: The Administrator Console UI Plugin | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to unify 19 ISC object categories, Transform and Connector Rule studios, source diagnostics, SP-Config packaging, and pre-commit RFC 6902 diff reviews inside the SailPoint ISC browser UI.",
+    description: "Reclaim the speed of the classic IdentityIQ Debug page inside ISC with a 19-category object browser, interactive Transform and Connector Rule studios, source diagnostics, and pre-commit RFC 6902 diff reviews.",
     url: 'https://identityexe.com/blog/ui-plugin-isc-debug-mode',
     type: 'article',
     publishedTime: `${getBlogPostSeo('ui-plugin-isc-debug-mode')!.datePublished}T08:00:00+00:00`, 
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Bringing the IIQ Debug Page to ISC: The Administrator Console UI Plugin | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to unify 19 ISC object categories, Transform and Connector Rule studios, source diagnostics, SP-Config packaging, and pre-commit RFC 6902 diff reviews inside the SailPoint ISC browser UI.",
+    description: "Reclaim the speed of the classic IdentityIQ Debug page inside ISC with a 19-category object browser, interactive Transform and Connector Rule studios, source diagnostics, and pre-commit RFC 6902 diff reviews.",
     images: ['/images/blog/ui-plugin-isc-debug-mode/opengraph-image.png'],
   },
 };

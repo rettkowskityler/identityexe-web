@@ -7,7 +7,7 @@ import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 export const metadata: Metadata = {
   title: "Comprehensive SailPoint Source Health Reporting & Automated Incident Alerting",
-  description: "A repeatable architectural methodology designed by IdentityEXE to continuously audit tenant-wide source health across eight core operations, detect silent aggregation and provisioning failures, and dispatch automated ITSM incident alerts.",
+  description: "Catch silent connector failures before users notice by continuously auditing eight core source operations, tracking real-time error rates against a 3% threshold, and auto-dispatching ITSM tickets with HTML health matrices.",
   keywords: getBlogPostSeo('comprehensive-source-reporting')?.keywords,
   authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Comprehensive SailPoint Source Health Reporting & Automated Incident Alerting | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to continuously audit tenant-wide source health across eight core operations, detect silent aggregation and provisioning failures, and dispatch automated ITSM incident alerts.",
+    description: "Catch silent connector failures before users notice by continuously auditing eight core source operations, tracking real-time error rates against a 3% threshold, and auto-dispatching ITSM tickets with HTML health matrices.",
     url: 'https://identityexe.com/blog/comprehensive-source-reporting',
     type: 'article',
     publishedTime: `${getBlogPostSeo('comprehensive-source-reporting')!.datePublished}T08:00:00+00:00`, 
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Comprehensive SailPoint Source Health Reporting & Automated Incident Alerting | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to continuously audit tenant-wide source health across eight core operations, detect silent aggregation and provisioning failures, and dispatch automated ITSM incident alerts.",
+    description: "Catch silent connector failures before users notice by continuously auditing eight core source operations, tracking real-time error rates against a 3% threshold, and auto-dispatching ITSM tickets with HTML health matrices.",
     images: ['/images/blog/comprehensive-source-reporting/opengraph-image.png'],
   },
 };

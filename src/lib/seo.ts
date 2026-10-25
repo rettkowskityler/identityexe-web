@@ -17,7 +17,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'ui-plugin-report-center',
     title: 'Modular Custom Reporting in ISC: The Report Center UI Plugin',
     description:
-      'A repeatable architectural methodology designed by IdentityEXE to embed a modular .report.ts reporting engine, dynamic schema discovery, multi-source account exports, unified certification campaign line-items, and unlimited identity directory reporting directly inside the SailPoint ISC browser UI.',
+      'Drop-in .report.ts modules bring multi-source account exports, unified certification campaign line-items, dynamic schema column pickers, and unlimited searchAfter identity reporting straight into the SailPoint ISC browser UI.',
     datePublished: '2026-10-25',
     category: 'Architecture',
     keywords: [
@@ -36,7 +36,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'ui-plugin-isc-debug-mode',
     title: 'Bringing the IIQ Debug Page to ISC: The Administrator Console UI Plugin',
     description:
-      'A repeatable architectural methodology designed by IdentityEXE to unify 19 ISC object categories, Transform and Connector Rule studios, source diagnostics, SP-Config packaging, and pre-commit RFC 6902 diff reviews inside the SailPoint ISC browser UI.',
+      'Reclaim the speed of the classic IdentityIQ Debug page inside ISC with a 19-category object browser, interactive Transform and Connector Rule studios, source diagnostics, and pre-commit RFC 6902 diff reviews.',
     datePublished: '2026-10-17',
     category: 'Architecture',
     keywords: [
@@ -55,7 +55,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'ui-plugin-role-refresher',
     title: 'UI Plugin Role Refresher in Identity Security Cloud',
     description:
-      'A repeatable architectural methodology designed by IdentityEXE to simulate complex role criteria trees client-side, preview live membership deltas, catch deprovisioning risks, and dispatch targeted identity recalculations via the SailPoint UI Plugin SDK.',
+      'Simulate complex role membership criteria in memory, preview exact gain/loss identity deltas, flag mass-deprovisioning risks, and trigger surgical single-role recalculations without running a global tenant refresh.',
     datePublished: '2026-10-11',
     category: 'Architecture',
     keywords: [
@@ -72,7 +72,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'comprehensive-source-reporting',
     title: 'Comprehensive SailPoint Source Health Reporting & Automated Incident Alerting',
     description:
-      'A repeatable architectural methodology designed by IdentityEXE to continuously audit tenant-wide source health across eight core operations, detect silent aggregation and provisioning failures, and dispatch automated ITSM incident alerts.',
+      'Catch silent connector failures before users notice by continuously auditing eight core source operations, tracking real-time error rates against a 3% threshold, and auto-dispatching ITSM tickets with HTML health matrices.',
     datePublished: '2026-10-03',
     category: 'Architecture',
     keywords: [
@@ -89,7 +89,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'webservices-attribute-sync',
     title: 'SailPoint Web Services Attribute Sync: Enterprise Architectural Framework',
     description:
-      'A repeatable architectural methodology designed by IdentityEXE to master Web Services attribute synchronization in SailPoint ISC, overcoming partial update limitations, PUT data loss, and retry locks.',
+      'Prevent full-object PUT overwrites, partial-payload failures, and infinite retry locks in Web Services connectors using five battle-tested synchronization patterns and an automated PowerShell verification suite.',
     datePublished: '2026-09-27',
     category: 'Architecture',
     keywords: [
@@ -106,7 +106,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'source-access-cleaner',
     title: 'Automating Source Access Cleanup in SailPoint Identity Security Cloud',
     description:
-      'A repeatable architectural methodology designed by IdentityEXE to safely audit, preview, and remediate lingering access on newly onboarded sources, overcoming native lifecycle state deprovisioning limitations.',
+      'Close the day-one onboarding gap by auditing newly connected sources for already-terminated identities, previewing lingering entitlements in an interactive form, and executing rate-limited bulk revocations.',
     datePublished: '2026-09-20',
     category: 'Architecture',
     keywords: [
@@ -122,7 +122,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'app-onboarding-transient-values',
     title: 'Optimizing SailPoint Web Services: The Transient Values Pattern',
     description:
-      'A repeatable architectural methodology leveraging in-memory transientValues in After-Operation rules to eliminate the N+1 REST API request explosion and slash aggregation runtimes by over 90%.',
+      'Eliminate the N+1 child endpoint bottleneck on Web Services sources by caching and inverting entitlement catalogs inside After-Operation Rule transientValues—cutting 22-minute aggregations down to 67 seconds.',
     datePublished: '2026-09-13',
     category: 'Architecture',
     keywords: [
@@ -138,7 +138,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'lcs-revoke-sources',
     title: 'Automating Per-Source Access Revocation in SailPoint ISC',
     description:
-      'A repeatable architectural methodology utilizing SailPoint Workflows to intelligently filter and selectively revoke access only on specific sources during lifecycle state changes.',
+      'Replace blunt all-or-nothing lifecycle deprovisioning with targeted workflow filtering that strips entitlements only from flagged high-risk sources while leaving birthright and alumni accounts intact.',
     datePublished: '2026-09-06',
     category: 'Architecture',
     keywords: [
@@ -152,7 +152,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'ui-ccg-logs',
     title: 'Bringing Virtual Appliance CCG Logs Directly into SailPoint ISC',
     description:
-      'Unite Windows Tasks and SailPoint Workflows to consolidate cluster Virtual Appliance CCG logs directly into Identity Security Cloud.',
+      'Stop SSHing into Virtual Appliances to hunt down connector errors—stream, filter, and inspect cluster-wide ccg.log telemetry directly inside the SailPoint ISC interface on demand.',
     datePublished: '2026-08-20',
     category: 'Architecture',
     keywords: [
@@ -167,7 +167,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'workflow-scope-analyzer',
     title: 'Automating Least Privilege: The Workflow Scope Analyzer Blueprint',
     description:
-      'A repeatable architectural methodology designed to dynamically calculate and enforce precise HTTP endpoint scopes for SailPoint workflows.',
+      'Eliminate over-privileged sp:scopes:all tokens by parsing workflow JSON definitions against SailPoint OpenAPI specs to automatically calculate and apply exact least-privilege OAuth scopes.',
     datePublished: '2026-08-15',
     category: 'Architecture',
     keywords: [
@@ -181,7 +181,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'source-offboarding',
     title: 'Automating Source Offboarding in SailPoint Identity Security Cloud',
     description:
-      'A repeatable architectural methodology utilizing a self-serve automated toolkit through SailPoint Workflows and Privileged Task Management to provide fail-safe source deletion.',
+      'Decommission legacy connectors without orphaned dependencies by automating pre-flight impact analysis across roles, access profiles, and transforms before executing multi-threaded source deletion.',
     datePublished: '2026-08-15',
     category: 'Architecture',
     keywords: [
@@ -195,7 +195,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'aggregation-exporter-importer',
     title: 'Automating Aggregation Schedules: Exporter & Importer for SailPoint ISC',
     description:
-      'A comprehensive, self-serve toolkit utilizing SailPoint Workflows and PAG to give administrators granular, push-button control over their aggregation schedules tenant-wide.',
+      'Export, audit, bulk-edit, and restore CRON aggregation schedules across every account and entitlement source in your tenant from a single self-service launcher.',
     datePublished: '2026-08-09',
     category: 'Architecture',
     keywords: [
@@ -209,7 +209,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'certification-email-frequency',
     title: 'Architecting Dynamic Certification Email Frequencies in SailPoint',
     description:
-      'A repeatable architectural methodology designed to give you complete control over escalation timing and notification routing, stopping manager approval fatigue in its tracks.',
+      'Break free from rigid daily reminder spam by orchestrating dynamic, deadline-aware certification notification cadences that escalate urgency only as campaign close dates approach.',
     datePublished: '2026-08-01',
     category: 'Architecture',
     keywords: [
@@ -222,7 +222,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'admin-helper-form',
     title: 'Admin Helper Form: Centralized Command Center for SailPoint ISC',
     description:
-      'Architectural methodology unifying interactive ISC forms with backend workflows and parallelized scripts for centralized administrative operations.',
+      'Replace scattered Postman collections and ad-hoc PowerShell scripts with a single interactive ISC launcher for account resets, health-check toggles, and privileged administrative actions.',
     datePublished: '2026-07-25',
     category: 'Architecture',
     keywords: [
@@ -236,7 +236,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'transform-timezone-management',
     title: 'Managing Timezone Transforms & Daylight Savings in SailPoint ISC',
     description:
-      'A repeatable architectural blueprint to dynamically handle daylight savings offsets in SailPoint Identity Security Cloud using scheduled workflows.',
+      'Prevent off-by-one-hour hire and termination timestamps during Daylight Saving Time transitions with scheduled workflows that dynamically recalculate UTC offsets inside lookup transforms.',
     datePublished: '2026-07-17',
     category: 'Architecture',
     keywords: [
@@ -250,7 +250,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'delegated-role-management',
     title: 'Delegated Role Management in SailPoint Identity Security Cloud',
     description:
-      'A modular implementation framework designed to empower business owners to securely manage their assigned roles without administrative bottlenecks.',
+      'Let non-admin role owners safely add or remove access profiles and entitlements on their own roles through guardrailed ISC forms—without granting global administrator privileges.',
     datePublished: '2026-07-12',
     category: 'Architecture',
     keywords: [
@@ -263,7 +263,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'paginated-role-refresher',
     title: 'Paginated Role Refresher in SailPoint Identity Security Cloud',
     description:
-      'A modular implementation framework to intelligently refresh single roles without triggering global tenant updates.',
+      'Target identity refresh runs to a single modified role using paginated workflow loops and search queries, avoiding the performance hit of a tenant-wide Apply Changes operation.',
     datePublished: '2026-07-05',
     category: 'Architecture',
     keywords: [
@@ -276,7 +276,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'custom-reports-workflow-pagination',
     title: 'Custom Reports with Workflow Pagination in SailPoint ISC',
     description:
-      'A modular architectural framework for building native paginated custom reports within Identity Security Cloud workflows.',
+      'Bypass the 250-item workflow loop limit using recursive self-invoking workflows and state-passing accumulators to build and email multi-page CSV reports natively in ISC.',
     datePublished: '2026-06-25',
     category: 'Architecture',
     keywords: [
@@ -290,7 +290,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'dynamic-retry-workflows',
     title: 'Dynamic Retry Workflows in SailPoint Identity Security Cloud',
     description:
-      'An architectural implementation framework to gracefully retry HTTP POSTs and PowerShell scripts to handle downstream dependency delays.',
+      'Wrap fragile downstream HTTP calls and PowerShell actions in a reusable retry sub-workflow with configurable backoff intervals, error aggregation, and live status polling.',
     datePublished: '2026-06-20',
     category: 'Architecture',
     keywords: [
@@ -303,7 +303,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'certification-escalation-workflow',
     title: 'Self-Service Certification Escalation Workflow in SailPoint ISC',
     description:
-      'A custom workflows and interactive forms solution to automate overdue certification campaign escalations to reviewers\' managers.',
+      'Keep access reviews moving before audit deadlines hit by automatically detecting stalled reviewers and reassigning uncertified line-items up the management chain.',
     datePublished: '2026-06-15',
     category: 'Architecture',
     keywords: [
@@ -316,7 +316,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'form-ui-customization',
     title: 'SailPoint Form UI Customization: Styling Beyond Default Layouts',
     description:
-      'An ultimate guide to SailPoint ISC Form UI customization using custom HTML elements, advanced inline CSS layout structures, and dynamic serial loops.',
+      'Push SailPoint ISC forms past plain-text inputs by injecting sanitized HTML tables, inline CSS status cards, and workflow-generated dynamic summaries into form description fields.',
     datePublished: '2026-06-10',
     category: 'Architecture',
     keywords: [
@@ -329,7 +329,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'maintenance-mode-isc',
     title: 'Bringing IdentityIQ Maintenance Mode to SailPoint ISC',
     description:
-      'A custom workflow forms solution to gracefully handle SailPoint source downtime using the Maintenance Guard pattern.',
+      'Pause aggregations, suppress false-positive failure alerts, and queue provisioning traffic during planned downstream application outages using a toggleable Maintenance Guard pattern.',
     datePublished: '2026-05-28',
     category: 'Architecture',
     keywords: [
@@ -342,7 +342,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'recursive-governance',
     title: 'Implementing Recursive Governance: Managing SailPoint PATs',
     description:
-      'Learn how to govern SailPoint ISC Personal Access Tokens (PATs) using a custom Web Services Connector to regain visibility and control.',
+      'Point SailPoint back at itself with a loopback Web Services connector that aggregates Personal Access Tokens (PATs) and OAuth clients into access reviews and leaver revocation workflows.',
     datePublished: '2026-05-20',
     category: 'Architecture',
     keywords: [
@@ -355,7 +355,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'delegated-governance-groups',
     title: 'Self-Service Governance Group Management in SailPoint ISC',
     description:
-      'Securely delegate governance group administration to group owners using a multi-form pipeline workaround in SailPoint ISC.',
+      'Work around native permission gaps by chaining interactive ISC forms and workflows so governance group owners can add or remove members without Helpdesk or Admin intervention.',
     datePublished: '2026-05-15',
     category: 'Architecture',
     keywords: [
@@ -368,7 +368,7 @@ export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
     slug: 'identity-timeline-report',
     title: 'Building a Custom Identity Timeline Report in SailPoint ISC',
     description:
-      'Consolidate identity lifecycle events, audit trails, provisioning activities, access requests, and manual work items into a single chronological timeline.',
+      'Reconstruct any user’s complete forensic history by merging lifecycle state shifts, access requests, provisioning transactions, and certification decisions into one chronological audit report.',
     datePublished: '2026-05-10',
     category: 'Architecture',
     keywords: [

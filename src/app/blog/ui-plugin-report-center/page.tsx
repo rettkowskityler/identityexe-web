@@ -7,7 +7,7 @@ import { getBlogPostJsonLd, getBlogPostSeo } from '../../../lib/seo';
 
 export const metadata: Metadata = {
   title: "Modular Custom Reporting in ISC: The Report Center UI Plugin",
-  description: "A repeatable architectural methodology designed by IdentityEXE to embed a modular .report.ts reporting engine, dynamic schema discovery, multi-source account exports, unified certification campaign line-items, and unlimited identity directory reporting directly inside the SailPoint ISC browser UI.",
+  description: "Drop-in .report.ts modules bring multi-source account exports, unified certification campaign line-items, dynamic schema column pickers, and unlimited searchAfter identity reporting straight into the SailPoint ISC browser UI.",
   keywords: getBlogPostSeo('ui-plugin-report-center')?.keywords,
   authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Modular Custom Reporting in ISC: The Report Center UI Plugin | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to embed a modular .report.ts reporting engine, dynamic schema discovery, multi-source account exports, unified certification campaign line-items, and unlimited identity directory reporting directly inside the SailPoint ISC browser UI.",
+    description: "Drop-in .report.ts modules bring multi-source account exports, unified certification campaign line-items, dynamic schema column pickers, and unlimited searchAfter identity reporting straight into the SailPoint ISC browser UI.",
     url: 'https://identityexe.com/blog/ui-plugin-report-center',
     type: 'article',
     publishedTime: `${getBlogPostSeo('ui-plugin-report-center')!.datePublished}T08:00:00+00:00`,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Modular Custom Reporting in ISC: The Report Center UI Plugin | IdentityEXE",
-    description: "A repeatable architectural methodology designed by IdentityEXE to embed a modular .report.ts reporting engine, dynamic schema discovery, multi-source account exports, unified certification campaign line-items, and unlimited identity directory reporting directly inside the SailPoint ISC browser UI.",
+    description: "Drop-in .report.ts modules bring multi-source account exports, unified certification campaign line-items, dynamic schema column pickers, and unlimited searchAfter identity reporting straight into the SailPoint ISC browser UI.",
     images: ['/images/blog/ui-plugin-report-center/opengraph-image.png'],
   },
 };

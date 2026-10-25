@@ -11,7 +11,7 @@ import workflowPatAnalyzerData from './WorkflowPATAnalyzer.json';
 
 export const metadata: Metadata = {
   title: "Automating Least Privilege: The Workflow Scope Analyzer Blueprint",
-  description: "A repeatable architectural methodology designed to dynamically calculate and enforce precise HTTP endpoint scopes for SailPoint workflows.",
+  description: "Eliminate over-privileged sp:scopes:all tokens by parsing workflow JSON definitions against SailPoint OpenAPI specs to automatically calculate and apply exact least-privilege OAuth scopes.",
   keywords: getBlogPostSeo('workflow-scope-analyzer')?.keywords,
   authors: [{ name: 'Tyler', url: 'https://identityexe.com' }],
   alternates: {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Automating Least Privilege: The Workflow Scope Analyzer Blueprint | IdentityEXE",
-    description: "A repeatable architectural methodology designed to dynamically calculate and enforce precise HTTP endpoint scopes for SailPoint workflows.",
+    description: "Eliminate over-privileged sp:scopes:all tokens by parsing workflow JSON definitions against SailPoint OpenAPI specs to automatically calculate and apply exact least-privilege OAuth scopes.",
     url: 'https://identityexe.com/blog/workflow-scope-analyzer',
     type: 'article',
     publishedTime: `${getBlogPostSeo('workflow-scope-analyzer')!.datePublished}T08:00:00+00:00`, 
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Automating Least Privilege: The Workflow Scope Analyzer Blueprint | IdentityEXE",
-    description: "A repeatable architectural methodology designed to dynamically calculate and enforce precise HTTP endpoint scopes for SailPoint workflows.",
+    description: "Eliminate over-privileged sp:scopes:all tokens by parsing workflow JSON definitions against SailPoint OpenAPI specs to automatically calculate and apply exact least-privilege OAuth scopes.",
   },
 };
 
