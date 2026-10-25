@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getBlogCollectionJsonLd } from '../../lib/seo';
+import BlogImageLightbox from '../../components/BlogImageLightbox';
 
 export const metadata: Metadata = {
   title: 'SailPoint Engineering Insights & Architecture Blueprints',
@@ -29,6 +30,7 @@ export default function BlogLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
       {children}
+      <BlogImageLightbox />
     </>
   );
 }

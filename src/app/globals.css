@@ -150,3 +150,27 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(0);
   }
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Blog post expandable images */
+article .prose img:not([data-no-lightbox="true"]) {
+  cursor: zoom-in;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease, box-shadow 0.25s ease;
+}
+
+article .prose img:not([data-no-lightbox="true"]):hover {
+  filter: brightness(1.04);
+  box-shadow: 0 0 28px rgba(84, 199, 231, 0.18);
+}
