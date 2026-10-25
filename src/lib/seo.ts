@@ -14,6 +14,25 @@ export interface BlogPostSeoEntry {
 
 export const BLOG_POSTS_SEO: BlogPostSeoEntry[] = [
   {
+    slug: 'ui-plugin-report-center',
+    title: 'Modular Custom Reporting in ISC: The Report Center UI Plugin',
+    description:
+      'A repeatable architectural methodology designed by IdentityEXE to embed a modular .report.ts reporting engine, dynamic schema discovery, multi-source account exports, unified certification campaign line-items, and unlimited identity directory reporting directly inside the SailPoint ISC browser UI.',
+    datePublished: '2026-10-25',
+    category: 'Architecture',
+    keywords: [
+      'SailPoint UI Plugin',
+      'SailPoint Custom Reports',
+      'SailPoint Report Center',
+      'Multi-Source Accounts Report SailPoint ISC',
+      'Certification Campaign Status Export SailPoint',
+      'Unlimited Identity Export searchAfter SailPoint',
+      'SailPoint UI Plugin SDK',
+      'SailPoint Identity Security Cloud',
+    ],
+    ogImage: '/images/blog/ui-plugin-report-center/opengraph-image.png',
+  },
+  {
     slug: 'ui-plugin-isc-debug-mode',
     title: 'Bringing the IIQ Debug Page to ISC: The Administrator Console UI Plugin',
     description:

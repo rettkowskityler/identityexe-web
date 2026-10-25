@@ -24,6 +24,28 @@ export default function Blog() {
 
   const blogPosts: BlogPost[] = [
     {
+      slug: 'ui-plugin-report-center',
+      title: 'Modular Custom Reporting in ISC: The Report Center UI Plugin',
+      category: 'Architecture',
+      date: 'October 2026',
+      description: 'A repeatable architectural methodology designed by IdentityEXE to embed a modular .report.ts reporting engine, dynamic schema discovery, multi-source account exports, unified certification campaign line-items, and unlimited identity directory reporting directly inside the SailPoint ISC browser UI.',
+      iconBgClass: 'bg-cyan-500/10',
+      iconBorderClass: 'border-cyan-500/20',
+      iconColorClass: 'text-cyan-400',
+      hoverTitleClass: 'group-hover:text-cyan-400',
+      readMoreColorClass: 'text-cyan-500',
+      gradientClass: 'from-cyan-600/20 to-indigo-600/20',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+          <line x1="16" y1="13" x2="8" y2="13" />
+          <line x1="16" y1="17" x2="8" y2="17" />
+          <line x1="10" y1="9" x2="8" y2="9" />
+        </svg>
+      )
+    },
+    {
       slug: 'ui-plugin-isc-debug-mode',
       title: 'Bringing the IIQ Debug Page to ISC: The Administrator Console UI Plugin',
       category: 'Architecture',
